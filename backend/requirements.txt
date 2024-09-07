@@ -1,4 +1,7 @@
 Flask==3.0.0
-flask_cors==4.0.0
 Flask_RESTful==0.3.10
+beautifulsoup4==4.12.2
+flask_cors==4.0.0
 python-dotenv==1.0.0
+selenium==4.10.0
+webdriver-manager==4.0.2
