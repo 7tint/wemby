@@ -1,35 +1,17 @@
-# from firebase_admin import credentials, initialize_app
-from flasgger import Swagger
 from flask import Flask
 from flask.blueprints import Blueprint
 from flask_cors import CORS
+from flask_restful import Api
+
+# from resources.players import PlayersResource
+# from routes.players import PLAYERS_RESOURCE
 from utils import config
+
 import routes
 
 server = Flask(__name__)
+api = Api(server)
 cors = CORS(server, resources={r"/api/*": {"origins": "*"}})
-
-# cred = credentials.Certificate("firebase.json")
-# initialize_app(cred, {
-#   "storageBucket": config.FIREBASE_STORAGE_BUCKET,
-#   "databaseURL": config.FIREBASE_DATABASE_URL
-# })
-
-server.config["SWAGGER"] = {
-    "swagger_version": "2.0",
-    "title": "Application",
-    "specs": [
-        {
-            "version": "1.0.0",
-            "title": "Wemby Fantasy Basketball",
-            "endpoint": "spec",
-            "route": "/api/info",
-        }
-    ],
-    "static_url_path": "/apidocs",
-}
-
-Swagger(server)
 
 server.debug = config.DEBUG
 
