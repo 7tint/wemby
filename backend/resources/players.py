@@ -1,3 +1,4 @@
+import json
 from flask import jsonify, make_response
 from flask_restful import Resource
 
@@ -8,4 +9,6 @@ class PlayersResource(Resource):
 
     @staticmethod
     def get():
-        return make_response(jsonify({"message": "GET players"}), 200)
+        with open("data/players.json") as f:
+            players_data = json.load(f)
+        return make_response(jsonify(players_data), 200)
