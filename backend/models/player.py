@@ -47,6 +47,7 @@ class Player:
     positions: list[str]  # List of position eligibilities
     projections: PlayerStats
     past_year_stats: PlayerStats | None
+    z_scores: PlayerStats | None
     auction_valued_at: float | None
     auction_yahoo_avg: float | None
     auction_espn_avg: float | None
@@ -87,7 +88,12 @@ class Player:
         self.adp = adp
         self.projections = projections
         self.past_year_stats = past_year_stats
+        self.z_scores = None
         self.auction_valued_at = auction_valued_at
         self.auction_yahoo_avg = auction_yahoo_avg
         self.auction_espn_avg = auction_espn_avg
         self.auction_blend_avg = auction_blend_avg
+
+    def update_z_scores(self, z_scores):
+        self.z_scores = z_scores
+        return self
