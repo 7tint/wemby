@@ -1,6 +1,6 @@
 import time
 import logging
-from classes import Player
+from models import Player
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
@@ -15,7 +15,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-def scrape_hashtag_basketball():
+def scrape_projections():
     url = "https://hashtagbasketball.com/fantasy-basketball-projections"
 
     logging.info("Setting up Chrome driver")
@@ -55,19 +55,13 @@ def scrape_hashtag_basketball():
                 cols = row.find_all("td")
                 if cols[0].text == "R#":
                     continue
-                player = Player(
-                    rank=int(cols[0].text.strip()),
-                    adp=float(cols[1].text.strip()) if cols[1].text.strip() else 140.0,
-                    name=cols[2].text.strip(),
-                )
-                players.append(player)
+                # player = Player(
+                #     rank=int(cols[0].text.strip()),
+                #     adp=float(cols[1].text.strip()) if cols[1].text.strip() else 140.0,
+                #     name=cols[2].text.strip(),
+                # )
+                # players.append(player)
         return players
 
     finally:
         driver.quit()
-
-
-if __name__ == "__main__":
-    players = scrape_hashtag_basketball()
-    for player in players:
-        print(player.rank, player.adp, player.name)

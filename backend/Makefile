@@ -13,5 +13,5 @@ install: ## Install dependencies
 run: ## Run the server
 	python3 app.py
 
-data: ## Set up players data
+setup_players: ## Set up players data
 	PYTHONPATH=. python3 data/players.py
