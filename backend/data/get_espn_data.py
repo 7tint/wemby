@@ -26,25 +26,22 @@ def get_rosters():
 
         for player in roster_players:
             try:
-                # Skip player if they don't have a jersey number
-                if "jersey" not in player:
-                    continue
-
-                player_data = Player(
-                    id=int(player["id"]),
-                    first_name=player["firstName"],
-                    last_name=player["lastName"],
-                    team_id=team_id,
-                    team=team["team"]["displayName"],
-                    age=int(player["age"]) if "age" in player else None,
-                    headshot=(
+                player_data = {
+                    "id": int(player["id"]),
+                    "first_name": player["firstName"],
+                    "last_name": player["lastName"],
+                    "display_name": player["displayName"],
+                    "team_id": team_id,
+                    "team": team["team"]["abbreviation"],
+                    "age": int(player["age"]) if "age" in player else None,
+                    "headshot": (
                         (player["headshot"]["href"])
                         if "headshot" in player
                         else "https://secure.espncdn.com/combiner/i?img=/i/headshots/nophoto.png"
                     ),
-                    years_pro=int(player["experience"]["years"]),
-                    jersey=int(player["jersey"]),
-                )
+                    "years_pro": int(player["experience"]["years"]),
+                    "jersey": int(player["jersey"]) if "jersey" in player else None,
+                }
                 players_list.append(player_data)
 
             except:
