@@ -2,6 +2,7 @@ import json
 import logging
 from models.player import Player, PlayerStats
 from data import (
+    calculate_z_scores,
     scrape_projections,
     scrape_past_year_stats,
     scrape_auction_data,
@@ -121,6 +122,9 @@ def main():
         )
 
         players.append(player)
+
+    # Calculate Z-Scores
+    z_scores = calculate_z_scores(players)
 
     # Make JSON serializable
     players_data = [player.__dict__ for player in players]

@@ -1,6 +1,5 @@
 import time
 import logging
-from models import Player
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
