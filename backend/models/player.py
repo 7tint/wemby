@@ -3,8 +3,10 @@ class PlayerStats:
     mpg: float
     fgm: float
     fga: float
+    fg_pct: float
     ftm: float
     fta: float
+    ft_pct: float
     tpm: float
     pts: float
     reb: float
@@ -18,8 +20,10 @@ class PlayerStats:
         self.mpg = mpg
         self.fgm = fgm
         self.fga = fga
+        self.fg_pct = fgm / fga if fga != 0 else 0
         self.ftm = ftm
         self.fta = fta
+        self.ft_pct = ftm / fta if fta != 0 else 0
         self.tpm = tpm
         self.pts = pts
         self.reb = reb
@@ -27,6 +31,31 @@ class PlayerStats:
         self.stl = stl
         self.blk = blk
         self.to = to
+
+
+class PlayerZScores:
+    fg_pct: float
+    ft_pct: float
+    tpm: float
+    pts: float
+    reb: float
+    ast: float
+    stl: float
+    blk: float
+    to: float
+    total: float
+
+    def __init__(self, fg_pct, ft_pct, tpm, pts, reb, ast, stl, blk, to):
+        self.fg_pct = fg_pct
+        self.ft_pct = ft_pct
+        self.tpm = tpm
+        self.pts = pts
+        self.reb = reb
+        self.ast = ast
+        self.stl = stl
+        self.blk = blk
+        self.to = to
+        self.total = sum([fg_pct, ft_pct, tpm, pts, reb, ast, stl, blk, to])
 
 
 class Player:
@@ -93,7 +122,3 @@ class Player:
         self.auction_yahoo_avg = auction_yahoo_avg
         self.auction_espn_avg = auction_espn_avg
         self.auction_blend_avg = auction_blend_avg
-
-    def update_z_scores(self, z_scores):
-        self.z_scores = z_scores
-        return self

@@ -1,6 +1,6 @@
 import json
 import logging
-from models.player import Player, PlayerStats
+from models import Player, PlayerStats
 from data import (
     calculate_z_scores,
     scrape_projections,
@@ -19,10 +19,13 @@ logger = logging.getLogger(__name__)
 def main():
     logger.info("=== Getting ESPN Roster Data ===")
     players_roster_data = get_rosters()  # ESPN Roster Data
+
     logger.info("=== Getting Hashtag Projections Data ===")
     players_projections = scrape_projections()  # Hashtag Projections
+
     logger.info("=== Getting Hashtag Past Year Data ===")
     players_past_year_stats = scrape_past_year_stats()  # Hashtag Past Year Stats
+
     logger.info("=== Getting Hashtag Auction Data ===")
     players_auction_data = scrape_auction_data()  # Hashtag Auction Data
 
@@ -123,16 +126,19 @@ def main():
 
         players.append(player)
 
-    # Calculate Z-Scores
+    logger.info("=== Calculating Z-Scores ===")
     z_scores = calculate_z_scores(players)
+    for player in players:
+        player.z_scores = z_scores[player.id]
 
-    # Make JSON serializable
+    logger.info("=== Writing to data/players.json ===")
     players_data = [player.__dict__ for player in players]
     for player in players_data:
         player["projections"] = player["projections"].__dict__
         player["past_year_stats"] = (
             player["past_year_stats"].__dict__ if player["past_year_stats"] else None
         )
+        player["z_scores"] = player["z_scores"].__dict__
 
     with open("data/players.json", "w") as json_file:
         json.dump(players_data, json_file, indent=2)
