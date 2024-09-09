@@ -26,6 +26,7 @@ export interface PlayerZScores {
   stl: number;
   blk: number;
   to: number;
+  total: number;
 }
 
 export interface Player {
@@ -42,8 +43,9 @@ export interface Player {
   adp: number; // Average Draft Position
   positions: string[]; // List of position eligibilities
   projections: PlayerStats;
+  projection_z_scores: PlayerZScores | null;
   past_year_stats: PlayerStats | null;
-  z_scores: PlayerZScores | null;
+  past_year_z_scores: PlayerZScores | null;
   auction_valued_at: number | null;
   auction_yahoo_avg: number | null;
   auction_espn_avg: number | null;
