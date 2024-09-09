@@ -3,10 +3,10 @@ export interface PlayerStats {
   mpg: number;
   fgm: number;
   fga: number;
-  fg_pct: number;
+  fgPct: number;
   ftm: number;
   fta: number;
-  ft_pct: number;
+  ftPct: number;
   tpm: number;
   pts: number;
   reb: number;
@@ -16,7 +16,7 @@ export interface PlayerStats {
   to: number;
 }
 
-export interface PlayerZScores {
+export interface PlayerStatsNScore {
   fg: number;
   ft: number;
   tpm: number;
@@ -31,24 +31,24 @@ export interface PlayerZScores {
 
 export interface Player {
   id: number; // ESPN Player ID
-  first_name: string;
-  last_name: string;
-  team_id: number;
+  firstName: string;
+  lastName: string;
+  teamId: number;
   team: string;
   age: number | null;
   headshot: string;
-  years_pro: number;
+  yearsPro: number;
   jersey: number | null;
   rank: number;
-  past_year_rank: number;
+  pastYearRank: number;
   adp: number; // Average Draft Position
   positions: string[]; // List of position eligibilities
   projections: PlayerStats;
-  projection_z_scores: PlayerZScores | null;
-  past_year_stats: PlayerStats | null;
-  past_year_z_scores: PlayerZScores | null;
-  auction_valued_at: number | null;
-  auction_yahoo_avg: number | null;
-  auction_espn_avg: number | null;
-  auction_blend_avg: number | null;
+  projectionZScores: PlayerStatsNScore | null;
+  pastYearStats: PlayerStats | null;
+  pastYearZScores: PlayerStatsNScore | null;
+  auctionValuedAt: number | null;
+  auctionYahooAvg: number | null;
+  auctionEspnAvg: number | null;
+  auctionBlendAvg: number | null;
 }

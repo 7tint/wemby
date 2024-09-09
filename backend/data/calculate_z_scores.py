@@ -8,11 +8,11 @@
 
 """
 import numpy as np
-from models import PlayerZScores
+from models import PlayerStatsNScore
 
 
 # Calculates the z-scores based on projections.
-# Return a dictionary of z_scores where the key is player_id and the value is a PlayerZScores object.
+# Return a dictionary of z_scores where the key is player_id and the value is a PlayerStatsNScore object.
 def calculate_z_scores(players):
     stats = ["fgm", "fga", "ftm", "fta", "tpm", "pts", "reb", "ast", "stl", "blk", "to"]
     projections = {
@@ -83,7 +83,7 @@ def calculate_z_scores(players):
 
     z_scores = {}
     for i, player in enumerate(players):
-        z_scores[player.id] = PlayerZScores(
+        z_scores[player.id] = PlayerStatsNScore(
             fg_pct=(fg_impact[i] - means["fg_impact"]) / stds["fg_impact"],
             ft_pct=(ft_impact[i] - means["ft_impact"]) / stds["ft_impact"],
             tpm=((player.projections.tpm - means["tpm"]) / stds["tpm"]),
