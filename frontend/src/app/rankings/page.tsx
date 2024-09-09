@@ -1,19 +1,34 @@
 "use client";
 
-import { Container, Heading } from "@chakra-ui/react";
+import {
+  Box,
+  Container,
+  Flex,
+  Heading,
+  Select,
+  Skeleton,
+  Spacer,
+  Stack,
+} from "@chakra-ui/react";
 import RankingsTable from "../../components/RankingsTable";
 import { getPlayers } from "../../api/players";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Player } from "@/types/playerTypes";
 import calculateMinMax from "@/data/minmax";
 import calculateZScores from "@/data/z_score";
+import { getNStats } from "@/data/const";
 
 const RankingsPage = () => {
   const [players, setPlayers] = useState<Player[]>([]);
 
+  // Chakra component states
+  const [selectedYear, setSelectedYear] = useState(1);
+  const [isLoaded, setIsLoaded] = useState(false);
+
   useEffect(() => {
     const getPlayersData = async () => {
       let players = await getPlayers();
+      const usePastYearStats = selectedYear !== 1;
       const zScoresProj = calculateZScores(players, false);
       const minmaxScoresProj = calculateMinMax(players, false);
       const zScoresPast = calculateZScores(players, true);
@@ -56,15 +71,66 @@ const RankingsPage = () => {
           player.pastYearNScores = null;
         }
       });
-      setPlayers(players);
+
+      const playersToDisplay = players
+        .filter((player) => {
+          if (usePastYearStats && !player.pastYearStats) return false;
+          if (!usePastYearStats && !player.projections) return false;
+          return true;
+        })
+        .filter((player) => getNStats(player, usePastYearStats))
+        .sort((a, b) => {
+          const aTotal = getNStats(a, usePastYearStats)?.total || 0;
+          const bTotal = getNStats(b, usePastYearStats)?.total || 0;
+          return bTotal - aTotal;
+        });
+
+      setPlayers(playersToDisplay);
+      setIsLoaded(true);
     };
     getPlayersData();
-  }, []);
+  }, [selectedYear]);
 
   return (
-    <Container maxW="container.xl">
-      <Heading>Rankings</Heading>
-      <RankingsTable players={players} />
+    <Container maxW="container.2xl" px={12}>
+      <Flex justify="space-between" my={8}>
+        <Heading>Rankings</Heading>
+        <Spacer />
+        <Select
+          width="auto"
+          placeholder="Select year for rankings"
+          value={selectedYear}
+          onChange={(e) => {
+            setSelectedYear(parseInt(e.target.value));
+            setIsLoaded(false);
+          }}
+        >
+          <option value={1}>2024-2025 Projections</option>
+          <option value={2}>2023-2024 Stats</option>
+        </Select>
+      </Flex>
+      <Stack spacing={4}>
+        {Array.from({ length: 100 }).map((_, i) =>
+          isLoaded ? (
+            <Fragment key={i}></Fragment>
+          ) : (
+            <Skeleton
+              key={i}
+              height={12}
+              startColor="gray.50"
+              endColor="gray.200"
+            />
+          )
+        )}
+        <Skeleton isLoaded={isLoaded} startColor="gray.50" endColor="gray.100">
+          <Box shadow="md">
+            <RankingsTable
+              players={players}
+              usePastYearStats={selectedYear === 2}
+            />
+          </Box>
+        </Skeleton>
+      </Stack>
     </Container>
   );
 };
