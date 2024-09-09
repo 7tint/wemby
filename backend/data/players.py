@@ -108,6 +108,7 @@ def main():
             years_pro=roster_data["years_pro"],
             jersey=roster_data["jersey"],
             rank=projections["rank"],
+            past_year_rank=past_year_stats["rank"] if past_year_stats else None,
             adp=projections["adp"],
             projections=PlayerStats(
                 gp=projections["gp"],

@@ -47,6 +47,7 @@ class Player:
     # TODO: add injuries
     # TODO: add salary
     rank: int  # Rank in projections
+    past_year_rank: int | None  # Rank in past year's stats
     adp: float  # Average Draft Position
     positions: list[str]  # List of position eligibilities
     projections: PlayerStats
@@ -69,6 +70,7 @@ class Player:
         years_pro,
         jersey,
         rank,
+        past_year_rank,
         adp,
         projections,
         past_year_stats,
@@ -88,6 +90,7 @@ class Player:
         self.years_pro = years_pro
         self.jersey = jersey
         self.rank = rank
+        self.past_year_rank = past_year_rank
         self.adp = adp
         self.projections = projections
         self.past_year_stats = past_year_stats

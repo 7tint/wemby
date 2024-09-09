@@ -39,7 +39,8 @@ export interface Player {
   headshot: string;
   years_pro: number;
   jersey: number | null;
-  rank: number; // Rank in projections
+  rank: number;
+  past_year_rank: number;
   adp: number; // Average Draft Position
   positions: string[]; // List of position eligibilities
   projections: PlayerStats;

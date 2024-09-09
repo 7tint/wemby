@@ -12,7 +12,7 @@ const RankingsPage = () => {
 
   useEffect(() => {
     const getPlayersData = async () => {
-      let players: Player[] = await getPlayers();
+      let players = await getPlayers();
       const proj_z_scores = calculateZScores(players, false);
       const past_z_scores = calculateZScores(players, true);
       players.forEach((player) => {
