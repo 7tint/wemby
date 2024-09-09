@@ -14,6 +14,10 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+name_exceptions = [
+    ("Kenyon Martin Jr.", "KJ Martin"),
+]
+
 
 def main():
     logger.info("=== Getting ESPN Roster Data ===")
@@ -50,25 +54,42 @@ def main():
         )
 
         if not roster_data:
-            # Try again with first or last name within the same team
-            team = projections["team"]
-            first_name = name.split(" ")[0]
-            last_name = name.split(" ")[1]
-            roster_data = next(
-                (
-                    player
-                    for player in players_roster_data
-                    if player["team"] == team
-                    and (
-                        player["first_name"] == first_name
-                        or player["last_name"] == last_name
-                    )
-                ),
-                None,
-            )
-            if not roster_data:
-                logger.error(f"Could not find roster data for player: {name}")
-                continue
+            # Check in name exception list
+            if name in [exception[0] for exception in name_exceptions]:
+                name = next(
+                    exception[1]
+                    for exception in name_exceptions
+                    if exception[0] == name
+                )
+                roster_data = next(
+                    (
+                        player
+                        for player in players_roster_data
+                        if player["display_name"] == name
+                    ),
+                    None,
+                )
+
+            else:
+                # Try again with first or last name within the same team
+                team = projections["team"]
+                first_name = name.split(" ")[0]
+                last_name = name.split(" ")[1]
+                roster_data = next(
+                    (
+                        player
+                        for player in players_roster_data
+                        if player["team"] == team
+                        and (
+                            player["first_name"] == first_name
+                            or player["last_name"] == last_name
+                        )
+                    ),
+                    None,
+                )
+                if not roster_data:
+                    logger.error(f"Could not find roster data for player: {name}")
+                    continue
 
         player = Player(
             id=roster_data["id"],
