@@ -14,9 +14,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-name_exceptions = [
-    ("Kenyon Martin Jr.", "KJ Martin"),
-]
+name_exceptions = [("Kenyon Martin Jr.", "KJ Martin"), ("Boogie Ellis", "SKIP")]
 
 
 def main():
@@ -54,21 +52,28 @@ def main():
         )
 
         if not roster_data:
+            logging.info(f"Attemping to find roster data for player: {name}")
+
             # Check in name exception list
             if name in [exception[0] for exception in name_exceptions]:
-                name = next(
+                new_name = next(
                     exception[1]
                     for exception in name_exceptions
                     if exception[0] == name
                 )
-                roster_data = next(
-                    (
-                        player
-                        for player in players_roster_data
-                        if player["display_name"] == name
-                    ),
-                    None,
-                )
+                if new_name == "SKIP":
+                    logger.error(f"Manually skipping player: {name}")
+                    continue
+
+                else:
+                    roster_data = next(
+                        (
+                            player
+                            for player in players_roster_data
+                            if player["display_name"] == new_name
+                        ),
+                        None,
+                    )
 
             else:
                 # Try again with first or last name within the same team

@@ -22144,44 +22144,6 @@
     "auction_blend_avg": 0.0
   },
   {
-    "id": 4702177,
-    "first_name": "Keon",
-    "last_name": "Ellis",
-    "positions": [
-      ""
-    ],
-    "team_id": 23,
-    "team": "SAC",
-    "age": 24,
-    "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4702177.png",
-    "years_pro": 1,
-    "jersey": 23,
-    "rank": 431,
-    "adp": 140.0,
-    "projections": {
-      "gp": 30.0,
-      "mpg": 5.6,
-      "fgm": 0.7,
-      "fga": 1.6,
-      "fg_pct": 0.43749999999999994,
-      "ftm": 0.3,
-      "fta": 0.4,
-      "ft_pct": 0.7499999999999999,
-      "tpm": 0.4,
-      "pts": 2.1,
-      "reb": 0.4,
-      "ast": 0.4,
-      "stl": 0.2,
-      "blk": 0.0,
-      "to": 0.2
-    },
-    "past_year_stats": null,
-    "auction_valued_at": 0.0,
-    "auction_yahoo_avg": 0.0,
-    "auction_espn_avg": 0.0,
-    "auction_blend_avg": 0.0
-  },
-  {
     "id": 4432735,
     "first_name": "Dariq",
     "last_name": "Whitehead",
