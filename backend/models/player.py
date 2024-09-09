@@ -33,31 +33,6 @@ class PlayerStats:
         self.to = to
 
 
-class PlayerZScores:
-    fg_pct: float
-    ft_pct: float
-    tpm: float
-    pts: float
-    reb: float
-    ast: float
-    stl: float
-    blk: float
-    to: float
-    total: float
-
-    def __init__(self, fg_pct, ft_pct, tpm, pts, reb, ast, stl, blk, to):
-        self.fg_pct = fg_pct
-        self.ft_pct = ft_pct
-        self.tpm = tpm
-        self.pts = pts
-        self.reb = reb
-        self.ast = ast
-        self.stl = stl
-        self.blk = blk
-        self.to = to
-        self.total = sum([fg_pct, ft_pct, tpm, pts, reb, ast, stl, blk, to])
-
-
 class Player:
     id: int  # ESPN Player ID
     first_name: str
@@ -76,7 +51,6 @@ class Player:
     positions: list[str]  # List of position eligibilities
     projections: PlayerStats
     past_year_stats: PlayerStats | None
-    z_scores: PlayerStats | None
     auction_valued_at: float | None
     auction_yahoo_avg: float | None
     auction_espn_avg: float | None
@@ -117,7 +91,6 @@ class Player:
         self.adp = adp
         self.projections = projections
         self.past_year_stats = past_year_stats
-        self.z_scores = None
         self.auction_valued_at = auction_valued_at
         self.auction_yahoo_avg = auction_yahoo_avg
         self.auction_espn_avg = auction_espn_avg

@@ -48,7 +48,6 @@
       "blk": 3.6,
       "to": 3.6
     },
-    "z_scores": null,
     "auction_valued_at": 61.1,
     "auction_yahoo_avg": 85.0,
     "auction_espn_avg": 61.8,
@@ -103,7 +102,6 @@
       "blk": 0.9,
       "to": 3.0
     },
-    "z_scores": null,
     "auction_valued_at": 60.7,
     "auction_yahoo_avg": 96.0,
     "auction_espn_avg": 62.4,
@@ -158,7 +156,6 @@
       "blk": 0.9,
       "to": 2.2
     },
-    "z_scores": null,
     "auction_valued_at": 58.6,
     "auction_yahoo_avg": 73.5,
     "auction_espn_avg": 57.3,
@@ -213,7 +210,6 @@
       "blk": 0.5,
       "to": 4.0
     },
-    "z_scores": null,
     "auction_valued_at": 57.0,
     "auction_yahoo_avg": 77.5,
     "auction_espn_avg": 61.2,
@@ -268,7 +264,6 @@
       "blk": 1.7,
       "to": 3.8
     },
-    "z_scores": null,
     "auction_valued_at": 53.4,
     "auction_yahoo_avg": 52.5,
     "auction_espn_avg": 51.4,
@@ -324,7 +319,6 @@
       "blk": 2.3,
       "to": 2.1
     },
-    "z_scores": null,
     "auction_valued_at": 52.9,
     "auction_yahoo_avg": 58.5,
     "auction_espn_avg": 39.5,
@@ -380,7 +374,6 @@
       "blk": 1.1,
       "to": 3.4
     },
-    "z_scores": null,
     "auction_valued_at": 44.0,
     "auction_yahoo_avg": 62.0,
     "auction_espn_avg": 57.7,
@@ -436,7 +429,6 @@
       "blk": 0.7,
       "to": 2.3
     },
-    "z_scores": null,
     "auction_valued_at": 43.0,
     "auction_yahoo_avg": 49.0,
     "auction_espn_avg": 48.4,
@@ -491,7 +483,6 @@
       "blk": 0.2,
       "to": 4.3
     },
-    "z_scores": null,
     "auction_valued_at": 39.4,
     "auction_yahoo_avg": 37.0,
     "auction_espn_avg": 44.0,
@@ -547,7 +538,6 @@
       "blk": 0.6,
       "to": 2.5
     },
-    "z_scores": null,
     "auction_valued_at": 39.1,
     "auction_yahoo_avg": 50.0,
     "auction_espn_avg": 53.3,
@@ -603,7 +593,6 @@
       "blk": 0.8,
       "to": 2.6
     },
-    "z_scores": null,
     "auction_valued_at": 38.3,
     "auction_yahoo_avg": 25.5,
     "auction_espn_avg": 13.4,
@@ -658,7 +647,6 @@
       "blk": 0.4,
       "to": 2.8
     },
-    "z_scores": null,
     "auction_valued_at": 37.4,
     "auction_yahoo_avg": 48.5,
     "auction_espn_avg": 30.3,
@@ -714,7 +702,6 @@
       "blk": 0.5,
       "to": 2.8
     },
-    "z_scores": null,
     "auction_valued_at": 35.9,
     "auction_yahoo_avg": 40.0,
     "auction_espn_avg": 39.9,
@@ -770,7 +757,6 @@
       "blk": 0.5,
       "to": 1.8
     },
-    "z_scores": null,
     "auction_valued_at": 35.8,
     "auction_yahoo_avg": 41.5,
     "auction_espn_avg": 22.9,
@@ -826,7 +812,6 @@
       "blk": 0.9,
       "to": 1.8
     },
-    "z_scores": null,
     "auction_valued_at": 35.6,
     "auction_yahoo_avg": 31.0,
     "auction_espn_avg": 18.8,
@@ -881,7 +866,6 @@
       "blk": 1.2,
       "to": 3.2
     },
-    "z_scores": null,
     "auction_valued_at": 35.0,
     "auction_yahoo_avg": 49.0,
     "auction_espn_avg": 30.0,
@@ -937,7 +921,6 @@
       "blk": 0.5,
       "to": 3.5
     },
-    "z_scores": null,
     "auction_valued_at": 34.3,
     "auction_yahoo_avg": 32.5,
     "auction_espn_avg": 40.8,
@@ -994,7 +977,6 @@
       "blk": 1.5,
       "to": 2.8
     },
-    "z_scores": null,
     "auction_valued_at": 33.6,
     "auction_yahoo_avg": 42.0,
     "auction_espn_avg": 38.2,
@@ -1049,7 +1031,6 @@
       "blk": 0.2,
       "to": 2.6
     },
-    "z_scores": null,
     "auction_valued_at": 33.2,
     "auction_yahoo_avg": 29.5,
     "auction_espn_avg": 26.0,
@@ -1105,7 +1086,6 @@
       "blk": 0.4,
       "to": 2.6
     },
-    "z_scores": null,
     "auction_valued_at": 33.1,
     "auction_yahoo_avg": 43.0,
     "auction_espn_avg": 42.1,
@@ -1160,7 +1140,6 @@
       "blk": 0.2,
       "to": 3.8
     },
-    "z_scores": null,
     "auction_valued_at": 32.9,
     "auction_yahoo_avg": 25.5,
     "auction_espn_avg": 21.5,
@@ -1216,7 +1195,6 @@
       "blk": 0.6,
       "to": 3.3
     },
-    "z_scores": null,
     "auction_valued_at": 32.7,
     "auction_yahoo_avg": 51.5,
     "auction_espn_avg": 47.9,
@@ -1272,7 +1250,6 @@
       "blk": 0.5,
       "to": 1.4
     },
-    "z_scores": null,
     "auction_valued_at": 31.0,
     "auction_yahoo_avg": 27.0,
     "auction_espn_avg": 20.0,
@@ -1327,7 +1304,6 @@
       "blk": 2.3,
       "to": 1.6
     },
-    "z_scores": null,
     "auction_valued_at": 30.7,
     "auction_yahoo_avg": 46.5,
     "auction_espn_avg": 27.6,
@@ -1383,7 +1359,6 @@
       "blk": 0.5,
       "to": 2.1
     },
-    "z_scores": null,
     "auction_valued_at": 28.5,
     "auction_yahoo_avg": 54.5,
     "auction_espn_avg": 13.8,
@@ -1439,7 +1414,6 @@
       "blk": 0.5,
       "to": 3.1
     },
-    "z_scores": null,
     "auction_valued_at": 28.5,
     "auction_yahoo_avg": 53.0,
     "auction_espn_avg": 51.7,
@@ -1495,7 +1469,6 @@
       "blk": 0.7,
       "to": 2.9
     },
-    "z_scores": null,
     "auction_valued_at": 27.0,
     "auction_yahoo_avg": 29.5,
     "auction_espn_avg": 16.2,
@@ -1550,7 +1523,6 @@
       "blk": 0.2,
       "to": 2.4
     },
-    "z_scores": null,
     "auction_valued_at": 25.7,
     "auction_yahoo_avg": 35.0,
     "auction_espn_avg": 38.4,
@@ -1607,7 +1579,6 @@
       "blk": 0.3,
       "to": 1.7
     },
-    "z_scores": null,
     "auction_valued_at": 25.4,
     "auction_yahoo_avg": 21.0,
     "auction_espn_avg": 8.3,
@@ -1662,7 +1633,6 @@
       "blk": 0.8,
       "to": 1.7
     },
-    "z_scores": null,
     "auction_valued_at": 23.6,
     "auction_yahoo_avg": 15.0,
     "auction_espn_avg": 5.9,
@@ -1718,7 +1688,6 @@
       "blk": 1.6,
       "to": 2.4
     },
-    "z_scores": null,
     "auction_valued_at": 23.0,
     "auction_yahoo_avg": 19.5,
     "auction_espn_avg": 9.5,
@@ -1774,7 +1743,6 @@
       "blk": 0.5,
       "to": 1.7
     },
-    "z_scores": null,
     "auction_valued_at": 22.7,
     "auction_yahoo_avg": 30.5,
     "auction_espn_avg": 22.6,
@@ -1829,7 +1797,6 @@
       "blk": 0.4,
       "to": 2.6
     },
-    "z_scores": null,
     "auction_valued_at": 22.4,
     "auction_yahoo_avg": 29.0,
     "auction_espn_avg": 31.7,
@@ -1885,7 +1852,6 @@
       "blk": 1.2,
       "to": 1.5
     },
-    "z_scores": null,
     "auction_valued_at": 22.4,
     "auction_yahoo_avg": 18.0,
     "auction_espn_avg": 4.8,
@@ -1940,7 +1906,6 @@
       "blk": 0.6,
       "to": 3.0
     },
-    "z_scores": null,
     "auction_valued_at": 21.9,
     "auction_yahoo_avg": 26.5,
     "auction_espn_avg": 43.3,
@@ -1996,7 +1961,6 @@
       "blk": 1.4,
       "to": 1.8
     },
-    "z_scores": null,
     "auction_valued_at": 21.9,
     "auction_yahoo_avg": 16.0,
     "auction_espn_avg": 15.6,
@@ -2052,7 +2016,6 @@
       "blk": 0.5,
       "to": 2.7
     },
-    "z_scores": null,
     "auction_valued_at": 21.4,
     "auction_yahoo_avg": 25.0,
     "auction_espn_avg": 20.7,
@@ -2107,7 +2070,6 @@
       "blk": 0.6,
       "to": 1.7
     },
-    "z_scores": null,
     "auction_valued_at": 21.0,
     "auction_yahoo_avg": 24.5,
     "auction_espn_avg": 11.7,
@@ -2162,7 +2124,6 @@
       "blk": 0.8,
       "to": 1.8
     },
-    "z_scores": null,
     "auction_valued_at": 21.0,
     "auction_yahoo_avg": 22.5,
     "auction_espn_avg": 3.1,
@@ -2218,7 +2179,6 @@
       "blk": 0.3,
       "to": 2.6
     },
-    "z_scores": null,
     "auction_valued_at": 20.9,
     "auction_yahoo_avg": 21.5,
     "auction_espn_avg": 32.9,
@@ -2273,7 +2233,6 @@
       "blk": 0.7,
       "to": 2.1
     },
-    "z_scores": null,
     "auction_valued_at": 20.8,
     "auction_yahoo_avg": 9.0,
     "auction_espn_avg": 12.3,
@@ -2328,7 +2287,6 @@
       "blk": 0.7,
       "to": 2.6
     },
-    "z_scores": null,
     "auction_valued_at": 20.7,
     "auction_yahoo_avg": 27.0,
     "auction_espn_avg": 44.0,
@@ -2383,7 +2341,6 @@
       "blk": 0.9,
       "to": 2.3
     },
-    "z_scores": null,
     "auction_valued_at": 20.7,
     "auction_yahoo_avg": 32.5,
     "auction_espn_avg": 23.9,
@@ -2439,7 +2396,6 @@
       "blk": 1.9,
       "to": 1.6
     },
-    "z_scores": null,
     "auction_valued_at": 20.6,
     "auction_yahoo_avg": 7.0,
     "auction_espn_avg": 8.7,
@@ -2494,7 +2450,6 @@
       "blk": 1.9,
       "to": 1.4
     },
-    "z_scores": null,
     "auction_valued_at": 19.9,
     "auction_yahoo_avg": 18.5,
     "auction_espn_avg": 4.2,
@@ -2550,7 +2505,6 @@
       "blk": 0.4,
       "to": 3.4
     },
-    "z_scores": null,
     "auction_valued_at": 19.9,
     "auction_yahoo_avg": 34.0,
     "auction_espn_avg": 15.7,
@@ -2606,7 +2560,6 @@
       "blk": 0.1,
       "to": 1.5
     },
-    "z_scores": null,
     "auction_valued_at": 19.6,
     "auction_yahoo_avg": 12.0,
     "auction_espn_avg": 3.9,
@@ -2662,7 +2615,6 @@
       "blk": 0.6,
       "to": 1.7
     },
-    "z_scores": null,
     "auction_valued_at": 18.2,
     "auction_yahoo_avg": 18.0,
     "auction_espn_avg": 26.6,
@@ -2718,7 +2670,6 @@
       "blk": 0.4,
       "to": 1.9
     },
-    "z_scores": null,
     "auction_valued_at": 17.2,
     "auction_yahoo_avg": 13.5,
     "auction_espn_avg": 11.3,
@@ -2773,7 +2724,6 @@
       "blk": 2.1,
       "to": 1.6
     },
-    "z_scores": null,
     "auction_valued_at": 16.3,
     "auction_yahoo_avg": 11.5,
     "auction_espn_avg": 7.0,
@@ -2828,7 +2778,6 @@
       "blk": 1.1,
       "to": 1.6
     },
-    "z_scores": null,
     "auction_valued_at": 16.3,
     "auction_yahoo_avg": 20.5,
     "auction_espn_avg": 6.4,
@@ -2883,7 +2832,6 @@
       "blk": 0.8,
       "to": 1.6
     },
-    "z_scores": null,
     "auction_valued_at": 16.3,
     "auction_yahoo_avg": 13.0,
     "auction_espn_avg": 19.5,
@@ -2938,7 +2886,6 @@
       "blk": 0.1,
       "to": 3.1
     },
-    "z_scores": null,
     "auction_valued_at": 15.8,
     "auction_yahoo_avg": 7.5,
     "auction_espn_avg": 6.8,
@@ -2994,7 +2941,6 @@
       "blk": 0.5,
       "to": 2.4
     },
-    "z_scores": null,
     "auction_valued_at": 15.7,
     "auction_yahoo_avg": 13.0,
     "auction_espn_avg": 15.7,
@@ -3050,7 +2996,6 @@
       "blk": 0.5,
       "to": 2.5
     },
-    "z_scores": null,
     "auction_valued_at": 15.5,
     "auction_yahoo_avg": 5.5,
     "auction_espn_avg": 2.3,
@@ -3105,7 +3050,6 @@
       "blk": 0.8,
       "to": 1.8
     },
-    "z_scores": null,
     "auction_valued_at": 15.1,
     "auction_yahoo_avg": 7.0,
     "auction_espn_avg": 9.3,
@@ -3161,7 +3105,6 @@
       "blk": 0.5,
       "to": 2.1
     },
-    "z_scores": null,
     "auction_valued_at": 14.8,
     "auction_yahoo_avg": 6.5,
     "auction_espn_avg": 3.8,
@@ -3217,7 +3160,6 @@
       "blk": 0.7,
       "to": 1.3
     },
-    "z_scores": null,
     "auction_valued_at": 14.7,
     "auction_yahoo_avg": 11.5,
     "auction_espn_avg": 2.5,
@@ -3272,7 +3214,6 @@
       "blk": 0.8,
       "to": 2.1
     },
-    "z_scores": null,
     "auction_valued_at": 14.5,
     "auction_yahoo_avg": 10.0,
     "auction_espn_avg": 2.6,
@@ -3328,7 +3269,6 @@
       "blk": 0.8,
       "to": 1.8
     },
-    "z_scores": null,
     "auction_valued_at": 14.5,
     "auction_yahoo_avg": 9.0,
     "auction_espn_avg": 2.2,
@@ -3383,7 +3323,6 @@
       "blk": 0.7,
       "to": 2.8
     },
-    "z_scores": null,
     "auction_valued_at": 14.2,
     "auction_yahoo_avg": 10.5,
     "auction_espn_avg": 15.9,
@@ -3438,7 +3377,6 @@
       "blk": 0.3,
       "to": 1.8
     },
-    "z_scores": null,
     "auction_valued_at": 14.1,
     "auction_yahoo_avg": 17.0,
     "auction_espn_avg": 16.8,
@@ -3494,7 +3432,6 @@
       "blk": 0.3,
       "to": 2.1
     },
-    "z_scores": null,
     "auction_valued_at": 13.9,
     "auction_yahoo_avg": 8.5,
     "auction_espn_avg": 5.4,
@@ -3550,7 +3487,6 @@
       "blk": 0.3,
       "to": 2.4
     },
-    "z_scores": null,
     "auction_valued_at": 13.6,
     "auction_yahoo_avg": 5.0,
     "auction_espn_avg": 1.6,
@@ -3605,7 +3541,6 @@
       "blk": 2.1,
       "to": 1.3
     },
-    "z_scores": null,
     "auction_valued_at": 13.4,
     "auction_yahoo_avg": 12.5,
     "auction_espn_avg": 5.2,
@@ -3660,7 +3595,6 @@
       "blk": 1.1,
       "to": 0.9
     },
-    "z_scores": null,
     "auction_valued_at": 13.3,
     "auction_yahoo_avg": 4.5,
     "auction_espn_avg": 0.8,
@@ -3716,7 +3650,6 @@
       "blk": 0.5,
       "to": 2.0
     },
-    "z_scores": null,
     "auction_valued_at": 13.0,
     "auction_yahoo_avg": 9.0,
     "auction_espn_avg": 4.4,
@@ -3772,7 +3705,6 @@
       "blk": 0.3,
       "to": 1.6
     },
-    "z_scores": null,
     "auction_valued_at": 12.9,
     "auction_yahoo_avg": 9.0,
     "auction_espn_avg": 3.6,
@@ -3828,7 +3760,6 @@
       "blk": 0.1,
       "to": 2.2
     },
-    "z_scores": null,
     "auction_valued_at": 12.9,
     "auction_yahoo_avg": 6.5,
     "auction_espn_avg": 2.5,
@@ -3883,7 +3814,6 @@
       "blk": 0.3,
       "to": 3.5
     },
-    "z_scores": null,
     "auction_valued_at": 12.9,
     "auction_yahoo_avg": 5.5,
     "auction_espn_avg": 6.7,
@@ -3938,7 +3868,6 @@
       "blk": 1.1,
       "to": 1.2
     },
-    "z_scores": null,
     "auction_valued_at": 12.8,
     "auction_yahoo_avg": 8.0,
     "auction_espn_avg": 0.5,
@@ -3993,7 +3922,6 @@
       "blk": 2.4,
       "to": 1.0
     },
-    "z_scores": null,
     "auction_valued_at": 12.8,
     "auction_yahoo_avg": 3.5,
     "auction_espn_avg": 4.0,
@@ -4049,7 +3977,6 @@
       "blk": 0.4,
       "to": 2.0
     },
-    "z_scores": null,
     "auction_valued_at": 12.6,
     "auction_yahoo_avg": 13.0,
     "auction_espn_avg": 10.7,
@@ -4104,7 +4031,6 @@
       "blk": 0.6,
       "to": 2.5
     },
-    "z_scores": null,
     "auction_valued_at": 12.4,
     "auction_yahoo_avg": 11.0,
     "auction_espn_avg": 9.8,
@@ -4159,7 +4085,6 @@
       "blk": 1.4,
       "to": 0.9
     },
-    "z_scores": null,
     "auction_valued_at": 12.4,
     "auction_yahoo_avg": 6.5,
     "auction_espn_avg": 0.2,
@@ -4215,7 +4140,6 @@
       "blk": 0.1,
       "to": 2.7
     },
-    "z_scores": null,
     "auction_valued_at": 12.2,
     "auction_yahoo_avg": 3.5,
     "auction_espn_avg": 1.9,
@@ -4271,7 +4195,6 @@
       "blk": 0.6,
       "to": 2.1
     },
-    "z_scores": null,
     "auction_valued_at": 12.0,
     "auction_yahoo_avg": 13.5,
     "auction_espn_avg": 6.8,
@@ -4327,7 +4250,6 @@
       "blk": 0.8,
       "to": 1.2
     },
-    "z_scores": null,
     "auction_valued_at": 12.0,
     "auction_yahoo_avg": 5.5,
     "auction_espn_avg": 3.6,
@@ -4383,7 +4305,6 @@
       "blk": 0.2,
       "to": 2.1
     },
-    "z_scores": null,
     "auction_valued_at": 11.9,
     "auction_yahoo_avg": 2.0,
     "auction_espn_avg": 1.0,
@@ -4439,7 +4360,6 @@
       "blk": 0.3,
       "to": 1.4
     },
-    "z_scores": null,
     "auction_valued_at": 11.9,
     "auction_yahoo_avg": 6.0,
     "auction_espn_avg": 1.2,
@@ -4495,7 +4415,6 @@
       "blk": 0.6,
       "to": 3.1
     },
-    "z_scores": null,
     "auction_valued_at": 11.8,
     "auction_yahoo_avg": 33.0,
     "auction_espn_avg": 33.3,
@@ -4551,7 +4470,6 @@
       "blk": 0.3,
       "to": 2.1
     },
-    "z_scores": null,
     "auction_valued_at": 11.8,
     "auction_yahoo_avg": 6.5,
     "auction_espn_avg": 5.9,
@@ -4607,7 +4525,6 @@
       "blk": 0.8,
       "to": 0.8
     },
-    "z_scores": null,
     "auction_valued_at": 11.7,
     "auction_yahoo_avg": 10.0,
     "auction_espn_avg": 6.6,
@@ -4662,7 +4579,6 @@
       "blk": 0.3,
       "to": 2.3
     },
-    "z_scores": null,
     "auction_valued_at": 11.5,
     "auction_yahoo_avg": 2.5,
     "auction_espn_avg": 1.1,
@@ -4717,7 +4633,6 @@
       "blk": 1.1,
       "to": 0.8
     },
-    "z_scores": null,
     "auction_valued_at": 11.5,
     "auction_yahoo_avg": 2.0,
     "auction_espn_avg": 0.8,
@@ -4773,7 +4688,6 @@
       "blk": 0.7,
       "to": 1.6
     },
-    "z_scores": null,
     "auction_valued_at": 11.2,
     "auction_yahoo_avg": 6.0,
     "auction_espn_avg": 1.3,
@@ -4829,7 +4743,6 @@
       "blk": 1.0,
       "to": 1.4
     },
-    "z_scores": null,
     "auction_valued_at": 11.1,
     "auction_yahoo_avg": 3.0,
     "auction_espn_avg": 0.6,
@@ -4885,7 +4798,6 @@
       "blk": 0.2,
       "to": 2.1
     },
-    "z_scores": null,
     "auction_valued_at": 11.0,
     "auction_yahoo_avg": 8.5,
     "auction_espn_avg": 2.4,
@@ -4940,7 +4852,6 @@
       "blk": 0.7,
       "to": 1.1
     },
-    "z_scores": null,
     "auction_valued_at": 11.0,
     "auction_yahoo_avg": 17.5,
     "auction_espn_avg": 1.6,
@@ -4995,7 +4906,6 @@
       "blk": 2.1,
       "to": 1.0
     },
-    "z_scores": null,
     "auction_valued_at": 10.9,
     "auction_yahoo_avg": 5.0,
     "auction_espn_avg": 0.4,
@@ -5051,7 +4961,6 @@
       "blk": 0.6,
       "to": 1.8
     },
-    "z_scores": null,
     "auction_valued_at": 10.9,
     "auction_yahoo_avg": 4.5,
     "auction_espn_avg": 0.3,
@@ -5107,7 +5016,6 @@
       "blk": 0.9,
       "to": 2.5
     },
-    "z_scores": null,
     "auction_valued_at": 10.8,
     "auction_yahoo_avg": 1.5,
     "auction_espn_avg": 0.9,
@@ -5162,7 +5070,6 @@
       "blk": 1.5,
       "to": 1.5
     },
-    "z_scores": null,
     "auction_valued_at": 10.3,
     "auction_yahoo_avg": 1.5,
     "auction_espn_avg": 1.7,
@@ -5218,7 +5125,6 @@
       "blk": 0.6,
       "to": 1.5
     },
-    "z_scores": null,
     "auction_valued_at": 10.3,
     "auction_yahoo_avg": 1.5,
     "auction_espn_avg": 0.9,
@@ -5274,7 +5180,6 @@
       "blk": 0.6,
       "to": 1.7
     },
-    "z_scores": null,
     "auction_valued_at": 9.8,
     "auction_yahoo_avg": 4.0,
     "auction_espn_avg": 5.6,
@@ -5329,7 +5234,6 @@
       "blk": 1.2,
       "to": 1.2
     },
-    "z_scores": null,
     "auction_valued_at": 9.7,
     "auction_yahoo_avg": 2.0,
     "auction_espn_avg": 0.9,
@@ -5385,7 +5289,6 @@
       "blk": 0.8,
       "to": 1.2
     },
-    "z_scores": null,
     "auction_valued_at": 9.7,
     "auction_yahoo_avg": 5.5,
     "auction_espn_avg": 0.6,
@@ -5440,7 +5343,6 @@
       "blk": 0.2,
       "to": 1.9
     },
-    "z_scores": null,
     "auction_valued_at": 9.6,
     "auction_yahoo_avg": 6.5,
     "auction_espn_avg": 3.0,
@@ -5495,7 +5397,6 @@
       "blk": 0.2,
       "to": 1.3
     },
-    "z_scores": null,
     "auction_valued_at": 9.5,
     "auction_yahoo_avg": 1.0,
     "auction_espn_avg": 0.7,
@@ -5550,7 +5451,6 @@
       "blk": 0.8,
       "to": 1.4
     },
-    "z_scores": null,
     "auction_valued_at": 9.5,
     "auction_yahoo_avg": 2.5,
     "auction_espn_avg": 1.8,
@@ -5606,7 +5506,6 @@
       "blk": 0.6,
       "to": 1.8
     },
-    "z_scores": null,
     "auction_valued_at": 9.3,
     "auction_yahoo_avg": 12.5,
     "auction_espn_avg": 3.9,
@@ -5661,7 +5560,6 @@
       "blk": 0.3,
       "to": 1.0
     },
-    "z_scores": null,
     "auction_valued_at": 9.2,
     "auction_yahoo_avg": 1.0,
     "auction_espn_avg": 1.4,
@@ -5716,7 +5614,6 @@
       "blk": 2.4,
       "to": 1.0
     },
-    "z_scores": null,
     "auction_valued_at": 9.2,
     "auction_yahoo_avg": 7.0,
     "auction_espn_avg": 1.3,
@@ -5771,7 +5668,6 @@
       "blk": 0.6,
       "to": 2.1
     },
-    "z_scores": null,
     "auction_valued_at": 8.6,
     "auction_yahoo_avg": 2.5,
     "auction_espn_avg": 1.2,
@@ -5827,7 +5723,6 @@
       "blk": 0.7,
       "to": 2.7
     },
-    "z_scores": null,
     "auction_valued_at": 8.5,
     "auction_yahoo_avg": 8.5,
     "auction_espn_avg": 5.7,
@@ -5882,7 +5777,6 @@
       "blk": 0.9,
       "to": 1.4
     },
-    "z_scores": null,
     "auction_valued_at": 8.4,
     "auction_yahoo_avg": 2.5,
     "auction_espn_avg": 0.9,
@@ -5938,7 +5832,6 @@
       "blk": 0.5,
       "to": 0.6
     },
-    "z_scores": null,
     "auction_valued_at": 8.0,
     "auction_yahoo_avg": 4.5,
     "auction_espn_avg": 0.8,
@@ -5994,7 +5887,6 @@
       "blk": 0.3,
       "to": 0.9
     },
-    "z_scores": null,
     "auction_valued_at": 7.9,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -6049,7 +5941,6 @@
       "blk": 1.5,
       "to": 1.0
     },
-    "z_scores": null,
     "auction_valued_at": 7.9,
     "auction_yahoo_avg": 3.0,
     "auction_espn_avg": 1.0,
@@ -6105,7 +5996,6 @@
       "blk": 0.5,
       "to": 1.2
     },
-    "z_scores": null,
     "auction_valued_at": 7.6,
     "auction_yahoo_avg": 2.5,
     "auction_espn_avg": 0.3,
@@ -6160,7 +6050,6 @@
       "blk": 0.7,
       "to": 0.7
     },
-    "z_scores": null,
     "auction_valued_at": 7.5,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -6216,7 +6105,6 @@
       "blk": 1.1,
       "to": 0.7
     },
-    "z_scores": null,
     "auction_valued_at": 7.2,
     "auction_yahoo_avg": 1.5,
     "auction_espn_avg": 0.1,
@@ -6271,7 +6159,6 @@
       "blk": 0.3,
       "to": 2.3
     },
-    "z_scores": null,
     "auction_valued_at": 6.9,
     "auction_yahoo_avg": 7.5,
     "auction_espn_avg": 19.1,
@@ -6326,7 +6213,6 @@
       "blk": 1.1,
       "to": 2.3
     },
-    "z_scores": null,
     "auction_valued_at": 6.5,
     "auction_yahoo_avg": 2.5,
     "auction_espn_avg": 1.5,
@@ -6382,7 +6268,6 @@
       "blk": 0.3,
       "to": 1.0
     },
-    "z_scores": null,
     "auction_valued_at": 6.3,
     "auction_yahoo_avg": 2.0,
     "auction_espn_avg": 0.7,
@@ -6438,7 +6323,6 @@
       "blk": 0.3,
       "to": 1.7
     },
-    "z_scores": null,
     "auction_valued_at": 6.1,
     "auction_yahoo_avg": 4.0,
     "auction_espn_avg": 1.3,
@@ -6493,7 +6377,6 @@
       "blk": 0.4,
       "to": 1.4
     },
-    "z_scores": null,
     "auction_valued_at": 5.9,
     "auction_yahoo_avg": 6.0,
     "auction_espn_avg": 0.4,
@@ -6549,7 +6432,6 @@
       "blk": 0.9,
       "to": 1.4
     },
-    "z_scores": null,
     "auction_valued_at": 5.4,
     "auction_yahoo_avg": 2.5,
     "auction_espn_avg": 0.7,
@@ -6604,7 +6486,6 @@
       "blk": 0.2,
       "to": 1.9
     },
-    "z_scores": null,
     "auction_valued_at": 4.5,
     "auction_yahoo_avg": 1.5,
     "auction_espn_avg": 0.5,
@@ -6659,7 +6540,6 @@
       "blk": 0.5,
       "to": 1.6
     },
-    "z_scores": null,
     "auction_valued_at": 4.4,
     "auction_yahoo_avg": 6.0,
     "auction_espn_avg": 2.5,
@@ -6715,7 +6595,6 @@
       "blk": 0.3,
       "to": 3.1
     },
-    "z_scores": null,
     "auction_valued_at": 4.3,
     "auction_yahoo_avg": 1.5,
     "auction_espn_avg": 0.3,
@@ -6771,7 +6650,6 @@
       "blk": 0.6,
       "to": 0.7
     },
-    "z_scores": null,
     "auction_valued_at": 4.2,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -6827,7 +6705,6 @@
       "blk": 0.2,
       "to": 1.2
     },
-    "z_scores": null,
     "auction_valued_at": 4.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -6882,7 +6759,6 @@
       "blk": 0.1,
       "to": 1.3
     },
-    "z_scores": null,
     "auction_valued_at": 3.9,
     "auction_yahoo_avg": 6.0,
     "auction_espn_avg": 1.1,
@@ -6938,7 +6814,6 @@
       "blk": 0.6,
       "to": 1.3
     },
-    "z_scores": null,
     "auction_valued_at": 3.8,
     "auction_yahoo_avg": 1.5,
     "auction_espn_avg": 1.3,
@@ -6994,7 +6869,6 @@
       "blk": 0.5,
       "to": 1.5
     },
-    "z_scores": null,
     "auction_valued_at": 3.8,
     "auction_yahoo_avg": 3.5,
     "auction_espn_avg": 0.8,
@@ -7049,7 +6923,6 @@
       "blk": 0.4,
       "to": 1.1
     },
-    "z_scores": null,
     "auction_valued_at": 3.5,
     "auction_yahoo_avg": 2.0,
     "auction_espn_avg": 0.7,
@@ -7105,7 +6978,6 @@
       "blk": 0.1,
       "to": 2.5
     },
-    "z_scores": null,
     "auction_valued_at": 3.4,
     "auction_yahoo_avg": 1.5,
     "auction_espn_avg": 0.4,
@@ -7160,7 +7032,6 @@
       "blk": 0.6,
       "to": 1.0
     },
-    "z_scores": null,
     "auction_valued_at": 3.3,
     "auction_yahoo_avg": 1.0,
     "auction_espn_avg": 0.1,
@@ -7215,7 +7086,6 @@
       "blk": 0.5,
       "to": 2.5
     },
-    "z_scores": null,
     "auction_valued_at": 3.0,
     "auction_yahoo_avg": 1.0,
     "auction_espn_avg": 0.6,
@@ -7271,7 +7141,6 @@
       "blk": 0.4,
       "to": 2.2
     },
-    "z_scores": null,
     "auction_valued_at": 2.9,
     "auction_yahoo_avg": 5.0,
     "auction_espn_avg": 1.8,
@@ -7326,7 +7195,6 @@
       "blk": 0.8,
       "to": 1.3
     },
-    "z_scores": null,
     "auction_valued_at": 2.8,
     "auction_yahoo_avg": 1.0,
     "auction_espn_avg": 0.3,
@@ -7381,7 +7249,6 @@
       "blk": 0.2,
       "to": 1.2
     },
-    "z_scores": null,
     "auction_valued_at": 2.7,
     "auction_yahoo_avg": 1.0,
     "auction_espn_avg": 0.3,
@@ -7437,7 +7304,6 @@
       "blk": 0.5,
       "to": 2.1
     },
-    "z_scores": null,
     "auction_valued_at": 2.5,
     "auction_yahoo_avg": 2.0,
     "auction_espn_avg": 0.7,
@@ -7493,7 +7359,6 @@
       "blk": 1.0,
       "to": 0.7
     },
-    "z_scores": null,
     "auction_valued_at": 2.5,
     "auction_yahoo_avg": 1.0,
     "auction_espn_avg": 0.2,
@@ -7549,7 +7414,6 @@
       "blk": 0.9,
       "to": 1.3
     },
-    "z_scores": null,
     "auction_valued_at": 2.3,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.7,
@@ -7604,7 +7468,6 @@
       "blk": 0.5,
       "to": 0.6
     },
-    "z_scores": null,
     "auction_valued_at": 2.1,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -7660,7 +7523,6 @@
       "blk": 0.4,
       "to": 0.7
     },
-    "z_scores": null,
     "auction_valued_at": 1.9,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.1,
@@ -7700,7 +7562,6 @@
       "to": 1.2
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 1.8,
     "auction_yahoo_avg": 11.5,
     "auction_espn_avg": 0.1,
@@ -7755,7 +7616,6 @@
       "blk": 0.5,
       "to": 1.2
     },
-    "z_scores": null,
     "auction_valued_at": 1.7,
     "auction_yahoo_avg": 1.0,
     "auction_espn_avg": 0.0,
@@ -7810,7 +7670,6 @@
       "blk": 0.7,
       "to": 0.9
     },
-    "z_scores": null,
     "auction_valued_at": 1.5,
     "auction_yahoo_avg": 1.0,
     "auction_espn_avg": 0.0,
@@ -7866,7 +7725,6 @@
       "blk": 0.4,
       "to": 1.0
     },
-    "z_scores": null,
     "auction_valued_at": 1.4,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.1,
@@ -7922,7 +7780,6 @@
       "blk": 0.4,
       "to": 1.9
     },
-    "z_scores": null,
     "auction_valued_at": 1.3,
     "auction_yahoo_avg": 1.0,
     "auction_espn_avg": 0.1,
@@ -7978,7 +7835,6 @@
       "blk": 0.7,
       "to": 1.2
     },
-    "z_scores": null,
     "auction_valued_at": 1.3,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -8034,7 +7890,6 @@
       "blk": 0.3,
       "to": 1.3
     },
-    "z_scores": null,
     "auction_valued_at": 0.9,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -8089,7 +7944,6 @@
       "blk": 1.1,
       "to": 0.8
     },
-    "z_scores": null,
     "auction_valued_at": 0.8,
     "auction_yahoo_avg": 2.0,
     "auction_espn_avg": 0.0,
@@ -8144,7 +7998,6 @@
       "blk": 0.7,
       "to": 0.7
     },
-    "z_scores": null,
     "auction_valued_at": 0.8,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -8199,7 +8052,6 @@
       "blk": 0.5,
       "to": 1.9
     },
-    "z_scores": null,
     "auction_valued_at": 0.8,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -8254,7 +8106,6 @@
       "blk": 0.9,
       "to": 0.9
     },
-    "z_scores": null,
     "auction_valued_at": 0.6,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -8309,7 +8160,6 @@
       "blk": 0.6,
       "to": 1.4
     },
-    "z_scores": null,
     "auction_valued_at": 0.5,
     "auction_yahoo_avg": 1.5,
     "auction_espn_avg": 1.0,
@@ -8364,7 +8214,6 @@
       "blk": 0.1,
       "to": 1.5
     },
-    "z_scores": null,
     "auction_valued_at": 0.4,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.6,
@@ -8420,7 +8269,6 @@
       "blk": 0.7,
       "to": 1.3
     },
-    "z_scores": null,
     "auction_valued_at": 0.2,
     "auction_yahoo_avg": 1.0,
     "auction_espn_avg": 0.4,
@@ -8459,7 +8307,6 @@
       "to": 1.0
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.1,
     "auction_yahoo_avg": 5.5,
     "auction_espn_avg": 0.2,
@@ -8515,7 +8362,6 @@
       "blk": 0.4,
       "to": 1.0
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -8570,7 +8416,6 @@
       "blk": 0.2,
       "to": 3.4
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 2.5,
     "auction_espn_avg": 1.0,
@@ -8625,7 +8470,6 @@
       "blk": 0.4,
       "to": 1.4
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -8680,7 +8524,6 @@
       "blk": 0.6,
       "to": 1.2
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 1.0,
     "auction_espn_avg": 0.0,
@@ -8735,7 +8578,6 @@
       "blk": 0.8,
       "to": 1.3
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -8774,7 +8616,6 @@
       "to": 1.4
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -8830,7 +8671,6 @@
       "blk": 0.6,
       "to": 0.9
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -8886,7 +8726,6 @@
       "blk": 0.2,
       "to": 0.6
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -8942,7 +8781,6 @@
       "blk": 0.2,
       "to": 1.5
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 3.0,
     "auction_espn_avg": 0.7,
@@ -8997,7 +8835,6 @@
       "blk": 0.1,
       "to": 1.5
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -9053,7 +8890,6 @@
       "blk": 0.4,
       "to": 1.6
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.1,
@@ -9109,7 +8945,6 @@
       "blk": 0.5,
       "to": 2.1
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 3.0,
     "auction_espn_avg": 0.5,
@@ -9165,7 +9000,6 @@
       "blk": 0.6,
       "to": 1.8
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 1.0,
     "auction_espn_avg": 0.2,
@@ -9221,7 +9055,6 @@
       "blk": 0.4,
       "to": 2.3
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 1.0,
     "auction_espn_avg": 2.4,
@@ -9276,7 +9109,6 @@
       "blk": 1.2,
       "to": 0.5
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 1.0,
     "auction_espn_avg": 0.0,
@@ -9331,7 +9163,6 @@
       "blk": 0.9,
       "to": 0.7
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -9370,7 +9201,6 @@
       "to": 2.3
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -9426,7 +9256,6 @@
       "blk": 0.3,
       "to": 1.5
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 1.0,
     "auction_espn_avg": 0.2,
@@ -9482,7 +9311,6 @@
       "blk": 0.4,
       "to": 0.8
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.7,
@@ -9537,7 +9365,6 @@
       "blk": 0.1,
       "to": 0.7
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -9592,7 +9419,6 @@
       "blk": 0.3,
       "to": 1.4
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 1.0,
     "auction_espn_avg": 0.8,
@@ -9647,7 +9473,6 @@
       "blk": 0.1,
       "to": 1.4
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -9702,7 +9527,6 @@
       "blk": 0.1,
       "to": 2.7
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.7,
@@ -9757,7 +9581,6 @@
       "blk": 1.1,
       "to": 1.1
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.1,
@@ -9812,7 +9635,6 @@
       "blk": 0.5,
       "to": 1.6
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -9851,7 +9673,6 @@
       "to": 1.1
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 2.0,
     "auction_espn_avg": 0.1,
@@ -9906,7 +9727,6 @@
       "blk": 0.2,
       "to": 1.0
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.7,
@@ -9962,7 +9782,6 @@
       "blk": 0.6,
       "to": 1.2
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.1,
@@ -10017,7 +9836,6 @@
       "blk": 0.8,
       "to": 1.4
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 1.0,
     "auction_espn_avg": 0.0,
@@ -10056,7 +9874,6 @@
       "to": 0.6
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 3.0,
     "auction_espn_avg": 0.0,
@@ -10111,7 +9928,6 @@
       "blk": 0.3,
       "to": 2.1
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 2.5,
     "auction_espn_avg": 0.2,
@@ -10167,7 +9983,6 @@
       "blk": 0.1,
       "to": 1.5
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 1.0,
     "auction_espn_avg": 0.0,
@@ -10223,7 +10038,6 @@
       "blk": 0.3,
       "to": 1.5
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 1.5,
     "auction_espn_avg": 0.9,
@@ -10279,7 +10093,6 @@
       "blk": 0.5,
       "to": 1.7
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.7,
@@ -10335,7 +10148,6 @@
       "blk": 0.5,
       "to": 1.2
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -10390,7 +10202,6 @@
       "blk": 0.2,
       "to": 1.4
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -10445,7 +10256,6 @@
       "blk": 0.3,
       "to": 0.9
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -10501,7 +10311,6 @@
       "blk": 0.3,
       "to": 0.8
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -10556,7 +10365,6 @@
       "blk": 1.0,
       "to": 0.5
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -10612,7 +10420,6 @@
       "blk": 0.2,
       "to": 1.6
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 1.0,
     "auction_espn_avg": 0.0,
@@ -10667,7 +10474,6 @@
       "blk": 0.4,
       "to": 0.7
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -10707,7 +10513,6 @@
       "to": 1.5
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 4.5,
     "auction_espn_avg": 0.2,
@@ -10762,7 +10567,6 @@
       "blk": 1.1,
       "to": 0.7
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -10818,7 +10622,6 @@
       "blk": 0.2,
       "to": 1.1
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -10873,7 +10676,6 @@
       "blk": 0.6,
       "to": 1.0
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 1.0,
     "auction_espn_avg": 0.0,
@@ -10928,7 +10730,6 @@
       "blk": 0.5,
       "to": 0.9
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -10984,7 +10785,6 @@
       "blk": 1.1,
       "to": 0.7
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -11023,7 +10823,6 @@
       "to": 1.7
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.2,
@@ -11078,7 +10877,6 @@
       "blk": 0.3,
       "to": 0.4
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -11134,7 +10932,6 @@
       "blk": 0.4,
       "to": 1.1
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -11190,7 +10987,6 @@
       "blk": 0.3,
       "to": 1.5
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 1.0,
     "auction_espn_avg": 0.0,
@@ -11245,7 +11041,6 @@
       "blk": 0.5,
       "to": 0.5
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -11300,7 +11095,6 @@
       "blk": 0.6,
       "to": 0.7
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -11356,7 +11150,6 @@
       "blk": 0.3,
       "to": 0.8
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -11411,7 +11204,6 @@
       "blk": 0.1,
       "to": 0.7
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -11466,7 +11258,6 @@
       "blk": 0.1,
       "to": 0.7
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -11521,7 +11312,6 @@
       "blk": 0.3,
       "to": 1.2
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -11577,7 +11367,6 @@
       "blk": 0.9,
       "to": 1.1
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -11633,7 +11422,6 @@
       "blk": 0.8,
       "to": 0.6
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -11688,7 +11476,6 @@
       "blk": 1.2,
       "to": 1.2
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -11743,7 +11530,6 @@
       "blk": 0.1,
       "to": 0.7
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.1,
@@ -11798,7 +11584,6 @@
       "blk": 0.5,
       "to": 1.4
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 2.0,
     "auction_espn_avg": 0.6,
@@ -11854,7 +11639,6 @@
       "blk": 0.7,
       "to": 1.8
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -11910,7 +11694,6 @@
       "blk": 0.6,
       "to": 0.9
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -11966,7 +11749,6 @@
       "blk": 0.3,
       "to": 1.2
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -12022,7 +11804,6 @@
       "blk": 0.9,
       "to": 0.8
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -12078,7 +11859,6 @@
       "blk": 0.1,
       "to": 1.2
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -12133,7 +11913,6 @@
       "blk": 0.6,
       "to": 0.9
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -12189,7 +11968,6 @@
       "blk": 0.6,
       "to": 1.2
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.1,
@@ -12244,7 +12022,6 @@
       "blk": 1.0,
       "to": 0.3
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -12300,7 +12077,6 @@
       "blk": 0.2,
       "to": 0.3
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -12355,7 +12131,6 @@
       "blk": 0.7,
       "to": 1.1
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -12411,7 +12186,6 @@
       "blk": 0.1,
       "to": 1.8
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -12467,7 +12241,6 @@
       "blk": 0.5,
       "to": 0.8
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -12506,7 +12279,6 @@
       "to": 1.2
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.1,
@@ -12561,7 +12333,6 @@
       "blk": 0.1,
       "to": 0.5
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -12617,7 +12388,6 @@
       "blk": 0.8,
       "to": 1.9
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -12672,7 +12442,6 @@
       "blk": 0.5,
       "to": 0.8
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 1.0,
     "auction_espn_avg": 0.1,
@@ -12727,7 +12496,6 @@
       "blk": 0.5,
       "to": 1.4
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -12783,7 +12551,6 @@
       "blk": 1.0,
       "to": 0.8
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -12838,7 +12605,6 @@
       "blk": 0.2,
       "to": 1.2
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -12893,7 +12659,6 @@
       "blk": 0.7,
       "to": 1.0
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -12948,7 +12713,6 @@
       "blk": 1.1,
       "to": 0.7
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -13003,7 +12767,6 @@
       "blk": 0.7,
       "to": 0.9
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -13058,7 +12821,6 @@
       "blk": 0.3,
       "to": 0.6
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -13097,7 +12859,6 @@
       "to": 1.5
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -13152,7 +12913,6 @@
       "blk": 0.1,
       "to": 1.2
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -13207,7 +12967,6 @@
       "blk": 0.5,
       "to": 1.4
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -13262,7 +13021,6 @@
       "blk": 0.8,
       "to": 0.5
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -13317,7 +13075,6 @@
       "blk": 0.1,
       "to": 0.4
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -13372,7 +13129,6 @@
       "blk": 0.2,
       "to": 1.5
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -13427,7 +13183,6 @@
       "blk": 0.1,
       "to": 0.9
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -13482,7 +13237,6 @@
       "blk": 0.2,
       "to": 1.3
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -13537,7 +13291,6 @@
       "blk": 0.3,
       "to": 0.7
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -13593,7 +13346,6 @@
       "blk": 0.8,
       "to": 1.4
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -13649,7 +13401,6 @@
       "blk": 0.0,
       "to": 0.8
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.1,
@@ -13704,7 +13455,6 @@
       "blk": 0.2,
       "to": 0.9
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -13759,7 +13509,6 @@
       "blk": 0.3,
       "to": 0.7
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -13815,7 +13564,6 @@
       "blk": 0.2,
       "to": 0.9
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -13870,7 +13618,6 @@
       "blk": 1.2,
       "to": 0.7
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -13925,7 +13672,6 @@
       "blk": 0.2,
       "to": 1.3
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.2,
@@ -13980,7 +13726,6 @@
       "blk": 0.5,
       "to": 0.9
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -14019,7 +13764,6 @@
       "to": 1.0
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 5.0,
     "auction_espn_avg": 0.0,
@@ -14074,7 +13818,6 @@
       "blk": 0.4,
       "to": 0.6
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -14113,7 +13856,6 @@
       "to": 0.7
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -14152,7 +13894,6 @@
       "to": 1.4
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -14207,7 +13948,6 @@
       "blk": 0.4,
       "to": 1.2
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -14263,7 +14003,6 @@
       "blk": 0.4,
       "to": 0.7
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -14319,7 +14058,6 @@
       "blk": 0.4,
       "to": 0.6
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -14374,7 +14112,6 @@
       "blk": 0.0,
       "to": 0.5
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -14429,7 +14166,6 @@
       "blk": 0.8,
       "to": 0.8
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -14484,7 +14220,6 @@
       "blk": 0.5,
       "to": 1.2
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -14540,7 +14275,6 @@
       "blk": 0.3,
       "to": 0.6
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -14595,7 +14329,6 @@
       "blk": 0.7,
       "to": 1.6
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -14650,7 +14383,6 @@
       "blk": 0.2,
       "to": 0.7
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -14705,7 +14437,6 @@
       "blk": 0.5,
       "to": 0.4
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -14760,7 +14491,6 @@
       "blk": 0.2,
       "to": 0.7
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -14815,7 +14545,6 @@
       "blk": 0.1,
       "to": 0.6
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -14871,7 +14600,6 @@
       "blk": 0.2,
       "to": 0.9
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -14926,7 +14654,6 @@
       "blk": 0.3,
       "to": 0.5
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -14981,7 +14708,6 @@
       "blk": 0.1,
       "to": 0.1
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -15036,7 +14762,6 @@
       "blk": 0.4,
       "to": 1.0
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -15091,7 +14816,6 @@
       "blk": 0.4,
       "to": 0.8
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -15146,7 +14870,6 @@
       "blk": 0.2,
       "to": 0.1
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -15201,7 +14924,6 @@
       "blk": 0.2,
       "to": 1.3
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -15240,7 +14962,6 @@
       "to": 1.1
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -15279,7 +15000,6 @@
       "to": 0.7
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 4.0,
     "auction_espn_avg": 0.0,
@@ -15318,7 +15038,6 @@
       "to": 0.9
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -15374,7 +15093,6 @@
       "blk": 0.9,
       "to": 1.1
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.1,
@@ -15430,7 +15148,6 @@
       "blk": 0.5,
       "to": 0.6
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -15486,7 +15203,6 @@
       "blk": 0.8,
       "to": 0.6
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -15541,7 +15257,6 @@
       "blk": 0.6,
       "to": 0.8
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -15596,7 +15311,6 @@
       "blk": 0.3,
       "to": 0.6
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -15635,7 +15349,6 @@
       "to": 1.3
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -15690,7 +15403,6 @@
       "blk": 0.1,
       "to": 0.1
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -15745,7 +15457,6 @@
       "blk": 0.6,
       "to": 0.8
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -15800,7 +15511,6 @@
       "blk": 0.6,
       "to": 1.0
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -15856,7 +15566,6 @@
       "blk": 0.1,
       "to": 0.5
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.1,
@@ -15911,7 +15620,6 @@
       "blk": 0.4,
       "to": 0.5
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -15966,7 +15674,6 @@
       "blk": 1.1,
       "to": 1.4
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -16005,7 +15712,6 @@
       "to": 0.8
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -16060,7 +15766,6 @@
       "blk": 0.4,
       "to": 0.6
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -16115,7 +15820,6 @@
       "blk": 0.2,
       "to": 1.0
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -16170,7 +15874,6 @@
       "blk": 0.1,
       "to": 1.0
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -16225,7 +15928,6 @@
       "blk": 0.1,
       "to": 1.6
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -16281,7 +15983,6 @@
       "blk": 0.1,
       "to": 0.9
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -16337,7 +16038,6 @@
       "blk": 0.4,
       "to": 0.6
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -16393,7 +16093,6 @@
       "blk": 0.3,
       "to": 0.7
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -16449,7 +16148,6 @@
       "blk": 0.6,
       "to": 0.5
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -16504,7 +16202,6 @@
       "blk": 0.4,
       "to": 0.4
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -16560,7 +16257,6 @@
       "blk": 0.1,
       "to": 0.9
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -16615,7 +16311,6 @@
       "blk": 0.3,
       "to": 0.2
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -16671,7 +16366,6 @@
       "blk": 0.3,
       "to": 0.8
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -16726,7 +16420,6 @@
       "blk": 0.2,
       "to": 0.5
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -16782,7 +16475,6 @@
       "blk": 0.3,
       "to": 0.6
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -16837,7 +16529,6 @@
       "blk": 0.5,
       "to": 0.5
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -16893,7 +16584,6 @@
       "blk": 0.6,
       "to": 0.8
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -16948,7 +16638,6 @@
       "blk": 0.1,
       "to": 0.3
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -17003,7 +16692,6 @@
       "blk": 0.1,
       "to": 1.2
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.1,
@@ -17058,7 +16746,6 @@
       "blk": 0.9,
       "to": 0.8
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -17113,7 +16800,6 @@
       "blk": 0.7,
       "to": 0.7
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -17152,7 +16838,6 @@
       "to": 0.8
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -17191,7 +16876,6 @@
       "to": 0.8
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -17246,7 +16930,6 @@
       "blk": 0.4,
       "to": 0.6
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -17302,7 +16985,6 @@
       "blk": 0.5,
       "to": 0.6
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -17357,7 +17039,6 @@
       "blk": 0.6,
       "to": 0.6
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -17412,7 +17093,6 @@
       "blk": 0.3,
       "to": 0.9
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -17467,7 +17147,6 @@
       "blk": 0.3,
       "to": 0.9
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -17522,7 +17201,6 @@
       "blk": 0.1,
       "to": 0.6
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -17577,7 +17255,6 @@
       "blk": 0.1,
       "to": 0.5
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -17633,7 +17310,6 @@
       "blk": 0.1,
       "to": 1.7
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.1,
@@ -17688,7 +17364,6 @@
       "blk": 0.1,
       "to": 0.3
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -17727,7 +17402,6 @@
       "to": 0.5
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -17782,7 +17456,6 @@
       "blk": 0.0,
       "to": 0.3
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -17837,7 +17510,6 @@
       "blk": 0.2,
       "to": 0.5
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -17876,7 +17548,6 @@
       "to": 0.7
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -17931,7 +17602,6 @@
       "blk": 0.3,
       "to": 0.5
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -17986,7 +17656,6 @@
       "blk": 0.3,
       "to": 1.3
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -18025,7 +17694,6 @@
       "to": 0.6
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -18080,7 +17748,6 @@
       "blk": 0.3,
       "to": 1.0
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -18135,7 +17802,6 @@
       "blk": 0.1,
       "to": 0.8
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -18190,7 +17856,6 @@
       "blk": 0.3,
       "to": 0.5
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -18229,7 +17894,6 @@
       "to": 0.9
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -18284,7 +17948,6 @@
       "blk": 0.2,
       "to": 0.5
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -18323,7 +17986,6 @@
       "to": 0.8
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -18362,7 +18024,6 @@
       "to": 0.5
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 1.0,
     "auction_espn_avg": 0.0,
@@ -18401,7 +18062,6 @@
       "to": 0.5
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -18457,7 +18117,6 @@
       "blk": 0.1,
       "to": 0.5
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -18512,7 +18171,6 @@
       "blk": 0.1,
       "to": 0.5
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -18567,7 +18225,6 @@
       "blk": 0.2,
       "to": 1.0
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -18622,7 +18279,6 @@
       "blk": 0.7,
       "to": 0.6
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -18661,7 +18317,6 @@
       "to": 1.0
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -18716,7 +18371,6 @@
       "blk": 0.1,
       "to": 0.4
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -18771,7 +18425,6 @@
       "blk": 0.4,
       "to": 0.7
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -18827,7 +18480,6 @@
       "blk": 0.1,
       "to": 0.4
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -18866,7 +18518,6 @@
       "to": 0.3
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -18921,7 +18572,6 @@
       "blk": 0.3,
       "to": 0.6
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -18976,7 +18626,6 @@
       "blk": 0.2,
       "to": 0.3
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -19031,7 +18680,6 @@
       "blk": 0.7,
       "to": 0.5
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -19087,7 +18735,6 @@
       "blk": 0.3,
       "to": 0.6
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -19142,7 +18789,6 @@
       "blk": 0.3,
       "to": 1.0
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -19198,7 +18844,6 @@
       "blk": 0.1,
       "to": 0.3
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -19237,7 +18882,6 @@
       "to": 0.8
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -19276,7 +18920,6 @@
       "to": 0.9
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -19331,7 +18974,6 @@
       "blk": 0.0,
       "to": 0.6
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -19386,7 +19028,6 @@
       "blk": 0.1,
       "to": 0.6
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -19441,7 +19082,6 @@
       "blk": 0.7,
       "to": 1.0
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -19496,7 +19136,6 @@
       "blk": 0.1,
       "to": 0.7
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -19551,7 +19190,6 @@
       "blk": 0.1,
       "to": 0.3
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -19606,7 +19244,6 @@
       "blk": 0.1,
       "to": 1.3
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -19661,7 +19298,6 @@
       "blk": 0.1,
       "to": 0.6
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -19716,7 +19352,6 @@
       "blk": 0.4,
       "to": 1.4
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -19771,7 +19406,6 @@
       "blk": 0.1,
       "to": 0.4
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -19826,7 +19460,6 @@
       "blk": 0.1,
       "to": 0.7
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -19865,7 +19498,6 @@
       "to": 0.6
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -19920,7 +19552,6 @@
       "blk": 0.2,
       "to": 0.5
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -19959,7 +19590,6 @@
       "to": 0.5
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -20014,7 +19644,6 @@
       "blk": 0.1,
       "to": 0.2
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -20053,7 +19682,6 @@
       "to": 1.3
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -20108,7 +19736,6 @@
       "blk": 0.1,
       "to": 0.5
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -20163,7 +19790,6 @@
       "blk": 0.4,
       "to": 0.6
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -20202,7 +19828,6 @@
       "to": 0.6
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -20257,7 +19882,6 @@
       "blk": 0.4,
       "to": 0.3
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -20312,7 +19936,6 @@
       "blk": 0.1,
       "to": 0.7
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -20367,7 +19990,6 @@
       "blk": 0.1,
       "to": 0.8
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -20406,7 +20028,6 @@
       "to": 0.4
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -20445,7 +20066,6 @@
       "to": 0.4
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -20485,7 +20105,6 @@
       "to": 0.5
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -20540,7 +20159,6 @@
       "blk": 0.4,
       "to": 0.6
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -20595,7 +20213,6 @@
       "blk": 0.1,
       "to": 0.3
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -20651,7 +20268,6 @@
       "blk": 0.2,
       "to": 0.3
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -20690,7 +20306,6 @@
       "to": 0.6
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -20745,7 +20360,6 @@
       "blk": 0.0,
       "to": 0.7
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -20800,7 +20414,6 @@
       "blk": 0.2,
       "to": 0.6
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -20855,7 +20468,6 @@
       "blk": 0.4,
       "to": 0.9
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -20910,7 +20522,6 @@
       "blk": 0.1,
       "to": 0.5
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -20949,7 +20560,6 @@
       "to": 0.4
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -20988,7 +20598,6 @@
       "to": 0.5
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -21027,7 +20636,6 @@
       "to": 0.4
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -21082,7 +20690,6 @@
       "blk": 0.1,
       "to": 0.9
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -21138,7 +20745,6 @@
       "blk": 0.3,
       "to": 0.5
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -21193,7 +20799,6 @@
       "blk": 0.2,
       "to": 0.5
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -21232,7 +20837,6 @@
       "to": 0.3
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.1,
@@ -21287,7 +20891,6 @@
       "blk": 0.2,
       "to": 0.6
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -21326,7 +20929,6 @@
       "to": 0.4
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -21365,7 +20967,6 @@
       "to": 0.6
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -21404,7 +21005,6 @@
       "to": 0.3
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -21443,7 +21043,6 @@
       "to": 0.4
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -21498,7 +21097,6 @@
       "blk": 0.2,
       "to": 0.3
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -21553,7 +21151,6 @@
       "blk": 0.1,
       "to": 0.3
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -21592,7 +21189,6 @@
       "to": 0.3
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -21631,7 +21227,6 @@
       "to": 0.5
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 1.0,
     "auction_espn_avg": 0.5,
@@ -21670,7 +21265,6 @@
       "to": 0.4
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -21725,7 +21319,6 @@
       "blk": 0.1,
       "to": 0.3
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -21780,7 +21373,6 @@
       "blk": 0.0,
       "to": 0.2
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -21835,7 +21427,6 @@
       "blk": 0.0,
       "to": 0.2
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -21874,7 +21465,6 @@
       "to": 0.3
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -21930,7 +21520,6 @@
       "blk": 0.1,
       "to": 0.2
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -21985,7 +21574,6 @@
       "blk": 0.1,
       "to": 0.2
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -22040,7 +21628,6 @@
       "blk": 0.1,
       "to": 0.3
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -22095,7 +21682,6 @@
       "blk": 0.3,
       "to": 0.3
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -22150,7 +21736,6 @@
       "blk": 0.0,
       "to": 0.5
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -22189,7 +21774,6 @@
       "to": 0.3
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -22244,7 +21828,6 @@
       "blk": 0.0,
       "to": 0.6
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -22300,7 +21883,6 @@
       "blk": 0.4,
       "to": 0.3
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -22355,7 +21937,6 @@
       "blk": 0.3,
       "to": 0.4
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -22394,7 +21975,6 @@
       "to": 0.2
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -22449,7 +22029,6 @@
       "blk": 0.1,
       "to": 0.2
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -22504,7 +22083,6 @@
       "blk": 0.2,
       "to": 0.3
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -22560,7 +22138,6 @@
       "blk": 0.0,
       "to": 0.3
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -22599,7 +22176,6 @@
       "to": 0.2
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -22654,7 +22230,6 @@
       "blk": 0.5,
       "to": 0.0
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -22709,7 +22284,6 @@
       "blk": 0.4,
       "to": 0.3
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -22764,7 +22338,6 @@
       "blk": 0.0,
       "to": 0.6
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -22819,7 +22392,6 @@
       "blk": 0.1,
       "to": 0.2
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -22874,7 +22446,6 @@
       "blk": 0.1,
       "to": 0.4
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -22929,7 +22500,6 @@
       "blk": 0.1,
       "to": 0.3
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -22984,7 +22554,6 @@
       "blk": 0.2,
       "to": 0.5
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -23039,7 +22608,6 @@
       "blk": 0.1,
       "to": 0.3
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -23094,7 +22662,6 @@
       "blk": 0.2,
       "to": 0.9
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -23149,7 +22716,6 @@
       "blk": 0.0,
       "to": 0.3
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -23188,7 +22754,6 @@
       "to": 0.8
     },
     "past_year_stats": null,
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -23243,7 +22808,6 @@
       "blk": 0.1,
       "to": 0.5
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -23298,7 +22862,6 @@
       "blk": 0.1,
       "to": 0.0
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -23353,7 +22916,6 @@
       "blk": 0.0,
       "to": 0.3
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
@@ -23408,7 +22970,6 @@
       "blk": 0.1,
       "to": 0.4
     },
-    "z_scores": null,
     "auction_valued_at": 0.0,
     "auction_yahoo_avg": 0.0,
     "auction_espn_avg": 0.0,
