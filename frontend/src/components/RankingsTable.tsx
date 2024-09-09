@@ -40,16 +40,15 @@ const RankingsTable = ({ players }: RankingsTableProps) => {
                 </Td>
                 <Td>{player.first_name}</Td>
                 <Td>{player.last_name}</Td>
-                <Td>{player.projection_z_scores?.fg.toFixed(2)}</Td>
-                <Td>{player.projection_z_scores?.ft.toFixed(2)}</Td>
-                <Td>{player.projection_z_scores?.tpm.toFixed(2)}</Td>
-                <Td>{player.projection_z_scores?.pts.toFixed(2)}</Td>
-                <Td>{player.projection_z_scores?.reb.toFixed(2)}</Td>
-                <Td>{player.projection_z_scores?.ast.toFixed(2)}</Td>
-                <Td>{player.projection_z_scores?.stl.toFixed(2)}</Td>
-                <Td>{player.projection_z_scores?.blk.toFixed(2)}</Td>
-                <Td>{player.projection_z_scores?.to.toFixed(2)}</Td>
-                <Td>{player.projection_z_scores?.total.toFixed(2)}</Td>
+                <Td>{player.past_year_z_scores?.fg.toFixed(2)}</Td>
+                <Td>{player.past_year_z_scores?.ft.toFixed(2)}</Td>
+                <Td>{player.past_year_z_scores?.tpm.toFixed(2)}</Td>
+                <Td>{player.past_year_z_scores?.pts.toFixed(2)}</Td>
+                <Td>{player.past_year_z_scores?.reb.toFixed(2)}</Td>
+                <Td>{player.past_year_z_scores?.ast.toFixed(2)}</Td>
+                <Td>{player.past_year_z_scores?.stl.toFixed(2)}</Td>
+                <Td>{player.past_year_z_scores?.blk.toFixed(2)}</Td>
+                <Td>{player.past_year_z_scores?.to.toFixed(2)}</Td>
                 <Td>{player.past_year_z_scores?.total.toFixed(2)}</Td>
               </Tr>
             );

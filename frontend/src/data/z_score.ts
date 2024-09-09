@@ -15,6 +15,8 @@ const CATEGORIES = [
   "to",
 ] as const;
 
+const MIN_MINUTES = 20;
+
 const calculateZScores = (
   players: Player[],
   usePastYearStats: boolean
@@ -28,7 +30,9 @@ const calculateZScores = (
   }
 
   // Only use players who averaged more than 20mpg for calculations
-  players = players.filter((player) => getStats(player).mpg > 20);
+  const players_calc = players.filter(
+    (player) => getStats(player).mpg > MIN_MINUTES
+  );
 
   const stats = new Map(
     CATEGORIES.map((category) => [
@@ -64,14 +68,17 @@ const calculateZScores = (
   ]);
 
   // Means for FG% and FT% are weighted by FGA and FTA
+  const fga_tot = players.map((player) => getStats(player).fga);
+  const fta_tot = players.map((player) => getStats(player).fta);
+
   const fg_diff = players.map(
     (player) => getStats(player).fg_pct - means.get("fg")!
   );
   const ft_diff = players.map(
     (player) => getStats(player).ft_pct - means.get("ft")!
   );
-  const fg_impact = fg_diff.map((diff, i) => diff * fga[i]);
-  const ft_impact = ft_diff.map((diff, i) => diff * fta[i]);
+  const fg_impact = fg_diff.map((diff, i) => diff * fga_tot[i]);
+  const ft_impact = ft_diff.map((diff, i) => diff * fta_tot[i]);
   means.set("fg_impact", mean(fg_impact));
   means.set("ft_impact", mean(ft_impact));
 
