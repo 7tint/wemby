@@ -25,15 +25,26 @@ const calculateZScores = (
   const u = usePastYearStats;
   if (u) players = players.filter((player) => player.pastYearStats);
 
+  // Games played
+  const GP = players.map((player) => getStats(player, u).gp || 0);
+
   // Array of index of players with MPG > MIN_MINUTES
   const filterIndexes = players
     .map((p, index) => (getStats(p, u).mpg > MIN_MINUTES ? index : -1))
     .filter((index) => index !== -1);
 
   // Organize stats by category
-  const stats = CATEGORIES.map((category) =>
-    players.map((player) => getStats(player, u)[category])
-  );
+  const stats = CATEGORIES.map((category) => {
+    if (
+      category === "fgm" ||
+      category === "fga" ||
+      category === "ftm" ||
+      category === "fta"
+    ) {
+      return players.map((player, i) => getStats(player, u)[category]);
+    } else
+      return players.map((player, i) => getStats(player, u)[category] * GP[i]);
+  });
   const filteredStats = stats.map((stat) =>
     stat.filter((_, i) => filterIndexes.includes(i))
   );
@@ -79,24 +90,25 @@ const calculateZScores = (
     ["to", std(to)],
   ]);
 
-  // 3. Calculate z-scores
+  // Calculate z-scores
   const plainZMap = new Map<number, PlayerStatsNScore>();
   players.forEach((p, i) => {
     const plainZ = {
       fg: (fgImpact[i] - fgImpactMean) / stds.get("fg")!,
       ft: (ftImpact[i] - ftImpactMean) / stds.get("ft")!,
-      tpm: (getStats(p, u).tpm - means.get("tpm")!) / stds.get("tpm")!,
-      pts: (getStats(p, u).pts - means.get("pts")!) / stds.get("pts")!,
-      reb: (getStats(p, u).reb - means.get("reb")!) / stds.get("reb")!,
-      ast: (getStats(p, u).ast - means.get("ast")!) / stds.get("ast")!,
-      stl: (getStats(p, u).stl - means.get("stl")!) / stds.get("stl")!,
-      blk: (getStats(p, u).blk - means.get("blk")!) / stds.get("blk")!,
-      to: (means.get("to")! - getStats(p, u).to) / stds.get("to")!,
+      tpm: (getStats(p, u).tpm * GP[i] - means.get("tpm")!) / stds.get("tpm")!,
+      pts: (getStats(p, u).pts * GP[i] - means.get("pts")!) / stds.get("pts")!,
+      reb: (getStats(p, u).reb * GP[i] - means.get("reb")!) / stds.get("reb")!,
+      ast: (getStats(p, u).ast * GP[i] - means.get("ast")!) / stds.get("ast")!,
+      stl: (getStats(p, u).stl * GP[i] - means.get("stl")!) / stds.get("stl")!,
+      blk: (getStats(p, u).blk * GP[i] - means.get("blk")!) / stds.get("blk")!,
+      to: (means.get("to")! - getStats(p, u).to * GP[i]) / stds.get("to")!,
       total: 0,
     };
     plainZMap.set(p.id, plainZ);
   });
 
+  // Add weights if needed
   const zScores = new Map<number, PlayerStatsNScore>();
   players.forEach((player) => {
     const PlayerStatsNScore = {

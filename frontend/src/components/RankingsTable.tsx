@@ -25,7 +25,7 @@ const RankingsTable = ({ players }: RankingsTableProps) => {
     setPlayersToDisplay(playersToDisplay);
 
     const totalDelta = playersToDisplay.reduce((acc, player, i) => {
-      const rankChange = -(player.rank - (i + 1));
+      const rankChange = Math.abs(player.rank - (i + 1));
       return acc + rankChange;
     }, 0);
     setTotalDelta(totalDelta);

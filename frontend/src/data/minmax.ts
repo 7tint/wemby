@@ -9,15 +9,26 @@ const calculateMinMax = (
   const u = usePastYearStats;
   if (u) players = players.filter((player) => player.pastYearStats);
 
+  // Games played factor
+  const GP = players.map((player) => getStats(player, u).gp || 0);
+
   // Array of index of players with MPG > MIN_MINUTES
   const filterIndexes = players
     .map((p, index) => (getStats(p, u).mpg > MIN_MINUTES ? index : -1))
     .filter((index) => index !== -1);
 
   // Organize stats by category
-  const stats = CATEGORIES.map((category) =>
-    players.map((player) => getStats(player, u)[category])
-  );
+  const stats = CATEGORIES.map((category) => {
+    if (
+      category === "fgm" ||
+      category === "fga" ||
+      category === "ftm" ||
+      category === "fta"
+    ) {
+      return players.map((player, i) => getStats(player, u)[category]);
+    } else
+      return players.map((player, i) => getStats(player, u)[category] * GP[i]);
+  });
   const filteredStats = stats.map((stat) =>
     stat.filter((_, i) => filterIndexes.includes(i))
   );
@@ -41,8 +52,8 @@ const calculateMinMax = (
 
     const playerStats = getStats(player, u);
     CATEGORIES.forEach((category, i) => {
-      mins[i] = Math.min(mins[i], playerStats[category]);
-      maxs[i] = Math.max(maxs[i], playerStats[category]);
+      mins[i] = Math.min(mins[i], playerStats[category] * GP[i]);
+      maxs[i] = Math.max(maxs[i], playerStats[category] * GP[i]);
     });
     mins[11] = Math.min(mins[11], fgImpact[i]);
     maxs[11] = Math.max(maxs[11], fgImpact[i]);
@@ -53,7 +64,7 @@ const calculateMinMax = (
   // Calculate min-max normalization
   const minMax = new Map<number, PlayerStatsNScore>();
   players.forEach((player, i) => {
-    if (!player.pastYearStats) {
+    if (u && !player.pastYearStats) {
       minMax.set(player.id, {
         fg: 0,
         ft: 0,
@@ -74,7 +85,7 @@ const calculateMinMax = (
       const min = mins[i];
       const max = maxs[i];
       if (max === min) return 0;
-      return 2 * ((playerStats[category] - min) / (max - min)) - 1;
+      return 2 * ((playerStats[category] * GP[i] - min) / (max - min)) - 1;
     });
 
     const nScores = {
