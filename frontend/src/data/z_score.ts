@@ -131,15 +131,15 @@ const calculateZScores = (
   const zScores = new Map<number, PlayerZScores>();
   players.forEach((player) => {
     const playerZScores = {
-      fg: plainZMap.get(player.id)!.fg / (maxes.get("fg")! / 4),
-      ft: plainZMap.get(player.id)!.ft / (maxes.get("ft")! / 4),
-      tpm: plainZMap.get(player.id)!.tpm / (maxes.get("tpm")! / 4),
-      pts: plainZMap.get(player.id)!.pts / (maxes.get("pts")! / 4),
-      reb: plainZMap.get(player.id)!.reb / (maxes.get("reb")! / 4),
-      ast: plainZMap.get(player.id)!.ast / (maxes.get("ast")! / 4),
-      stl: plainZMap.get(player.id)!.stl / (maxes.get("stl")! / 4),
-      blk: plainZMap.get(player.id)!.blk / (maxes.get("blk")! / 4),
-      to: plainZMap.get(player.id)!.to / (maxes.get("to")! / 4),
+      fg: plainZMap.get(player.id)!.fg / (maxes.get("fg")! / 5),
+      ft: plainZMap.get(player.id)!.ft / (maxes.get("ft")! / 5),
+      tpm: plainZMap.get(player.id)!.tpm / (maxes.get("tpm")! / 5),
+      pts: plainZMap.get(player.id)!.pts / (maxes.get("pts")! / 5),
+      reb: plainZMap.get(player.id)!.reb / (maxes.get("reb")! / 5),
+      ast: plainZMap.get(player.id)!.ast / (maxes.get("ast")! / 5),
+      stl: plainZMap.get(player.id)!.stl / (maxes.get("stl")! / 5),
+      blk: plainZMap.get(player.id)!.blk / (maxes.get("blk")! / 5),
+      to: plainZMap.get(player.id)!.to / (maxes.get("to")! / 3),
       total: 0,
     };
     playerZScores.total = sum(Object.values(playerZScores));
