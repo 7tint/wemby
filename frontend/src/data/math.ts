@@ -10,3 +10,7 @@ export const std = (arr: number[]): number => {
   const m = mean(arr);
   return Math.sqrt(mean(arr.map((x) => Math.pow(x - m, 2))));
 };
+
+export const absmin = (a: number, b: number): number => {
+  return Math.abs(a) < Math.abs(b) ? a : b;
+};

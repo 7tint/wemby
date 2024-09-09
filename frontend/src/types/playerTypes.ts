@@ -44,9 +44,9 @@ export interface Player {
   adp: number; // Average Draft Position
   positions: string[]; // List of position eligibilities
   projections: PlayerStats;
-  projectionZScores: PlayerStatsNScore | null;
+  projectionNScores: PlayerStatsNScore | null;
   pastYearStats: PlayerStats | null;
-  pastYearZScores: PlayerStatsNScore | null;
+  pastYearNScores: PlayerStatsNScore | null;
   auctionValuedAt: number | null;
   auctionYahooAvg: number | null;
   auctionEspnAvg: number | null;

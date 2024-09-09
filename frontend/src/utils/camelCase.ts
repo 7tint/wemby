@@ -1,10 +1,15 @@
-import { mapKeys, camelCase, isObject } from "lodash-es";
+import { mapKeys, camelCase, isObject, mapValues } from "lodash-es";
 
 const toCamelCase = (obj: any): any => {
   if (Array.isArray(obj)) {
+    // Process arrays recursively
     return obj.map((item) => toCamelCase(item));
   } else if (isObject(obj)) {
-    return mapKeys(obj, (_, key) => camelCase(key));
+    // Process each key and value recursively
+    return mapValues(
+      mapKeys(obj, (_, key) => camelCase(key)),
+      (value) => toCamelCase(value)
+    );
   }
   return obj;
 };
