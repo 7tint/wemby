@@ -2,7 +2,6 @@ import json
 import logging
 from models import Player, PlayerStats
 from data import (
-    calculate_z_scores,
     scrape_projections,
     scrape_past_year_stats,
     scrape_auction_data,
@@ -126,11 +125,6 @@ def main():
 
         players.append(player)
 
-    logger.info("=== Calculating Z-Scores ===")
-    z_scores = calculate_z_scores(players)
-    for player in players:
-        player.z_scores = z_scores[player.id]
-
     logger.info("=== Writing to data/players.json ===")
     players_data = [player.__dict__ for player in players]
     for player in players_data:
@@ -138,7 +132,6 @@ def main():
         player["past_year_stats"] = (
             player["past_year_stats"].__dict__ if player["past_year_stats"] else None
         )
-        player["z_scores"] = player["z_scores"].__dict__
 
     with open("data/players.json", "w") as json_file:
         json.dump(players_data, json_file, indent=2)

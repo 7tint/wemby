@@ -1,3 +1,12 @@
+# Calculating z-scores is moved to the frontend.
+
+# data/players.py:
+#       logger.info("=== Calculating Z-Scores ===")
+#       z_scores = calculate_z_scores(players)
+#       for player in players:
+#           player.z_scores = z_scores[player.id]
+
+"""
 import numpy as np
 from models import PlayerZScores
 
@@ -87,3 +96,4 @@ def calculate_z_scores(players):
         )
 
     return z_scores
+"""
