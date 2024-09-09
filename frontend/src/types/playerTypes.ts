@@ -17,8 +17,8 @@ export interface PlayerStats {
 }
 
 export interface PlayerZScores {
-  fg_pct: number;
-  ft_pct: number;
+  fg: number;
+  ft: number;
   tpm: number;
   pts: number;
   reb: number;

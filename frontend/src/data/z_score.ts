@@ -48,9 +48,10 @@ const calculateZScores = (
   const blk = stats.get("blk")!;
   const to = stats.get("to")!;
 
+  // 1. Calculate means
   const means = new Map<string, number>([
-    ["fg_pct", sum(fgm) / sum(fga)],
-    ["ft_pct", sum(ftm) / sum(fta)],
+    ["fg", sum(fgm) / sum(fga)],
+    ["ft", sum(ftm) / sum(fta)],
     ["fga", mean(fga)],
     ["fta", mean(fta)],
     ["tpm", mean(tpm)],
@@ -64,19 +65,20 @@ const calculateZScores = (
 
   // Means for FG% and FT% are weighted by FGA and FTA
   const fg_diff = players.map(
-    (player) => getStats(player).fg_pct - means.get("fg_pct")!
+    (player) => getStats(player).fg_pct - means.get("fg")!
   );
   const ft_diff = players.map(
-    (player) => getStats(player).ft_pct - means.get("ft_pct")!
+    (player) => getStats(player).ft_pct - means.get("ft")!
   );
   const fg_impact = fg_diff.map((diff, i) => diff * fga[i]);
   const ft_impact = ft_diff.map((diff, i) => diff * fta[i]);
   means.set("fg_impact", mean(fg_impact));
   means.set("ft_impact", mean(ft_impact));
 
+  // 2. Calculate standard deviations
   const stds = new Map<string, number>([
-    ["fg_impact", std(fg_impact)],
-    ["ft_impact", std(ft_impact)],
+    ["fg", std(fg_impact)],
+    ["ft", std(ft_impact)],
     ["tpm", std(tpm)],
     ["pts", std(pts)],
     ["reb", std(reb)],
@@ -86,12 +88,24 @@ const calculateZScores = (
     ["to", std(to)],
   ]);
 
-  const zScores = new Map<number, PlayerZScores>();
+  // 3. Calculate z-scores
+  const plainZMap = new Map<number, PlayerZScores>();
+  const maxes = new Map<string, number>([
+    ["fg", 0],
+    ["ft", 0],
+    ["tpm", 0],
+    ["pts", 0],
+    ["reb", 0],
+    ["ast", 0],
+    ["stl", 0],
+    ["blk", 0],
+    ["to", 0],
+  ]);
 
   players.forEach((player, i) => {
-    const playerZScores = {
-      fg_pct: (fg_impact[i] - means.get("fg_impact")!) / stds.get("fg_impact")!,
-      ft_pct: (ft_impact[i] - means.get("ft_impact")!) / stds.get("ft_impact")!,
+    const plainZ = {
+      fg: (fg_impact[i] - means.get("fg_impact")!) / stds.get("fg")!,
+      ft: (ft_impact[i] - means.get("ft_impact")!) / stds.get("ft")!,
       tpm: (player.projections.tpm - means.get("tpm")!) / stds.get("tpm")!,
       pts: (player.projections.pts - means.get("pts")!) / stds.get("pts")!,
       reb: (player.projections.reb - means.get("reb")!) / stds.get("reb")!,
@@ -99,8 +113,36 @@ const calculateZScores = (
       stl: (player.projections.stl - means.get("stl")!) / stds.get("stl")!,
       blk: (player.projections.blk - means.get("blk")!) / stds.get("blk")!,
       to: (means.get("to")! - player.projections.to) / stds.get("to")!,
+      total: 0,
     };
+    plainZMap.set(player.id, plainZ);
 
+    maxes.set("fg", Math.max(maxes.get("fg")!, Math.abs(plainZ.fg)));
+    maxes.set("ft", Math.max(maxes.get("ft")!, Math.abs(plainZ.ft)));
+    maxes.set("tpm", Math.max(maxes.get("tpm")!, Math.abs(plainZ.tpm)));
+    maxes.set("pts", Math.max(maxes.get("pts")!, Math.abs(plainZ.pts)));
+    maxes.set("reb", Math.max(maxes.get("reb")!, Math.abs(plainZ.reb)));
+    maxes.set("ast", Math.max(maxes.get("ast")!, Math.abs(plainZ.ast)));
+    maxes.set("stl", Math.max(maxes.get("stl")!, Math.abs(plainZ.stl)));
+    maxes.set("blk", Math.max(maxes.get("blk")!, Math.abs(plainZ.blk)));
+    maxes.set("to", Math.max(maxes.get("to")!, Math.abs(plainZ.to)));
+  });
+
+  const zScores = new Map<number, PlayerZScores>();
+  players.forEach((player) => {
+    const playerZScores = {
+      fg: plainZMap.get(player.id)!.fg / (maxes.get("fg")! / 4),
+      ft: plainZMap.get(player.id)!.ft / (maxes.get("ft")! / 4),
+      tpm: plainZMap.get(player.id)!.tpm / (maxes.get("tpm")! / 4),
+      pts: plainZMap.get(player.id)!.pts / (maxes.get("pts")! / 4),
+      reb: plainZMap.get(player.id)!.reb / (maxes.get("reb")! / 4),
+      ast: plainZMap.get(player.id)!.ast / (maxes.get("ast")! / 4),
+      stl: plainZMap.get(player.id)!.stl / (maxes.get("stl")! / 4),
+      blk: plainZMap.get(player.id)!.blk / (maxes.get("blk")! / 4),
+      to: plainZMap.get(player.id)!.to / (maxes.get("to")! / 4),
+      total: 0,
+    };
+    playerZScores.total = sum(Object.values(playerZScores));
     zScores.set(player.id, {
       ...playerZScores,
       total: sum(Object.values(playerZScores)),
