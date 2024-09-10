@@ -24,18 +24,230 @@ import {
 } from "@tabler/icons-react";
 import { ReactNode, useState } from "react";
 
+type PlayerStatsNScoreKeys = keyof PlayerStatsNScore;
+
+// CONSTANTS
+const cellWidthSm = "50px";
+const cellWidthMd = "75px";
+const cellHeight = 10;
+
+const colProps = {
+  borderX: "1px",
+  borderColor: "gray.100",
+};
+
+const headerColProps = {
+  ...colProps,
+  borderColor: "gray.300",
+};
+
+const TableTd = ({
+  children,
+  ...props
+}: {
+  children: ReactNode;
+  [key: string]: any;
+}) => (
+  <Td px={4} {...props}>
+    <Flex justifyContent="center" alignItems="center">
+      {children}
+    </Flex>
+  </Td>
+);
+
+const TableTdSm = ({
+  children,
+  ...props
+}: {
+  children: ReactNode;
+  [key: string]: any;
+}) => (
+  <Td px={2} {...props}>
+    <Flex justifyContent="center" alignItems="center">
+      {children}
+    </Flex>
+  </Td>
+);
+
+interface RankingsTableHeadProps {
+  requestSort: (key: string) => void;
+  calcHeaderSortColor: (key: string) => string;
+  u: boolean;
+}
+
+const RankingsTableHead = ({
+  requestSort,
+  calcHeaderSortColor,
+  u,
+}: RankingsTableHeadProps) => {
+  return (
+    <Thead>
+      <Tr
+        height={cellHeight}
+        backgroundColor="gray.200"
+        borderBottomColor="gray.300"
+        borderBottomWidth={1}
+        fontWeight="bold"
+      >
+        <TableTdSm
+          {...headerColProps}
+          cursor="pointer"
+          onClick={() => requestSort("default")}
+          backgroundColor={calcHeaderSortColor("default")}
+        >
+          <Tooltip label='Ranked by "Total"' hasArrow placement="top">
+            R
+          </Tooltip>
+        </TableTdSm>
+        <TableTdSm
+          {...headerColProps}
+          cursor="pointer"
+          onClick={() => requestSort("rank")}
+          backgroundColor={calcHeaderSortColor("rank")}
+        >
+          <Tooltip label="Rank (Hashtag Basketball)" hasArrow placement="top">
+            H#
+          </Tooltip>
+        </TableTdSm>
+        {!u && (
+          <TableTdSm
+            {...headerColProps}
+            cursor="pointer"
+            onClick={() => requestSort("auctionValuedAt")}
+            backgroundColor={calcHeaderSortColor("auctionValuedAt")}
+          >
+            <Tooltip
+              label="Expected Auction Value (Hashtag Basketball)"
+              hasArrow
+              placement="top"
+            >
+              <Icon as={IconTag} />
+            </Tooltip>
+          </TableTdSm>
+        )}
+        <TableTd {...headerColProps}>Name</TableTd>
+        <TableTd
+          {...headerColProps}
+          cursor="pointer"
+          onClick={() => requestSort("gp")}
+          backgroundColor={calcHeaderSortColor("gp")}
+        >
+          <Tooltip label="Games Played" hasArrow placement="top">
+            GP
+          </Tooltip>
+        </TableTd>
+        <TableTd
+          {...headerColProps}
+          cursor="pointer"
+          onClick={() => requestSort("fg")}
+          backgroundColor={calcHeaderSortColor("fg")}
+        >
+          <Tooltip label="Field Goal Percentage" hasArrow placement="top">
+            FG%
+          </Tooltip>
+        </TableTd>
+        <TableTd
+          {...headerColProps}
+          cursor="pointer"
+          onClick={() => requestSort("ft")}
+          backgroundColor={calcHeaderSortColor("ft")}
+        >
+          <Tooltip label="Free Throw Percentage" hasArrow placement="top">
+            FT%
+          </Tooltip>
+        </TableTd>
+        <TableTd
+          {...headerColProps}
+          cursor="pointer"
+          onClick={() => requestSort("tpm")}
+          backgroundColor={calcHeaderSortColor("tpm")}
+        >
+          <Tooltip label="Three-Point Made" hasArrow placement="top">
+            3PM
+          </Tooltip>
+        </TableTd>
+        <TableTd
+          {...headerColProps}
+          cursor="pointer"
+          onClick={() => requestSort("pts")}
+          backgroundColor={calcHeaderSortColor("pts")}
+        >
+          <Tooltip label="Points" hasArrow placement="top">
+            PTS
+          </Tooltip>
+        </TableTd>
+        <TableTd
+          {...headerColProps}
+          cursor="pointer"
+          onClick={() => requestSort("reb")}
+          backgroundColor={calcHeaderSortColor("reb")}
+        >
+          <Tooltip label="Rebounds" hasArrow placement="top">
+            REB
+          </Tooltip>
+        </TableTd>
+        <TableTd
+          {...headerColProps}
+          cursor="pointer"
+          onClick={() => requestSort("ast")}
+          backgroundColor={calcHeaderSortColor("ast")}
+        >
+          <Tooltip label="Assists" hasArrow placement="top">
+            AST
+          </Tooltip>
+        </TableTd>
+        <TableTd
+          {...headerColProps}
+          cursor="pointer"
+          onClick={() => requestSort("stl")}
+          backgroundColor={calcHeaderSortColor("stl")}
+        >
+          <Tooltip label="Steals" hasArrow placement="top">
+            STL
+          </Tooltip>
+        </TableTd>
+        <TableTd
+          {...headerColProps}
+          cursor="pointer"
+          onClick={() => requestSort("blk")}
+          backgroundColor={calcHeaderSortColor("blk")}
+        >
+          <Tooltip label="Blocks" hasArrow placement="top">
+            BLK
+          </Tooltip>
+        </TableTd>
+        <TableTd
+          {...headerColProps}
+          cursor="pointer"
+          onClick={() => requestSort("to")}
+          backgroundColor={calcHeaderSortColor("to")}
+        >
+          <Tooltip label="Turnovers" hasArrow placement="top">
+            TO
+          </Tooltip>
+        </TableTd>
+        <TableTd
+          {...headerColProps}
+          cursor="pointer"
+          onClick={() => requestSort("total")}
+          backgroundColor={calcHeaderSortColor("total")}
+        >
+          <Tooltip label="Total Value (see info)" hasArrow placement="top">
+            Total
+          </Tooltip>
+        </TableTd>
+      </Tr>
+    </Thead>
+  );
+};
+
 interface RankingsTableProps {
   players: Player[];
   usePastYearStats: boolean;
 }
 
-type PlayerStatsNScoreKeys = keyof PlayerStatsNScore;
-
 const RankingsTable = ({ players, usePastYearStats }: RankingsTableProps) => {
   const u = usePastYearStats;
-  const cellWidthSm = "50px";
-  const cellWidthMd = "75px";
-  const cellHeight = 10;
 
   const [sortConfig, setSortConfig] = useState<{
     key: string;
@@ -93,44 +305,6 @@ const RankingsTable = ({ players, usePastYearStats }: RankingsTableProps) => {
     setSortConfig({ key, direction });
   };
 
-  const TableTd = ({
-    children,
-    ...props
-  }: {
-    children: ReactNode;
-    [key: string]: any;
-  }) => (
-    <Td px={4} {...props}>
-      <Flex justifyContent="center" alignItems="center">
-        {children}
-      </Flex>
-    </Td>
-  );
-
-  const TableTdSm = ({
-    children,
-    ...props
-  }: {
-    children: ReactNode;
-    [key: string]: any;
-  }) => (
-    <Td px={2} {...props}>
-      <Flex justifyContent="center" alignItems="center">
-        {children}
-      </Flex>
-    </Td>
-  );
-
-  const colProps = {
-    borderX: "1px",
-    borderColor: "gray.100",
-  };
-
-  const headerColProps = {
-    ...colProps,
-    borderColor: "gray.300",
-  };
-
   const calcHeaderSortColor = (key: string) => {
     if (sortConfig?.key === key) {
       if (sortConfig.direction === "ascending") {
@@ -169,167 +343,11 @@ const RankingsTable = ({ players, usePastYearStats }: RankingsTableProps) => {
           <Box as="col" {...colProps} width={cellWidthMd} />
           <Box as="col" {...colProps} width={cellWidthMd} />
         </Box>
-        <Thead>
-          <Tr
-            height={cellHeight}
-            backgroundColor="gray.200"
-            borderBottomColor="gray.300"
-            borderBottomWidth={1}
-            fontWeight="bold"
-          >
-            <TableTdSm
-              {...headerColProps}
-              cursor="pointer"
-              onClick={() => requestSort("default")}
-              backgroundColor={calcHeaderSortColor("default")}
-            >
-              <Tooltip label='Ranked by "Total"' hasArrow placement="top">
-                R
-              </Tooltip>
-            </TableTdSm>
-            <TableTdSm
-              {...headerColProps}
-              cursor="pointer"
-              onClick={() => requestSort("rank")}
-              backgroundColor={calcHeaderSortColor("rank")}
-            >
-              <Tooltip
-                label="Rank (Hashtag Basketball)"
-                hasArrow
-                placement="top"
-              >
-                H#
-              </Tooltip>
-            </TableTdSm>
-            {!u && (
-              <TableTdSm
-                {...headerColProps}
-                cursor="pointer"
-                onClick={() => requestSort("auctionValuedAt")}
-                backgroundColor={calcHeaderSortColor("auctionValuedAt")}
-              >
-                <Tooltip
-                  label="Expected Auction Value (Hashtag Basketball)"
-                  hasArrow
-                  placement="top"
-                >
-                  <Icon as={IconTag} />
-                </Tooltip>
-              </TableTdSm>
-            )}
-            <TableTd {...headerColProps}>Name</TableTd>
-            <TableTd
-              {...headerColProps}
-              cursor="pointer"
-              onClick={() => requestSort("gp")}
-              backgroundColor={calcHeaderSortColor("gp")}
-            >
-              <Tooltip label="Games Played" hasArrow placement="top">
-                GP
-              </Tooltip>
-            </TableTd>
-            <TableTd
-              {...headerColProps}
-              cursor="pointer"
-              onClick={() => requestSort("fg")}
-              backgroundColor={calcHeaderSortColor("fg")}
-            >
-              <Tooltip label="Field Goal Percentage" hasArrow placement="top">
-                FG%
-              </Tooltip>
-            </TableTd>
-            <TableTd
-              {...headerColProps}
-              cursor="pointer"
-              onClick={() => requestSort("ft")}
-              backgroundColor={calcHeaderSortColor("ft")}
-            >
-              <Tooltip label="Free Throw Percentage" hasArrow placement="top">
-                FT%
-              </Tooltip>
-            </TableTd>
-            <TableTd
-              {...headerColProps}
-              cursor="pointer"
-              onClick={() => requestSort("tpm")}
-              backgroundColor={calcHeaderSortColor("tpm")}
-            >
-              <Tooltip label="Three-Point Made" hasArrow placement="top">
-                3PM
-              </Tooltip>
-            </TableTd>
-            <TableTd
-              {...headerColProps}
-              cursor="pointer"
-              onClick={() => requestSort("pts")}
-              backgroundColor={calcHeaderSortColor("pts")}
-            >
-              <Tooltip label="Points" hasArrow placement="top">
-                PTS
-              </Tooltip>
-            </TableTd>
-            <TableTd
-              {...headerColProps}
-              cursor="pointer"
-              onClick={() => requestSort("reb")}
-              backgroundColor={calcHeaderSortColor("reb")}
-            >
-              <Tooltip label="Rebounds" hasArrow placement="top">
-                REB
-              </Tooltip>
-            </TableTd>
-            <TableTd
-              {...headerColProps}
-              cursor="pointer"
-              onClick={() => requestSort("ast")}
-              backgroundColor={calcHeaderSortColor("ast")}
-            >
-              <Tooltip label="Assists" hasArrow placement="top">
-                AST
-              </Tooltip>
-            </TableTd>
-            <TableTd
-              {...headerColProps}
-              cursor="pointer"
-              onClick={() => requestSort("stl")}
-              backgroundColor={calcHeaderSortColor("stl")}
-            >
-              <Tooltip label="Steals" hasArrow placement="top">
-                STL
-              </Tooltip>
-            </TableTd>
-            <TableTd
-              {...headerColProps}
-              cursor="pointer"
-              onClick={() => requestSort("blk")}
-              backgroundColor={calcHeaderSortColor("blk")}
-            >
-              <Tooltip label="Blocks" hasArrow placement="top">
-                BLK
-              </Tooltip>
-            </TableTd>
-            <TableTd
-              {...headerColProps}
-              cursor="pointer"
-              onClick={() => requestSort("to")}
-              backgroundColor={calcHeaderSortColor("to")}
-            >
-              <Tooltip label="Turnovers" hasArrow placement="top">
-                TO
-              </Tooltip>
-            </TableTd>
-            <TableTd
-              {...headerColProps}
-              cursor="pointer"
-              onClick={() => requestSort("total")}
-              backgroundColor={calcHeaderSortColor("total")}
-            >
-              <Tooltip label="Total Value (see info)" hasArrow placement="top">
-                Total
-              </Tooltip>
-            </TableTd>
-          </Tr>
-        </Thead>
+        <RankingsTableHead
+          requestSort={requestSort}
+          calcHeaderSortColor={calcHeaderSortColor}
+          u={u}
+        />
         <Tbody>
           {sortedPlayers.map((player, i) => {
             return (
