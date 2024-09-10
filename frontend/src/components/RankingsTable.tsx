@@ -45,7 +45,7 @@ const TableTd = ({
   children,
   ...props
 }: {
-  children: ReactNode;
+  children?: ReactNode;
   [key: string]: any;
 }) => (
   <Td px={4} {...props}>
@@ -59,7 +59,7 @@ const TableTdSm = ({
   children,
   ...props
 }: {
-  children: ReactNode;
+  children?: ReactNode;
   [key: string]: any;
 }) => (
   <Td px={2} {...props}>
@@ -70,18 +70,118 @@ const TableTdSm = ({
 );
 
 interface RankingsTableHeadProps {
+  sortConfig: { key: string; direction: string } | null;
   requestSort: (key: string) => void;
-  calcHeaderSortColor: (key: string) => string;
   u: boolean;
 }
 
 const RankingsTableHead = ({
+  sortConfig,
   requestSort,
-  calcHeaderSortColor,
   u,
 }: RankingsTableHeadProps) => {
+  const calcHeaderSortColor = (key: string) => {
+    if (sortConfig?.key === key) {
+      if (sortConfig.direction === "ascending") {
+        return "orange.200";
+      } else if (sortConfig.direction === "descending") {
+        return "teal.200";
+      }
+    }
+    return "gray.300";
+  };
+
   return (
     <Thead>
+      <Tr height={4} backgroundColor="gray.300">
+        <TableTdSm
+          {...headerColProps}
+          cursor="pointer"
+          backgroundColor={calcHeaderSortColor("default")}
+          onClick={() => requestSort("default")}
+        />
+        <TableTdSm
+          {...headerColProps}
+          cursor="pointer"
+          backgroundColor={calcHeaderSortColor("rank")}
+          onClick={() => requestSort("rank")}
+        />
+        {!u && (
+          <TableTdSm
+            {...headerColProps}
+            cursor="pointer"
+            backgroundColor={calcHeaderSortColor("auctionValuedAt")}
+            onClick={() => requestSort("auctionValuedAt")}
+          />
+        )}
+        <TableTd {...headerColProps} />
+        <TableTd
+          {...headerColProps}
+          cursor="pointer"
+          backgroundColor={calcHeaderSortColor("gp")}
+          onClick={() => requestSort("gp")}
+        />
+        <TableTd
+          {...headerColProps}
+          cursor="pointer"
+          backgroundColor={calcHeaderSortColor("fg")}
+          onClick={() => requestSort("fg")}
+        />
+        <TableTd
+          {...headerColProps}
+          cursor="pointer"
+          backgroundColor={calcHeaderSortColor("ft")}
+          onClick={() => requestSort("ft")}
+        />
+        <TableTd
+          {...headerColProps}
+          cursor="pointer"
+          backgroundColor={calcHeaderSortColor("tpm")}
+          onClick={() => requestSort("tpm")}
+        />
+        <TableTd
+          {...headerColProps}
+          cursor="pointer"
+          backgroundColor={calcHeaderSortColor("pts")}
+          onClick={() => requestSort("pts")}
+        />
+        <TableTd
+          {...headerColProps}
+          cursor="pointer"
+          backgroundColor={calcHeaderSortColor("reb")}
+          onClick={() => requestSort("reb")}
+        />
+        <TableTd
+          {...headerColProps}
+          cursor="pointer"
+          backgroundColor={calcHeaderSortColor("ast")}
+          onClick={() => requestSort("ast")}
+        />
+        <TableTd
+          {...headerColProps}
+          cursor="pointer"
+          backgroundColor={calcHeaderSortColor("stl")}
+          onClick={() => requestSort("stl")}
+        />
+        <TableTd
+          {...headerColProps}
+          cursor="pointer"
+          backgroundColor={calcHeaderSortColor("blk")}
+          onClick={() => requestSort("blk")}
+        />
+        <TableTd
+          {...headerColProps}
+          cursor="pointer"
+          backgroundColor={calcHeaderSortColor("to")}
+          onClick={() => requestSort("to")}
+        />
+        <TableTd
+          {...headerColProps}
+          cursor="pointer"
+          backgroundColor={calcHeaderSortColor("total")}
+          onClick={() => requestSort("total")}
+        />
+      </Tr>
       <Tr
         height={cellHeight}
         backgroundColor="gray.200"
@@ -93,7 +193,6 @@ const RankingsTableHead = ({
           {...headerColProps}
           cursor="pointer"
           onClick={() => requestSort("default")}
-          backgroundColor={calcHeaderSortColor("default")}
         >
           <Tooltip label='Ranked by "Total"' hasArrow placement="top">
             R
@@ -103,7 +202,6 @@ const RankingsTableHead = ({
           {...headerColProps}
           cursor="pointer"
           onClick={() => requestSort("rank")}
-          backgroundColor={calcHeaderSortColor("rank")}
         >
           <Tooltip label="Rank (Hashtag Basketball)" hasArrow placement="top">
             H#
@@ -114,7 +212,6 @@ const RankingsTableHead = ({
             {...headerColProps}
             cursor="pointer"
             onClick={() => requestSort("auctionValuedAt")}
-            backgroundColor={calcHeaderSortColor("auctionValuedAt")}
           >
             <Tooltip
               label="Expected Auction Value (Hashtag Basketball)"
@@ -130,7 +227,6 @@ const RankingsTableHead = ({
           {...headerColProps}
           cursor="pointer"
           onClick={() => requestSort("gp")}
-          backgroundColor={calcHeaderSortColor("gp")}
         >
           <Tooltip label="Games Played" hasArrow placement="top">
             GP
@@ -140,7 +236,6 @@ const RankingsTableHead = ({
           {...headerColProps}
           cursor="pointer"
           onClick={() => requestSort("fg")}
-          backgroundColor={calcHeaderSortColor("fg")}
         >
           <Tooltip label="Field Goal Percentage" hasArrow placement="top">
             FG%
@@ -150,7 +245,6 @@ const RankingsTableHead = ({
           {...headerColProps}
           cursor="pointer"
           onClick={() => requestSort("ft")}
-          backgroundColor={calcHeaderSortColor("ft")}
         >
           <Tooltip label="Free Throw Percentage" hasArrow placement="top">
             FT%
@@ -160,7 +254,6 @@ const RankingsTableHead = ({
           {...headerColProps}
           cursor="pointer"
           onClick={() => requestSort("tpm")}
-          backgroundColor={calcHeaderSortColor("tpm")}
         >
           <Tooltip label="Three-Point Made" hasArrow placement="top">
             3PM
@@ -170,7 +263,6 @@ const RankingsTableHead = ({
           {...headerColProps}
           cursor="pointer"
           onClick={() => requestSort("pts")}
-          backgroundColor={calcHeaderSortColor("pts")}
         >
           <Tooltip label="Points" hasArrow placement="top">
             PTS
@@ -180,7 +272,6 @@ const RankingsTableHead = ({
           {...headerColProps}
           cursor="pointer"
           onClick={() => requestSort("reb")}
-          backgroundColor={calcHeaderSortColor("reb")}
         >
           <Tooltip label="Rebounds" hasArrow placement="top">
             REB
@@ -190,7 +281,6 @@ const RankingsTableHead = ({
           {...headerColProps}
           cursor="pointer"
           onClick={() => requestSort("ast")}
-          backgroundColor={calcHeaderSortColor("ast")}
         >
           <Tooltip label="Assists" hasArrow placement="top">
             AST
@@ -200,7 +290,6 @@ const RankingsTableHead = ({
           {...headerColProps}
           cursor="pointer"
           onClick={() => requestSort("stl")}
-          backgroundColor={calcHeaderSortColor("stl")}
         >
           <Tooltip label="Steals" hasArrow placement="top">
             STL
@@ -210,7 +299,6 @@ const RankingsTableHead = ({
           {...headerColProps}
           cursor="pointer"
           onClick={() => requestSort("blk")}
-          backgroundColor={calcHeaderSortColor("blk")}
         >
           <Tooltip label="Blocks" hasArrow placement="top">
             BLK
@@ -220,7 +308,6 @@ const RankingsTableHead = ({
           {...headerColProps}
           cursor="pointer"
           onClick={() => requestSort("to")}
-          backgroundColor={calcHeaderSortColor("to")}
         >
           <Tooltip label="Turnovers" hasArrow placement="top">
             TO
@@ -230,7 +317,6 @@ const RankingsTableHead = ({
           {...headerColProps}
           cursor="pointer"
           onClick={() => requestSort("total")}
-          backgroundColor={calcHeaderSortColor("total")}
         >
           <Tooltip label="Total Value (see info)" hasArrow placement="top">
             Total
@@ -305,17 +391,6 @@ const RankingsTable = ({ players, usePastYearStats }: RankingsTableProps) => {
     setSortConfig({ key, direction });
   };
 
-  const calcHeaderSortColor = (key: string) => {
-    if (sortConfig?.key === key) {
-      if (sortConfig.direction === "ascending") {
-        return "orange.200";
-      } else if (sortConfig.direction === "descending") {
-        return "blue.200";
-      }
-    }
-    return "gray.200";
-  };
-
   return (
     <TableContainer overflowX="scroll" minWidth="100%">
       <Table
@@ -344,8 +419,8 @@ const RankingsTable = ({ players, usePastYearStats }: RankingsTableProps) => {
           <Box as="col" {...colProps} width={cellWidthMd} />
         </Box>
         <RankingsTableHead
+          sortConfig={sortConfig}
           requestSort={requestSort}
-          calcHeaderSortColor={calcHeaderSortColor}
           u={u}
         />
         <Tbody>
