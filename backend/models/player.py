@@ -65,6 +65,7 @@ class Player:
         positions,
         team_id,
         team,
+        past_year_team,
         age,
         headshot,
         years_pro,
@@ -85,6 +86,7 @@ class Player:
         self.positions = positions
         self.team_id = team_id
         self.team = team
+        self.past_year_team = past_year_team
         self.age = age
         self.headshot = headshot
         self.years_pro = years_pro

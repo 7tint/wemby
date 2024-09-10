@@ -103,6 +103,7 @@ def main():
             positions=projections["positions"],
             team_id=roster_data["team_id"],
             team=roster_data["team"],
+            past_year_team=past_year_stats["team"] if past_year_stats else None,
             age=roster_data["age"],
             headshot=roster_data["headshot"],
             years_pro=roster_data["years_pro"],
