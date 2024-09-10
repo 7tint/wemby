@@ -35,6 +35,7 @@ export interface Player {
   lastName: string;
   teamId: number;
   team: string;
+  pastYearTeam: string;
   age: number | null;
   headshot: string;
   yearsPro: number;

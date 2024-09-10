@@ -114,6 +114,7 @@ const RankingsTableHead = ({
             onClick={() => requestSort("auctionValuedAt")}
           />
         )}
+        <TableTdSm {...headerColProps} />
         <TableTd {...headerColProps} />
         <TableTd
           {...headerColProps}
@@ -222,6 +223,7 @@ const RankingsTableHead = ({
             </Tooltip>
           </TableTdSm>
         )}
+        <TableTdSm {...headerColProps}>Team</TableTdSm>
         <TableTd {...headerColProps}>Name</TableTd>
         <TableTd
           {...headerColProps}
@@ -405,6 +407,7 @@ const RankingsTable = ({ players, usePastYearStats }: RankingsTableProps) => {
           <Box as="col" {...colProps} width={cellWidthSm} />
           <Box as="col" {...colProps} width={cellWidthSm} />
           {!u && <Box as="col" {...colProps} width={cellWidthMd} />}
+          <Box as="col" {...colProps} width={cellWidthSm} />
           <Box as="col" {...colProps} width="290px" />
           <Box as="col" {...colProps} width={cellWidthMd} />
           <Box as="col" {...colProps} width={cellWidthMd} />
@@ -436,6 +439,7 @@ const RankingsTable = ({ players, usePastYearStats }: RankingsTableProps) => {
                 {!u && (
                   <TableTdSm>${player.auctionValuedAt?.toFixed(1)}</TableTdSm>
                 )}
+                <TableTdSm>{u ? player.pastYearTeam : player.team}</TableTdSm>
                 <Td pb={0}>
                   <Flex px={4} alignItems="center">
                     <Image src={player.headshot} width="45px" />
