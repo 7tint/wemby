@@ -123,7 +123,7 @@ const RankingsPage = () => {
           )
         )}
         <Skeleton isLoaded={isLoaded} startColor="gray.50" endColor="gray.100">
-          <Box shadow="md">
+          <Box shadow="md" mb={12}>
             <RankingsTable
               players={players}
               usePastYearStats={selectedYear === 2}
