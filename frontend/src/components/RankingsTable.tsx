@@ -449,7 +449,7 @@ const RankingsTable = ({ players, usePastYearStats }: RankingsTableProps) => {
           <Box as="col" {...colProps} width={cellWidthSm} />
           {!u && <Box as="col" {...colProps} width={cellWidthMd} />}
           <Box as="col" {...colProps} width={cellWidthSm} />
-          <Box as="col" {...colProps} width="290px" />
+          <Box as="col" {...colProps} width="280px" />
           <Box as="col" {...colProps} width={cellWidthMd} />
           <Box as="col" {...colProps} width={cellWidthMd} />
           <Box as="col" {...colProps} width={cellWidthMd} />
