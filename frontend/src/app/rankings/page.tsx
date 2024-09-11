@@ -3,6 +3,7 @@
 import { Fragment, useEffect, useState } from "react";
 import {
   Box,
+  Collapse,
   Container,
   Flex,
   Heading,
@@ -17,17 +18,22 @@ import { Player } from "@/types/playerTypes";
 import { getNStats } from "@/data/const";
 import calculateMinMax from "@/data/minmax";
 import calculateZScores from "@/data/zScore";
-import { IconAdjustmentsFilled } from "@tabler/icons-react";
+import {
+  IconAdjustmentsFilled,
+  IconCaretDown,
+  IconCaretRight,
+} from "@tabler/icons-react";
 import RankingsTable from "../../components/RankingsTable";
 import { getPlayers } from "../../api/players";
 
 const RankingsPage = () => {
   const [players, setPlayers] = useState<Player[]>([]);
   const [playersToDisplay, setPlayersToDisplay] = useState<Player[]>([]);
+  const [selectedYear, setSelectedYear] = useState(1);
 
   // Chakra component states
-  const [selectedYear, setSelectedYear] = useState(1);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
   const [showSmartScores, setShowSmartScores] = useState(false);
 
   useEffect(() => {
@@ -121,17 +127,32 @@ const RankingsPage = () => {
         </Select>
       </Flex>
       <Box my={8}>
-        <Heading size="md">Settings</Heading>
-        <Flex alignItems="center" my={3}>
-          <Icon as={IconAdjustmentsFilled} boxSize={5} />
-          <Box pl={1} pr={2} fontWeight="bold">
-            Smart Scores
-          </Box>
-          <Switch
-            colorScheme="cyan"
-            onChange={() => setShowSmartScores(!showSmartScores)}
+        <Flex
+          alignItems="center"
+          cursor="pointer"
+          onClick={() => {
+            setShowSettings(!showSettings);
+          }}
+        >
+          <Icon
+            as={showSettings ? IconCaretDown : IconCaretRight}
+            mr={1}
+            boxSize={5}
           />
+          <Heading size="md">Settings</Heading>
         </Flex>
+        <Collapse in={showSettings}>
+          <Flex alignItems="center" my={3} ml={6}>
+            <Icon as={IconAdjustmentsFilled} boxSize={5} />
+            <Box pl={1} pr={2} fontWeight="bold">
+              Smart Scores
+            </Box>
+            <Switch
+              colorScheme="cyan"
+              onChange={() => setShowSmartScores(!showSmartScores)}
+            />
+          </Flex>
+        </Collapse>
       </Box>
       <Stack spacing={4}>
         {Array.from({ length: 100 }).map((_, i) =>
