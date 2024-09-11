@@ -23,7 +23,9 @@ import {
   IconTag,
 } from "@tabler/icons-react";
 import { ReactNode, useState } from "react";
-import PlayerHeadshot from "./PlayerHeadshot";
+import PlayerHeadshot from "./player/PlayerHeadshot";
+import TeamLogo from "./team/TeamLogo";
+import { Team } from "@/types/teamTypes";
 
 type PlayerStatsNScoreKeys = keyof PlayerStatsNScore;
 
@@ -224,7 +226,17 @@ const RankingsTableHead = ({
             </Tooltip>
           </TableTdSm>
         )}
-        <TableTdSm {...headerColProps}>Team</TableTdSm>
+        <TableTdSm {...headerColProps}>
+          <TeamLogo
+            team="NBA"
+            size="sm"
+            tooltipProps={{
+              label: "Team",
+              hasArrow: true,
+              placement: "top",
+            }}
+          />
+        </TableTdSm>
         <TableTd {...headerColProps}>Name</TableTd>
         <TableTd
           {...headerColProps}
@@ -394,6 +406,34 @@ const RankingsTable = ({ players, usePastYearStats }: RankingsTableProps) => {
     setSortConfig({ key, direction });
   };
 
+  const getPlayerTrend = (player: Player) => {
+    const playerTrend =
+      player.pastYearStats === null
+        ? {
+            color: "purple.400",
+            label: "Rookie season",
+            icon: IconPointFilled,
+          }
+        : player.rank === player.pastYearRank
+        ? {
+            color: "blue.400",
+            label: "No change in rank from last season",
+            icon: IconEqual,
+          }
+        : player.rank > player.pastYearRank
+        ? {
+            color: "red.400",
+            label: "Rank decreased from last season",
+            icon: IconArrowDown,
+          }
+        : {
+            color: "green.400",
+            label: "Rank increased from last season",
+            icon: IconArrowUp,
+          };
+    return playerTrend;
+  };
+
   return (
     <TableContainer overflowX="scroll" minWidth="100%">
       <Table
@@ -429,6 +469,8 @@ const RankingsTable = ({ players, usePastYearStats }: RankingsTableProps) => {
         />
         <Tbody>
           {sortedPlayers.map((player, i) => {
+            const playerTrend = getPlayerTrend(player);
+
             return (
               <Tr
                 key={player.id}
@@ -440,43 +482,28 @@ const RankingsTable = ({ players, usePastYearStats }: RankingsTableProps) => {
                 {!u && (
                   <TableTdSm>${player.auctionValuedAt?.toFixed(1)}</TableTdSm>
                 )}
-                <TableTdSm>{u ? player.pastYearTeam : player.team}</TableTdSm>
+                <TableTdSm>
+                  {u ? (
+                    <TeamLogo team={player.pastYearTeam as Team} size="sm" />
+                  ) : (
+                    <TeamLogo team={player.team as Team} size="sm" />
+                  )}
+                </TableTdSm>
                 <Td pb={0}>
                   <Flex px={4} alignItems="center">
                     <PlayerHeadshot player={player} size="sm" />
                     <Flex alignItems="center" ml={2} mr={1}>
                       {player.firstName} {player.lastName}
                     </Flex>
-                    {!u &&
-                      (player.pastYearStats === null ? (
-                        <Tooltip label="Rookie season" hasArrow placement="top">
-                          <Icon as={IconPointFilled} color="purple.400" />
-                        </Tooltip>
-                      ) : player.rank === player.pastYearRank ? (
-                        <Tooltip
-                          label="No change in rank from last season"
-                          hasArrow
-                          placement="top"
-                        >
-                          <Icon as={IconEqual} color="blue.400" />
-                        </Tooltip>
-                      ) : player.rank > player.pastYearRank ? (
-                        <Tooltip
-                          label="Rank decreased from last season"
-                          hasArrow
-                          placement="top"
-                        >
-                          <Icon as={IconArrowDown} color="red.400" />
-                        </Tooltip>
-                      ) : (
-                        <Tooltip
-                          label="Rank increased from last season"
-                          hasArrow
-                          placement="top"
-                        >
-                          <Icon as={IconArrowUp} color="green.400" />
-                        </Tooltip>
-                      ))}
+                    {!u && (
+                      <Tooltip
+                        label={playerTrend.label}
+                        hasArrow
+                        placement="bottom"
+                      >
+                        <Icon as={playerTrend.icon} color={playerTrend.color} />
+                      </Tooltip>
+                    )}
                   </Flex>
                 </Td>
                 <TableTd>{getStats(player, u)?.gp}</TableTd>
