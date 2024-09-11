@@ -23,6 +23,7 @@ import {
   IconTag,
 } from "@tabler/icons-react";
 import { ReactNode, useState } from "react";
+import PlayerHeadshot from "./PlayerHeadshot";
 
 type PlayerStatsNScoreKeys = keyof PlayerStatsNScore;
 
@@ -442,7 +443,7 @@ const RankingsTable = ({ players, usePastYearStats }: RankingsTableProps) => {
                 <TableTdSm>{u ? player.pastYearTeam : player.team}</TableTdSm>
                 <Td pb={0}>
                   <Flex px={4} alignItems="center">
-                    <Image src={player.headshot} width="45px" />
+                    <PlayerHeadshot player={player} size="sm" />
                     <Flex alignItems="center" ml={2} mr={1}>
                       {player.firstName} {player.lastName}
                     </Flex>
