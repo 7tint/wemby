@@ -1,7 +1,6 @@
 "use client";
 
-import { getNStats, getStats } from "@/data/const";
-import { Player, PlayerStats, PlayerStatsNScore } from "@/types/playerTypes";
+import { ReactNode, useEffect, useState } from "react";
 import {
   Box,
   Flex,
@@ -21,10 +20,11 @@ import {
   IconPointFilled,
   IconTag,
 } from "@tabler/icons-react";
-import { ReactNode, useState } from "react";
+import { getNStats, getStats } from "@/data/const";
+import { Player, PlayerStats, PlayerStatsNScore } from "@/types/playerTypes";
+import { Team } from "@/types/teamTypes";
 import PlayerHeadshot from "./player/PlayerHeadshot";
 import TeamLogo from "./team/TeamLogo";
-import { Team } from "@/types/teamTypes";
 
 type PlayerStatsNScoreKeys = keyof PlayerStatsNScore;
 type PlayerStatsKeys = keyof PlayerStats;
@@ -363,43 +363,51 @@ const RankingsTable = ({
     key: string;
     direction: string;
   } | null>({ key: "total", direction: "descending" });
+  const [sortedPlayers, setSortedPlayers] = useState<Player[]>([]);
 
-  const sortedPlayers = [...players].sort((a, b) => {
-    if (sortConfig && sortConfig.direction !== "none") {
-      let { key, direction } = sortConfig;
-      let aValue, bValue: number;
+  useEffect(() => {
+    const newSortedPlayers = [...players].sort((a, b) => {
+      if (sortConfig && sortConfig.direction !== "none") {
+        let { key, direction } = sortConfig;
+        let aValue, bValue: number;
 
-      if (key === "default") {
-        aValue = getNStats(a, usePastYearStats)?.total || 0;
-        bValue = getNStats(b, usePastYearStats)?.total || 0;
-      } else if (key === "rank" || key === "auctionValuedAt") {
-        aValue = a[key] || 0;
-        bValue = b[key] || 0;
-      } else if (key === "gp") {
-        aValue = getStats(a, usePastYearStats)?.gp || 0;
-        bValue = getStats(b, usePastYearStats)?.gp || 0;
-      } else {
-        if (showSmartScores) {
-          aValue =
-            getNStats(a, usePastYearStats)?.[key as PlayerStatsNScoreKeys] || 0;
-          bValue =
-            getNStats(b, usePastYearStats)?.[key as PlayerStatsNScoreKeys] || 0;
+        if (key === "default") {
+          aValue = getNStats(a, usePastYearStats)?.total || 0;
+          bValue = getNStats(b, usePastYearStats)?.total || 0;
+        } else if (key === "rank" || key === "auctionValuedAt") {
+          aValue = a[key] || 0;
+          bValue = b[key] || 0;
+        } else if (key === "gp") {
+          aValue = getStats(a, usePastYearStats)?.gp || 0;
+          bValue = getStats(b, usePastYearStats)?.gp || 0;
         } else {
-          if (key == "fg") key = "fgm";
-          if (key == "ft") key = "ftm";
-          aValue = getStats(a, usePastYearStats)?.[key as PlayerStatsKeys] || 0;
-          bValue = getStats(b, usePastYearStats)?.[key as PlayerStatsKeys] || 0;
+          if (showSmartScores) {
+            aValue =
+              getNStats(a, usePastYearStats)?.[key as PlayerStatsNScoreKeys] ||
+              0;
+            bValue =
+              getNStats(b, usePastYearStats)?.[key as PlayerStatsNScoreKeys] ||
+              0;
+          } else {
+            if (key == "fg") key = "fgm";
+            if (key == "ft") key = "ftm";
+            aValue =
+              getStats(a, usePastYearStats)?.[key as PlayerStatsKeys] || 0;
+            bValue =
+              getStats(b, usePastYearStats)?.[key as PlayerStatsKeys] || 0;
+          }
+        }
+        if (aValue < bValue) {
+          return direction === "ascending" ? -1 : 1;
+        }
+        if (aValue > bValue) {
+          return direction === "ascending" ? 1 : -1;
         }
       }
-      if (aValue < bValue) {
-        return direction === "ascending" ? -1 : 1;
-      }
-      if (aValue > bValue) {
-        return direction === "ascending" ? 1 : -1;
-      }
-    }
-    return 0;
-  });
+      return 0;
+    });
+    setSortedPlayers(newSortedPlayers);
+  }, [players]);
 
   const requestSort = (key: string) => {
     let direction = "none";

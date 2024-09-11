@@ -16,13 +16,14 @@ import {
 import { Player } from "@/types/playerTypes";
 import { getNStats } from "@/data/const";
 import calculateMinMax from "@/data/minmax";
-import calculateZScores from "@/data/z_score";
+import calculateZScores from "@/data/zScore";
 import { IconAdjustmentsFilled } from "@tabler/icons-react";
 import RankingsTable from "../../components/RankingsTable";
 import { getPlayers } from "../../api/players";
 
 const RankingsPage = () => {
   const [players, setPlayers] = useState<Player[]>([]);
+  const [playersToDisplay, setPlayersToDisplay] = useState<Player[]>([]);
 
   // Chakra component states
   const [selectedYear, setSelectedYear] = useState(1);
@@ -32,7 +33,6 @@ const RankingsPage = () => {
   useEffect(() => {
     const getPlayersData = async () => {
       let players = await getPlayers();
-      const usePastYearStats = selectedYear !== 1;
       const zScoresProj = calculateZScores(players, false);
       const minmaxScoresProj = calculateMinMax(players, false);
       const zScoresPast = calculateZScores(players, true);
@@ -75,7 +75,15 @@ const RankingsPage = () => {
           player.pastYearNScores = null;
         }
       });
+      setPlayers(players);
+    };
+    getPlayersData();
+  }, []);
 
+  useEffect(() => {
+    const usePastYearStats = selectedYear !== 1;
+
+    if (players.length > 0) {
       const playersToDisplay = players
         .filter((player) => {
           if (usePastYearStats && !player.pastYearStats) return false;
@@ -89,11 +97,10 @@ const RankingsPage = () => {
           return bTotal - aTotal;
         });
 
-      setPlayers(playersToDisplay);
+      setPlayersToDisplay(playersToDisplay);
       setIsLoaded(true);
-    };
-    getPlayersData();
-  }, [selectedYear]);
+    }
+  }, [selectedYear, players]);
 
   return (
     <Container maxW="container.2xl" px={12} my={12}>
@@ -142,7 +149,7 @@ const RankingsPage = () => {
         <Skeleton isLoaded={isLoaded} startColor="gray.50" endColor="gray.100">
           <Box shadow="md">
             <RankingsTable
-              players={players}
+              players={playersToDisplay}
               usePastYearStats={selectedYear === 2}
               showSmartScores={showSmartScores}
             />
