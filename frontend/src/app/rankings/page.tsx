@@ -1,22 +1,25 @@
 "use client";
 
+import { Fragment, useEffect, useState } from "react";
 import {
   Box,
   Container,
   Flex,
   Heading,
+  Icon,
   Select,
   Skeleton,
   Spacer,
   Stack,
+  Switch,
 } from "@chakra-ui/react";
-import RankingsTable from "../../components/RankingsTable";
-import { getPlayers } from "../../api/players";
-import { Fragment, useEffect, useState } from "react";
 import { Player } from "@/types/playerTypes";
+import { getNStats } from "@/data/const";
 import calculateMinMax from "@/data/minmax";
 import calculateZScores from "@/data/z_score";
-import { getNStats } from "@/data/const";
+import { IconAdjustmentsFilled } from "@tabler/icons-react";
+import RankingsTable from "../../components/RankingsTable";
+import { getPlayers } from "../../api/players";
 
 const RankingsPage = () => {
   const [players, setPlayers] = useState<Player[]>([]);
@@ -24,6 +27,7 @@ const RankingsPage = () => {
   // Chakra component states
   const [selectedYear, setSelectedYear] = useState(1);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [showSmartScores, setShowSmartScores] = useState(false);
 
   useEffect(() => {
     const getPlayersData = async () => {
@@ -92,9 +96,9 @@ const RankingsPage = () => {
   }, [selectedYear]);
 
   return (
-    <Container maxW="container.2xl" px={12}>
+    <Container maxW="container.2xl" px={12} my={12}>
       <Flex justify="space-between" my={8}>
-        <Heading>Rankings</Heading>
+        <Heading size="lg">Player Rankings</Heading>
         <Spacer />
         <Select
           width="auto"
@@ -109,6 +113,19 @@ const RankingsPage = () => {
           <option value={2}>2023-2024 Stats</option>
         </Select>
       </Flex>
+      <Box my={8}>
+        <Heading size="md">Settings</Heading>
+        <Flex alignItems="center" my={3}>
+          <Icon as={IconAdjustmentsFilled} boxSize={5} />
+          <Box pl={1} pr={2} fontWeight="bold">
+            Smart Scores
+          </Box>
+          <Switch
+            colorScheme="cyan"
+            onChange={() => setShowSmartScores(!showSmartScores)}
+          />
+        </Flex>
+      </Box>
       <Stack spacing={4}>
         {Array.from({ length: 100 }).map((_, i) =>
           isLoaded ? (
@@ -123,10 +140,11 @@ const RankingsPage = () => {
           )
         )}
         <Skeleton isLoaded={isLoaded} startColor="gray.50" endColor="gray.100">
-          <Box shadow="md" mb={12}>
+          <Box shadow="md">
             <RankingsTable
               players={players}
               usePastYearStats={selectedYear === 2}
+              showSmartScores={showSmartScores}
             />
           </Box>
         </Skeleton>

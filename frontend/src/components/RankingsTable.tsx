@@ -1,12 +1,11 @@
 "use client";
 
 import { getNStats, getStats } from "@/data/const";
-import { Player, PlayerStatsNScore } from "@/types/playerTypes";
+import { Player, PlayerStats, PlayerStatsNScore } from "@/types/playerTypes";
 import {
   Box,
   Flex,
   Icon,
-  Image,
   Table,
   TableContainer,
   Tbody,
@@ -28,10 +27,12 @@ import TeamLogo from "./team/TeamLogo";
 import { Team } from "@/types/teamTypes";
 
 type PlayerStatsNScoreKeys = keyof PlayerStatsNScore;
+type PlayerStatsKeys = keyof PlayerStats;
 
 // CONSTANTS
 const cellWidthSm = "50px";
 const cellWidthMd = "75px";
+const cellWidthLg = "120px";
 const cellHeight = 10;
 
 const colProps = {
@@ -51,7 +52,7 @@ const TableTd = ({
   children?: ReactNode;
   [key: string]: any;
 }) => (
-  <Td px={4} {...props}>
+  <Td px={4} py={1} {...props}>
     <Flex justifyContent="center" alignItems="center">
       {children}
     </Flex>
@@ -75,14 +76,16 @@ const TableTdSm = ({
 interface RankingsTableHeadProps {
   sortConfig: { key: string; direction: string } | null;
   requestSort: (key: string) => void;
-  u: boolean;
+  usePastYearStats: boolean;
 }
 
 const RankingsTableHead = ({
   sortConfig,
   requestSort,
-  u,
+  usePastYearStats,
 }: RankingsTableHeadProps) => {
+  const u = usePastYearStats;
+
   const calcHeaderSortColor = (key: string) => {
     if (sortConfig?.key === key) {
       if (sortConfig.direction === "ascending") {
@@ -345,10 +348,16 @@ const RankingsTableHead = ({
 interface RankingsTableProps {
   players: Player[];
   usePastYearStats: boolean;
+  showSmartScores?: boolean;
 }
 
-const RankingsTable = ({ players, usePastYearStats }: RankingsTableProps) => {
+const RankingsTable = ({
+  players,
+  usePastYearStats,
+  showSmartScores = false,
+}: RankingsTableProps) => {
   const u = usePastYearStats;
+  const ss = showSmartScores;
 
   const [sortConfig, setSortConfig] = useState<{
     key: string;
@@ -357,8 +366,9 @@ const RankingsTable = ({ players, usePastYearStats }: RankingsTableProps) => {
 
   const sortedPlayers = [...players].sort((a, b) => {
     if (sortConfig && sortConfig.direction !== "none") {
-      const { key, direction } = sortConfig;
+      let { key, direction } = sortConfig;
       let aValue, bValue: number;
+
       if (key === "default") {
         aValue = getNStats(a, usePastYearStats)?.total || 0;
         bValue = getNStats(b, usePastYearStats)?.total || 0;
@@ -369,10 +379,17 @@ const RankingsTable = ({ players, usePastYearStats }: RankingsTableProps) => {
         aValue = getStats(a, usePastYearStats)?.gp || 0;
         bValue = getStats(b, usePastYearStats)?.gp || 0;
       } else {
-        aValue =
-          getNStats(a, usePastYearStats)?.[key as PlayerStatsNScoreKeys] || 0;
-        bValue =
-          getNStats(b, usePastYearStats)?.[key as PlayerStatsNScoreKeys] || 0;
+        if (showSmartScores) {
+          aValue =
+            getNStats(a, usePastYearStats)?.[key as PlayerStatsNScoreKeys] || 0;
+          bValue =
+            getNStats(b, usePastYearStats)?.[key as PlayerStatsNScoreKeys] || 0;
+        } else {
+          if (key == "fg") key = "fgm";
+          if (key == "ft") key = "ftm";
+          aValue = getStats(a, usePastYearStats)?.[key as PlayerStatsKeys] || 0;
+          bValue = getStats(b, usePastYearStats)?.[key as PlayerStatsKeys] || 0;
+        }
       }
       if (aValue < bValue) {
         return direction === "ascending" ? -1 : 1;
@@ -451,8 +468,8 @@ const RankingsTable = ({ players, usePastYearStats }: RankingsTableProps) => {
           <Box as="col" {...colProps} width={cellWidthSm} />
           <Box as="col" {...colProps} width="280px" />
           <Box as="col" {...colProps} width={cellWidthMd} />
-          <Box as="col" {...colProps} width={cellWidthMd} />
-          <Box as="col" {...colProps} width={cellWidthMd} />
+          <Box as="col" {...colProps} width={ss ? cellWidthMd : cellWidthLg} />
+          <Box as="col" {...colProps} width={ss ? cellWidthMd : cellWidthLg} />
           <Box as="col" {...colProps} width={cellWidthMd} />
           <Box as="col" {...colProps} width={cellWidthMd} />
           <Box as="col" {...colProps} width={cellWidthMd} />
@@ -465,11 +482,13 @@ const RankingsTable = ({ players, usePastYearStats }: RankingsTableProps) => {
         <RankingsTableHead
           sortConfig={sortConfig}
           requestSort={requestSort}
-          u={u}
+          usePastYearStats={u}
         />
         <Tbody>
           {sortedPlayers.map((player, i) => {
             const playerTrend = getPlayerTrend(player);
+            const playerNStats = getNStats(player, u)!;
+            const playerStats = getStats(player, u)!;
 
             return (
               <Tr
@@ -506,17 +525,91 @@ const RankingsTable = ({ players, usePastYearStats }: RankingsTableProps) => {
                     )}
                   </Flex>
                 </Td>
-                <TableTd>{getStats(player, u)?.gp}</TableTd>
-                <TableTd>{getNStats(player, u)?.fg.toFixed(2)}</TableTd>
-                <TableTd>{getNStats(player, u)?.ft.toFixed(2)}</TableTd>
-                <TableTd>{getNStats(player, u)?.tpm.toFixed(2)}</TableTd>
-                <TableTd>{getNStats(player, u)?.pts.toFixed(2)}</TableTd>
-                <TableTd>{getNStats(player, u)?.reb.toFixed(2)}</TableTd>
-                <TableTd>{getNStats(player, u)?.ast.toFixed(2)}</TableTd>
-                <TableTd>{getNStats(player, u)?.stl.toFixed(2)}</TableTd>
-                <TableTd>{getNStats(player, u)?.blk.toFixed(2)}</TableTd>
-                <TableTd>{getNStats(player, u)?.to.toFixed(2)}</TableTd>
-                <TableTd>{getNStats(player, u)?.total.toFixed(2)}</TableTd>
+                <TableTd>{playerStats.gp}</TableTd>
+                <TableTd>
+                  <Flex direction="column" alignItems="center">
+                    {ss ? (
+                      <Box fontWeight={500}>{playerNStats.fg.toFixed(2)}</Box>
+                    ) : (
+                      <Flex alignItems="center">
+                        <Box fontWeight={500}>
+                          {playerStats.fgPct.toFixed(2)}
+                        </Box>
+                        <Box as="span" fontSize={11} ml={2}>
+                          ({playerStats.fgm.toFixed(2)} /{" "}
+                          {playerStats.fga.toFixed(2)})
+                        </Box>
+                      </Flex>
+                    )}
+                  </Flex>
+                </TableTd>
+                <TableTd>
+                  <Flex direction="column" alignItems="center">
+                    {ss ? (
+                      <Box fontWeight={500}>{playerNStats.ft.toFixed(2)}</Box>
+                    ) : (
+                      <Flex alignItems="center">
+                        <Box fontWeight={500}>
+                          {playerStats.ftPct.toFixed(2)}
+                        </Box>
+                        <Box as="span" fontSize={11} ml={2}>
+                          ({playerStats.ftm.toFixed(2)} /{" "}
+                          {playerStats.fta.toFixed(2)})
+                        </Box>
+                      </Flex>
+                    )}
+                  </Flex>
+                </TableTd>
+                <TableTd>
+                  {ss ? (
+                    <Box fontWeight={500}>{playerNStats.tpm.toFixed(2)}</Box>
+                  ) : (
+                    <Box fontWeight={500}>{playerStats.tpm.toFixed(1)}</Box>
+                  )}
+                </TableTd>
+                <TableTd>
+                  {ss ? (
+                    <Box fontWeight={500}>{playerNStats.pts.toFixed(2)}</Box>
+                  ) : (
+                    <Box fontWeight={500}>{playerStats.pts.toFixed(1)}</Box>
+                  )}
+                </TableTd>
+                <TableTd>
+                  {ss ? (
+                    <Box fontWeight={500}>{playerNStats.reb.toFixed(2)}</Box>
+                  ) : (
+                    <Box fontWeight={500}>{playerStats.reb.toFixed(1)}</Box>
+                  )}
+                </TableTd>
+                <TableTd>
+                  {ss ? (
+                    <Box fontWeight={500}>{playerNStats.ast.toFixed(2)}</Box>
+                  ) : (
+                    <Box fontWeight={500}>{playerStats.ast.toFixed(1)}</Box>
+                  )}
+                </TableTd>
+                <TableTd>
+                  {ss ? (
+                    <Box fontWeight={500}>{playerNStats.stl.toFixed(2)}</Box>
+                  ) : (
+                    <Box fontWeight={500}>{playerStats.stl.toFixed(1)}</Box>
+                  )}
+                </TableTd>
+                <TableTd>
+                  {ss ? (
+                    <Box fontWeight={500}>{playerNStats.blk.toFixed(2)}</Box>
+                  ) : (
+                    <Box fontWeight={500}>{playerStats.blk.toFixed(1)}</Box>
+                  )}
+                </TableTd>
+                <TableTd>
+                  {ss ? (
+                    <Box fontWeight={500}>{playerNStats.to.toFixed(2)}</Box>
+                  ) : (
+                    <Box fontWeight={500}>{playerStats.to.toFixed(1)}</Box>
+                  )}
+                </TableTd>
+                <TableTd>{playerNStats.total.toFixed(2)}</TableTd>
               </Tr>
             );
           })}
