@@ -1,4 +1,4 @@
-import { Player, PlayerStats, PlayerStatsNScore } from "@/types/playerTypes";
+import { Player, PlayerStatsNScore } from "@/types/playerTypes";
 import { sum } from "./math";
 import { CATEGORIES, getStats, MIN_MINUTES } from "./const";
 
@@ -25,14 +25,17 @@ const calculateMinMax = (
       category === "ftm" ||
       category === "fta"
     ) {
-      return players.map((player, i) => getStats(player, u)[category]);
+      return players.map((player) => getStats(player, u)[category]);
     } else
       return players.map((player, i) => getStats(player, u)[category] * GP[i]);
   });
   const filteredStats = stats.map((stat) =>
     stat.filter((_, i) => filterIndexes.includes(i))
   );
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [fgm, fga, ftm, fta, tpm, pts, reb, ast, stl, blk, to] = stats;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [fgmF, fgaF, ftmF, ftaF, tpmF, ptsF, rebF, astF, stlF, blkF, toF] =
     filteredStats;
 

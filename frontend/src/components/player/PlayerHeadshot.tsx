@@ -15,6 +15,7 @@ const PlayerHeadshot = ({ player, size }: PlayerHeadshotProps) => {
     <Image
       src={player.headshot}
       width={size === "sm" ? small : size === "md" ? medium : large}
+      alt={player.firstName + " " + player.lastName}
     />
   );
 };

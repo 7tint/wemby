@@ -1,5 +1,6 @@
 import { mapKeys, camelCase, isObject, mapValues } from "lodash-es";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const toCamelCase = (obj: any): any => {
   if (Array.isArray(obj)) {
     // Process arrays recursively

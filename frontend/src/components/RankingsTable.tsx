@@ -50,7 +50,7 @@ const TableTd = ({
   ...props
 }: {
   children?: ReactNode;
-  [key: string]: any;
+  [key: string]: any; // eslint-disable-line
 }) => (
   <Td px={4} py={1} {...props}>
     <Flex justifyContent="center" alignItems="center">
@@ -64,7 +64,7 @@ const TableTdSm = ({
   ...props
 }: {
   children?: ReactNode;
-  [key: string]: any;
+  [key: string]: any; // eslint-disable-line
 }) => (
   <Td px={2} {...props}>
     <Flex justifyContent="center" alignItems="center">
@@ -368,7 +368,8 @@ const RankingsTable = ({
   useEffect(() => {
     const newSortedPlayers = [...players].sort((a, b) => {
       if (sortConfig && sortConfig.direction !== "none") {
-        let { key, direction } = sortConfig;
+        let { key } = sortConfig;
+        const { direction } = sortConfig;
         let aValue, bValue: number;
 
         if (key === "default") {
@@ -389,8 +390,8 @@ const RankingsTable = ({
               getNStats(b, usePastYearStats)?.[key as PlayerStatsNScoreKeys] ||
               0;
           } else {
-            if (key == "fg") key = "fgm";
-            if (key == "ft") key = "ftm";
+            if (key === "fg") key = "fgm";
+            if (key === "ft") key = "ftm";
             aValue =
               getStats(a, usePastYearStats)?.[key as PlayerStatsKeys] || 0;
             bValue =
@@ -407,7 +408,7 @@ const RankingsTable = ({
       return 0;
     });
     setSortedPlayers(newSortedPlayers);
-  }, [players]);
+  }, [players, showSmartScores, sortConfig, usePastYearStats]);
 
   const requestSort = (key: string) => {
     let direction = "none";

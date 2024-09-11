@@ -1,5 +1,5 @@
-import { Player, PlayerStats, PlayerStatsNScore } from "@/types/playerTypes";
-import { absmin, mean, std, sum } from "./math";
+import { Player, PlayerStatsNScore } from "@/types/playerTypes";
+import { mean, std, sum } from "./math";
 import { getStats } from "./const";
 
 const CATEGORIES = [
@@ -41,14 +41,17 @@ const calculateZScores = (
       category === "ftm" ||
       category === "fta"
     ) {
-      return players.map((player, i) => getStats(player, u)[category]);
+      return players.map((player) => getStats(player, u)[category]);
     } else
       return players.map((player, i) => getStats(player, u)[category] * GP[i]);
   });
   const filteredStats = stats.map((stat) =>
     stat.filter((_, i) => filterIndexes.includes(i))
   );
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [fgm, fga, ftm, fta, tpm, pts, reb, ast, stl, blk, to] = stats;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [fgmF, fgaF, ftmF, ftaF, tpmF, ptsF, rebF, astF, stlF, blkF, toF] =
     filteredStats;
 

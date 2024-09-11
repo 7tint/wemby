@@ -38,7 +38,7 @@ const RankingsPage = () => {
 
   useEffect(() => {
     const getPlayersData = async () => {
-      let players = await getPlayers();
+      const players = await getPlayers();
       const zScoresProj = calculateZScores(players, false);
       const minmaxScoresProj = calculateMinMax(players, false);
       const zScoresPast = calculateZScores(players, true);
