@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, memo, ReactNode, useMemo, useState } from "react";
+import { memo, ReactNode, useMemo, useState } from "react";
 import {
   Box,
   Flex,
@@ -18,7 +18,6 @@ import {
   IconArrowDown,
   IconEqual,
   IconPointFilled,
-  IconTag,
 } from "@tabler/icons-react";
 import { getNStats, getStats } from "@/data/const";
 import { Player, PlayerStats, PlayerStatsNScore } from "@/types/playerTypes";
@@ -74,14 +73,12 @@ const RankingsHeaderCell_ = ({
   text,
   calcHeaderSortColor,
   requestSort,
-  size = "md",
 }: {
   id?: string;
   label: string;
   text: string;
   calcHeaderSortColor?: (key: string) => string;
   requestSort?: (key: string) => void;
-  size?: string;
 }) => (
   <Td
     {...headerColProps}
@@ -144,14 +141,13 @@ const RankingsTableHead_ = ({
         borderBottomWidth={1}
         fontWeight="bold"
       >
-        <RankingsHeaderCell text="R" label="Row #" size="sm" />
+        <RankingsHeaderCell text="R" label="Row #" />
         <RankingsHeaderCell
           id="rank"
           text="H#"
           label="Rank (Hashtag Basketball)"
           calcHeaderSortColor={calcHeaderSortColor}
           requestSort={requestSort}
-          size="sm"
         />
         {!u && (
           <RankingsHeaderCell
@@ -160,10 +156,9 @@ const RankingsTableHead_ = ({
             label="Expected Auction Value (Hashtag Basketball)"
             calcHeaderSortColor={calcHeaderSortColor}
             requestSort={requestSort}
-            size="sm"
           />
         )}
-        <RankingsHeaderCell text="Tm" label="Team" size="sm" />
+        <RankingsHeaderCell text="Tm" label="Team" />
         <RankingsHeaderCell text="Name" label="Player Name" />
         <RankingsHeaderCell
           id="gp"
