@@ -158,6 +158,7 @@ const RankingsTableHead_ = ({
         )}
         <RankingsHeaderCell text="Team" label="Pro Team" />
         <RankingsHeaderCell text="Name" label="Player Name" />
+        <RankingsHeaderCell id="age" text="Age" label="Age" />
         <RankingsHeaderCell
           id="gp"
           text="GP"
@@ -404,6 +405,7 @@ const RankingsTable_ = ({
           <Box as="col" {...colProps} width={cellWidthMd} />
           <Box as="col" {...colProps} width="260px" />
           <Box as="col" {...colProps} width={cellWidthSm} />
+          <Box as="col" {...colProps} width={cellWidthSm} />
           <Box as="col" {...colProps} width={ss ? cellWidthMd : cellWidthLg} />
           <Box as="col" {...colProps} width={ss ? cellWidthMd : cellWidthLg} />
           <Box as="col" {...colProps} width={cellWidthMd} />
@@ -479,6 +481,7 @@ const RankingsTable_ = ({
                     )}
                   </Flex>
                 </Td>
+                <TableTd>{player.age}</TableTd>
                 <TableTd>{playerStats.gp}</TableTd>
                 <TableTd
                   backgroundColor={getPercentileColor(
