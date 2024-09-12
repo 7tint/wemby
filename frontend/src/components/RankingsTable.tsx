@@ -279,7 +279,15 @@ const RankingsTable_ = ({
         if (key === "default") {
           aValue = getNStats(a, usePastYearStats)?.total || 0;
           bValue = getNStats(b, usePastYearStats)?.total || 0;
-        } else if (key === "rank" || key === "auctionValuedAt") {
+        } else if (key === "rank") {
+          if (u) {
+            bValue = a.pastYearRank;
+            aValue = b.pastYearRank;
+          } else {
+            bValue = a.rank;
+            aValue = b.rank;
+          }
+        } else if (key === "auctionValuedAt") {
           aValue = a[key] || 0;
           bValue = b[key] || 0;
         } else if (key === "gp") {
@@ -425,7 +433,7 @@ const RankingsTable_ = ({
                 _odd={{ backgroundColor: "gray.50" }}
               >
                 <TableTd fontWeight={600}>{i + 1}</TableTd>
-                <TableTd>{player.rank}</TableTd>
+                <TableTd>{u ? player.pastYearRank : player.rank}</TableTd>
                 {!u && (
                   <TableTd fontWeight={500} color="yellow.700">
                     ${player.auctionValuedAt?.toFixed(1)}

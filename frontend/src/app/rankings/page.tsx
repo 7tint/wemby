@@ -175,8 +175,6 @@ const RankingsPage = () => {
       setProjPercentiles(projPercentiles);
       setPastPercentiles(pastPercentiles);
       setPlayers(players);
-
-      console.log(projPercentiles);
     };
     getPlayersData();
   }, []);
