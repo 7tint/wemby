@@ -4,8 +4,6 @@ from flask_cors import CORS
 from flask_restful import Api
 from waitress import serve
 
-# from resources.players import PlayersResource
-# from routes.players import PLAYERS_RESOURCE
 from utils import config
 
 import routes
