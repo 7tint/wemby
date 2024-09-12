@@ -23,7 +23,6 @@ import {
 import { getPlayers } from "@/api/players";
 import { Player } from "@/types/playerTypes";
 import { getNStats } from "@/data/const";
-import { calculateStatPercentiles } from "@/data/math";
 import calculateMinMax from "@/data/minmax";
 import calculateZScores from "@/data/zScore";
 import RankingsTable from "@/components/RankingsTable";
@@ -87,8 +86,6 @@ const RankingsSettings = ({
 const RankingsPage = () => {
   const [players, setPlayers] = useState<Player[]>([]);
   const [selectedYear, setSelectedYear] = useState(1);
-  const [projPercentiles, setProjPercentiles] = useState<number[][]>([]);
-  const [pastPercentiles, setPastPercentiles] = useState<number[][]>([]);
 
   // Chakra component states
   const [isLoaded, setIsLoaded] = useState(false);
@@ -96,17 +93,12 @@ const RankingsPage = () => {
   const [showHighlights, setShowHighlights] = useState(true);
 
   useEffect(() => {
-    console.log("Fetching player data...");
-
     const getPlayersData = async () => {
       const players = await getPlayers();
       const zScoresProj = calculateZScores(players, false);
       const minmaxScoresProj = calculateMinMax(players, false);
       const zScoresPast = calculateZScores(players, true);
       const minmaxScoresPast = calculateMinMax(players, true);
-
-      const allProjStats: number[][] = [[], [], [], [], [], [], [], [], []];
-      const allPastStats: number[][] = [[], [], [], [], [], [], [], [], []];
 
       players.forEach((player) => {
         const projZScores = zScoresProj.get(player.id) || null;
@@ -124,16 +116,6 @@ const RankingsPage = () => {
             to: 1 * projZScores.to + 5 * projMinMax.to,
             total: 1 * projZScores.total + 5 * projMinMax.total,
           };
-          Object.entries(player.projectionNScores).forEach(
-            ([key, value], i) => {
-              if (key === "total") return;
-              if (key === "fg")
-                allProjStats[0].push(player.projections?.fgPct || 0);
-              if (key === "ft")
-                allProjStats[1].push(player.projections?.ftPct || 0);
-              else allProjStats[i].push(value);
-            }
-          );
         }
 
         const pastZScores = zScoresPast.get(player.id) || null;
@@ -151,29 +133,10 @@ const RankingsPage = () => {
             to: 1 * pastZScores.to + 5 * pastMinMax.to,
             total: 1 * pastZScores.total + 5 * pastMinMax.total,
           };
-          Object.entries(player.pastYearNScores).forEach(([key, value], i) => {
-            if (key === "total") return;
-            if (key === "fg")
-              allPastStats[0].push(player.pastYearStats?.fgPct || 0);
-            if (key === "ft")
-              allPastStats[1].push(player.pastYearStats?.ftPct || 0);
-            else allPastStats[i].push(value);
-          });
         } else {
           player.pastYearNScores = null;
         }
       });
-
-      // Divide all stats into 5 equal percentiles
-      const projPercentiles = allProjStats.map((stat) => {
-        return calculateStatPercentiles(stat);
-      });
-      const pastPercentiles = allPastStats.map((stat) => {
-        return calculateStatPercentiles(stat);
-      });
-
-      setProjPercentiles(projPercentiles);
-      setPastPercentiles(pastPercentiles);
       setPlayers(players);
     };
     getPlayersData();
@@ -245,8 +208,6 @@ const RankingsPage = () => {
             <RankingsTable
               players={playersToDisplay}
               usePastYearStats={selectedYear === 2}
-              projPercentiles={projPercentiles}
-              pastPercentiles={pastPercentiles}
               showSmartScores={showSmartScores}
               showHighlights={showHighlights}
             />

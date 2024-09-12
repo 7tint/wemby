@@ -19,7 +19,7 @@ import {
   IconEqual,
   IconPointFilled,
 } from "@tabler/icons-react";
-import { getNStats, getStats } from "@/data/const";
+import { calculateStatPercentiles, getNStats, getStats } from "@/data/const";
 import { Player, PlayerStats, PlayerStatsNScore } from "@/types/playerTypes";
 import { Team } from "@/types/teamTypes";
 import PlayerHeadshot from "./player/PlayerHeadshot";
@@ -248,8 +248,6 @@ const RankingsTableHead = memo(RankingsTableHead_);
 interface RankingsTableProps {
   players: Player[];
   usePastYearStats: boolean;
-  projPercentiles: number[][];
-  pastPercentiles: number[][];
   showSmartScores: boolean;
   showHighlights: boolean;
 }
@@ -257,8 +255,6 @@ interface RankingsTableProps {
 const RankingsTable_ = ({
   players,
   usePastYearStats,
-  projPercentiles,
-  pastPercentiles,
   showSmartScores,
   showHighlights,
 }: RankingsTableProps) => {
@@ -273,8 +269,7 @@ const RankingsTable_ = ({
   const sortedPlayers = useMemo(() => {
     return [...players].sort((a, b) => {
       if (sortConfig && sortConfig.direction !== "none") {
-        let { key } = sortConfig;
-        const { direction } = sortConfig;
+        const { key, direction } = sortConfig;
         let aValue, bValue: number;
 
         if (key === "default") {
@@ -295,7 +290,7 @@ const RankingsTable_ = ({
           aValue = getStats(a, usePastYearStats)?.gp || 0;
           bValue = getStats(b, usePastYearStats)?.gp || 0;
         } else {
-          if (showSmartScores) {
+          if (showSmartScores || key === "fg" || key === "ft") {
             aValue =
               getNStats(a, usePastYearStats)?.[key as PlayerStatsNScoreKeys] ||
               0;
@@ -303,8 +298,6 @@ const RankingsTable_ = ({
               getNStats(b, usePastYearStats)?.[key as PlayerStatsNScoreKeys] ||
               0;
           } else {
-            if (key === "fg") key = "fgm";
-            if (key === "ft") key = "ftm";
             aValue =
               getStats(a, usePastYearStats)?.[key as PlayerStatsKeys] || 0;
             bValue =
@@ -320,7 +313,7 @@ const RankingsTable_ = ({
       }
       return 0;
     });
-  }, [players, showSmartScores, sortConfig, usePastYearStats]);
+  }, [players, showSmartScores, sortConfig, usePastYearStats, u]);
 
   const requestSort = (key: string) => {
     let direction = "none";
@@ -372,19 +365,21 @@ const RankingsTable_ = ({
     return playerTrend;
   };
 
-  const getPercentileColor = (stat: number, i: number) => {
+  const getPercentileColor = (stat: number, category: string) => {
     if (!showHighlights) return "transparent";
-    const percentiles = ss ? pastPercentiles[i] : projPercentiles[i];
-    if (stat <= percentiles[0]) {
+    const percentile = calculateStatPercentiles(stat, category);
+    if (percentile === 0) {
       return "red.200";
-    } else if (stat <= percentiles[1]) {
+    } else if (percentile === 1) {
       return "red.100";
-    } else if (stat <= percentiles[2]) {
+    } else if (percentile === 2) {
       return "transparent";
-    } else if (stat <= percentiles[3]) {
+    } else if (percentile === 3) {
       return "green.100";
-    } else {
+    } else if (percentile === 4) {
       return "green.200";
+    } else {
+      return "transparent";
     }
   };
 
@@ -484,10 +479,7 @@ const RankingsTable_ = ({
                 <TableTd>{player.age}</TableTd>
                 <TableTd>{playerStats.gp}</TableTd>
                 <TableTd
-                  backgroundColor={getPercentileColor(
-                    playerStats.fgPct + 0.05,
-                    0
-                  )}
+                  backgroundColor={getPercentileColor(playerStats.fgPct, "fg")}
                 >
                   <Flex direction="column" align="center">
                     {ss ? (
@@ -506,7 +498,7 @@ const RankingsTable_ = ({
                   </Flex>
                 </TableTd>
                 <TableTd
-                  backgroundColor={getPercentileColor(playerStats.ftPct, 1)}
+                  backgroundColor={getPercentileColor(playerStats.ftPct, "ft")}
                 >
                   <Flex direction="column" align="center">
                     {ss ? (
@@ -525,7 +517,7 @@ const RankingsTable_ = ({
                   </Flex>
                 </TableTd>
                 <TableTd
-                  backgroundColor={getPercentileColor(playerNStats.tpm, 2)}
+                  backgroundColor={getPercentileColor(playerStats.tpm, "tpm")}
                 >
                   {ss ? (
                     <Box fontWeight={500}>{playerNStats.tpm.toFixed(2)}</Box>
@@ -534,7 +526,7 @@ const RankingsTable_ = ({
                   )}
                 </TableTd>
                 <TableTd
-                  backgroundColor={getPercentileColor(playerNStats.pts, 3)}
+                  backgroundColor={getPercentileColor(playerStats.pts, "pts")}
                 >
                   {ss ? (
                     <Box fontWeight={500}>{playerNStats.pts.toFixed(2)}</Box>
@@ -543,7 +535,7 @@ const RankingsTable_ = ({
                   )}
                 </TableTd>
                 <TableTd
-                  backgroundColor={getPercentileColor(playerNStats.reb, 4)}
+                  backgroundColor={getPercentileColor(playerStats.reb, "reb")}
                 >
                   {ss ? (
                     <Box fontWeight={500}>{playerNStats.reb.toFixed(2)}</Box>
@@ -552,7 +544,7 @@ const RankingsTable_ = ({
                   )}
                 </TableTd>
                 <TableTd
-                  backgroundColor={getPercentileColor(playerNStats.ast, 5)}
+                  backgroundColor={getPercentileColor(playerStats.ast, "ast")}
                 >
                   {ss ? (
                     <Box fontWeight={500}>{playerNStats.ast.toFixed(2)}</Box>
@@ -561,7 +553,7 @@ const RankingsTable_ = ({
                   )}
                 </TableTd>
                 <TableTd
-                  backgroundColor={getPercentileColor(playerNStats.stl, 6)}
+                  backgroundColor={getPercentileColor(playerStats.stl, "stl")}
                 >
                   {ss ? (
                     <Box fontWeight={500}>{playerNStats.stl.toFixed(2)}</Box>
@@ -570,7 +562,7 @@ const RankingsTable_ = ({
                   )}
                 </TableTd>
                 <TableTd
-                  backgroundColor={getPercentileColor(playerNStats.blk, 7)}
+                  backgroundColor={getPercentileColor(playerStats.blk, "blk")}
                 >
                   {ss ? (
                     <Box fontWeight={500}>{playerNStats.blk.toFixed(2)}</Box>
@@ -579,7 +571,7 @@ const RankingsTable_ = ({
                   )}
                 </TableTd>
                 <TableTd
-                  backgroundColor={getPercentileColor(playerNStats.to, 8)}
+                  backgroundColor={getPercentileColor(playerStats.to, "to")}
                 >
                   {ss ? (
                     <Box fontWeight={500}>{playerNStats.to.toFixed(2)}</Box>
