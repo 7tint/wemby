@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, useEffect, useState } from "react";
+import { Fragment, memo, ReactNode, useMemo, useState } from "react";
 import {
   Box,
   Flex,
@@ -45,41 +45,79 @@ const headerColProps = {
   borderColor: "gray.300",
 };
 
-const TableTd = ({
+/*
+ * TABLE CELL COMPONENTS
+ */
+const TableTd_ = ({
   children,
+  size = "md",
   ...props
 }: {
   children?: ReactNode;
+  size?: string;
   [key: string]: any; // eslint-disable-line
 }) => (
-  <Td px={4} py={1} {...props}>
-    <Flex justifyContent="center" alignItems="center">
+  <Td px={size === "md" ? 4 : 2} py={size === "md" ? 1 : 0} {...props}>
+    <Flex justify="center" align="center">
       {children}
     </Flex>
   </Td>
 );
+const TableTd = memo(TableTd_);
 
-const TableTdSm = ({
-  children,
-  ...props
+/*
+ * RANKINGS HEADER CELL
+ */
+const RankingsHeaderCell_ = ({
+  id,
+  label,
+  text,
+  calcHeaderSortColor,
+  requestSort,
+  size = "md",
 }: {
-  children?: ReactNode;
-  [key: string]: any; // eslint-disable-line
+  id?: string;
+  label: string;
+  text: string;
+  calcHeaderSortColor?: (key: string) => string;
+  requestSort?: (key: string) => void;
+  size?: string;
 }) => (
-  <Td px={2} {...props}>
-    <Flex justifyContent="center" alignItems="center">
-      {children}
+  <Td
+    {...headerColProps}
+    cursor={requestSort ? "pointer" : "default"}
+    onClick={() => {
+      if (requestSort) requestSort(id || "default");
+    }}
+    p={0}
+  >
+    <Flex direction="column" justify="center" align="center">
+      <Box
+        height={4}
+        width="100%"
+        backgroundColor={
+          calcHeaderSortColor
+            ? calcHeaderSortColor(id || "default")
+            : "gray.300"
+        }
+      />
+      <Tooltip label={label} hasArrow placement="top">
+        <Box my={2}>{text}</Box>
+      </Tooltip>
     </Flex>
   </Td>
 );
+const RankingsHeaderCell = memo(RankingsHeaderCell_);
 
+/**
+ * RANKINGS TABLE HEAD
+ */
 interface RankingsTableHeadProps {
   sortConfig: { key: string; direction: string } | null;
   requestSort: (key: string) => void;
   usePastYearStats: boolean;
 }
-
-const RankingsTableHead = ({
+const RankingsTableHead_ = ({
   sortConfig,
   requestSort,
   usePastYearStats,
@@ -99,96 +137,6 @@ const RankingsTableHead = ({
 
   return (
     <Thead>
-      <Tr height={4} backgroundColor="gray.300">
-        <TableTdSm
-          {...headerColProps}
-          cursor="pointer"
-          backgroundColor={calcHeaderSortColor("default")}
-          onClick={() => requestSort("default")}
-        />
-        <TableTdSm
-          {...headerColProps}
-          cursor="pointer"
-          backgroundColor={calcHeaderSortColor("rank")}
-          onClick={() => requestSort("rank")}
-        />
-        {!u && (
-          <TableTdSm
-            {...headerColProps}
-            cursor="pointer"
-            backgroundColor={calcHeaderSortColor("auctionValuedAt")}
-            onClick={() => requestSort("auctionValuedAt")}
-          />
-        )}
-        <TableTdSm {...headerColProps} />
-        <TableTd {...headerColProps} />
-        <TableTd
-          {...headerColProps}
-          cursor="pointer"
-          backgroundColor={calcHeaderSortColor("gp")}
-          onClick={() => requestSort("gp")}
-        />
-        <TableTd
-          {...headerColProps}
-          cursor="pointer"
-          backgroundColor={calcHeaderSortColor("fg")}
-          onClick={() => requestSort("fg")}
-        />
-        <TableTd
-          {...headerColProps}
-          cursor="pointer"
-          backgroundColor={calcHeaderSortColor("ft")}
-          onClick={() => requestSort("ft")}
-        />
-        <TableTd
-          {...headerColProps}
-          cursor="pointer"
-          backgroundColor={calcHeaderSortColor("tpm")}
-          onClick={() => requestSort("tpm")}
-        />
-        <TableTd
-          {...headerColProps}
-          cursor="pointer"
-          backgroundColor={calcHeaderSortColor("pts")}
-          onClick={() => requestSort("pts")}
-        />
-        <TableTd
-          {...headerColProps}
-          cursor="pointer"
-          backgroundColor={calcHeaderSortColor("reb")}
-          onClick={() => requestSort("reb")}
-        />
-        <TableTd
-          {...headerColProps}
-          cursor="pointer"
-          backgroundColor={calcHeaderSortColor("ast")}
-          onClick={() => requestSort("ast")}
-        />
-        <TableTd
-          {...headerColProps}
-          cursor="pointer"
-          backgroundColor={calcHeaderSortColor("stl")}
-          onClick={() => requestSort("stl")}
-        />
-        <TableTd
-          {...headerColProps}
-          cursor="pointer"
-          backgroundColor={calcHeaderSortColor("blk")}
-          onClick={() => requestSort("blk")}
-        />
-        <TableTd
-          {...headerColProps}
-          cursor="pointer"
-          backgroundColor={calcHeaderSortColor("to")}
-          onClick={() => requestSort("to")}
-        />
-        <TableTd
-          {...headerColProps}
-          cursor="pointer"
-          backgroundColor={calcHeaderSortColor("total")}
-          onClick={() => requestSort("total")}
-        />
-      </Tr>
       <Tr
         height={cellHeight}
         backgroundColor="gray.200"
@@ -196,162 +144,120 @@ const RankingsTableHead = ({
         borderBottomWidth={1}
         fontWeight="bold"
       >
-        <TableTdSm
-          {...headerColProps}
-          cursor="pointer"
-          onClick={() => requestSort("default")}
-        >
-          <Tooltip label='Ranked by "Total"' hasArrow placement="top">
-            R
-          </Tooltip>
-        </TableTdSm>
-        <TableTdSm
-          {...headerColProps}
-          cursor="pointer"
-          onClick={() => requestSort("rank")}
-        >
-          <Tooltip label="Rank (Hashtag Basketball)" hasArrow placement="top">
-            H#
-          </Tooltip>
-        </TableTdSm>
+        <RankingsHeaderCell text="R" label="Row #" size="sm" />
+        <RankingsHeaderCell
+          id="rank"
+          text="H#"
+          label="Rank (Hashtag Basketball)"
+          calcHeaderSortColor={calcHeaderSortColor}
+          requestSort={requestSort}
+          size="sm"
+        />
         {!u && (
-          <TableTdSm
-            {...headerColProps}
-            cursor="pointer"
-            onClick={() => requestSort("auctionValuedAt")}
-          >
-            <Tooltip
-              label="Expected Auction Value (Hashtag Basketball)"
-              hasArrow
-              placement="top"
-            >
-              <Icon as={IconTag} />
-            </Tooltip>
-          </TableTdSm>
-        )}
-        <TableTdSm {...headerColProps}>
-          <TeamLogo
-            team="NBA"
+          <RankingsHeaderCell
+            id="auctionValuedAt"
+            text="A$"
+            label="Expected Auction Value (Hashtag Basketball)"
+            calcHeaderSortColor={calcHeaderSortColor}
+            requestSort={requestSort}
             size="sm"
-            tooltipProps={{
-              label: "Team",
-              hasArrow: true,
-              placement: "top",
-            }}
           />
-        </TableTdSm>
-        <TableTd {...headerColProps}>Name</TableTd>
-        <TableTd
-          {...headerColProps}
-          cursor="pointer"
-          onClick={() => requestSort("gp")}
-        >
-          <Tooltip label="Games Played" hasArrow placement="top">
-            GP
-          </Tooltip>
-        </TableTd>
-        <TableTd
-          {...headerColProps}
-          cursor="pointer"
-          onClick={() => requestSort("fg")}
-        >
-          <Tooltip label="Field Goal Percentage" hasArrow placement="top">
-            FG%
-          </Tooltip>
-        </TableTd>
-        <TableTd
-          {...headerColProps}
-          cursor="pointer"
-          onClick={() => requestSort("ft")}
-        >
-          <Tooltip label="Free Throw Percentage" hasArrow placement="top">
-            FT%
-          </Tooltip>
-        </TableTd>
-        <TableTd
-          {...headerColProps}
-          cursor="pointer"
-          onClick={() => requestSort("tpm")}
-        >
-          <Tooltip label="Three-Point Made" hasArrow placement="top">
-            3PM
-          </Tooltip>
-        </TableTd>
-        <TableTd
-          {...headerColProps}
-          cursor="pointer"
-          onClick={() => requestSort("pts")}
-        >
-          <Tooltip label="Points" hasArrow placement="top">
-            PTS
-          </Tooltip>
-        </TableTd>
-        <TableTd
-          {...headerColProps}
-          cursor="pointer"
-          onClick={() => requestSort("reb")}
-        >
-          <Tooltip label="Rebounds" hasArrow placement="top">
-            REB
-          </Tooltip>
-        </TableTd>
-        <TableTd
-          {...headerColProps}
-          cursor="pointer"
-          onClick={() => requestSort("ast")}
-        >
-          <Tooltip label="Assists" hasArrow placement="top">
-            AST
-          </Tooltip>
-        </TableTd>
-        <TableTd
-          {...headerColProps}
-          cursor="pointer"
-          onClick={() => requestSort("stl")}
-        >
-          <Tooltip label="Steals" hasArrow placement="top">
-            STL
-          </Tooltip>
-        </TableTd>
-        <TableTd
-          {...headerColProps}
-          cursor="pointer"
-          onClick={() => requestSort("blk")}
-        >
-          <Tooltip label="Blocks" hasArrow placement="top">
-            BLK
-          </Tooltip>
-        </TableTd>
-        <TableTd
-          {...headerColProps}
-          cursor="pointer"
-          onClick={() => requestSort("to")}
-        >
-          <Tooltip label="Turnovers" hasArrow placement="top">
-            TO
-          </Tooltip>
-        </TableTd>
-        <TableTd
-          {...headerColProps}
-          cursor="pointer"
-          onClick={() => requestSort("total")}
-        >
-          <Tooltip label="Total Value (see info)" hasArrow placement="top">
-            Total
-          </Tooltip>
-        </TableTd>
+        )}
+        <RankingsHeaderCell text="Tm" label="Team" size="sm" />
+        <RankingsHeaderCell text="Name" label="Player Name" />
+        <RankingsHeaderCell
+          id="gp"
+          text="GP"
+          label="Games Played"
+          calcHeaderSortColor={calcHeaderSortColor}
+          requestSort={requestSort}
+        />
+        <RankingsHeaderCell
+          id="fg"
+          text="FG%"
+          label="Field Goal Percentage"
+          calcHeaderSortColor={calcHeaderSortColor}
+          requestSort={requestSort}
+        />
+        <RankingsHeaderCell
+          id="ft"
+          text="FT%"
+          label="Free Throw Percentage"
+          calcHeaderSortColor={calcHeaderSortColor}
+          requestSort={requestSort}
+        />
+        <RankingsHeaderCell
+          id="tpm"
+          text="3PM"
+          label="Three-Point Made"
+          calcHeaderSortColor={calcHeaderSortColor}
+          requestSort={requestSort}
+        />
+        <RankingsHeaderCell
+          id="pts"
+          text="PTS"
+          label="Points"
+          calcHeaderSortColor={calcHeaderSortColor}
+          requestSort={requestSort}
+        />
+        <RankingsHeaderCell
+          id="reb"
+          text="REB"
+          label="Rebounds"
+          calcHeaderSortColor={calcHeaderSortColor}
+          requestSort={requestSort}
+        />
+        <RankingsHeaderCell
+          id="ast"
+          text="AST"
+          label="Assists"
+          calcHeaderSortColor={calcHeaderSortColor}
+          requestSort={requestSort}
+        />
+        <RankingsHeaderCell
+          id="stl"
+          text="STL"
+          label="Steals"
+          calcHeaderSortColor={calcHeaderSortColor}
+          requestSort={requestSort}
+        />
+        <RankingsHeaderCell
+          id="blk"
+          text="BLK"
+          label="Blocks"
+          calcHeaderSortColor={calcHeaderSortColor}
+          requestSort={requestSort}
+        />
+        <RankingsHeaderCell
+          id="to"
+          text="TO"
+          label="Turnovers"
+          calcHeaderSortColor={calcHeaderSortColor}
+          requestSort={requestSort}
+        />
+        <RankingsHeaderCell
+          id="default"
+          text="Total"
+          label="Total Value (see info)"
+          calcHeaderSortColor={calcHeaderSortColor}
+          requestSort={requestSort}
+        />
       </Tr>
     </Thead>
   );
 };
+const RankingsTableHead = memo(RankingsTableHead_);
 
+/*
+ * RANKINGS TABLE
+ */
 interface RankingsTableProps {
   players: Player[];
   usePastYearStats: boolean;
   showSmartScores?: boolean;
 }
 
-const RankingsTable = ({
+const RankingsTable_ = ({
   players,
   usePastYearStats,
   showSmartScores = false,
@@ -363,10 +269,9 @@ const RankingsTable = ({
     key: string;
     direction: string;
   } | null>({ key: "total", direction: "descending" });
-  const [sortedPlayers, setSortedPlayers] = useState<Player[]>([]);
 
-  useEffect(() => {
-    const newSortedPlayers = [...players].sort((a, b) => {
+  const sortedPlayers = useMemo(() => {
+    return [...players].sort((a, b) => {
       if (sortConfig && sortConfig.direction !== "none") {
         let { key } = sortConfig;
         const { direction } = sortConfig;
@@ -407,7 +312,6 @@ const RankingsTable = ({
       }
       return 0;
     });
-    setSortedPlayers(newSortedPlayers);
   }, [players, showSmartScores, sortConfig, usePastYearStats]);
 
   const requestSort = (key: string) => {
@@ -505,22 +409,24 @@ const RankingsTable = ({
                 height={cellHeight}
                 _odd={{ backgroundColor: "purple.50" }}
               >
-                <TableTdSm>{i + 1}</TableTdSm>
-                <TableTdSm>{player.rank}</TableTdSm>
+                <TableTd size="sm">{i + 1}</TableTd>
+                <TableTd size="sm">{player.rank}</TableTd>
                 {!u && (
-                  <TableTdSm>${player.auctionValuedAt?.toFixed(1)}</TableTdSm>
+                  <TableTd size="sm">
+                    ${player.auctionValuedAt?.toFixed(1)}
+                  </TableTd>
                 )}
-                <TableTdSm>
+                <TableTd size="sm">
                   {u ? (
                     <TeamLogo team={player.pastYearTeam as Team} size="sm" />
                   ) : (
                     <TeamLogo team={player.team as Team} size="sm" />
                   )}
-                </TableTdSm>
+                </TableTd>
                 <Td pb={0}>
-                  <Flex px={4} alignItems="center">
+                  <Flex px={4} align="center">
                     <PlayerHeadshot player={player} size="sm" />
-                    <Flex alignItems="center" ml={2} mr={1}>
+                    <Flex align="center" ml={2} mr={1}>
                       {player.firstName} {player.lastName}
                     </Flex>
                     {!u && (
@@ -536,11 +442,11 @@ const RankingsTable = ({
                 </Td>
                 <TableTd>{playerStats.gp}</TableTd>
                 <TableTd>
-                  <Flex direction="column" alignItems="center">
+                  <Flex direction="column" align="center">
                     {ss ? (
                       <Box fontWeight={500}>{playerNStats.fg.toFixed(2)}</Box>
                     ) : (
-                      <Flex alignItems="center">
+                      <Flex align="center">
                         <Box fontWeight={500}>
                           {playerStats.fgPct.toFixed(2)}
                         </Box>
@@ -553,11 +459,11 @@ const RankingsTable = ({
                   </Flex>
                 </TableTd>
                 <TableTd>
-                  <Flex direction="column" alignItems="center">
+                  <Flex direction="column" align="center">
                     {ss ? (
                       <Box fontWeight={500}>{playerNStats.ft.toFixed(2)}</Box>
                     ) : (
-                      <Flex alignItems="center">
+                      <Flex align="center">
                         <Box fontWeight={500}>
                           {playerStats.ftPct.toFixed(2)}
                         </Box>
@@ -627,5 +533,7 @@ const RankingsTable = ({
     </TableContainer>
   );
 };
+
+const RankingsTable = memo(RankingsTable_);
 
 export default RankingsTable;

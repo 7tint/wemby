@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useMemo, useState } from "react";
 import {
   Box,
   Collapse,
@@ -26,14 +26,54 @@ import {
 import RankingsTable from "../../components/RankingsTable";
 import { getPlayers } from "../../api/players";
 
+interface RankingsSettingsProps {
+  showSmartScores: boolean;
+  setShowSmartScores: (value: boolean) => void;
+}
+
+const RankingsSettings = ({
+  showSmartScores,
+  setShowSmartScores,
+}: RankingsSettingsProps) => {
+  const [showSettings, setShowSettings] = useState(false);
+  return (
+    <Box my={8}>
+      <Flex
+        align="center"
+        cursor="pointer"
+        onClick={() => {
+          setShowSettings(!showSettings);
+        }}
+      >
+        <Icon
+          as={showSettings ? IconCaretDown : IconCaretRight}
+          mr={1}
+          boxSize={5}
+        />
+        <Heading size="md">Settings</Heading>
+      </Flex>
+      <Collapse in={showSettings}>
+        <Flex align="center" my={3} ml={6}>
+          <Icon as={IconAdjustmentsFilled} boxSize={5} />
+          <Box pl={1} pr={2} fontWeight="bold">
+            Smart Scores
+          </Box>
+          <Switch
+            colorScheme="cyan"
+            onChange={() => setShowSmartScores(!showSmartScores)}
+          />
+        </Flex>
+      </Collapse>
+    </Box>
+  );
+};
+
 const RankingsPage = () => {
   const [players, setPlayers] = useState<Player[]>([]);
-  const [playersToDisplay, setPlayersToDisplay] = useState<Player[]>([]);
   const [selectedYear, setSelectedYear] = useState(1);
 
   // Chakra component states
   const [isLoaded, setIsLoaded] = useState(false);
-  const [showSettings, setShowSettings] = useState(false);
   const [showSmartScores, setShowSmartScores] = useState(false);
 
   useEffect(() => {
@@ -86,11 +126,11 @@ const RankingsPage = () => {
     getPlayersData();
   }, []);
 
-  useEffect(() => {
+  const playersToDisplay = useMemo(() => {
     const usePastYearStats = selectedYear !== 1;
 
     if (players.length > 0) {
-      const playersToDisplay = players
+      return players
         .filter((player) => {
           if (usePastYearStats && !player.pastYearStats) return false;
           if (!usePastYearStats && !player.projections) return false;
@@ -102,11 +142,13 @@ const RankingsPage = () => {
           const bTotal = getNStats(b, usePastYearStats)?.total || 0;
           return bTotal - aTotal;
         });
-
-      setPlayersToDisplay(playersToDisplay);
-      setIsLoaded(true);
     }
+    return [];
   }, [selectedYear, players]);
+
+  useEffect(() => {
+    if (playersToDisplay.length > 0) setIsLoaded(true);
+  }, [playersToDisplay]);
 
   return (
     <Container maxW="container.2xl" px={12} my={12}>
@@ -126,34 +168,10 @@ const RankingsPage = () => {
           <option value={2}>2023-2024 Stats</option>
         </Select>
       </Flex>
-      <Box my={8}>
-        <Flex
-          alignItems="center"
-          cursor="pointer"
-          onClick={() => {
-            setShowSettings(!showSettings);
-          }}
-        >
-          <Icon
-            as={showSettings ? IconCaretDown : IconCaretRight}
-            mr={1}
-            boxSize={5}
-          />
-          <Heading size="md">Settings</Heading>
-        </Flex>
-        <Collapse in={showSettings}>
-          <Flex alignItems="center" my={3} ml={6}>
-            <Icon as={IconAdjustmentsFilled} boxSize={5} />
-            <Box pl={1} pr={2} fontWeight="bold">
-              Smart Scores
-            </Box>
-            <Switch
-              colorScheme="cyan"
-              onChange={() => setShowSmartScores(!showSmartScores)}
-            />
-          </Flex>
-        </Collapse>
-      </Box>
+      <RankingsSettings
+        showSmartScores={showSmartScores}
+        setShowSmartScores={setShowSmartScores}
+      />
       <Stack spacing={4}>
         {Array.from({ length: 100 }).map((_, i) =>
           isLoaded ? (
