@@ -249,13 +249,19 @@ const RankingsTableHead = memo(RankingsTableHead_);
 interface RankingsTableProps {
   players: Player[];
   usePastYearStats: boolean;
-  showSmartScores?: boolean;
+  projPercentiles: number[][];
+  pastPercentiles: number[][];
+  showSmartScores: boolean;
+  showHighlights: boolean;
 }
 
 const RankingsTable_ = ({
   players,
   usePastYearStats,
-  showSmartScores = false,
+  projPercentiles,
+  pastPercentiles,
+  showSmartScores,
+  showHighlights,
 }: RankingsTableProps) => {
   const u = usePastYearStats;
   const ss = showSmartScores;
@@ -359,6 +365,22 @@ const RankingsTable_ = ({
     return playerTrend;
   };
 
+  const getPercentileColor = (stat: number, i: number) => {
+    if (!showHighlights) return "transparent";
+    const percentiles = ss ? pastPercentiles[i] : projPercentiles[i];
+    if (stat <= percentiles[0]) {
+      return "red.200";
+    } else if (stat <= percentiles[1]) {
+      return "red.100";
+    } else if (stat <= percentiles[2]) {
+      return "transparent";
+    } else if (stat <= percentiles[3]) {
+      return "green.100";
+    } else {
+      return "green.200";
+    }
+  };
+
   return (
     <TableContainer overflowX="scroll" minWidth="100%">
       <Table
@@ -436,7 +458,12 @@ const RankingsTable_ = ({
                   </Flex>
                 </Td>
                 <TableTd>{playerStats.gp}</TableTd>
-                <TableTd>
+                <TableTd
+                  backgroundColor={getPercentileColor(
+                    playerStats.fgPct + 0.05,
+                    0
+                  )}
+                >
                   <Flex direction="column" align="center">
                     {ss ? (
                       <Box fontWeight={500}>{playerNStats.fg.toFixed(2)}</Box>
@@ -453,7 +480,9 @@ const RankingsTable_ = ({
                     )}
                   </Flex>
                 </TableTd>
-                <TableTd>
+                <TableTd
+                  backgroundColor={getPercentileColor(playerStats.ftPct, 1)}
+                >
                   <Flex direction="column" align="center">
                     {ss ? (
                       <Box fontWeight={500}>{playerNStats.ft.toFixed(2)}</Box>
@@ -470,49 +499,63 @@ const RankingsTable_ = ({
                     )}
                   </Flex>
                 </TableTd>
-                <TableTd>
+                <TableTd
+                  backgroundColor={getPercentileColor(playerNStats.tpm, 2)}
+                >
                   {ss ? (
                     <Box fontWeight={500}>{playerNStats.tpm.toFixed(2)}</Box>
                   ) : (
                     <Box fontWeight={500}>{playerStats.tpm.toFixed(1)}</Box>
                   )}
                 </TableTd>
-                <TableTd>
+                <TableTd
+                  backgroundColor={getPercentileColor(playerNStats.pts, 3)}
+                >
                   {ss ? (
                     <Box fontWeight={500}>{playerNStats.pts.toFixed(2)}</Box>
                   ) : (
                     <Box fontWeight={500}>{playerStats.pts.toFixed(1)}</Box>
                   )}
                 </TableTd>
-                <TableTd>
+                <TableTd
+                  backgroundColor={getPercentileColor(playerNStats.reb, 4)}
+                >
                   {ss ? (
                     <Box fontWeight={500}>{playerNStats.reb.toFixed(2)}</Box>
                   ) : (
                     <Box fontWeight={500}>{playerStats.reb.toFixed(1)}</Box>
                   )}
                 </TableTd>
-                <TableTd>
+                <TableTd
+                  backgroundColor={getPercentileColor(playerNStats.ast, 5)}
+                >
                   {ss ? (
                     <Box fontWeight={500}>{playerNStats.ast.toFixed(2)}</Box>
                   ) : (
                     <Box fontWeight={500}>{playerStats.ast.toFixed(1)}</Box>
                   )}
                 </TableTd>
-                <TableTd>
+                <TableTd
+                  backgroundColor={getPercentileColor(playerNStats.stl, 6)}
+                >
                   {ss ? (
                     <Box fontWeight={500}>{playerNStats.stl.toFixed(2)}</Box>
                   ) : (
                     <Box fontWeight={500}>{playerStats.stl.toFixed(1)}</Box>
                   )}
                 </TableTd>
-                <TableTd>
+                <TableTd
+                  backgroundColor={getPercentileColor(playerNStats.blk, 7)}
+                >
                   {ss ? (
                     <Box fontWeight={500}>{playerNStats.blk.toFixed(2)}</Box>
                   ) : (
                     <Box fontWeight={500}>{playerStats.blk.toFixed(1)}</Box>
                   )}
                 </TableTd>
-                <TableTd>
+                <TableTd
+                  backgroundColor={getPercentileColor(playerNStats.to, 8)}
+                >
                   {ss ? (
                     <Box fontWeight={500}>{playerNStats.to.toFixed(2)}</Box>
                   ) : (
