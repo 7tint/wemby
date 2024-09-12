@@ -29,8 +29,8 @@ type PlayerStatsNScoreKeys = keyof PlayerStatsNScore;
 type PlayerStatsKeys = keyof PlayerStats;
 
 // CONSTANTS
-const cellWidthSm = "35px";
-const cellWidthMd = "70px";
+const cellWidthSm = "45px";
+const cellWidthMd = "65px";
 const cellWidthLg = "125px";
 const cellHeight = 10;
 
@@ -341,7 +341,7 @@ const RankingsTable_ = ({
     const playerTrend =
       player.pastYearStats === null
         ? {
-            color: "purple.400",
+            color: "pink.400",
             label: "Rookie season",
             icon: IconPointFilled,
           }
@@ -396,8 +396,8 @@ const RankingsTable_ = ({
           <Box as="col" {...colProps} width={cellWidthSm} />
           {!u && <Box as="col" {...colProps} width={cellWidthMd} />}
           <Box as="col" {...colProps} width={cellWidthMd} />
-          <Box as="col" {...colProps} width="280px" />
-          <Box as="col" {...colProps} width={cellWidthMd} />
+          <Box as="col" {...colProps} width="260px" />
+          <Box as="col" {...colProps} width={cellWidthSm} />
           <Box as="col" {...colProps} width={ss ? cellWidthMd : cellWidthLg} />
           <Box as="col" {...colProps} width={ss ? cellWidthMd : cellWidthLg} />
           <Box as="col" {...colProps} width={cellWidthMd} />
@@ -424,22 +424,42 @@ const RankingsTable_ = ({
               <Tr
                 key={player.id}
                 height={cellHeight}
-                _odd={{ backgroundColor: "purple.50" }}
+                _odd={{ backgroundColor: "gray.50" }}
               >
-                <TableTd>{i + 1}</TableTd>
+                <TableTd fontWeight={600}>{i + 1}</TableTd>
                 <TableTd>{player.rank}</TableTd>
-                {!u && <TableTd>${player.auctionValuedAt?.toFixed(1)}</TableTd>}
+                {!u && (
+                  <TableTd fontWeight={500} color="yellow.700">
+                    ${player.auctionValuedAt?.toFixed(1)}
+                  </TableTd>
+                )}
                 <TableTd>
                   {u ? (
                     <TeamLogo team={player.pastYearTeam as Team} size="sm" />
                   ) : (
-                    <TeamLogo team={player.team as Team} size="sm" />
+                    <>
+                      {player.team !== player.pastYearTeam && (
+                        <Tooltip
+                          label="Changing teams this season"
+                          hasArrow
+                          placement="bottom"
+                        >
+                          <Icon
+                            as={IconPointFilled}
+                            color="pink.400"
+                            pr={1}
+                            boxSize={5}
+                          />
+                        </Tooltip>
+                      )}
+                      <TeamLogo team={player.team as Team} size="sm" />
+                    </>
                   )}
                 </TableTd>
                 <Td pb={0}>
                   <Flex px={4} align="center" pt={1.5}>
                     <PlayerHeadshot player={player} size="sm" />
-                    <Flex align="center" ml={2} mr={1}>
+                    <Flex align="center" ml={2} mr={1} fontWeight={500}>
                       {player.firstName} {player.lastName}
                     </Flex>
                     {!u && (
@@ -558,7 +578,9 @@ const RankingsTable_ = ({
                     <Box fontWeight={500}>{playerStats.to.toFixed(1)}</Box>
                   )}
                 </TableTd>
-                <TableTd>{playerNStats.total.toFixed(2)}</TableTd>
+                <TableTd fontWeight={600}>
+                  {playerNStats.total.toFixed(2)}
+                </TableTd>
               </Tr>
             );
           })}
