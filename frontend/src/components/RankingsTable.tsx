@@ -93,7 +93,7 @@ const RankingsHeaderCell_ = ({
   >
     <Flex direction="column" justify="center" align="center">
       <Box
-        height={4}
+        height={3}
         width="100%"
         backgroundColor={
           calcHeaderSortColor
