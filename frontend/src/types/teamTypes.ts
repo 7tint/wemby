@@ -8,7 +8,7 @@ export type Team =
   | "DAL"
   | "DEN"
   | "DET"
-  | "GSW"
+  | "GS"
   | "HOU"
   | "IND"
   | "LAC"
@@ -17,18 +17,18 @@ export type Team =
   | "MIA"
   | "MIL"
   | "MIN"
-  | "NOP"
-  | "NYK"
+  | "NO"
+  | "NY"
   | "OKC"
   | "ORL"
   | "PHI"
   | "PHX"
   | "POR"
   | "SAC"
-  | "SAS"
+  | "SA"
   | "TOR"
-  | "UTA"
-  | "WAS"
+  | "UTAH"
+  | "WSH"
   | "NBA";
 
 export const getTeamName = (team: Team): string => {
@@ -51,7 +51,7 @@ export const getTeamName = (team: Team): string => {
       return "Denver Nuggets";
     case "DET":
       return "Detroit Pistons";
-    case "GSW":
+    case "GS":
       return "Golden State Warriors";
     case "HOU":
       return "Houston Rockets";
@@ -69,9 +69,9 @@ export const getTeamName = (team: Team): string => {
       return "Milwaukee Bucks";
     case "MIN":
       return "Minnesota Timberwolves";
-    case "NOP":
+    case "NO":
       return "New Orleans Pelicans";
-    case "NYK":
+    case "NY":
       return "New York Knicks";
     case "OKC":
       return "Oklahoma City Thunder";
@@ -85,13 +85,13 @@ export const getTeamName = (team: Team): string => {
       return "Portland Trail Blazers";
     case "SAC":
       return "Sacramento Kings";
-    case "SAS":
+    case "SA":
       return "San Antonio Spurs";
     case "TOR":
       return "Toronto Raptors";
-    case "UTA":
+    case "UTAH":
       return "Utah Jazz";
-    case "WAS":
+    case "WSH":
       return "Washington Wizards";
     case "NBA":
       return "NBA";
