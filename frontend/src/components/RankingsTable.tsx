@@ -49,11 +49,9 @@ const headerColProps = {
  */
 const TableTd_ = ({
   children,
-  size = "md",
   ...props
 }: {
   children?: ReactNode;
-  size?: string;
   [key: string]: any; // eslint-disable-line
 }) => (
   <Td px={2} py={1} {...props}>
