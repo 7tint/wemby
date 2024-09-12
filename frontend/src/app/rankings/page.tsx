@@ -76,7 +76,7 @@ const RankingsSettings = ({
               onChange={() => setShowHighlights(!showHighlights)}
             />
             <Icon mx={2} as={IconHighlight} boxSize={5} />
-            <Box fontWeight={600}>Highlights</Box>
+            <Box fontWeight={600}>Highlight Stats</Box>
           </Flex>
         </Flex>
       </Collapse>

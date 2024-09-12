@@ -29,9 +29,9 @@ type PlayerStatsNScoreKeys = keyof PlayerStatsNScore;
 type PlayerStatsKeys = keyof PlayerStats;
 
 // CONSTANTS
-const cellWidthSm = "50px";
-const cellWidthMd = "75px";
-const cellWidthLg = "120px";
+const cellWidthSm = "35px";
+const cellWidthMd = "70px";
+const cellWidthLg = "125px";
 const cellHeight = 10;
 
 const colProps = {
@@ -56,7 +56,7 @@ const TableTd_ = ({
   size?: string;
   [key: string]: any; // eslint-disable-line
 }) => (
-  <Td px={size === "md" ? 4 : 2} py={size === "md" ? 1 : 0} {...props}>
+  <Td px={2} py={1} {...props}>
     <Flex justify="center" align="center">
       {children}
     </Flex>
@@ -158,7 +158,7 @@ const RankingsTableHead_ = ({
             requestSort={requestSort}
           />
         )}
-        <RankingsHeaderCell text="Tm" label="Team" />
+        <RankingsHeaderCell text="Team" label="Pro Team" />
         <RankingsHeaderCell text="Name" label="Player Name" />
         <RankingsHeaderCell
           id="gp"
@@ -395,7 +395,7 @@ const RankingsTable_ = ({
           <Box as="col" {...colProps} width={cellWidthSm} />
           <Box as="col" {...colProps} width={cellWidthSm} />
           {!u && <Box as="col" {...colProps} width={cellWidthMd} />}
-          <Box as="col" {...colProps} width={cellWidthSm} />
+          <Box as="col" {...colProps} width={cellWidthMd} />
           <Box as="col" {...colProps} width="280px" />
           <Box as="col" {...colProps} width={cellWidthMd} />
           <Box as="col" {...colProps} width={ss ? cellWidthMd : cellWidthLg} />
@@ -426,14 +426,10 @@ const RankingsTable_ = ({
                 height={cellHeight}
                 _odd={{ backgroundColor: "purple.50" }}
               >
-                <TableTd size="sm">{i + 1}</TableTd>
-                <TableTd size="sm">{player.rank}</TableTd>
-                {!u && (
-                  <TableTd size="sm">
-                    ${player.auctionValuedAt?.toFixed(1)}
-                  </TableTd>
-                )}
-                <TableTd size="sm">
+                <TableTd>{i + 1}</TableTd>
+                <TableTd>{player.rank}</TableTd>
+                {!u && <TableTd>${player.auctionValuedAt?.toFixed(1)}</TableTd>}
+                <TableTd>
                   {u ? (
                     <TeamLogo team={player.pastYearTeam as Team} size="sm" />
                   ) : (
@@ -441,7 +437,7 @@ const RankingsTable_ = ({
                   )}
                 </TableTd>
                 <Td pb={0}>
-                  <Flex px={4} align="center">
+                  <Flex px={4} align="center" pt={1.5}>
                     <PlayerHeadshot player={player} size="sm" />
                     <Flex align="center" ml={2} mr={1}>
                       {player.firstName} {player.lastName}
