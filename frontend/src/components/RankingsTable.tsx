@@ -239,7 +239,7 @@ const RankingsTableHead_ = ({
         <RankingsHeaderCell
           id="default"
           text="Total"
-          label="Total Value (see info)"
+          label="Total Smart Score"
           calcHeaderSortColor={calcHeaderSortColor}
           requestSort={requestSort}
         />

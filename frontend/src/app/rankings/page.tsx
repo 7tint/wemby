@@ -13,12 +13,14 @@ import {
   Spacer,
   Stack,
   Switch,
+  Tooltip,
 } from "@chakra-ui/react";
 import {
   IconAdjustmentsFilled,
   IconCaretDown,
   IconCaretRight,
   IconHighlight,
+  IconInfoSquareRounded,
 } from "@tabler/icons-react";
 import { getPlayers } from "@/api/players";
 import { Player } from "@/types/playerTypes";
@@ -67,6 +69,9 @@ const RankingsSettings = ({
             />
             <Icon mx={2} as={IconAdjustmentsFilled} boxSize={5} />
             <Box fontWeight={600}>Smart Scores</Box>
+            <Tooltip label='Show "Smart Scores" - a fine-tuned combination of z-scores and min-max normalization that is used to rank players.'>
+              <Icon mx={1} as={IconInfoSquareRounded} boxSize={4} />
+            </Tooltip>
           </Flex>
           <Flex align="center" ml={6}>
             <Switch
