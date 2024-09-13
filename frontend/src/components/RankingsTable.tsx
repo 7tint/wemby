@@ -520,7 +520,9 @@ const RankingsTable_ = ({
                     ) : (
                       <Flex align="center">
                         <Box fontWeight={500}>
-                          {(playerStats.fgm / playerStats.fga).toFixed(2)}
+                          {playerStats.fga > 0
+                            ? (playerStats.fgm / playerStats.fga).toFixed(2)
+                            : (0).toFixed(2)}
                         </Box>
                         <Box as="span" fontSize={11} ml={2}>
                           ({playerStats.fgm.toFixed(2)} /{" "}
@@ -544,7 +546,9 @@ const RankingsTable_ = ({
                     ) : (
                       <Flex align="center">
                         <Box fontWeight={500}>
-                          {(playerStats.ftm / playerStats.fta).toFixed(2)}
+                          {playerStats.fta > 0
+                            ? (playerStats.ftm / playerStats.fta).toFixed(2)
+                            : (0).toFixed(2)}
                         </Box>
                         <Box as="span" fontSize={11} ml={2}>
                           ({playerStats.ftm.toFixed(2)} /{" "}
