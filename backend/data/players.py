@@ -51,12 +51,17 @@ def main():
     # Sums for calculating means
     proj_category_sums = [0] * 11
     past_category_sums = [0] * 11
+
     # Sum of squares for calculating stds
     proj_category_sums_sq = [0] * 11
     past_category_sums_sq = [0] * 11
+
     # Min and Max for each category
     proj_category_stats = {}
     past_category_stats = {}
+
+    proj_players_count = 0
+    past_players_count = 0
     for key in category_keys:
         proj_category_stats[key] = {
             "min": float("inf"),
@@ -190,6 +195,7 @@ def main():
 
         # Update sums, sums of squares, and min/max for each category
         if player.projections.mpg > 25:
+            proj_players_count += 1
             for i, key in enumerate(category_keys):
                 if key == "fg_impact" or key == "ft_impact":
                     continue
@@ -202,6 +208,7 @@ def main():
                     proj_category_stats[key]["max"], getattr(player.projections, key)
                 )
         if player.past_year_stats and player.past_year_stats.mpg > 25:
+            past_players_count += 1
             for i, key in enumerate(category_keys):
                 if key == "fg_impact" or key == "ft_impact":
                     continue
@@ -218,8 +225,8 @@ def main():
 
         players.append(player)
 
-    proj_category_means = [sum / len(players) for sum in proj_category_sums]
-    past_category_means = [sum / len(players) for sum in past_category_sums]
+    proj_category_means = [sum / proj_players_count for sum in proj_category_sums]
+    past_category_means = [sum / past_players_count for sum in past_category_sums]
 
     # Calculate FG Impact and FT Impact
     proj_fg_impact_sum, proj_ft_impact_sum = 0, 0
@@ -232,7 +239,6 @@ def main():
     past_league_avg_ft_pct = past_category_sums[2] / past_category_sums[3]
     min_fg_impact, max_fg_impact = float("inf"), float("-inf")
     min_ft_impact, max_ft_impact = float("inf"), float("-inf")
-    past_players_count = 0
 
     for player in players:
         proj_fg_diff = (
@@ -255,7 +261,6 @@ def main():
         max_fg_impact = max(max_fg_impact, player.projections.fg_impact)
 
         if player.past_year_stats:
-            past_players_count += 1
             past_fg_diff = (
                 (player.past_year_stats.fgm / player.past_year_stats.fga)
                 - past_league_avg_fg_pct
@@ -279,11 +284,11 @@ def main():
 
     # Calculate stds
     proj_category_stds = [
-        (sum_sq / len(players) - mean**2) ** 0.5
+        (sum_sq / proj_players_count - mean**2) ** 0.5
         for sum_sq, mean in zip(proj_category_sums_sq, proj_category_means)
     ]
     past_category_stds = [
-        (sum_sq / len(players) - mean**2) ** 0.5
+        (sum_sq / past_players_count - mean**2) ** 0.5
         for sum_sq, mean in zip(past_category_sums_sq, past_category_means)
     ]
 
@@ -299,13 +304,13 @@ def main():
         past_category_stats[category]["mean"] = mean
         past_category_stats[category]["std"] = std
 
-    proj_category_stats["fg_impact"]["mean"] = proj_fg_impact_sum / len(players)
-    proj_category_stats["fg_impact"]["std"] = proj_fg_impact_sum_sq / len(players)
+    proj_category_stats["fg_impact"]["mean"] = proj_fg_impact_sum / proj_players_count
+    proj_category_stats["fg_impact"]["std"] = proj_fg_impact_sum_sq / proj_players_count
     proj_category_stats["fg_impact"]["min"] = min_fg_impact
     proj_category_stats["fg_impact"]["max"] = max_fg_impact
 
-    proj_category_stats["ft_impact"]["mean"] = proj_ft_impact_sum / len(players)
-    proj_category_stats["ft_impact"]["std"] = proj_ft_impact_sum_sq / len(players)
+    proj_category_stats["ft_impact"]["mean"] = proj_ft_impact_sum / proj_players_count
+    proj_category_stats["ft_impact"]["std"] = proj_ft_impact_sum_sq / proj_players_count
     proj_category_stats["ft_impact"]["min"] = min_ft_impact
     proj_category_stats["ft_impact"]["max"] = max_ft_impact
 
