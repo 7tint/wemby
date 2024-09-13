@@ -276,7 +276,8 @@ const RankingsTable_ = ({
   const sortedPlayers = useMemo(() => {
     return [...players].sort((a, b) => {
       if (sortConfig && sortConfig.direction !== "none") {
-        let { key, direction } = sortConfig;
+        let { key } = sortConfig;
+        const { direction } = sortConfig;
         let aValue, bValue: number;
 
         if (key === "fg") {

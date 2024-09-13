@@ -16,12 +16,9 @@ const calculateMinMax = (
   const u = usePastYearStats;
   if (u) players = players.filter((player) => player.pastYearStats);
 
-  // Games played factor
-  const GP = players.map((player) => getStats(player, u).gp || 0);
-
   // Calculate min-max normalization
   const minMax = new Map<number, PlayerStatsNScore>();
-  players.forEach((player, i) => {
+  players.forEach((player) => {
     if (u && !player.pastYearStats) {
       minMax.set(player.id, {
         fgImpact: 0,
@@ -57,7 +54,7 @@ const calculateMinMax = (
         max = max / 72;
       }
 
-      let pStat = playerStats[category as keyof typeof playerStats];
+      const pStat = playerStats[category as keyof typeof playerStats];
       if (category === "to")
         nScores.set(
           category,
