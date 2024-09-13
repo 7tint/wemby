@@ -3,10 +3,10 @@ class PlayerStats:
     mpg: float
     fgm: float
     fga: float
-    fg_pct: float
+    fg_impact: float
     ftm: float
     fta: float
-    ft_pct: float
+    ft_impact: float
     tpm: float
     pts: float
     reb: float
@@ -20,10 +20,10 @@ class PlayerStats:
         self.mpg = mpg
         self.fgm = fgm
         self.fga = fga
-        self.fg_pct = fgm / fga if fga != 0 else 0
+        self.fg_impact = 0
         self.ftm = ftm
         self.fta = fta
-        self.ft_pct = ftm / fta if fta != 0 else 0
+        self.ft_impact = 0
         self.tpm = tpm
         self.pts = pts
         self.reb = reb
