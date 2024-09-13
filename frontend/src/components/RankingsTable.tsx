@@ -504,8 +504,8 @@ const RankingsTable_ = ({
                   </Flex>
                 </Td>
                 <TableTd>{player.age}</TableTd>
-                <TableTd>{playerStats.gp}</TableTd>
-                <TableTd>{playerStats.mpg.toFixed(1)}</TableTd>
+                <TableTd fontWeight={500}>{playerStats.gp}</TableTd>
+                <TableTd fontWeight={500}>{playerStats.mpg.toFixed(1)}</TableTd>
                 <TableTd
                   backgroundColor={getPercentileColor(
                     playerStats.fgm / playerStats.fga,
