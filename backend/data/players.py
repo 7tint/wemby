@@ -202,12 +202,14 @@ def main():
                 proj_category_sums[i] += getattr(player.projections, key)
                 proj_category_sums_sq[i] += getattr(player.projections, key) ** 2
                 proj_category_stats[key]["min"] = min(
-                    proj_category_stats[key]["min"], getattr(player.projections, key)
+                    proj_category_stats[key]["min"],
+                    getattr(player.projections, key) * player.projections.gp,
                 )
                 proj_category_stats[key]["max"] = max(
-                    proj_category_stats[key]["max"], getattr(player.projections, key)
+                    proj_category_stats[key]["max"],
+                    getattr(player.projections, key) * player.projections.gp,
                 )
-        if player.past_year_stats and player.past_year_stats.mpg > 25:
+        if player.past_year_stats and player.past_year_stats.mpg > 20:
             past_players_count += 1
             for i, key in enumerate(category_keys):
                 if key == "fg_impact" or key == "ft_impact":
@@ -216,11 +218,11 @@ def main():
                 past_category_sums_sq[i] += getattr(player.past_year_stats, key) ** 2
                 past_category_stats[key]["min"] = min(
                     past_category_stats[key]["min"],
-                    getattr(player.past_year_stats, key),
+                    getattr(player.past_year_stats, key) * player.past_year_stats.gp,
                 )
                 past_category_stats[key]["max"] = max(
                     past_category_stats[key]["max"],
-                    getattr(player.past_year_stats, key),
+                    getattr(player.past_year_stats, key) * player.past_year_stats.gp,
                 )
 
         players.append(player)
@@ -257,8 +259,12 @@ def main():
         proj_ft_impact_sum += player.projections.ft_impact
         proj_fg_impact_sum_sq += player.projections.fg_impact**2
         proj_ft_impact_sum_sq += player.projections.ft_impact**2
-        min_fg_impact = min(min_fg_impact, player.projections.fg_impact)
-        max_fg_impact = max(max_fg_impact, player.projections.fg_impact)
+        min_fg_impact = min(
+            min_fg_impact, player.projections.fg_impact * player.projections.gp
+        )
+        max_fg_impact = max(
+            max_fg_impact, player.projections.fg_impact * player.projections.gp
+        )
 
         if player.past_year_stats:
             past_fg_diff = (
@@ -279,8 +285,12 @@ def main():
             past_ft_impact_sum += player.past_year_stats.ft_impact
             past_fg_impact_sum_sq += player.past_year_stats.fg_impact**2
             past_ft_impact_sum_sq += player.past_year_stats.ft_impact**2
-            min_ft_impact = min(min_ft_impact, player.projections.ft_impact)
-            max_ft_impact = max(max_ft_impact, player.projections.ft_impact)
+            min_ft_impact = min(
+                min_ft_impact, player.projections.ft_impact * player.projections.gp
+            )
+            max_ft_impact = max(
+                max_ft_impact, player.projections.ft_impact * player.projections.gp
+            )
 
     # Calculate stds
     proj_category_stds = [
