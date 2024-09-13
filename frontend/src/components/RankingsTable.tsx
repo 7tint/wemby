@@ -29,7 +29,7 @@ type PlayerStatsNScoreKeys = keyof PlayerStatsNScore;
 type PlayerStatsKeys = keyof PlayerStats;
 
 // CONSTANTS
-const cellWidthSm = "45px";
+const cellWidthSm = "50px";
 const cellWidthMd = "65px";
 const cellWidthLg = "125px";
 const cellHeight = 10;
@@ -167,6 +167,13 @@ const RankingsTableHead_ = ({
           requestSort={requestSort}
         />
         <RankingsHeaderCell
+          id="mpg"
+          text="MPG"
+          label="Minutes Per Game"
+          calcHeaderSortColor={calcHeaderSortColor}
+          requestSort={requestSort}
+        />
+        <RankingsHeaderCell
           id="fg"
           text="FG%"
           label="Field Goal Percentage"
@@ -269,8 +276,17 @@ const RankingsTable_ = ({
   const sortedPlayers = useMemo(() => {
     return [...players].sort((a, b) => {
       if (sortConfig && sortConfig.direction !== "none") {
-        const { key, direction } = sortConfig;
+        let { key, direction } = sortConfig;
         let aValue, bValue: number;
+
+        if (key === "fg") {
+          if (showSmartScores) key = "fgImpact";
+          else key = "fgm";
+        }
+        if (key === "ft") {
+          if (showSmartScores) key = "ftImpact";
+          else key = "ftm";
+        }
 
         if (key === "default") {
           aValue = getNStats(a, usePastYearStats)?.total || 0;
@@ -286,9 +302,6 @@ const RankingsTable_ = ({
         } else if (key === "auctionValuedAt") {
           aValue = a[key] || 0;
           bValue = b[key] || 0;
-        } else if (key === "gp") {
-          aValue = getStats(a, usePastYearStats)?.gp || 0;
-          bValue = getStats(b, usePastYearStats)?.gp || 0;
         } else {
           if (showSmartScores || key === "fg" || key === "ft") {
             aValue =
@@ -383,6 +396,18 @@ const RankingsTable_ = ({
     }
   };
 
+  const getTotalDelta = () => {
+    let totalDelta = 0;
+    sortedPlayers.forEach((player, i) => {
+      if (i > 200) return;
+      const rank = i + 1;
+      totalDelta += Math.abs(rank - (u ? player.pastYearRank : player.rank));
+    });
+    return totalDelta;
+  };
+
+  console.log(getTotalDelta());
+
   return (
     <TableContainer overflowX="scroll" minWidth="100%">
       <Table
@@ -399,6 +424,7 @@ const RankingsTable_ = ({
           {!u && <Box as="col" {...colProps} width={cellWidthMd} />}
           <Box as="col" {...colProps} width={cellWidthMd} />
           <Box as="col" {...colProps} width="260px" />
+          <Box as="col" {...colProps} width={cellWidthSm} />
           <Box as="col" {...colProps} width={cellWidthSm} />
           <Box as="col" {...colProps} width={cellWidthSm} />
           <Box as="col" {...colProps} width={ss ? cellWidthMd : cellWidthLg} />
@@ -478,16 +504,22 @@ const RankingsTable_ = ({
                 </Td>
                 <TableTd>{player.age}</TableTd>
                 <TableTd>{playerStats.gp}</TableTd>
+                <TableTd>{playerStats.mpg.toFixed(1)}</TableTd>
                 <TableTd
-                  backgroundColor={getPercentileColor(playerStats.fgPct, "fg")}
+                  backgroundColor={getPercentileColor(
+                    playerStats.fgm / playerStats.fga,
+                    "fg"
+                  )}
                 >
                   <Flex direction="column" align="center">
                     {ss ? (
-                      <Box fontWeight={500}>{playerNStats.fg.toFixed(2)}</Box>
+                      <Box fontWeight={500}>
+                        {playerNStats.fgImpact.toFixed(2)}
+                      </Box>
                     ) : (
                       <Flex align="center">
                         <Box fontWeight={500}>
-                          {playerStats.fgPct.toFixed(2)}
+                          {(playerStats.fgm / playerStats.fga).toFixed(2)}
                         </Box>
                         <Box as="span" fontSize={11} ml={2}>
                           ({playerStats.fgm.toFixed(2)} /{" "}
@@ -498,15 +530,20 @@ const RankingsTable_ = ({
                   </Flex>
                 </TableTd>
                 <TableTd
-                  backgroundColor={getPercentileColor(playerStats.ftPct, "ft")}
+                  backgroundColor={getPercentileColor(
+                    playerStats.ftm / playerStats.fta,
+                    "ft"
+                  )}
                 >
                   <Flex direction="column" align="center">
                     {ss ? (
-                      <Box fontWeight={500}>{playerNStats.ft.toFixed(2)}</Box>
+                      <Box fontWeight={500}>
+                        {playerNStats.ftImpact.toFixed(2)}
+                      </Box>
                     ) : (
                       <Flex align="center">
                         <Box fontWeight={500}>
-                          {playerStats.ftPct.toFixed(2)}
+                          {(playerStats.ftm / playerStats.fta).toFixed(2)}
                         </Box>
                         <Box as="span" fontSize={11} ml={2}>
                           ({playerStats.ftm.toFixed(2)} /{" "}

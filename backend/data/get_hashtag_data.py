@@ -61,7 +61,7 @@ def scrape_projections():
         all_option.click()
 
         logger.info("Waiting for table to update")
-        time.sleep(3)
+        time.sleep(1)
 
         page_source = driver.page_source
 
@@ -133,7 +133,7 @@ def scrape_past_year_stats():
         all_option = driver.find_element(By.XPATH, "//option[text()='All']")
         all_option.click()
         logger.info("Waiting for table to update p.1")
-        time.sleep(3)
+        time.sleep(1)
 
         # Toggle to past year stats; second option in dropdown (value = 1)
         dropdown2 = driver.find_element(By.NAME, "ctl00$ContentPlaceHolder1$DDDURATION")
@@ -145,7 +145,7 @@ def scrape_past_year_stats():
         past_year_option.click()
 
         logger.info("Waiting for table to update p.2")
-        time.sleep(3)
+        time.sleep(1)
 
         page_source = driver.page_source
 
@@ -215,7 +215,7 @@ def scrape_auction_data():
         all_option.click()
 
         logger.info("Waiting for table to update")
-        time.sleep(3)
+        time.sleep(1)
 
         page_source = driver.page_source
 

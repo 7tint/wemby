@@ -3,10 +3,10 @@ export interface PlayerStats {
   mpg: number;
   fgm: number;
   fga: number;
-  fgPct: number;
+  fgImpact: number;
   ftm: number;
   fta: number;
-  ftPct: number;
+  ftImpact: number;
   tpm: number;
   pts: number;
   reb: number;
@@ -17,8 +17,8 @@ export interface PlayerStats {
 }
 
 export interface PlayerStatsNScore {
-  fg: number;
-  ft: number;
+  fgImpact: number;
+  ftImpact: number;
   tpm: number;
   pts: number;
   reb: number;

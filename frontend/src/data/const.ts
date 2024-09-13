@@ -1,20 +1,5 @@
+import { shrinkNumber, sum } from "./math";
 import { Player, PlayerStats, PlayerStatsNScore } from "@/types/playerTypes";
-
-export const CATEGORIES = [
-  "fgm",
-  "fga",
-  "ftm",
-  "fta",
-  "tpm",
-  "pts",
-  "reb",
-  "ast",
-  "stl",
-  "blk",
-  "to",
-] as const;
-
-export const MIN_MINUTES = 20;
 
 export const getStats = (
   player: Player,
@@ -90,4 +75,22 @@ export const calculateStatPercentiles = (stat: number, category: string) => {
     default:
       return 0;
   }
+};
+
+export const normalizeScores = (score: PlayerStatsNScore) => {
+  const newScores = {
+    fgImpact: shrinkNumber(score.fgImpact + 1.5),
+    ftImpact: shrinkNumber(score.ftImpact + 1.5),
+    tpm: shrinkNumber(score.tpm + 1.5),
+    pts: shrinkNumber(score.pts + 1.5),
+    reb: shrinkNumber(score.reb + 1.5),
+    ast: shrinkNumber(score.ast + 1.5),
+    stl: shrinkNumber(score.stl + 1.5),
+    blk: shrinkNumber(score.blk + 1.5),
+    to: shrinkNumber(score.to + 1.5),
+  };
+  return {
+    ...newScores,
+    total: sum(Object.values(newScores)),
+  };
 };
