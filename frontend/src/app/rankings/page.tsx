@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useEffect, useMemo, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -214,19 +214,6 @@ const RankingsPage = () => {
     if (players.length > 0) setIsLoaded(true);
   }, [players]);
 
-  const currentYearPlayers = useMemo(() => {
-    if (players.length > 0) {
-      const usePastYearStats = selectedYear !== 1;
-      return players.filter((player) => {
-        if (usePastYearStats && !player.pastYearRank) return false;
-        if (!usePastYearStats && !player.rank) return false;
-        return true;
-      });
-    } else {
-      return [];
-    }
-  }, [players, selectedYear]);
-
   return (
     <Container maxW="container.2xl" px={12} my={12}>
       <Flex justify="space-between" my={8}>
@@ -269,7 +256,7 @@ const RankingsPage = () => {
         <Skeleton isLoaded={isLoaded} startColor="gray.50" endColor="gray.100">
           <Box shadow="md">
             <RankingsTable
-              players={currentYearPlayers}
+              players={players}
               usePastYearStats={selectedYear === 2}
               setIsLoaded={setIsLoaded}
               showSmartScores={showSmartScores}

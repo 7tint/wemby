@@ -15,6 +15,7 @@ import {
 } from "@chakra-ui/react";
 import {
   ColumnDef,
+  SortingState,
   VisibilityState,
   flexRender,
   getCoreRowModel,
@@ -487,8 +488,8 @@ const RankingsTable_ = ({
       },
       {
         id: "total",
-        accessorFn: (player) =>
-          u
+        accessorFn: (player) => {
+          const total = u
             ? totalCategories(
                 player.pastYearNScores
                   ? player.pastYearNScores
@@ -500,7 +501,10 @@ const RankingsTable_ = ({
                   ? player.projectionNScores
                   : EMPTY_PLAYER_STATS_NSCORE,
                 punts
-              ),
+              );
+          console.log(total);
+          return total;
+        },
         header: () => (
           <RankingsHeaderCell text="Total" label="Total Smart Score" />
         ),
@@ -518,17 +522,31 @@ const RankingsTable_ = ({
     if (players.length > 0) setIsLoaded(true);
   }, [u, setIsLoaded, players]);
 
+  const currentYearPlayers = useMemo(() => {
+    if (players.length > 0) {
+      return players.filter((player) => {
+        if (usePastYearStats && !player.pastYearRank) return false;
+        if (!usePastYearStats && !player.rank) return false;
+        return true;
+      });
+    } else {
+      return [];
+    }
+  }, [players, usePastYearStats]);
+
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
-  // const [sorting, setSorting] = useState<SortingState>([]);
+  const [sorting, setSorting] = useState<SortingState>([]);
 
   const playersTable = useReactTable<Player>({
     columns,
-    data: players,
+    data: currentYearPlayers,
     getCoreRowModel: getCoreRowModel(),
     state: {
       columnVisibility,
+      sorting,
     },
     onColumnVisibilityChange: setColumnVisibility,
+    onSortingChange: setSorting,
   });
 
   return (
