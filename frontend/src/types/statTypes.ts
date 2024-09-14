@@ -5,6 +5,18 @@ interface StatCategory {
   std: number;
 }
 
+export const STAT_KEYS_NO_FG_FT = [
+  "tpm",
+  "pts",
+  "reb",
+  "ast",
+  "stl",
+  "blk",
+  "to",
+] as const;
+
+export const STAT_KEYS = ["fg", "ft", ...STAT_KEYS_NO_FG_FT] as const;
+
 export interface CategoryStats {
   fgm: StatCategory;
   fga: StatCategory;
@@ -20,8 +32,6 @@ export interface CategoryStats {
   blk: StatCategory;
   to: StatCategory;
 }
-
-export type Categories = keyof CategoryStats;
 
 export const EMPTY_CATEGORY_STATS: CategoryStats = {
   fgm: { max: 0, mean: 0, min: 0, std: 0 },

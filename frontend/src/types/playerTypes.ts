@@ -26,7 +26,6 @@ export interface PlayerStatsNScore {
   stl: number;
   blk: number;
   to: number;
-  total: number;
 }
 
 export interface Player {

@@ -1,4 +1,4 @@
-import { shrinkNumber, sum } from "./math";
+import { shrinkNumber } from "./math";
 import { Player, PlayerStats, PlayerStatsNScore } from "@/types/playerTypes";
 
 export const getStats = (
@@ -77,7 +77,9 @@ export const calculateStatPercentiles = (stat: number, category: string) => {
   }
 };
 
-export const normalizeScores = (score: PlayerStatsNScore) => {
+export const normalizeScores = (
+  score: PlayerStatsNScore
+): PlayerStatsNScore => {
   const newScores = {
     fgImpact: shrinkNumber(score.fgImpact + 1.5),
     ftImpact: shrinkNumber(score.ftImpact + 1.5),
@@ -88,9 +90,20 @@ export const normalizeScores = (score: PlayerStatsNScore) => {
     stl: shrinkNumber(score.stl + 1.5),
     blk: shrinkNumber(score.blk + 1.5),
     to: shrinkNumber(score.to + 1.5),
+    total: 0,
   };
-  return {
-    ...newScores,
-    total: sum(Object.values(newScores)),
-  };
+  return newScores;
+};
+
+export const totalCategories = (
+  categories: PlayerStatsNScore,
+  punts: string[]
+): number => {
+  let total = 0;
+  Object.entries(categories).forEach(([category, score]) => {
+    if (category === "fgImpact") category = "fg";
+    if (category === "ftImpact") category = "ft";
+    if (!punts.includes(category)) total += score;
+  });
+  return total;
 };

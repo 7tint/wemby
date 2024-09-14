@@ -1,6 +1,6 @@
 "use client";
 
-import { memo, ReactNode, useMemo, useState } from "react";
+import { ReactNode, memo, useMemo, useState } from "react";
 import {
   Box,
   Flex,
@@ -19,11 +19,17 @@ import {
   IconEqual,
   IconPointFilled,
 } from "@tabler/icons-react";
-import { calculateStatPercentiles, getNStats, getStats } from "@/data/const";
+import {
+  calculateStatPercentiles,
+  getNStats,
+  getStats,
+  totalCategories,
+} from "@/data/stats";
 import { Player, PlayerStats, PlayerStatsNScore } from "@/types/playerTypes";
 import { Team } from "@/types/teamTypes";
 import PlayerHeadshot from "./player/PlayerHeadshot";
 import TeamLogo from "./team/TeamLogo";
+import { STAT_KEYS_NO_FG_FT } from "@/types/statTypes";
 
 type PlayerStatsNScoreKeys = keyof PlayerStatsNScore;
 type PlayerStatsKeys = keyof PlayerStats;
@@ -257,6 +263,7 @@ interface RankingsTableProps {
   usePastYearStats: boolean;
   showSmartScores: boolean;
   showHighlights: boolean;
+  punts: string[];
 }
 
 const RankingsTable_ = ({
@@ -264,6 +271,7 @@ const RankingsTable_ = ({
   usePastYearStats,
   showSmartScores,
   showHighlights,
+  punts,
 }: RankingsTableProps) => {
   const u = usePastYearStats;
   const ss = showSmartScores;
@@ -271,7 +279,7 @@ const RankingsTable_ = ({
   const [sortConfig, setSortConfig] = useState<{
     key: string;
     direction: string;
-  } | null>({ key: "total", direction: "descending" });
+  } | null>({ key: "default", direction: "descending" });
 
   const sortedPlayers = useMemo(() => {
     return [...players].sort((a, b) => {
@@ -280,6 +288,7 @@ const RankingsTable_ = ({
         const { direction } = sortConfig;
         let aValue, bValue: number;
 
+        // Handle FG% and FT% key names
         if (key === "fg") {
           if (showSmartScores) key = "fgImpact";
           else key = "fgm";
@@ -290,44 +299,39 @@ const RankingsTable_ = ({
         }
 
         if (key === "default") {
-          aValue = getNStats(a, usePastYearStats)?.total || 0;
-          bValue = getNStats(b, usePastYearStats)?.total || 0;
+          const aPlayerNStats = getNStats(a, usePastYearStats)!;
+          const bPlayerNStats = getNStats(b, usePastYearStats)!;
+          aValue = totalCategories(aPlayerNStats, punts);
+          bValue = totalCategories(bPlayerNStats, punts);
         } else if (key === "rank") {
-          if (u) {
-            bValue = a.pastYearRank;
-            aValue = b.pastYearRank;
-          } else {
-            bValue = a.rank;
-            aValue = b.rank;
-          }
+          bValue = u ? a.pastYearRank : a.rank;
+          aValue = u ? b.pastYearRank : b.rank;
         } else if (key === "auctionValuedAt") {
           aValue = a[key] || 0;
           bValue = b[key] || 0;
         } else {
           if (showSmartScores || key === "fg" || key === "ft") {
-            aValue =
-              getNStats(a, usePastYearStats)?.[key as PlayerStatsNScoreKeys] ||
-              0;
-            bValue =
-              getNStats(b, usePastYearStats)?.[key as PlayerStatsNScoreKeys] ||
-              0;
+            const aPlayerNStats = getNStats(a, usePastYearStats)!;
+            const bPlayerNStats = getNStats(b, usePastYearStats)!;
+            aValue = aPlayerNStats[key as PlayerStatsNScoreKeys] || 0;
+            bValue = bPlayerNStats[key as PlayerStatsNScoreKeys] || 0;
           } else {
-            aValue =
-              getStats(a, usePastYearStats)?.[key as PlayerStatsKeys] || 0;
-            bValue =
-              getStats(b, usePastYearStats)?.[key as PlayerStatsKeys] || 0;
+            const aPlayerStats = getStats(a, usePastYearStats)!;
+            const bPlayerStats = getStats(b, usePastYearStats)!;
+            aValue = aPlayerStats[key as PlayerStatsKeys] || 0;
+            bValue = bPlayerStats[key as PlayerStatsKeys] || 0;
           }
         }
+
         if (aValue < bValue) {
           return direction === "ascending" ? -1 : 1;
-        }
-        if (aValue > bValue) {
+        } else if (aValue > bValue) {
           return direction === "ascending" ? 1 : -1;
         }
       }
       return 0;
     });
-  }, [players, showSmartScores, sortConfig, usePastYearStats, u]);
+  }, [players, showSmartScores, sortConfig, usePastYearStats, u, punts]);
 
   const requestSort = (key: string) => {
     let direction = "none";
@@ -381,6 +385,7 @@ const RankingsTable_ = ({
 
   const getPercentileColor = (stat: number, category: string) => {
     if (!showHighlights) return "transparent";
+    if (punts.includes(category)) return "gray.100";
     const percentile = calculateStatPercentiles(stat, category);
     if (percentile === 0) {
       return "red.200";
@@ -396,18 +401,6 @@ const RankingsTable_ = ({
       return "transparent";
     }
   };
-
-  const getTotalDelta = () => {
-    let totalDelta = 0;
-    sortedPlayers.forEach((player, i) => {
-      if (i > 200) return;
-      const rank = i + 1;
-      totalDelta += Math.abs(rank - (u ? player.pastYearRank : player.rank));
-    });
-    return totalDelta;
-  };
-
-  console.log(getTotalDelta());
 
   return (
     <TableContainer overflowX="scroll" minWidth="100%">
@@ -558,71 +551,20 @@ const RankingsTable_ = ({
                     )}
                   </Flex>
                 </TableTd>
-                <TableTd
-                  backgroundColor={getPercentileColor(playerStats.tpm, "tpm")}
-                >
-                  {ss ? (
-                    <Box fontWeight={500}>{playerNStats.tpm.toFixed(2)}</Box>
-                  ) : (
-                    <Box fontWeight={500}>{playerStats.tpm.toFixed(1)}</Box>
-                  )}
-                </TableTd>
-                <TableTd
-                  backgroundColor={getPercentileColor(playerStats.pts, "pts")}
-                >
-                  {ss ? (
-                    <Box fontWeight={500}>{playerNStats.pts.toFixed(2)}</Box>
-                  ) : (
-                    <Box fontWeight={500}>{playerStats.pts.toFixed(1)}</Box>
-                  )}
-                </TableTd>
-                <TableTd
-                  backgroundColor={getPercentileColor(playerStats.reb, "reb")}
-                >
-                  {ss ? (
-                    <Box fontWeight={500}>{playerNStats.reb.toFixed(2)}</Box>
-                  ) : (
-                    <Box fontWeight={500}>{playerStats.reb.toFixed(1)}</Box>
-                  )}
-                </TableTd>
-                <TableTd
-                  backgroundColor={getPercentileColor(playerStats.ast, "ast")}
-                >
-                  {ss ? (
-                    <Box fontWeight={500}>{playerNStats.ast.toFixed(2)}</Box>
-                  ) : (
-                    <Box fontWeight={500}>{playerStats.ast.toFixed(1)}</Box>
-                  )}
-                </TableTd>
-                <TableTd
-                  backgroundColor={getPercentileColor(playerStats.stl, "stl")}
-                >
-                  {ss ? (
-                    <Box fontWeight={500}>{playerNStats.stl.toFixed(2)}</Box>
-                  ) : (
-                    <Box fontWeight={500}>{playerStats.stl.toFixed(1)}</Box>
-                  )}
-                </TableTd>
-                <TableTd
-                  backgroundColor={getPercentileColor(playerStats.blk, "blk")}
-                >
-                  {ss ? (
-                    <Box fontWeight={500}>{playerNStats.blk.toFixed(2)}</Box>
-                  ) : (
-                    <Box fontWeight={500}>{playerStats.blk.toFixed(1)}</Box>
-                  )}
-                </TableTd>
-                <TableTd
-                  backgroundColor={getPercentileColor(playerStats.to, "to")}
-                >
-                  {ss ? (
-                    <Box fontWeight={500}>{playerNStats.to.toFixed(2)}</Box>
-                  ) : (
-                    <Box fontWeight={500}>{playerStats.to.toFixed(1)}</Box>
-                  )}
-                </TableTd>
+                {STAT_KEYS_NO_FG_FT.map((key) => (
+                  <TableTd
+                    key={key}
+                    backgroundColor={getPercentileColor(playerStats[key], key)}
+                  >
+                    {ss ? (
+                      <Box fontWeight={500}>{playerNStats[key].toFixed(2)}</Box>
+                    ) : (
+                      <Box fontWeight={500}>{playerStats[key].toFixed(1)}</Box>
+                    )}
+                  </TableTd>
+                ))}
                 <TableTd fontWeight={600}>
-                  {playerNStats.total.toFixed(2)}
+                  {totalCategories(playerNStats, punts).toFixed(2)}
                 </TableTd>
               </Tr>
             );
