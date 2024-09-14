@@ -30,7 +30,6 @@ const calculateMinMax = (
         stl: 0,
         blk: 0,
         to: 0,
-        total: 0,
       });
       return;
     }
@@ -75,7 +74,6 @@ const calculateMinMax = (
       stl: nScores.get("stl") || 0,
       blk: nScores.get("blk") || 0,
       to: nScores.get("to") || 0,
-      total: total,
     });
   });
 

@@ -26,7 +26,6 @@ import {
   IconInfoSquareRounded,
 } from "@tabler/icons-react";
 import { getPlayers } from "@/api/players";
-import { Player } from "@/types/playerTypes";
 import RankingsTable from "@/components/RankingsTable";
 import { getNStats, normalizeScores, totalCategories } from "@/data/stats";
 import calculateMinMax from "@/data/minmax";

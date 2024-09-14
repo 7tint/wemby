@@ -30,7 +30,6 @@ const calculateZScores = (
       stl: (pStats.stl * GP[i] - categories.stl.mean) / categories.stl.std,
       blk: (pStats.blk * GP[i] - categories.blk.mean) / categories.blk.std,
       to: (categories.to.mean - pStats.to * GP[i]) / categories.to.std,
-      total: 0,
     };
     plainZMap.set(p.id, plainZ);
   });
@@ -51,10 +50,7 @@ const calculateZScores = (
       to: plainZMap.get(player.id)!.to,
     };
     const total = sum(Object.values(PlayerStatsNScore));
-    zScores.set(player.id, {
-      ...PlayerStatsNScore,
-      total: total,
-    });
+    zScores.set(player.id, PlayerStatsNScore);
   });
 
   return zScores;
