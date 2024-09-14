@@ -49,7 +49,6 @@ const calculateZScores = (
       blk: plainZMap.get(player.id)!.blk,
       to: plainZMap.get(player.id)!.to,
     };
-    const total = sum(Object.values(PlayerStatsNScore));
     zScores.set(player.id, PlayerStatsNScore);
   });
 

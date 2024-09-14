@@ -63,7 +63,6 @@ const calculateMinMax = (
     });
 
     // TODO: Let user choose weights
-    const total = sum(Array.from(nScores.values()));
     minMax.set(player.id, {
       fgImpact: nScores.get("fgImpact") || 0,
       ftImpact: nScores.get("ftImpact") || 0,
