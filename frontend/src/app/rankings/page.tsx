@@ -27,7 +27,7 @@ import {
 } from "@tabler/icons-react";
 import { getPlayers } from "@/api/players";
 import RankingsTable from "@/components/RankingsTable";
-import { getNStats, normalizeScores, totalCategories } from "@/data/stats";
+import { normalizeScores } from "@/data/stats";
 import calculateMinMax from "@/data/minmax";
 import calculateZScores from "@/data/zScore";
 import { Player } from "@/types/playerTypes";
@@ -56,6 +56,7 @@ const RankingsSettings = ({
       <Flex
         align="center"
         cursor="pointer"
+        width="fit-content"
         onClick={() => {
           setShowSettings(!showSettings);
         }}
@@ -209,30 +210,22 @@ const RankingsPage = () => {
     getPlayersData();
   }, []);
 
-  const playersToDisplay = useMemo(() => {
-    const usePastYearStats = selectedYear !== 1;
-    if (players.length > 0) {
-      return players
-        .filter((player) => {
-          if (usePastYearStats && !player.pastYearStats) return false;
-          if (!usePastYearStats && !player.projections) return false;
-          return true;
-        })
-        .filter((player) => getNStats(player, usePastYearStats))
-        .sort((a, b) => {
-          const aPlayerNStats = getNStats(a, usePastYearStats)!;
-          const bPlayerNStats = getNStats(b, usePastYearStats)!;
-          const aTotal = totalCategories(aPlayerNStats, []);
-          const bTotal = totalCategories(bPlayerNStats, []);
-          return bTotal - aTotal;
-        });
-    }
-    return [];
-  }, [selectedYear, players]);
-
   useEffect(() => {
-    if (playersToDisplay.length > 0) setIsLoaded(true);
-  }, [playersToDisplay]);
+    if (players.length > 0) setIsLoaded(true);
+  }, [players]);
+
+  const currentYearPlayers = useMemo(() => {
+    if (players.length > 0) {
+      const usePastYearStats = selectedYear !== 1;
+      return players.filter((player) => {
+        if (usePastYearStats && !player.pastYearRank) return false;
+        if (!usePastYearStats && !player.rank) return false;
+        return true;
+      });
+    } else {
+      return [];
+    }
+  }, [players, selectedYear]);
 
   return (
     <Container maxW="container.2xl" px={12} my={12}>
@@ -276,8 +269,9 @@ const RankingsPage = () => {
         <Skeleton isLoaded={isLoaded} startColor="gray.50" endColor="gray.100">
           <Box shadow="md">
             <RankingsTable
-              players={playersToDisplay}
+              players={currentYearPlayers}
               usePastYearStats={selectedYear === 2}
+              setIsLoaded={setIsLoaded}
               showSmartScores={showSmartScores}
               showHighlights={showHighlights}
               punts={punts}

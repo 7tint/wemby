@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, memo, useMemo, useState } from "react";
+import { ReactNode, memo, useEffect, useMemo, useState } from "react";
 import {
   Box,
   Flex,
@@ -14,6 +14,13 @@ import {
   Tr,
 } from "@chakra-ui/react";
 import {
+  ColumnDef,
+  VisibilityState,
+  flexRender,
+  getCoreRowModel,
+  useReactTable,
+} from "@tanstack/react-table";
+import {
   IconArrowUp,
   IconArrowDown,
   IconEqual,
@@ -25,14 +32,10 @@ import {
   getStats,
   totalCategories,
 } from "@/data/stats";
-import { Player, PlayerStats, PlayerStatsNScore } from "@/types/playerTypes";
+import { EMPTY_PLAYER_STATS_NSCORE, Player } from "@/types/playerTypes";
 import { Team } from "@/types/teamTypes";
 import PlayerHeadshot from "./player/PlayerHeadshot";
 import TeamLogo from "./team/TeamLogo";
-import { STAT_KEYS_NO_FG_FT } from "@/types/statTypes";
-
-type PlayerStatsNScoreKeys = keyof PlayerStatsNScore;
-type PlayerStatsKeys = keyof PlayerStats;
 
 // CONSTANTS
 const cellWidthSm = "50px";
@@ -75,192 +78,75 @@ const RankingsHeaderCell_ = ({
   id,
   label,
   text,
-  calcHeaderSortColor,
-  requestSort,
 }: {
   id?: string;
   label: string;
   text: string;
-  calcHeaderSortColor?: (key: string) => string;
-  requestSort?: (key: string) => void;
-}) => (
-  <Td
-    {...headerColProps}
-    cursor={requestSort ? "pointer" : "default"}
-    onClick={() => {
-      if (requestSort) requestSort(id || "default");
-    }}
-    p={0}
-  >
-    <Flex direction="column" justify="center" align="center">
-      <Box
-        height={3}
-        width="100%"
-        backgroundColor={
-          calcHeaderSortColor
-            ? calcHeaderSortColor(id || "default")
-            : "gray.300"
-        }
-      />
-      <Tooltip label={label} hasArrow placement="top">
-        <Box my={2}>{text}</Box>
-      </Tooltip>
-    </Flex>
-  </Td>
-);
-const RankingsHeaderCell = memo(RankingsHeaderCell_);
-
-/**
- * RANKINGS TABLE HEAD
- */
-interface RankingsTableHeadProps {
-  sortConfig: { key: string; direction: string } | null;
-  requestSort: (key: string) => void;
-  usePastYearStats: boolean;
-}
-const RankingsTableHead_ = ({
-  sortConfig,
-  requestSort,
-  usePastYearStats,
-}: RankingsTableHeadProps) => {
-  const u = usePastYearStats;
-
+}) => {
   const calcHeaderSortColor = (key: string) => {
-    if (sortConfig?.key === key) {
-      if (sortConfig.direction === "ascending") {
-        return "orange.200";
-      } else if (sortConfig.direction === "descending") {
-        return "teal.200";
-      }
-    }
+    if (key === "") return "gray.300";
+    // TODO: add sort color
     return "gray.300";
   };
 
   return (
-    <Thead>
-      <Tr
-        height={cellHeight}
-        backgroundColor="gray.200"
-        borderBottomColor="gray.300"
-        borderBottomWidth={1}
-        fontWeight="bold"
-      >
-        <RankingsHeaderCell text="R" label="Row #" />
-        <RankingsHeaderCell
-          id="rank"
-          text="H#"
-          label="Rank (Hashtag Basketball)"
-          calcHeaderSortColor={calcHeaderSortColor}
-          requestSort={requestSort}
+    <Td {...headerColProps} p={0} backgroundColor="gray.200">
+      <Flex direction="column" justify="center" align="center">
+        <Box
+          height={3}
+          width="100%"
+          backgroundColor={
+            calcHeaderSortColor
+              ? calcHeaderSortColor(id || "default")
+              : "gray.300"
+          }
         />
-        {!u && (
-          <RankingsHeaderCell
-            id="auctionValuedAt"
-            text="A$"
-            label="Expected Auction Value (Hashtag Basketball)"
-            calcHeaderSortColor={calcHeaderSortColor}
-            requestSort={requestSort}
-          />
-        )}
-        <RankingsHeaderCell text="Team" label="Pro Team" />
-        <RankingsHeaderCell text="Name" label="Player Name" />
-        <RankingsHeaderCell id="age" text="Age" label="Age" />
-        <RankingsHeaderCell
-          id="gp"
-          text="GP"
-          label="Games Played"
-          calcHeaderSortColor={calcHeaderSortColor}
-          requestSort={requestSort}
-        />
-        <RankingsHeaderCell
-          id="mpg"
-          text="MPG"
-          label="Minutes Per Game"
-          calcHeaderSortColor={calcHeaderSortColor}
-          requestSort={requestSort}
-        />
-        <RankingsHeaderCell
-          id="fg"
-          text="FG%"
-          label="Field Goal Percentage"
-          calcHeaderSortColor={calcHeaderSortColor}
-          requestSort={requestSort}
-        />
-        <RankingsHeaderCell
-          id="ft"
-          text="FT%"
-          label="Free Throw Percentage"
-          calcHeaderSortColor={calcHeaderSortColor}
-          requestSort={requestSort}
-        />
-        <RankingsHeaderCell
-          id="tpm"
-          text="3PM"
-          label="Three-Point Made"
-          calcHeaderSortColor={calcHeaderSortColor}
-          requestSort={requestSort}
-        />
-        <RankingsHeaderCell
-          id="pts"
-          text="PTS"
-          label="Points"
-          calcHeaderSortColor={calcHeaderSortColor}
-          requestSort={requestSort}
-        />
-        <RankingsHeaderCell
-          id="reb"
-          text="REB"
-          label="Rebounds"
-          calcHeaderSortColor={calcHeaderSortColor}
-          requestSort={requestSort}
-        />
-        <RankingsHeaderCell
-          id="ast"
-          text="AST"
-          label="Assists"
-          calcHeaderSortColor={calcHeaderSortColor}
-          requestSort={requestSort}
-        />
-        <RankingsHeaderCell
-          id="stl"
-          text="STL"
-          label="Steals"
-          calcHeaderSortColor={calcHeaderSortColor}
-          requestSort={requestSort}
-        />
-        <RankingsHeaderCell
-          id="blk"
-          text="BLK"
-          label="Blocks"
-          calcHeaderSortColor={calcHeaderSortColor}
-          requestSort={requestSort}
-        />
-        <RankingsHeaderCell
-          id="to"
-          text="TO"
-          label="Turnovers"
-          calcHeaderSortColor={calcHeaderSortColor}
-          requestSort={requestSort}
-        />
-        <RankingsHeaderCell
-          id="default"
-          text="Total"
-          label="Total Smart Score"
-          calcHeaderSortColor={calcHeaderSortColor}
-          requestSort={requestSort}
-        />
-      </Tr>
-    </Thead>
+        <Tooltip label={label} hasArrow placement="top">
+          <Box my={2} fontWeight={700}>
+            {text}
+          </Box>
+        </Tooltip>
+      </Flex>
+    </Td>
   );
 };
-const RankingsTableHead = memo(RankingsTableHead_);
+const RankingsHeaderCell = memo(RankingsHeaderCell_);
 
 /*
  * RANKINGS TABLE
  */
+const getPlayerTrend = (player: Player) => {
+  const playerTrend =
+    player.pastYearStats === null
+      ? {
+          color: "pink.400",
+          label: "Rookie season",
+          icon: IconPointFilled,
+        }
+      : player.rank === player.pastYearRank
+      ? {
+          color: "blue.400",
+          label: "No change in rank from last season",
+          icon: IconEqual,
+        }
+      : player.rank > player.pastYearRank
+      ? {
+          color: "red.400",
+          label: "Rank decreased from last season",
+          icon: IconArrowDown,
+        }
+      : {
+          color: "green.400",
+          label: "Rank increased from last season",
+          icon: IconArrowUp,
+        };
+  return playerTrend;
+};
+
 interface RankingsTableProps {
   players: Player[];
   usePastYearStats: boolean;
+  setIsLoaded: (value: boolean) => void;
   showSmartScores: boolean;
   showHighlights: boolean;
   punts: string[];
@@ -269,6 +155,7 @@ interface RankingsTableProps {
 const RankingsTable_ = ({
   players,
   usePastYearStats,
+  setIsLoaded,
   showSmartScores,
   showHighlights,
   punts,
@@ -276,131 +163,373 @@ const RankingsTable_ = ({
   const u = usePastYearStats;
   const ss = showSmartScores;
 
-  const [sortConfig, setSortConfig] = useState<{
-    key: string;
-    direction: string;
-  } | null>({ key: "default", direction: "descending" });
-
-  const sortedPlayers = useMemo(() => {
-    return [...players].sort((a, b) => {
-      if (sortConfig && sortConfig.direction !== "none") {
-        let { key } = sortConfig;
-        const { direction } = sortConfig;
-        let aValue, bValue: number;
-
-        // Handle FG% and FT% key names
-        if (key === "fg") {
-          if (showSmartScores) key = "fgImpact";
-          else key = "fgm";
-        }
-        if (key === "ft") {
-          if (showSmartScores) key = "ftImpact";
-          else key = "ftm";
-        }
-
-        if (key === "default") {
-          const aPlayerNStats = getNStats(a, usePastYearStats)!;
-          const bPlayerNStats = getNStats(b, usePastYearStats)!;
-          aValue = totalCategories(aPlayerNStats, punts);
-          bValue = totalCategories(bPlayerNStats, punts);
-        } else if (key === "rank") {
-          bValue = u ? a.pastYearRank : a.rank;
-          aValue = u ? b.pastYearRank : b.rank;
-        } else if (key === "auctionValuedAt") {
-          aValue = a[key] || 0;
-          bValue = b[key] || 0;
-        } else {
-          if (showSmartScores || key === "fg" || key === "ft") {
-            const aPlayerNStats = getNStats(a, usePastYearStats)!;
-            const bPlayerNStats = getNStats(b, usePastYearStats)!;
-            aValue = aPlayerNStats[key as PlayerStatsNScoreKeys] || 0;
-            bValue = bPlayerNStats[key as PlayerStatsNScoreKeys] || 0;
-          } else {
-            const aPlayerStats = getStats(a, usePastYearStats)!;
-            const bPlayerStats = getStats(b, usePastYearStats)!;
-            aValue = aPlayerStats[key as PlayerStatsKeys] || 0;
-            bValue = bPlayerStats[key as PlayerStatsKeys] || 0;
-          }
-        }
-
-        if (aValue < bValue) {
-          return direction === "ascending" ? -1 : 1;
-        } else if (aValue > bValue) {
-          return direction === "ascending" ? 1 : -1;
-        }
+  const columns = useMemo<ColumnDef<Player>[]>(() => {
+    const getPercentileColor = (stat: number, category: string) => {
+      if (!showHighlights) return "transparent";
+      if (punts.includes(category)) return "gray.100";
+      const percentile = calculateStatPercentiles(stat, category);
+      if (percentile === 0) {
+        return "red.200";
+      } else if (percentile === 1) {
+        return "red.100";
+      } else if (percentile === 2) {
+        return "transparent";
+      } else if (percentile === 3) {
+        return "green.100";
+      } else if (percentile === 4) {
+        return "green.200";
+      } else {
+        return "transparent";
       }
-      return 0;
-    });
-  }, [players, showSmartScores, sortConfig, usePastYearStats, u, punts]);
+    };
 
-  const requestSort = (key: string) => {
-    let direction = "none";
-    if (sortConfig && sortConfig.key !== key) {
-      setSortConfig({ key, direction: "descending" });
-      direction = "descending";
-    } else {
-      if (sortConfig && sortConfig.key === key) {
-        if (sortConfig.direction === "none") {
-          setSortConfig({ key, direction: "descending" });
-          direction = "descending";
-        } else if (sortConfig.direction === "descending") {
-          setSortConfig({ key, direction: "ascending" });
-          direction = "ascending";
-        } else {
-          setSortConfig({ key, direction: "none" });
-          direction = "none";
-        }
-      }
-    }
-    setSortConfig({ key, direction });
-  };
+    return [
+      {
+        id: "rank",
+        accessorFn: (player) => (u ? player.pastYearRank : player.rank),
+        header: () => (
+          <RankingsHeaderCell
+            text="Rank"
+            label="Rank (from Hashtag Basketball)"
+          />
+        ),
+        cell: (p) => <TableTd>{p.getValue() as number}</TableTd>,
+      },
+      {
+        accessorKey: "auctionValuedAt",
+        header: () => <RankingsHeaderCell text="$" label="Auction Value" />,
+        cell: (p) => <TableTd>${(p.getValue() as number).toFixed(1)}</TableTd>,
+      },
+      {
+        id: "team",
+        accessorFn: (player) => (u ? player.pastYearTeam : player.team),
+        header: () => <RankingsHeaderCell text="Team" label="Team" />,
+        cell: ({ row }) => (
+          <TableTd>
+            {u ? (
+              <TeamLogo team={row.original.pastYearTeam as Team} size="sm" />
+            ) : (
+              <>
+                {row.original.team !== row.original.pastYearTeam && (
+                  <Tooltip
+                    label="Changing teams this season"
+                    hasArrow
+                    placement="bottom"
+                  >
+                    <Icon
+                      as={IconPointFilled}
+                      color="pink.400"
+                      pr={1}
+                      boxSize={5}
+                    />
+                  </Tooltip>
+                )}
+                <TeamLogo team={row.original.team as Team} size="sm" />
+              </>
+            )}
+          </TableTd>
+        ),
+      },
+      {
+        id: "name",
+        accessorFn: (player) => player.firstName + player.lastName,
+        header: () => <RankingsHeaderCell text="Player" label="Player Name" />,
+        cell: ({ row }) => {
+          const playerTrend = getPlayerTrend(row.original);
+          return (
+            <Td pb={0}>
+              <Flex px={4} align="center" pt={1.5}>
+                <PlayerHeadshot player={row.original} size="sm" />
+                <Flex align="center" ml={2} mr={1} pb={1} fontWeight={500}>
+                  {row.original.firstName} {row.original.lastName}
+                </Flex>
+                {!u && (
+                  <Tooltip
+                    label={playerTrend.label}
+                    hasArrow
+                    placement="bottom"
+                  >
+                    <Icon as={playerTrend.icon} color={playerTrend.color} />
+                  </Tooltip>
+                )}
+              </Flex>
+            </Td>
+          );
+        },
+      },
+      {
+        accessorKey: "age",
+        header: () => <RankingsHeaderCell text="Age" label="Age" />,
+        cell: (p) => (
+          <TableTd>
+            {u ? (p.getValue() as number) - 1 : (p.getValue() as number)}
+          </TableTd>
+        ),
+      },
+      {
+        id: "gp",
+        accessorFn: (player) =>
+          u
+            ? player.pastYearStats
+              ? player.pastYearStats.gp
+              : 0
+            : player.projections.gp,
+        header: () => <RankingsHeaderCell text="GP" label="Games Played" />,
+        cell: (p) => (
+          <TableTd fontWeight={500}>{p.getValue() as number}</TableTd>
+        ),
+      },
+      {
+        id: "mpg",
+        accessorFn: (player) =>
+          u
+            ? player.pastYearStats
+              ? player.pastYearStats.mpg
+              : 0
+            : player.projections.mpg,
+        header: () => (
+          <RankingsHeaderCell text="MPG" label="Minutes Per Game" />
+        ),
+        cell: (p) => (
+          <TableTd fontWeight={500}>
+            {(p.getValue() as number).toFixed(1)}
+          </TableTd>
+        ),
+      },
+      {
+        id: "fg",
+        header: () => <RankingsHeaderCell text="FG" label="Field Goal %" />,
+        cell: ({ row }) => {
+          const playerStats = getStats(row.original, u);
+          const playerNStats = getNStats(row.original, u);
+          return (
+            <TableTd
+              backgroundColor={getPercentileColor(
+                playerStats.fgm / playerStats.fga,
+                "fg"
+              )}
+            >
+              <Flex direction="column" align="center">
+                {ss ? (
+                  <Box fontWeight={500}>{playerNStats.fgImpact.toFixed(2)}</Box>
+                ) : (
+                  <Flex align="center">
+                    <Box fontWeight={500}>
+                      {playerStats.fga > 0
+                        ? (playerStats.fgm / playerStats.fga).toFixed(2)
+                        : (0).toFixed(2)}
+                    </Box>
+                    <Box as="span" fontSize={11} ml={2}>
+                      ({playerStats.fgm.toFixed(2)} /{" "}
+                      {playerStats.fga.toFixed(2)})
+                    </Box>
+                  </Flex>
+                )}
+              </Flex>
+            </TableTd>
+          );
+        },
+      },
+      {
+        id: "ft",
+        header: () => <RankingsHeaderCell text="FT" label="Free Throw %" />,
+        cell: ({ row }) => {
+          const playerStats = getStats(row.original, u);
+          const playerNStats = getNStats(row.original, u);
+          return (
+            <TableTd
+              backgroundColor={getPercentileColor(
+                playerStats.ftm / playerStats.fta,
+                "ft"
+              )}
+            >
+              <Flex direction="column" align="center">
+                {ss ? (
+                  <Box fontWeight={500}>{playerNStats.ftImpact.toFixed(2)}</Box>
+                ) : (
+                  <Flex align="center">
+                    <Box fontWeight={500}>
+                      {playerStats.fta > 0
+                        ? (playerStats.ftm / playerStats.fta).toFixed(2)
+                        : (0).toFixed(2)}
+                    </Box>
+                    <Box as="span" fontSize={11} ml={2}>
+                      ({playerStats.ftm.toFixed(2)} /{" "}
+                      {playerStats.fta.toFixed(2)})
+                    </Box>
+                  </Flex>
+                )}
+              </Flex>
+            </TableTd>
+          );
+        },
+      },
+      {
+        id: "tpm",
+        accessorFn: (player) =>
+          ss ? getNStats(player, u).tpm : getStats(player, u).tpm,
+        header: () => <RankingsHeaderCell text="3PM" label="3-Pointers Made" />,
+        cell: ({ cell, row }) => {
+          const tpm = cell.getValue() as number;
+          return (
+            <TableTd
+              backgroundColor={getPercentileColor(
+                getStats(row.original, u).tpm,
+                "tpm"
+              )}
+            >
+              <Box fontWeight={500}>{tpm.toFixed(1)}</Box>
+            </TableTd>
+          );
+        },
+      },
+      {
+        id: "pts",
+        accessorFn: (player) =>
+          ss ? getNStats(player, u).pts : getStats(player, u).pts,
+        header: () => <RankingsHeaderCell text="PTS" label="Points" />,
+        cell: ({ cell }) => {
+          const pts = cell.getValue() as number;
+          return (
+            <TableTd
+              backgroundColor={getPercentileColor(pts, "pts")}
+              fontWeight={500}
+            >
+              {pts.toFixed(1)}
+            </TableTd>
+          );
+        },
+      },
+      {
+        id: "reb",
+        accessorFn: (player) =>
+          ss ? getNStats(player, u).reb : getStats(player, u).reb,
+        header: () => <RankingsHeaderCell text="REB" label="Rebounds" />,
+        cell: ({ cell }) => {
+          const reb = cell.getValue() as number;
+          return (
+            <TableTd
+              backgroundColor={getPercentileColor(reb, "reb")}
+              fontWeight={500}
+            >
+              {reb.toFixed(1)}
+            </TableTd>
+          );
+        },
+      },
+      {
+        id: "ast",
+        accessorFn: (player) =>
+          ss ? getNStats(player, u).ast : getStats(player, u).ast,
+        header: () => <RankingsHeaderCell text="AST" label="Assists" />,
+        cell: ({ cell }) => {
+          const ast = cell.getValue() as number;
+          return (
+            <TableTd
+              backgroundColor={getPercentileColor(ast, "ast")}
+              fontWeight={500}
+            >
+              {ast.toFixed(1)}
+            </TableTd>
+          );
+        },
+      },
+      {
+        id: "stl",
+        accessorFn: (player) =>
+          ss ? getNStats(player, u).stl : getStats(player, u).stl,
+        header: () => <RankingsHeaderCell text="STL" label="Steals" />,
+        cell: ({ cell }) => {
+          const stl = cell.getValue() as number;
+          return (
+            <TableTd
+              backgroundColor={getPercentileColor(stl, "stl")}
+              fontWeight={500}
+            >
+              {stl.toFixed(1)}
+            </TableTd>
+          );
+        },
+      },
+      {
+        id: "blk",
+        accessorFn: (player) =>
+          ss ? getNStats(player, u).blk : getStats(player, u).blk,
+        header: () => <RankingsHeaderCell text="BLK" label="Blocks" />,
+        cell: ({ cell }) => {
+          const blk = cell.getValue() as number;
+          return (
+            <TableTd
+              backgroundColor={getPercentileColor(blk, "blk")}
+              fontWeight={500}
+            >
+              {blk.toFixed(1)}
+            </TableTd>
+          );
+        },
+      },
+      {
+        id: "to",
+        accessorFn: (player) =>
+          ss ? getNStats(player, u).to : getStats(player, u).to,
+        header: () => <RankingsHeaderCell text="TO" label="Turnovers" />,
+        cell: ({ cell }) => {
+          const to = cell.getValue() as number;
+          return (
+            <TableTd
+              backgroundColor={getPercentileColor(to, "to")}
+              fontWeight={500}
+            >
+              {to.toFixed(1)}
+            </TableTd>
+          );
+        },
+      },
+      {
+        id: "total",
+        accessorFn: (player) =>
+          u
+            ? totalCategories(
+                player.pastYearNScores
+                  ? player.pastYearNScores
+                  : EMPTY_PLAYER_STATS_NSCORE,
+                punts
+              )
+            : totalCategories(
+                player.projectionNScores
+                  ? player.projectionNScores
+                  : EMPTY_PLAYER_STATS_NSCORE,
+                punts
+              ),
+        header: () => (
+          <RankingsHeaderCell text="Total" label="Total Smart Score" />
+        ),
+        cell: ({ cell }) => (
+          <TableTd fontWeight={600}>
+            {(cell.getValue() as number).toFixed(2)}
+          </TableTd>
+        ),
+      },
+    ];
+  }, [u, ss, punts, showHighlights]);
 
-  const getPlayerTrend = (player: Player) => {
-    const playerTrend =
-      player.pastYearStats === null
-        ? {
-            color: "pink.400",
-            label: "Rookie season",
-            icon: IconPointFilled,
-          }
-        : player.rank === player.pastYearRank
-        ? {
-            color: "blue.400",
-            label: "No change in rank from last season",
-            icon: IconEqual,
-          }
-        : player.rank > player.pastYearRank
-        ? {
-            color: "red.400",
-            label: "Rank decreased from last season",
-            icon: IconArrowDown,
-          }
-        : {
-            color: "green.400",
-            label: "Rank increased from last season",
-            icon: IconArrowUp,
-          };
-    return playerTrend;
-  };
+  useEffect(() => {
+    setColumnVisibility({ auctionValuedAt: !u });
+    if (players.length > 0) setIsLoaded(true);
+  }, [u, setIsLoaded, players]);
 
-  const getPercentileColor = (stat: number, category: string) => {
-    if (!showHighlights) return "transparent";
-    if (punts.includes(category)) return "gray.100";
-    const percentile = calculateStatPercentiles(stat, category);
-    if (percentile === 0) {
-      return "red.200";
-    } else if (percentile === 1) {
-      return "red.100";
-    } else if (percentile === 2) {
-      return "transparent";
-    } else if (percentile === 3) {
-      return "green.100";
-    } else if (percentile === 4) {
-      return "green.200";
-    } else {
-      return "transparent";
-    }
-  };
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+  // const [sorting, setSorting] = useState<SortingState>([]);
+
+  const playersTable = useReactTable<Player>({
+    columns,
+    data: players,
+    getCoreRowModel: getCoreRowModel(),
+    state: {
+      columnVisibility,
+    },
+    onColumnVisibilityChange: setColumnVisibility,
+  });
 
   return (
     <TableContainer overflowX="scroll" minWidth="100%">
@@ -432,140 +561,34 @@ const RankingsTable_ = ({
           <Box as="col" {...colProps} width={cellWidthMd} />
           <Box as="col" {...colProps} width={cellWidthMd} />
         </Box>
-        <RankingsTableHead
-          sortConfig={sortConfig}
-          requestSort={requestSort}
-          usePastYearStats={u}
-        />
+        <Thead>
+          {playersTable.getHeaderGroups().map((headerGroup) => (
+            <Tr {...headerColProps} key={headerGroup.id}>
+              <RankingsHeaderCell key={headerGroup.id} text="#" label="Row #" />
+              {headerGroup.headers.map((header) =>
+                flexRender(header.column.columnDef.header, {
+                  ...header.getContext(),
+                  key: `${header.id}-${header.index}`,
+                })
+              )}
+            </Tr>
+          ))}
+        </Thead>
         <Tbody>
-          {sortedPlayers.map((player, i) => {
-            const playerTrend = getPlayerTrend(player);
-            const playerNStats = getNStats(player, u)!;
-            const playerStats = getStats(player, u)!;
-
+          {playersTable.getRowModel().rows.map((row) => {
             return (
               <Tr
-                key={player.id}
+                key={row.id}
                 height={cellHeight}
                 _odd={{ backgroundColor: "gray.50" }}
               >
-                <TableTd fontWeight={600}>{i + 1}</TableTd>
-                <TableTd>{u ? player.pastYearRank : player.rank}</TableTd>
-                {!u && (
-                  <TableTd fontWeight={500} color="yellow.700">
-                    ${player.auctionValuedAt?.toFixed(1)}
-                  </TableTd>
+                <TableTd fontWeight={600}>{row.index + 1}</TableTd>
+                {row.getVisibleCells().map((cell) =>
+                  flexRender(cell.column.columnDef.cell, {
+                    ...cell.getContext(),
+                    key: `${row.id}-${cell.id}`,
+                  })
                 )}
-                <TableTd>
-                  {u ? (
-                    <TeamLogo team={player.pastYearTeam as Team} size="sm" />
-                  ) : (
-                    <>
-                      {player.team !== player.pastYearTeam && (
-                        <Tooltip
-                          label="Changing teams this season"
-                          hasArrow
-                          placement="bottom"
-                        >
-                          <Icon
-                            as={IconPointFilled}
-                            color="pink.400"
-                            pr={1}
-                            boxSize={5}
-                          />
-                        </Tooltip>
-                      )}
-                      <TeamLogo team={player.team as Team} size="sm" />
-                    </>
-                  )}
-                </TableTd>
-                <Td pb={0}>
-                  <Flex px={4} align="center" pt={1.5}>
-                    <PlayerHeadshot player={player} size="sm" />
-                    <Flex align="center" ml={2} mr={1} fontWeight={500}>
-                      {player.firstName} {player.lastName}
-                    </Flex>
-                    {!u && (
-                      <Tooltip
-                        label={playerTrend.label}
-                        hasArrow
-                        placement="bottom"
-                      >
-                        <Icon as={playerTrend.icon} color={playerTrend.color} />
-                      </Tooltip>
-                    )}
-                  </Flex>
-                </Td>
-                <TableTd>{player.age}</TableTd>
-                <TableTd fontWeight={500}>{playerStats.gp}</TableTd>
-                <TableTd fontWeight={500}>{playerStats.mpg.toFixed(1)}</TableTd>
-                <TableTd
-                  backgroundColor={getPercentileColor(
-                    playerStats.fgm / playerStats.fga,
-                    "fg"
-                  )}
-                >
-                  <Flex direction="column" align="center">
-                    {ss ? (
-                      <Box fontWeight={500}>
-                        {playerNStats.fgImpact.toFixed(2)}
-                      </Box>
-                    ) : (
-                      <Flex align="center">
-                        <Box fontWeight={500}>
-                          {playerStats.fga > 0
-                            ? (playerStats.fgm / playerStats.fga).toFixed(2)
-                            : (0).toFixed(2)}
-                        </Box>
-                        <Box as="span" fontSize={11} ml={2}>
-                          ({playerStats.fgm.toFixed(2)} /{" "}
-                          {playerStats.fga.toFixed(2)})
-                        </Box>
-                      </Flex>
-                    )}
-                  </Flex>
-                </TableTd>
-                <TableTd
-                  backgroundColor={getPercentileColor(
-                    playerStats.ftm / playerStats.fta,
-                    "ft"
-                  )}
-                >
-                  <Flex direction="column" align="center">
-                    {ss ? (
-                      <Box fontWeight={500}>
-                        {playerNStats.ftImpact.toFixed(2)}
-                      </Box>
-                    ) : (
-                      <Flex align="center">
-                        <Box fontWeight={500}>
-                          {playerStats.fta > 0
-                            ? (playerStats.ftm / playerStats.fta).toFixed(2)
-                            : (0).toFixed(2)}
-                        </Box>
-                        <Box as="span" fontSize={11} ml={2}>
-                          ({playerStats.ftm.toFixed(2)} /{" "}
-                          {playerStats.fta.toFixed(2)})
-                        </Box>
-                      </Flex>
-                    )}
-                  </Flex>
-                </TableTd>
-                {STAT_KEYS_NO_FG_FT.map((key) => (
-                  <TableTd
-                    key={key}
-                    backgroundColor={getPercentileColor(playerStats[key], key)}
-                  >
-                    {ss ? (
-                      <Box fontWeight={500}>{playerNStats[key].toFixed(2)}</Box>
-                    ) : (
-                      <Box fontWeight={500}>{playerStats[key].toFixed(1)}</Box>
-                    )}
-                  </TableTd>
-                ))}
-                <TableTd fontWeight={600}>
-                  {totalCategories(playerNStats, punts).toFixed(2)}
-                </TableTd>
               </Tr>
             );
           })}

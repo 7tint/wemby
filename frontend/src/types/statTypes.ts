@@ -5,7 +5,9 @@ interface StatCategory {
   std: number;
 }
 
-export const STAT_KEYS_NO_FG_FT = [
+export const STAT_KEYS = [
+  "fg",
+  "ft",
   "tpm",
   "pts",
   "reb",
@@ -14,8 +16,6 @@ export const STAT_KEYS_NO_FG_FT = [
   "blk",
   "to",
 ] as const;
-
-export const STAT_KEYS = ["fg", "ft", ...STAT_KEYS_NO_FG_FT] as const;
 
 export interface CategoryStats {
   fgm: StatCategory;

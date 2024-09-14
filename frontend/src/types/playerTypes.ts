@@ -16,6 +16,24 @@ export interface PlayerStats {
   to: number;
 }
 
+export const EMPTY_PLAYER_STATS: PlayerStats = {
+  gp: 0,
+  mpg: 0,
+  fgm: 0,
+  fga: 0,
+  fgImpact: 0,
+  ftm: 0,
+  fta: 0,
+  ftImpact: 0,
+  tpm: 0,
+  pts: 0,
+  reb: 0,
+  ast: 0,
+  stl: 0,
+  blk: 0,
+  to: 0,
+};
+
 export interface PlayerStatsNScore {
   fgImpact: number;
   ftImpact: number;
@@ -27,6 +45,18 @@ export interface PlayerStatsNScore {
   blk: number;
   to: number;
 }
+
+export const EMPTY_PLAYER_STATS_NSCORE: PlayerStatsNScore = {
+  fgImpact: 0,
+  ftImpact: 0,
+  tpm: 0,
+  pts: 0,
+  reb: 0,
+  ast: 0,
+  stl: 0,
+  blk: 0,
+  to: 0,
+};
 
 export interface Player {
   id: number; // ESPN Player ID

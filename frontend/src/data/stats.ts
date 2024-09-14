@@ -1,17 +1,33 @@
 import { shrinkNumber } from "./math";
-import { Player, PlayerStats, PlayerStatsNScore } from "@/types/playerTypes";
+import {
+  EMPTY_PLAYER_STATS,
+  EMPTY_PLAYER_STATS_NSCORE,
+  Player,
+  PlayerStats,
+  PlayerStatsNScore,
+} from "@/types/playerTypes";
 
 export const getStats = (
   player: Player,
   usePastYearStats: boolean
 ): PlayerStats =>
-  usePastYearStats ? player.pastYearStats! : player.projections;
+  usePastYearStats
+    ? player.pastYearStats === null
+      ? EMPTY_PLAYER_STATS
+      : player.pastYearStats
+    : player.projections;
 
 export const getNStats = (
   player: Player,
   usePastYearStats: boolean
-): PlayerStatsNScore | null =>
-  usePastYearStats ? player.pastYearNScores! : player.projectionNScores;
+): PlayerStatsNScore =>
+  usePastYearStats
+    ? player.pastYearNScores === null
+      ? EMPTY_PLAYER_STATS_NSCORE
+      : player.pastYearNScores!
+    : player.projectionNScores === null
+    ? EMPTY_PLAYER_STATS_NSCORE
+    : player.projectionNScores!;
 
 export const calculateStatPercentiles = (stat: number, category: string) => {
   switch (category) {

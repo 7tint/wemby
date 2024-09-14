@@ -1,4 +1,3 @@
-import { sum } from "./math";
 import { getStats } from "./stats";
 import { Player, PlayerStatsNScore } from "@/types/playerTypes";
 import { CategoryStats } from "@/types/statTypes";
