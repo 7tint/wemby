@@ -551,7 +551,11 @@ const RankingsTable_ = ({
         <RankingsColumnGroup u={u} ss={ss} />
         <TableHeader>
           {playersTable.getHeaderGroups().map((headerGroup) => (
-            <TableRow className={headerColStyles} key={headerGroup.id}>
+            <TableRow
+              key={headerGroup.id}
+              className={headerColStyles}
+              style={{ height: 50 }}
+            >
               <TableHead
                 key={headerGroup.id}
                 className={cn("border-slate-300 p-0 ", headerColStyles)}

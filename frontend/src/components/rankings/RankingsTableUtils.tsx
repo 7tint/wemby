@@ -48,7 +48,11 @@ const RankingsHeaderCell_ = ({
   };
 
   return (
-    <div key={id} className="flex flex-col h-full justify-start items-center">
+    <div
+      key={id}
+      className="flex flex-col justify-start items-center"
+      style={{ height: 50 }}
+    >
       <div className={cn("h-3 w-full", calcHeaderSortColor(sort))} />
       <Tooltip label={label}>
         <div className="my-2 font-semibold">{text}</div>
