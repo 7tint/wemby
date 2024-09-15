@@ -54,7 +54,7 @@ const RankingsSettings = ({
   const [showSettings, setShowSettings] = useState(false);
   return (
     <div className="my-8">
-      <Collapsible>
+      <Collapsible open={true}>
         <CollapsibleTrigger>
           <div
             className="flex items-center cursor-pointer w-fit"
