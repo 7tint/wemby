@@ -80,14 +80,11 @@ interface RankingsTableProps {
 
 const RankingsTable_ = ({
   players,
-  usePastYearStats,
-  showSmartScores,
+  usePastYearStats: u,
+  showSmartScores: ss,
   showHighlights,
   punts,
 }: RankingsTableProps) => {
-  const u = usePastYearStats;
-  const ss = showSmartScores;
-
   const getPercentileColor = useMemo(() => {
     return (stat: number, category: string) => {
       if (!showHighlights) return "bg-transparent";
@@ -109,12 +106,10 @@ const RankingsTable_ = ({
     };
   }, [showHighlights, punts]);
 
-  const getDisplayValue = useMemo(
-    () => (player: Player) => ss ? getNStats(player, u) : getStats(player, u),
-    [u, ss]
-  );
-
   const columns = useMemo<ColumnDef<Player>[]>(() => {
+    const getDisplayValue = (player: Player) =>
+      ss ? getNStats(player, u) : getStats(player, u);
+
     return [
       {
         id: "rank",
@@ -334,8 +329,8 @@ const RankingsTable_ = ({
             sort={column.getIsSorted()}
           />
         ),
-        cell: ({ row }) => {
-          const tpm = getDisplayValue(row.original).tpm;
+        cell: ({ cell }) => {
+          const tpm = cell.getValue() as number;
           return (
             <TableTd className={getPercentileColor(tpm, "tpm")}>
               {tpm.toFixed(1)}
@@ -353,8 +348,8 @@ const RankingsTable_ = ({
             sort={column.getIsSorted()}
           />
         ),
-        cell: ({ row }) => {
-          const pts = getDisplayValue(row.original).pts;
+        cell: ({ cell }) => {
+          const pts = cell.getValue() as number;
           return (
             <TableTd className={getPercentileColor(pts, "pts")}>
               {pts.toFixed(1)}
@@ -372,8 +367,8 @@ const RankingsTable_ = ({
             sort={column.getIsSorted()}
           />
         ),
-        cell: ({ row }) => {
-          const reb = getDisplayValue(row.original).reb;
+        cell: ({ cell }) => {
+          const reb = cell.getValue() as number;
           return (
             <TableTd className={getPercentileColor(reb, "reb")}>
               {reb.toFixed(1)}
@@ -391,8 +386,8 @@ const RankingsTable_ = ({
             sort={column.getIsSorted()}
           />
         ),
-        cell: ({ row }) => {
-          const ast = getDisplayValue(row.original).ast;
+        cell: ({ cell }) => {
+          const ast = cell.getValue() as number;
           return (
             <TableTd className={getPercentileColor(ast, "ast")}>
               {ast.toFixed(1)}
@@ -410,8 +405,8 @@ const RankingsTable_ = ({
             sort={column.getIsSorted()}
           />
         ),
-        cell: ({ row }) => {
-          const stl = getDisplayValue(row.original).stl;
+        cell: ({ cell }) => {
+          const stl = cell.getValue() as number;
           return (
             <TableTd className={getPercentileColor(stl, "stl")}>
               {stl.toFixed(1)}
@@ -429,8 +424,8 @@ const RankingsTable_ = ({
             sort={column.getIsSorted()}
           />
         ),
-        cell: ({ row }) => {
-          const blk = getDisplayValue(row.original).blk;
+        cell: ({ cell }) => {
+          const blk = cell.getValue() as number;
           return (
             <TableTd className={getPercentileColor(blk, "blk")}>
               {blk.toFixed(1)}
@@ -448,8 +443,8 @@ const RankingsTable_ = ({
             sort={column.getIsSorted()}
           />
         ),
-        cell: ({ row }) => {
-          const to = getDisplayValue(row.original).to;
+        cell: ({ cell }) => {
+          const to = cell.getValue() as number;
           return (
             <TableTd className={getPercentileColor(to, "to")}>
               {to.toFixed(1)}
@@ -475,7 +470,7 @@ const RankingsTable_ = ({
         ),
       },
     ];
-  }, [u, ss, getDisplayValue, getPercentileColor]);
+  }, [u, ss, getPercentileColor]);
 
   useEffect(() => {
     setColumnVisibility({ auctionValuedAt: !u });
@@ -485,8 +480,8 @@ const RankingsTable_ = ({
     if (players.length > 0) {
       return players
         .filter((player) => {
-          if (usePastYearStats && !player.pastYearRank) return false;
-          if (!usePastYearStats && !player.rank) return false;
+          if (u && !player.pastYearRank) return false;
+          if (!u && !player.rank) return false;
           return true;
         })
         .map((player) => {
@@ -515,7 +510,8 @@ const RankingsTable_ = ({
     } else {
       return [];
     }
-  }, [players, usePastYearStats, punts]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [players, u, ss, punts]);
 
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [sorting, setSorting] = useState<SortingState>([
