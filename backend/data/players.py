@@ -50,6 +50,12 @@ def main():
     logger.info("=== Getting Hashtag Auction Data ===")
     players_auction_data = scrape_auction_data()  # Hashtag Auction Data
 
+    """
+    ========================================
+    Helper Functions
+    ========================================
+    """
+
     def get_roster_data(player):
         name = player["name"]
         roster_data = next(
@@ -111,22 +117,39 @@ def main():
         )
         return auction_data
 
+    """
+    ========================================
+    Data Processing
+    ========================================
+    """
     json_data = {}
 
     # Sums for calculating means
-    proj_category_sums = [0] * 11
-    past_category_sums = [0] * 11
+    proj_category_sums_totals = [0] * 11
+    past_category_sums_totals = [0] * 11
+    proj_category_sums_per = [0] * 11
+    past_category_sums_per = [0] * 11
 
     # Min and Max for each category
-    proj_category_stats = {}
-    past_category_stats = {}
+    proj_category_stats_totals = {}
+    past_category_stats_totals = {}
+    proj_category_stats_per = {}
+    past_category_stats_per = {}
 
     for key in category_keys:
-        proj_category_stats[key] = {
+        proj_category_stats_totals[key] = {
             "min": float("inf"),
             "max": float("-inf"),
         }
-        past_category_stats[key] = {
+        proj_category_stats_per[key] = {
+            "min": float("inf"),
+            "max": float("-inf"),
+        }
+        past_category_stats_totals[key] = {
+            "min": float("inf"),
+            "max": float("-inf"),
+        }
+        past_category_stats_per[key] = {
             "min": float("inf"),
             "max": float("-inf"),
         }
@@ -182,14 +205,21 @@ def main():
         for i, key in enumerate(category_keys):
             if key == "fg_impact" or key == "ft_impact":
                 continue
-            proj_category_sums[i] += getattr(player.stats, key) * player.stats.gp
-            proj_category_stats[key]["min"] = min(
-                proj_category_stats[key]["min"],
+            proj_category_sums_totals[i] += getattr(player.stats, key) * player.stats.gp
+            proj_category_stats_totals[key]["min"] = min(
+                proj_category_stats_totals[key]["min"],
                 getattr(player.stats, key) * player.stats.gp,
             )
-            proj_category_stats[key]["max"] = max(
-                proj_category_stats[key]["max"],
+            proj_category_stats_totals[key]["max"] = max(
+                proj_category_stats_totals[key]["max"],
                 getattr(player.stats, key) * player.stats.gp,
+            )
+            proj_category_sums_per[i] += getattr(player.stats, key)
+            proj_category_stats_per[key]["min"] = min(
+                proj_category_stats_per[key]["min"], getattr(player.stats, key)
+            )
+            proj_category_stats_per[key]["max"] = max(
+                proj_category_stats_per[key]["max"], getattr(player.stats, key)
             )
 
         proj_players.append(player)
@@ -236,21 +266,28 @@ def main():
         for i, key in enumerate(category_keys):
             if key == "fg_impact" or key == "ft_impact":
                 continue
-            past_category_sums[i] += getattr(player.stats, key) * player.stats.gp
-            past_category_stats[key]["min"] = min(
-                past_category_stats[key]["min"],
+            past_category_sums_totals[i] += getattr(player.stats, key) * player.stats.gp
+            past_category_stats_totals[key]["min"] = min(
+                past_category_stats_totals[key]["min"],
                 getattr(player.stats, key) * player.stats.gp,
             )
-            past_category_stats[key]["max"] = max(
-                past_category_stats[key]["max"],
+            past_category_stats_totals[key]["max"] = max(
+                past_category_stats_totals[key]["max"],
                 getattr(player.stats, key) * player.stats.gp,
+            )
+            past_category_sums_per[i] += getattr(player.stats, key)
+            past_category_stats_per[key]["min"] = min(
+                past_category_stats_per[key]["min"], getattr(player.stats, key)
+            )
+            past_category_stats_per[key]["max"] = max(
+                past_category_stats_per[key]["max"], getattr(player.stats, key)
             )
 
         past_players.append(player)
 
     """
     ========================================
-    Calculate means and stds for each category
+    Calculate means and stds for each category, for both totals and per game stats
     ========================================
     """
     (
@@ -263,14 +300,39 @@ def main():
         proj_max_ft_impact,
     ) = calc_categories(
         proj_players,
-        proj_category_sums,
+        proj_category_sums_totals,
+        proj_category_sums_totals[0] / proj_category_sums_totals[1],
+        proj_category_sums_totals[2] / proj_category_sums_totals[3],
+        True,
     )
-    proj_category_stats["fg_impact"]["mean"] = proj_fg_impact_mean
-    proj_category_stats["fg_impact"]["min"] = proj_min_fg_impact
-    proj_category_stats["fg_impact"]["max"] = proj_max_fg_impact
-    proj_category_stats["ft_impact"]["mean"] = proj_ft_impact_mean
-    proj_category_stats["ft_impact"]["min"] = proj_min_ft_impact
-    proj_category_stats["ft_impact"]["max"] = proj_max_ft_impact
+    proj_category_stats_totals["fg_impact"]["mean"] = proj_fg_impact_mean
+    proj_category_stats_totals["fg_impact"]["min"] = proj_min_fg_impact
+    proj_category_stats_totals["fg_impact"]["max"] = proj_max_fg_impact
+    proj_category_stats_totals["ft_impact"]["mean"] = proj_ft_impact_mean
+    proj_category_stats_totals["ft_impact"]["min"] = proj_min_ft_impact
+    proj_category_stats_totals["ft_impact"]["max"] = proj_max_ft_impact
+
+    (
+        proj_category_means_per,
+        proj_fg_impact_mean_per,
+        proj_min_fg_impact_per,
+        proj_max_fg_impact_per,
+        proj_ft_impact_mean_per,
+        proj_min_ft_impact_per,
+        proj_max_ft_impact_per,
+    ) = calc_categories(
+        proj_players,
+        proj_category_sums_per,
+        proj_category_sums_per[0] / proj_category_sums_per[1],
+        proj_category_sums_per[2] / proj_category_sums_per[3],
+        False,
+    )
+    proj_category_stats_per["fg_impact"]["mean"] = proj_fg_impact_mean_per
+    proj_category_stats_per["fg_impact"]["min"] = proj_min_fg_impact_per
+    proj_category_stats_per["fg_impact"]["max"] = proj_max_fg_impact_per
+    proj_category_stats_per["ft_impact"]["mean"] = proj_ft_impact_mean_per
+    proj_category_stats_per["ft_impact"]["min"] = proj_min_ft_impact_per
+    proj_category_stats_per["ft_impact"]["max"] = proj_max_ft_impact_per
 
     (
         past_category_means,
@@ -282,51 +344,96 @@ def main():
         past_max_ft_impact,
     ) = calc_categories(
         past_players,
-        past_category_sums,
+        past_category_sums_totals,
+        past_category_sums_totals[0] / past_category_sums_totals[1],
+        past_category_sums_totals[2] / past_category_sums_totals[3],
+        True,
     )
-    past_category_stats["fg_impact"]["mean"] = past_fg_impact_mean
-    past_category_stats["fg_impact"]["min"] = past_min_fg_impact
-    past_category_stats["fg_impact"]["max"] = past_max_fg_impact
-    past_category_stats["ft_impact"]["mean"] = past_ft_impact_mean
-    past_category_stats["ft_impact"]["min"] = past_min_ft_impact
-    past_category_stats["ft_impact"]["max"] = past_max_ft_impact
+    past_category_stats_totals["fg_impact"]["mean"] = past_fg_impact_mean
+    past_category_stats_totals["fg_impact"]["min"] = past_min_fg_impact
+    past_category_stats_totals["fg_impact"]["max"] = past_max_fg_impact
+    past_category_stats_totals["ft_impact"]["mean"] = past_ft_impact_mean
+    past_category_stats_totals["ft_impact"]["min"] = past_min_ft_impact
+    past_category_stats_totals["ft_impact"]["max"] = past_max_ft_impact
+
+    (
+        past_category_means_per,
+        past_fg_impact_mean_per,
+        past_min_fg_impact_per,
+        past_max_fg_impact_per,
+        past_ft_impact_mean_per,
+        past_min_ft_impact_per,
+        past_max_ft_impact_per,
+    ) = calc_categories(
+        past_players,
+        past_category_sums_per,
+        past_category_sums_per[0] / past_category_sums_per[1],
+        past_category_sums_per[2] / past_category_sums_per[3],
+        False,
+    )
+    past_category_stats_per["fg_impact"]["mean"] = past_fg_impact_mean_per
+    past_category_stats_per["fg_impact"]["min"] = past_min_fg_impact_per
+    past_category_stats_per["fg_impact"]["max"] = past_max_fg_impact_per
+    past_category_stats_per["ft_impact"]["mean"] = past_ft_impact_mean_per
+    past_category_stats_per["ft_impact"]["min"] = past_min_ft_impact_per
+    past_category_stats_per["ft_impact"]["max"] = past_max_ft_impact_per
 
     # Update means
     for category, mean in zip(category_keys, proj_category_means):
-        proj_category_stats[category]["mean"] = mean
+        proj_category_stats_totals[category]["mean"] = mean
+    for category, mean in zip(category_keys, proj_category_means_per):
+        proj_category_stats_per[category]["mean"] = mean
     for category, mean in zip(category_keys, past_category_means):
-        past_category_stats[category]["mean"] = mean
+        past_category_stats_totals[category]["mean"] = mean
+    for category, mean in zip(category_keys, past_category_means_per):
+        past_category_stats_per[category]["mean"] = mean
 
     # Calculate stds
-    proj_category_stds = [0] * 13
-    past_category_stds = [0] * 13
+    proj_category_stds_totals = [0] * 13
+    past_category_stds_totals = [0] * 13
+    proj_category_stds_per = [0] * 13
+    past_category_stds_per = [0] * 13
 
     for player in proj_players:
         for i, key in enumerate(category_keys):
             gp = player.stats.gp
-            if key == "fg_impact" or key == "ft_impact":
-                gp = 1
-            proj_category_stds[i] += (
-                getattr(player.stats, key) * gp - proj_category_stats[key]["mean"]
+            proj_category_stds_totals[i] += (
+                getattr(player.stats, key) * gp
+                - proj_category_stats_totals[key]["mean"]
+            ) ** 2
+            proj_category_stds_per[i] += (
+                getattr(player.stats, key) - proj_category_stats_per[key]["mean"]
             ) ** 2
 
     for player in past_players:
         for i, key in enumerate(category_keys):
             gp = player.stats.gp
-            if key == "fg_impact" or key == "ft_impact":
-                gp = 1
-            past_category_stds[i] += (
-                getattr(player.stats, key) * gp - past_category_stats[key]["mean"]
+            past_category_stds_totals[i] += (
+                getattr(player.stats, key) * gp
+                - past_category_stats_totals[key]["mean"]
+            ) ** 2
+            past_category_stds_per[i] += (
+                getattr(player.stats, key) - past_category_stats_per[key]["mean"]
             ) ** 2
 
-    proj_category_stds = [((s / len(proj_players)) ** 0.5) for s in proj_category_stds]
-    past_category_stds = [((s / len(past_players)) ** 0.5) for s in past_category_stds]
+    proj_category_stds_totals = [
+        ((s / len(proj_players)) ** 0.5) for s in proj_category_stds_totals
+    ]
+    proj_category_stds_per = [
+        ((s / len(proj_players)) ** 0.5) for s in proj_category_stds_per
+    ]
+    past_category_stds_totals = [
+        ((s / len(past_players)) ** 0.5) for s in past_category_stds_totals
+    ]
+    past_category_stds_per = [
+        ((s / len(past_players)) ** 0.5) for s in past_category_stds_per
+    ]
 
     # Update stds
-    for category, std in zip(category_keys, proj_category_stds):
-        proj_category_stats[category]["std"] = std
-    for category, std in zip(category_keys, past_category_stds):
-        past_category_stats[category]["std"] = std
+    for category, std in zip(category_keys, proj_category_stds_totals):
+        proj_category_stats_totals[category]["std"] = std
+    for category, std in zip(category_keys, past_category_stds_totals):
+        past_category_stats_totals[category]["std"] = std
 
     logger.info("=== Writing to data/players.json ===")
 
@@ -338,8 +445,10 @@ def main():
         player["stats"] = player["stats"].__dict__
     json_data[proj_year_key] = proj_players_data
     json_data[past_year_key] = past_players_data
-    json_data[proj_year_key + "_category_stats"] = proj_category_stats
-    json_data[past_year_key + "_category_stats"] = past_category_stats
+    json_data[proj_year_key + "_category_stats_totals"] = proj_category_stats_totals
+    json_data[proj_year_key + "_category_stats_per"] = proj_category_stats_per
+    json_data[past_year_key + "_category_stats_totals"] = past_category_stats_totals
+    json_data[past_year_key + "_category_stats_per"] = past_category_stats_per
 
     with open("data/players.json", "w") as json_file:
         json.dump(json_data, json_file, indent=2)

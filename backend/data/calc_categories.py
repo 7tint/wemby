@@ -1,9 +1,9 @@
-def calc_categories(players, category_sums):
+def calc_categories(
+    players, category_sums, league_avg_fg_pct, league_avg_ft_pct, use_totals
+):
     players_count = len(players)
     category_means = [sum / players_count for sum in category_sums]
     fg_impact_sum, ft_impact_sum = 0, 0
-    league_avg_fg_pct = category_sums[0] / category_sums[1]
-    league_avg_ft_pct = category_sums[2] / category_sums[3]
     min_fg_impact, max_fg_impact = float("inf"), float("-inf")
     min_ft_impact, max_ft_impact = float("inf"), float("-inf")
 
@@ -18,6 +18,9 @@ def calc_categories(players, category_sums):
             if player.stats.fta != 0
             else 0
         )
+        if use_totals:
+            fg_diff *= player.stats.gp
+            ft_diff *= player.stats.gp
         player.stats.fg_impact = fg_diff * player.stats.fga
         player.stats.ft_impact = ft_diff * player.stats.fta
         fg_impact_sum += player.stats.fg_impact
