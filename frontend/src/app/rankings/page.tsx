@@ -255,14 +255,15 @@ const RankingsPage = () => {
         )}
         <Skeleton isLoaded={isLoaded} startColor="gray.50" endColor="gray.100">
           <Box shadow="md">
-            <RankingsTable
-              players={players}
-              usePastYearStats={selectedYear === 2}
-              setIsLoaded={setIsLoaded}
-              showSmartScores={showSmartScores}
-              showHighlights={showHighlights}
-              punts={punts}
-            />
+            {isLoaded && (
+              <RankingsTable
+                players={players}
+                usePastYearStats={selectedYear === 2}
+                showSmartScores={showSmartScores}
+                showHighlights={showHighlights}
+                punts={punts}
+              />
+            )}
           </Box>
         </Skeleton>
       </Stack>

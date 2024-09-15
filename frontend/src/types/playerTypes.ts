@@ -44,6 +44,7 @@ export interface PlayerStatsNScore {
   stl: number;
   blk: number;
   to: number;
+  total?: number;
 }
 
 export const EMPTY_PLAYER_STATS_NSCORE: PlayerStatsNScore = {

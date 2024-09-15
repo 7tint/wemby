@@ -79,7 +79,6 @@ const getPlayerTrend = (player: Player) => {
 interface RankingsTableProps {
   players: Player[];
   usePastYearStats: boolean;
-  setIsLoaded: (value: boolean) => void;
   showSmartScores: boolean;
   showHighlights: boolean;
   punts: string[];
@@ -88,7 +87,6 @@ interface RankingsTableProps {
 const RankingsTable_ = ({
   players,
   usePastYearStats,
-  setIsLoaded,
   showSmartScores,
   showHighlights,
   punts,
@@ -516,19 +514,7 @@ const RankingsTable_ = ({
       {
         id: "total",
         accessorFn: (player) => {
-          const total = u
-            ? totalCategories(
-                player.pastYearNScores
-                  ? player.pastYearNScores
-                  : EMPTY_PLAYER_STATS_NSCORE,
-                punts
-              )
-            : totalCategories(
-                player.projectionNScores
-                  ? player.projectionNScores
-                  : EMPTY_PLAYER_STATS_NSCORE,
-                punts
-              );
+          const total = getNStats(player, u).total;
           return total;
         },
         header: ({ column }) => (
@@ -549,20 +535,43 @@ const RankingsTable_ = ({
 
   useEffect(() => {
     setColumnVisibility({ auctionValuedAt: !u });
-    if (players.length > 0) setIsLoaded(true);
-  }, [u, setIsLoaded, players]);
+  }, [u, players]);
 
-  const currentYearPlayers = useMemo(() => {
+  const currentYearPlayers = useMemo<Player[]>(() => {
     if (players.length > 0) {
-      return players.filter((player) => {
-        if (usePastYearStats && !player.pastYearRank) return false;
-        if (!usePastYearStats && !player.rank) return false;
-        return true;
-      });
+      return players
+        .filter((player) => {
+          if (usePastYearStats && !player.pastYearRank) return false;
+          if (!usePastYearStats && !player.rank) return false;
+          return true;
+        })
+        .map((player) => {
+          return {
+            ...player,
+            projectionNScores: {
+              ...getNStats(player, false),
+              total: totalCategories(
+                player.projectionNScores
+                  ? player.projectionNScores
+                  : EMPTY_PLAYER_STATS_NSCORE,
+                punts
+              ),
+            },
+            pastYearNScores: {
+              ...getNStats(player, true),
+              total: totalCategories(
+                player.pastYearNScores
+                  ? player.pastYearNScores
+                  : EMPTY_PLAYER_STATS_NSCORE,
+                punts
+              ),
+            },
+          };
+        });
     } else {
       return [];
     }
-  }, [players, usePastYearStats]);
+  }, [players, usePastYearStats, punts]);
 
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [sorting, setSorting] = useState<SortingState>([]);
@@ -594,17 +603,18 @@ const RankingsTable_ = ({
         <Thead>
           {playersTable.getHeaderGroups().map((headerGroup) => (
             <Tr {...headerColProps} key={headerGroup.id}>
-              <Td {...headerColProps} backgroundColor="gray.200" p={0}>
-                <RankingsHeaderCell
-                  key={headerGroup.id}
-                  text="#"
-                  label="Row #"
-                />
+              <Td
+                {...headerColProps}
+                key={headerGroup.id}
+                backgroundColor="gray.200"
+                p={0}
+              >
+                <RankingsHeaderCell text="#" label="Row #" />
               </Td>
               {headerGroup.headers.map((header) => (
                 <Td
                   {...headerColProps}
-                  key={`${header.id}-${header.index}`}
+                  key={`${headerGroup.id}-${header.id}`}
                   backgroundColor="gray.200"
                   p={0}
                   cursor={header.column.getCanSort() ? "pointer" : "default"}
