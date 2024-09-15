@@ -176,6 +176,8 @@ const RankingsTable_ = ({
             )}
           </TableTd>
         ),
+        invertSorting: true,
+        sortDescFirst: true,
       },
       {
         id: "name",
