@@ -5,8 +5,10 @@ from .get_hashtag_data import (
     scrape_auction_data,
 )
 from .players import main as setup_players
+from .calc_categories import calc_categories
 
 __all__ = [
+    "calc_categories",
     "get_rosters",
     "scrape_projections",
     "scrape_past_year_stats",

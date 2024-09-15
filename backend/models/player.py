@@ -47,11 +47,9 @@ class Player:
     # TODO: add injuries
     # TODO: add salary
     rank: int  # Rank in projections
-    past_year_rank: int | None  # Rank in past year's stats
-    adp: float  # Average Draft Position
+    adp: float | None  # Average Draft Position
     positions: list[str]  # List of position eligibilities
-    projections: PlayerStats
-    past_year_stats: PlayerStats | None
+    stats: PlayerStats
     auction_valued_at: float | None
     auction_yahoo_avg: float | None
     auction_espn_avg: float | None
@@ -65,20 +63,17 @@ class Player:
         positions,
         team_id,
         team,
-        past_year_team,
-        age,
         headshot,
         years_pro,
-        jersey,
         rank,
-        past_year_rank,
-        adp,
-        projections,
-        past_year_stats,
-        auction_valued_at,
-        auction_yahoo_avg,
-        auction_espn_avg,
-        auction_blend_avg,
+        stats,
+        adp=None,
+        age=None,
+        jersey=None,
+        auction_valued_at=None,
+        auction_yahoo_avg=None,
+        auction_espn_avg=None,
+        auction_blend_avg=None,
     ):
         self.id = id
         self.first_name = first_name
@@ -86,16 +81,13 @@ class Player:
         self.positions = positions
         self.team_id = team_id
         self.team = team
-        self.past_year_team = past_year_team
         self.age = age
         self.headshot = headshot
         self.years_pro = years_pro
         self.jersey = jersey
         self.rank = rank
-        self.past_year_rank = past_year_rank
         self.adp = adp
-        self.projections = projections
-        self.past_year_stats = past_year_stats
+        self.stats = stats
         self.auction_valued_at = auction_valued_at
         self.auction_yahoo_avg = auction_yahoo_avg
         self.auction_espn_avg = auction_espn_avg
