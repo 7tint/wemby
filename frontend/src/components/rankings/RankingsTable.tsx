@@ -588,10 +588,10 @@ const RankingsTable_ = ({
           ))}
         </TableHeader>
         <TableBody>
-          {playersTable.getRowModel().rows.map((row) => {
+          {playersTable.getRowModel().rows.map((row, index) => {
             return (
               <TableRow key={row.id} className="h-10 odd:bg-slate-50">
-                <TableTd className="font-medium">{row.index + 1}</TableTd>
+                <TableTd className="font-medium">{index + 1}</TableTd>
                 {row.getVisibleCells().map((cell) =>
                   flexRender(cell.column.columnDef.cell, {
                     ...cell.getContext(),
