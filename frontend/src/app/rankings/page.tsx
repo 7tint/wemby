@@ -26,7 +26,7 @@ import {
   IconInfoSquareRounded,
 } from "@tabler/icons-react";
 import { getPlayers } from "@/api/players";
-import RankingsTable from "@/components/RankingsTable";
+import RankingsTable from "@/components/rankings/RankingsTable";
 import { normalizeScores } from "@/data/stats";
 import calculateMinMax from "@/data/minmax";
 import calculateZScores from "@/data/zScore";
