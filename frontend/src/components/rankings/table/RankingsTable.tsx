@@ -35,8 +35,8 @@ import {
 } from "@/data/stats";
 import { EMPTY_PLAYER_STATS_NSCORE, Player } from "@/types/playerTypes";
 import { Team } from "@/types/teamTypes";
-import PlayerHeadshot from "../player/PlayerHeadshot";
-import TeamLogo from "../team/TeamLogo";
+import PlayerHeadshot from "../../player/PlayerHeadshot";
+import TeamLogo from "../../team/TeamLogo";
 import {
   headerColStyles,
   RankingsColumnGroup,
@@ -108,6 +108,11 @@ const RankingsTable_ = ({
       }
     };
   }, [showHighlights, punts]);
+
+  const getDisplayValue = useMemo(
+    () => (player: Player) => ss ? getNStats(player, u) : getStats(player, u),
+    [u, ss]
+  );
 
   const columns = useMemo<ColumnDef<Player>[]>(() => {
     return [
@@ -239,8 +244,7 @@ const RankingsTable_ = ({
       },
       {
         id: "fg",
-        accessorFn: (player) =>
-          ss ? getNStats(player, u).fgImpact : getStats(player, u).fgImpact,
+        accessorFn: (player) => getDisplayValue(player).fgImpact,
         header: ({ column }) => (
           <RankingsHeaderCell
             text="FG"
@@ -281,8 +285,7 @@ const RankingsTable_ = ({
       },
       {
         id: "ft",
-        accessorFn: (player) =>
-          ss ? getNStats(player, u).ftImpact : getStats(player, u).ftImpact,
+        accessorFn: (player) => getDisplayValue(player).ftImpact,
         header: ({ column }) => (
           <RankingsHeaderCell
             text="FT"
@@ -323,8 +326,7 @@ const RankingsTable_ = ({
       },
       {
         id: "tpm",
-        accessorFn: (player) =>
-          ss ? getNStats(player, u).tpm : getStats(player, u).tpm,
+        accessorFn: (player) => getDisplayValue(player).tpm,
         header: ({ column }) => (
           <RankingsHeaderCell
             text="3PM"
@@ -332,8 +334,8 @@ const RankingsTable_ = ({
             sort={column.getIsSorted()}
           />
         ),
-        cell: ({ cell }) => {
-          const tpm = cell.getValue() as number;
+        cell: ({ row }) => {
+          const tpm = getDisplayValue(row.original).tpm;
           return (
             <TableTd className={getPercentileColor(tpm, "tpm")}>
               {tpm.toFixed(1)}
@@ -343,8 +345,7 @@ const RankingsTable_ = ({
       },
       {
         id: "pts",
-        accessorFn: (player) =>
-          ss ? getNStats(player, u).pts : getStats(player, u).pts,
+        accessorFn: (player) => getDisplayValue(player).pts,
         header: ({ column }) => (
           <RankingsHeaderCell
             text="PTS"
@@ -352,8 +353,8 @@ const RankingsTable_ = ({
             sort={column.getIsSorted()}
           />
         ),
-        cell: ({ cell }) => {
-          const pts = cell.getValue() as number;
+        cell: ({ row }) => {
+          const pts = getDisplayValue(row.original).pts;
           return (
             <TableTd className={getPercentileColor(pts, "pts")}>
               {pts.toFixed(1)}
@@ -363,8 +364,7 @@ const RankingsTable_ = ({
       },
       {
         id: "reb",
-        accessorFn: (player) =>
-          ss ? getNStats(player, u).reb : getStats(player, u).reb,
+        accessorFn: (player) => getDisplayValue(player).reb,
         header: ({ column }) => (
           <RankingsHeaderCell
             text="REB"
@@ -372,8 +372,8 @@ const RankingsTable_ = ({
             sort={column.getIsSorted()}
           />
         ),
-        cell: ({ cell }) => {
-          const reb = cell.getValue() as number;
+        cell: ({ row }) => {
+          const reb = getDisplayValue(row.original).reb;
           return (
             <TableTd className={getPercentileColor(reb, "reb")}>
               {reb.toFixed(1)}
@@ -383,8 +383,7 @@ const RankingsTable_ = ({
       },
       {
         id: "ast",
-        accessorFn: (player) =>
-          ss ? getNStats(player, u).ast : getStats(player, u).ast,
+        accessorFn: (player) => getDisplayValue(player).ast,
         header: ({ column }) => (
           <RankingsHeaderCell
             text="AST"
@@ -392,8 +391,8 @@ const RankingsTable_ = ({
             sort={column.getIsSorted()}
           />
         ),
-        cell: ({ cell }) => {
-          const ast = cell.getValue() as number;
+        cell: ({ row }) => {
+          const ast = getDisplayValue(row.original).ast;
           return (
             <TableTd className={getPercentileColor(ast, "ast")}>
               {ast.toFixed(1)}
@@ -403,8 +402,7 @@ const RankingsTable_ = ({
       },
       {
         id: "stl",
-        accessorFn: (player) =>
-          ss ? getNStats(player, u).stl : getStats(player, u).stl,
+        accessorFn: (player) => getDisplayValue(player).stl,
         header: ({ column }) => (
           <RankingsHeaderCell
             text="STL"
@@ -412,8 +410,8 @@ const RankingsTable_ = ({
             sort={column.getIsSorted()}
           />
         ),
-        cell: ({ cell }) => {
-          const stl = cell.getValue() as number;
+        cell: ({ row }) => {
+          const stl = getDisplayValue(row.original).stl;
           return (
             <TableTd className={getPercentileColor(stl, "stl")}>
               {stl.toFixed(1)}
@@ -423,8 +421,7 @@ const RankingsTable_ = ({
       },
       {
         id: "blk",
-        accessorFn: (player) =>
-          ss ? getNStats(player, u).blk : getStats(player, u).blk,
+        accessorFn: (player) => getDisplayValue(player).blk,
         header: ({ column }) => (
           <RankingsHeaderCell
             text="BLK"
@@ -432,8 +429,8 @@ const RankingsTable_ = ({
             sort={column.getIsSorted()}
           />
         ),
-        cell: ({ cell }) => {
-          const blk = cell.getValue() as number;
+        cell: ({ row }) => {
+          const blk = getDisplayValue(row.original).blk;
           return (
             <TableTd className={getPercentileColor(blk, "blk")}>
               {blk.toFixed(1)}
@@ -443,8 +440,7 @@ const RankingsTable_ = ({
       },
       {
         id: "to",
-        accessorFn: (player) =>
-          ss ? getNStats(player, u).to : getStats(player, u).to,
+        accessorFn: (player) => getDisplayValue(player).to,
         header: ({ column }) => (
           <RankingsHeaderCell
             text="TO"
@@ -452,8 +448,8 @@ const RankingsTable_ = ({
             sort={column.getIsSorted()}
           />
         ),
-        cell: ({ cell }) => {
-          const to = cell.getValue() as number;
+        cell: ({ row }) => {
+          const to = getDisplayValue(row.original).to;
           return (
             <TableTd className={getPercentileColor(to, "to")}>
               {to.toFixed(1)}
@@ -464,10 +460,7 @@ const RankingsTable_ = ({
       },
       {
         id: "total",
-        accessorFn: (player) => {
-          const total = getNStats(player, u).total;
-          return total;
-        },
+        accessorFn: (player) => getNStats(player, u).total,
         header: ({ column }) => (
           <RankingsHeaderCell
             text="Total"
@@ -482,7 +475,7 @@ const RankingsTable_ = ({
         ),
       },
     ];
-  }, [u, ss, getPercentileColor]);
+  }, [u, ss, getDisplayValue, getPercentileColor]);
 
   useEffect(() => {
     setColumnVisibility({ auctionValuedAt: !u });
@@ -547,7 +540,7 @@ const RankingsTable_ = ({
 
   return (
     <div className="shadow-md w-full overflow-x-scroll">
-      <Table className="w-max">
+      <Table className="w-max min-w-full">
         <RankingsColumnGroup u={u} ss={ss} />
         <TableHeader>
           {playersTable.getHeaderGroups().map((headerGroup) => (

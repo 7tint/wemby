@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { Player } from "@/types/playerTypes";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 
 interface PlayerHeadshotProps {
   player: Player;
@@ -12,12 +12,14 @@ const PlayerHeadshot = ({ player, size }: PlayerHeadshotProps) => {
   const large = 135;
 
   return (
-    <Image
-      src={player.headshot}
-      alt={player.firstName + " " + player.lastName}
-      width={size === "sm" ? small : size === "md" ? medium : large}
-      height={size === "sm" ? small : size === "md" ? medium : large}
-    />
+    <Avatar
+      style={{ width: size === "sm" ? small : size === "md" ? medium : large }}
+    >
+      <AvatarImage
+        src={player.headshot}
+        alt={player.firstName + " " + player.lastName}
+      />
+    </Avatar>
   );
 };
 

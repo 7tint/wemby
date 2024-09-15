@@ -1,29 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import {
-  IconAbacus,
-  IconAdjustmentsFilled,
-  IconCaretDown,
-  IconCaretRight,
-  IconHighlight,
-  IconInfoSquareRounded,
-} from "@tabler/icons-react";
 import { getPlayers } from "@/api/players";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
-import RankingsTable from "@/components/rankings/RankingsTable";
-import { normalizeScores } from "@/data/stats";
-import calculateMinMax from "@/data/minmax";
-import calculateZScores from "@/data/zScore";
-import { Player } from "@/types/playerTypes";
-import { STAT_KEYS } from "@/types/statTypes";
-import { Switch } from "@/components/ui/switch";
-import Tooltip from "@/components/ui/tooltip";
-import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
@@ -32,114 +10,13 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
-import { cn } from "@/lib/utils";
-
-interface RankingsSettingsProps {
-  showSmartScores: boolean;
-  setShowSmartScores: (value: boolean) => void;
-  showHighlights: boolean;
-  setShowHighlights: (value: boolean) => void;
-  punts: string[];
-  setPunts: (value: string[]) => void;
-}
-
-const RankingsSettings = ({
-  showSmartScores,
-  setShowSmartScores,
-  showHighlights,
-  setShowHighlights,
-  punts,
-  setPunts,
-}: RankingsSettingsProps) => {
-  const [showSettings, setShowSettings] = useState(false);
-  return (
-    <div className="my-8">
-      <Collapsible defaultOpen={true}>
-        <CollapsibleTrigger>
-          <div
-            className="flex items-center cursor-pointer w-fit"
-            onClick={() => {
-              setShowSettings(!showSettings);
-            }}
-          >
-            {showSettings ? (
-              <IconCaretDown className="mr-1" size={18} />
-            ) : (
-              <IconCaretRight className="mr-1" size={18} />
-            )}
-            <h2 className="text-lg font-medium">Settings</h2>
-          </div>
-        </CollapsibleTrigger>
-        <CollapsibleContent>
-          <div className="flex flex-col lg:flex-row justify-between gap-4 lg:gap-0 overflow-scroll ml-6 my-3">
-            <div className="flex flex-col gap-2">
-              <div className="flex items-center">
-                <Switch
-                  checked={showSmartScores}
-                  onChange={() => setShowSmartScores(!showSmartScores)}
-                />
-                <IconAdjustmentsFilled className="ml-3 mr-1" size={18} />
-                <div className="font-medium">Smart Scores</div>
-                <Tooltip label='Show "Smart Scores" - a fine-tuned combination of z-scores and min-max normalization that is used to rank players.'>
-                  <IconInfoSquareRounded className="mx-1" size={14} />
-                </Tooltip>
-              </div>
-              <div className="flex items-center">
-                <Switch
-                  checked={showHighlights}
-                  onChange={() => setShowHighlights(!showHighlights)}
-                />
-                <IconHighlight className="ml-3 mr-1" size={18} />
-                <div className="font-medium">Highlight Stats</div>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <div className="flex items-center">
-                <IconAbacus className="mr-1" size={18} />
-                <div className="font-medium">Punting</div>
-                <Tooltip label="Select categories to punt. These categories will not be calculated in the rankings.">
-                  <IconInfoSquareRounded className="mx-1" size={14} />
-                </Tooltip>
-                <div className="flex ml-3">
-                  <div className="flex gap-0">
-                    {STAT_KEYS.map((key, i) => {
-                      let label: string = key.toUpperCase();
-                      if (key === "fg") label = "FG%";
-                      if (key === "ft") label = "FT%";
-                      if (key === "tpm") label = "3PM";
-                      return (
-                        <Button
-                          key={label}
-                          variant={punts.includes(key) ? "violet" : "secondary"}
-                          className={cn(
-                            "border rounded-none border-l-0",
-                            i === 0 ? "rounded-l-md " : "",
-                            i === 8 ? "rounded-r-md " : "",
-                            i === 0 ? "border-l " : ""
-                          )}
-                          color={punts.includes(key) ? "purple" : "slate"}
-                          onClick={() => {
-                            if (punts.includes(key)) {
-                              setPunts(punts.filter((cat) => cat !== key));
-                            } else {
-                              setPunts([...punts, key]);
-                            }
-                          }}
-                        >
-                          {label}
-                        </Button>
-                      );
-                    })}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </CollapsibleContent>
-      </Collapsible>
-    </div>
-  );
-};
+import RankingsSettings from "@/components/rankings/RankingsSettings";
+import RankingsTable from "@/components/rankings/table/RankingsTable";
+import { normalizeScores } from "@/data/stats";
+import calculateMinMax from "@/data/minmax";
+import calculateZScores from "@/data/zScore";
+import { Player } from "@/types/playerTypes";
+import RankingsFilters from "@/components/rankings/RankingsFilters";
 
 const RankingsPage = () => {
   const [players, setPlayers] = useState<Player[]>([]);
@@ -205,7 +82,7 @@ const RankingsPage = () => {
   }, [players]);
 
   return (
-    <div className="mx-auto my-12 px-4 md:px-8 lg:px-12">
+    <div className="mx-auto mt-16 mb-12 px-4 md:px-8 lg:px-12">
       <div className="flex justify-between my-8">
         <h1 className="text-2xl font-semibold">Player Rankings</h1>
         <div className="w-auto">
@@ -237,14 +114,17 @@ const RankingsPage = () => {
         punts={punts}
         setPunts={setPunts}
       />
+      <RankingsFilters />
       {isLoaded ? (
-        <RankingsTable
-          players={players}
-          usePastYearStats={selectedYear === 2}
-          showSmartScores={showSmartScores}
-          showHighlights={showHighlights}
-          punts={punts}
-        />
+        <div className="mt-8">
+          <RankingsTable
+            players={players}
+            usePastYearStats={selectedYear === 2}
+            showSmartScores={showSmartScores}
+            showHighlights={showHighlights}
+            punts={punts}
+          />
+        </div>
       ) : (
         Array.from({ length: 10 }, (_, i) => (
           <Skeleton key={i} className="h-10 mb-4" />
