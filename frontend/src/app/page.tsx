@@ -1,5 +1,5 @@
 const Home = () => {
-  return <>Hi</>;
+  return <a href="/rankings">Rankings Page</a>;
 };
 
 export default Home;

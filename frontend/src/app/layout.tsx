@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { fonts } from "./fonts";
-import { Providers } from "./providers";
+
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Wemby Fantasy Helper",
@@ -14,9 +15,7 @@ const RootLayout = ({
 }>) => {
   return (
     <html lang="en" className={fonts.rubik.variable}>
-      <body>
-        <Providers>{children}</Providers>
-      </body>
+      <body className="text-xs sm:text-sm bg-inherit">{children}</body>
     </html>
   );
 };

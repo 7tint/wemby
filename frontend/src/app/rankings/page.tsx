@@ -1,22 +1,6 @@
 "use client";
 
-import { Fragment, useEffect, useState } from "react";
-import {
-  Box,
-  Button,
-  Collapse,
-  Container,
-  Flex,
-  Heading,
-  HStack,
-  Icon,
-  Select,
-  Skeleton,
-  Spacer,
-  Stack,
-  Switch,
-  Tooltip,
-} from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 import {
   IconAbacus,
   IconAdjustmentsFilled,
@@ -26,12 +10,29 @@ import {
   IconInfoSquareRounded,
 } from "@tabler/icons-react";
 import { getPlayers } from "@/api/players";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 import RankingsTable from "@/components/rankings/RankingsTable";
 import { normalizeScores } from "@/data/stats";
 import calculateMinMax from "@/data/minmax";
 import calculateZScores from "@/data/zScore";
 import { Player } from "@/types/playerTypes";
 import { STAT_KEYS } from "@/types/statTypes";
+import { Switch } from "@/components/ui/switch";
+import Tooltip from "@/components/ui/tooltip";
+import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Skeleton } from "@/components/ui/skeleton";
+import { cn } from "@/lib/utils";
 
 interface RankingsSettingsProps {
   showSmartScores: boolean;
@@ -52,102 +53,91 @@ const RankingsSettings = ({
 }: RankingsSettingsProps) => {
   const [showSettings, setShowSettings] = useState(false);
   return (
-    <Box my={8}>
-      <Flex
-        align="center"
-        cursor="pointer"
-        width="fit-content"
-        onClick={() => {
-          setShowSettings(!showSettings);
-        }}
-      >
-        <Icon
-          as={showSettings ? IconCaretDown : IconCaretRight}
-          mr={1}
-          boxSize={5}
-        />
-        <Heading size="md">Settings</Heading>
-      </Flex>
-      <Collapse in={showSettings}>
-        <Flex
-          direction={{ base: "column", lg: "row" }}
-          justify="space-between"
-          gap={{ base: 4, lg: 0 }}
-          overflow="scroll"
-          ml={6}
-          my={3}
-        >
-          <Flex direction="column" gap={2}>
-            <Flex align="center">
-              <Switch
-                colorScheme="purple"
-                isChecked={showSmartScores}
-                onChange={() => setShowSmartScores(!showSmartScores)}
-              />
-              <Icon ml={2} mr={1.5} as={IconAdjustmentsFilled} boxSize={5} />
-              <Box fontWeight={600}>Smart Scores</Box>
-              <Tooltip
-                placement="top"
-                label='Show "Smart Scores" - a fine-tuned combination of z-scores and min-max normalization that is used to rank players.'
-              >
-                <Icon mx={1} as={IconInfoSquareRounded} boxSize={4} />
-              </Tooltip>
-            </Flex>
-            <Flex align="center">
-              <Switch
-                colorScheme="purple"
-                isChecked={showHighlights}
-                onChange={() => setShowHighlights(!showHighlights)}
-              />
-              <Icon ml={2} mr={1.5} as={IconHighlight} boxSize={5} />
-              <Box fontWeight={600}>Highlight Stats</Box>
-            </Flex>
-          </Flex>
-          <Flex gap={3} align="center">
-            <Flex align="center">
-              <Icon mr={1.5} as={IconAbacus} boxSize={5} />
-              <Box fontWeight={600}>Punting</Box>
-              <Tooltip
-                placement="top"
-                label="Select categories to punt. These categories will not be calculated in the rankings."
-              >
-                <Icon mx={1} as={IconInfoSquareRounded} boxSize={4} />
-              </Tooltip>
-            </Flex>
-            <HStack spacing={0}>
-              <HStack spacing={0}>
-                {STAT_KEYS.map((key, i) => {
-                  let label: string = key.toUpperCase();
-                  if (key === "fg") label = "FG%";
-                  if (key === "ft") label = "FT%";
-                  if (key === "tpm") label = "3PM";
-                  return (
-                    <Button
-                      key={label}
-                      borderWidth={1}
-                      borderRadius={i === 0 ? "md" : 0}
-                      borderRightRadius={i === 8 ? "md" : 0}
-                      borderLeftRadius={i === 0 ? "md" : 0}
-                      borderLeftWidth={i === 0 ? 1 : 0}
-                      colorScheme={punts.includes(key) ? "purple" : "gray"}
-                      onClick={() => {
-                        if (punts.includes(key)) {
-                          setPunts(punts.filter((cat) => cat !== key));
-                        } else {
-                          setPunts([...punts, key]);
-                        }
-                      }}
-                    >
-                      {label}
-                    </Button>
-                  );
-                })}
-              </HStack>
-            </HStack>
-          </Flex>
-        </Flex>
-      </Collapse>
-    </Box>
+    <div className="my-8">
+      <Collapsible>
+        <CollapsibleTrigger>
+          <div
+            className="flex items-center cursor-pointer w-fit"
+            onClick={() => {
+              setShowSettings(!showSettings);
+            }}
+          >
+            {showSettings ? (
+              <IconCaretDown className="mr-1" size={18} />
+            ) : (
+              <IconCaretRight className="mr-1" size={18} />
+            )}
+            <h2 className="text-lg font-medium">Settings</h2>
+          </div>
+        </CollapsibleTrigger>
+        <CollapsibleContent>
+          <div className="flex flex-col lg:flex-row justify-between gap-4 lg:gap-0 overflow-scroll ml-6 my-3">
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center">
+                <Switch
+                  checked={showSmartScores}
+                  onChange={() => setShowSmartScores(!showSmartScores)}
+                />
+                <IconAdjustmentsFilled className="ml-3 mr-1" size={18} />
+                <div className="font-medium">Smart Scores</div>
+                <Tooltip label='Show "Smart Scores" - a fine-tuned combination of z-scores and min-max normalization that is used to rank players.'>
+                  <IconInfoSquareRounded className="mx-1" size={14} />
+                </Tooltip>
+              </div>
+              <div className="flex items-center">
+                <Switch
+                  checked={showHighlights}
+                  onChange={() => setShowHighlights(!showHighlights)}
+                />
+                <IconHighlight className="ml-3 mr-1" size={18} />
+                <div className="font-medium">Highlight Stats</div>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="flex items-center">
+                <IconAbacus className="mr-1" size={18} />
+                <div className="font-medium">Punting</div>
+                <Tooltip label="Select categories to punt. These categories will not be calculated in the rankings.">
+                  <IconInfoSquareRounded className="mx-1" size={14} />
+                </Tooltip>
+                <div className="flex ml-3">
+                  <div className="flex gap-0">
+                    {STAT_KEYS.map((key, i) => {
+                      let label: string = key.toUpperCase();
+                      if (key === "fg") label = "FG%";
+                      if (key === "ft") label = "FT%";
+                      if (key === "tpm") label = "3PM";
+                      return (
+                        <Button
+                          key={label}
+                          variant={punts.includes(key) ? "violet" : "secondary"}
+                          className={cn(
+                            "border rounded-none border-l-0",
+                            i === 0 ? "rounded-l-md " : "",
+                            i === 8 ? "rounded-r-md " : "",
+                            i === 0 ? "border-l " : ""
+                          )}
+                          color={punts.includes(key) ? "purple" : "slate"}
+                          onClick={() => {
+                            if (punts.includes(key)) {
+                              setPunts(punts.filter((cat) => cat !== key));
+                            } else {
+                              setPunts([...punts, key]);
+                            }
+                          }}
+                        >
+                          {label}
+                        </Button>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </CollapsibleContent>
+      </Collapsible>
+    </div>
   );
 };
 
@@ -215,22 +205,30 @@ const RankingsPage = () => {
   }, [players]);
 
   return (
-    <Container maxW="container.2xl" px={12} my={12}>
-      <Flex justify="space-between" my={8}>
-        <Heading size="lg">Player Rankings</Heading>
-        <Spacer />
-        <Select
-          width="auto"
-          placeholder="Select year for rankings"
-          value={selectedYear}
-          onChange={(e) => {
-            setSelectedYear(parseInt(e.target.value));
-          }}
-        >
-          <option value={1}>2024-2025 Projections</option>
-          <option value={2}>2023-2024 Stats</option>
-        </Select>
-      </Flex>
+    <div className="mx-auto my-12 px-4 md:px-8 lg:px-12">
+      <div className="flex justify-between my-8">
+        <h1 className="text-2xl font-semibold">Player Rankings</h1>
+        <div className="w-auto">
+          <Select
+            defaultValue={selectedYear.toString()}
+            onValueChange={(value) => {
+              setSelectedYear(parseInt(value));
+            }}
+          >
+            <SelectTrigger>
+              <SelectValue placeholder="Select year for rankings" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem className="cursor-pointer" value="1">
+                2024-2025 Projections
+              </SelectItem>
+              <SelectItem className="cursor-pointer" value="2">
+                2023-2024 Stats
+              </SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+      </div>
       <RankingsSettings
         showSmartScores={showSmartScores}
         setShowSmartScores={setShowSmartScores}
@@ -239,34 +237,20 @@ const RankingsPage = () => {
         punts={punts}
         setPunts={setPunts}
       />
-      <Stack spacing={4}>
-        {Array.from({ length: 100 }).map((_, i) =>
-          isLoaded ? (
-            <Fragment key={i}></Fragment>
-          ) : (
-            <Skeleton
-              key={i}
-              height={12}
-              startColor="gray.50"
-              endColor="gray.200"
-            />
-          )
+      <div className="gap-4">
+        {isLoaded ? (
+          <RankingsTable
+            players={players}
+            usePastYearStats={selectedYear === 2}
+            showSmartScores={showSmartScores}
+            showHighlights={showHighlights}
+            punts={punts}
+          />
+        ) : (
+          <Skeleton className="h-12" />
         )}
-        <Skeleton isLoaded={isLoaded} startColor="gray.50" endColor="gray.100">
-          <Box shadow="md">
-            {isLoaded && (
-              <RankingsTable
-                players={players}
-                usePastYearStats={selectedYear === 2}
-                showSmartScores={showSmartScores}
-                showHighlights={showHighlights}
-                punts={punts}
-              />
-            )}
-          </Box>
-        </Skeleton>
-      </Stack>
-    </Container>
+      </div>
+    </div>
   );
 };
 
