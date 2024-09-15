@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Player } from "@/types/playerTypes";
 
 interface PlayerHeadshotProps {
@@ -6,15 +7,16 @@ interface PlayerHeadshotProps {
 }
 
 const PlayerHeadshot = ({ player, size }: PlayerHeadshotProps) => {
-  const small = "45px";
-  const medium = "90px";
-  const large = "135px";
+  const small = 45;
+  const medium = 90;
+  const large = 135;
 
   return (
-    <img
+    <Image
       src={player.headshot}
       alt={player.firstName + " " + player.lastName}
       width={size === "sm" ? small : size === "md" ? medium : large}
+      height={size === "sm" ? small : size === "md" ? medium : large}
     />
   );
 };
