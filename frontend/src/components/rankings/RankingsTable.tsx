@@ -94,8 +94,8 @@ const RankingsTable_ = ({
   const u = usePastYearStats;
   const ss = showSmartScores;
 
-  const columns = useMemo<ColumnDef<Player>[]>(() => {
-    const getPercentileColor = (stat: number, category: string) => {
+  const getPercentileColor = useMemo(() => {
+    return (stat: number, category: string) => {
       if (!showHighlights) return "transparent";
       if (punts.includes(category)) return "gray.100";
       const percentile = calculateStatPercentiles(stat, category);
@@ -113,7 +113,9 @@ const RankingsTable_ = ({
         return "transparent";
       }
     };
+  }, [showHighlights, punts]);
 
+  const columns = useMemo<ColumnDef<Player>[]>(() => {
     return [
       {
         id: "rank",
@@ -531,7 +533,7 @@ const RankingsTable_ = ({
         ),
       },
     ];
-  }, [u, ss, punts, showHighlights]);
+  }, [u, ss, getPercentileColor]);
 
   useEffect(() => {
     setColumnVisibility({ auctionValuedAt: !u });
