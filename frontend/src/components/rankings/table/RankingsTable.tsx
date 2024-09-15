@@ -27,13 +27,8 @@ import {
   IconArrowBadgeUpFilled,
   IconCurrencyDollar,
 } from "@tabler/icons-react";
-import {
-  calculateStatPercentiles,
-  getNStats,
-  getStats,
-  totalCategories,
-} from "@/data/stats";
-import { EMPTY_PLAYER_STATS_NSCORE, Player } from "@/types/playerTypes";
+import { calculateStatPercentiles, getNStats, getStats } from "@/data/stats";
+import { Player } from "@/types/playerTypes";
 import { Team } from "@/types/teamTypes";
 import PlayerHeadshot from "../../player/PlayerHeadshot";
 import TeamLogo from "../../team/TeamLogo";
@@ -44,6 +39,7 @@ import {
   TableTd,
 } from "./RankingsTableUtils";
 import { cn } from "@/lib/utils";
+import usePlayersToDisplay from "@/hooks/usePlayersToDisplay";
 
 /*
  * RANKINGS TABLE
@@ -476,42 +472,7 @@ const RankingsTable_ = ({
     setColumnVisibility({ auctionValuedAt: !u });
   }, [u, players]);
 
-  const currentYearPlayers = useMemo<Player[]>(() => {
-    if (players.length > 0) {
-      return players
-        .filter((player) => {
-          if (u && !player.pastYearRank) return false;
-          if (!u && !player.rank) return false;
-          return true;
-        })
-        .map((player) => {
-          return {
-            ...player,
-            projectionNScores: {
-              ...getNStats(player, false),
-              total: totalCategories(
-                player.projectionNScores
-                  ? player.projectionNScores
-                  : EMPTY_PLAYER_STATS_NSCORE,
-                punts
-              ),
-            },
-            pastYearNScores: {
-              ...getNStats(player, true),
-              total: totalCategories(
-                player.pastYearNScores
-                  ? player.pastYearNScores
-                  : EMPTY_PLAYER_STATS_NSCORE,
-                punts
-              ),
-            },
-          };
-        });
-    } else {
-      return [];
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [players, u, ss, punts]);
+  const playersList = usePlayersToDisplay(players, u, punts);
 
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [sorting, setSorting] = useState<SortingState>([
@@ -523,7 +484,7 @@ const RankingsTable_ = ({
 
   const playersTable = useReactTable<Player>({
     columns,
-    data: currentYearPlayers,
+    data: playersList,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     state: {
