@@ -238,7 +238,7 @@ const RankingsTable_ = ({
         accessorFn: (player) => getDisplayValue(player).fgImpact,
         header: ({ column }) => (
           <RankingsHeaderCell
-            text="FG"
+            text="FG%"
             label="Field Goal %"
             sort={column.getIsSorted()}
           />
@@ -279,7 +279,7 @@ const RankingsTable_ = ({
         accessorFn: (player) => getDisplayValue(player).ftImpact,
         header: ({ column }) => (
           <RankingsHeaderCell
-            text="FT"
+            text="FT%"
             label="Free Throw %"
             sort={column.getIsSorted()}
           />
