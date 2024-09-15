@@ -513,7 +513,7 @@ const RankingsTable_ = ({
                 <RankingsHeaderCell text="#" label="Row #" />
               </TableHead>
               {headerGroup.headers.map((header) => (
-                <TableCell
+                <TableHead
                   key={`${headerGroup.id}-${header.id}`}
                   className={cn(
                     "border-slate-300 p-0",
@@ -536,7 +536,7 @@ const RankingsTable_ = ({
                   {flexRender(header.column.columnDef.header, {
                     ...header.getContext(),
                   })}
-                </TableCell>
+                </TableHead>
               ))}
             </TableRow>
           ))}
