@@ -237,19 +237,19 @@ const RankingsPage = () => {
         punts={punts}
         setPunts={setPunts}
       />
-      <div className="gap-4">
-        {isLoaded ? (
-          <RankingsTable
-            players={players}
-            usePastYearStats={selectedYear === 2}
-            showSmartScores={showSmartScores}
-            showHighlights={showHighlights}
-            punts={punts}
-          />
-        ) : (
-          <Skeleton className="h-12" />
-        )}
-      </div>
+      {isLoaded ? (
+        <RankingsTable
+          players={players}
+          usePastYearStats={selectedYear === 2}
+          showSmartScores={showSmartScores}
+          showHighlights={showHighlights}
+          punts={punts}
+        />
+      ) : (
+        Array.from({ length: 10 }, (_, i) => (
+          <Skeleton key={i} className="h-10 mb-4" />
+        ))
+      )}
     </div>
   );
 };

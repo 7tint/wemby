@@ -24,6 +24,8 @@ import {
   IconArrowDown,
   IconEqual,
   IconPointFilled,
+  IconArrowBadgeUpFilled,
+  IconCurrencyDollar,
 } from "@tabler/icons-react";
 import {
   calculateStatPercentiles,
@@ -114,7 +116,7 @@ const RankingsTable_ = ({
         accessorFn: (player) => (u ? player.pastYearRank : player.rank),
         header: ({ column }) => (
           <RankingsHeaderCell
-            text="Rank"
+            text={<IconArrowBadgeUpFilled size={18} />}
             label="Rank (from Hashtag Basketball)"
             sort={column.getIsSorted()}
           />
@@ -126,7 +128,7 @@ const RankingsTable_ = ({
         accessorKey: "auctionValuedAt",
         header: ({ column }) => (
           <RankingsHeaderCell
-            text="$"
+            text={<IconCurrencyDollar className="mt-2.5" size={16} />}
             label="Auction Value"
             sort={column.getIsSorted()}
           />

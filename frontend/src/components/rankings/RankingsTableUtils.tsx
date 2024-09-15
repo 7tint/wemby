@@ -8,7 +8,7 @@ export const cellWidthSm = "50px";
 export const cellWidthMd = "65px";
 export const cellWidthLg = "125px";
 
-export const colStyles = "border-x border-slate-300";
+export const colStyles = "border border-slate-300";
 export const headerColStyles = cn(colStyles, "bg-slate-200");
 
 /*
@@ -38,7 +38,7 @@ const RankingsHeaderCell_ = ({
 }: {
   id?: string;
   label: string;
-  text: string;
+  text: string | ReactNode;
   sort?: false | SortDirection;
 }) => {
   const calcHeaderSortColor = (sort: false | SortDirection) => {
@@ -48,7 +48,7 @@ const RankingsHeaderCell_ = ({
   };
 
   return (
-    <div key={id} className="flex flex-col justify-center items-center">
+    <div key={id} className="flex flex-col h-full justify-start items-center">
       <div className={cn("h-3 w-full", calcHeaderSortColor(sort))} />
       <Tooltip label={label}>
         <div className="my-2 font-semibold">{text}</div>
