@@ -15,10 +15,12 @@ import {
 } from "@chakra-ui/react";
 import {
   ColumnDef,
+  SortDirection,
   SortingState,
   VisibilityState,
   flexRender,
   getCoreRowModel,
+  getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
 import {
@@ -79,36 +81,32 @@ const RankingsHeaderCell_ = ({
   id,
   label,
   text,
+  sort = false,
 }: {
   id?: string;
   label: string;
   text: string;
+  sort?: false | SortDirection;
 }) => {
-  const calcHeaderSortColor = (key: string) => {
-    if (key === "") return "gray.300";
-    // TODO: add sort color
+  const calcHeaderSortColor = (sort: false | SortDirection) => {
+    if (sort === "asc") return "orange.200";
+    if (sort === "desc") return "teal.200";
     return "gray.300";
   };
 
   return (
-    <Td {...headerColProps} p={0} backgroundColor="gray.200">
-      <Flex direction="column" justify="center" align="center">
-        <Box
-          height={3}
-          width="100%"
-          backgroundColor={
-            calcHeaderSortColor
-              ? calcHeaderSortColor(id || "default")
-              : "gray.300"
-          }
-        />
-        <Tooltip label={label} hasArrow placement="top">
-          <Box my={2} fontWeight={700}>
-            {text}
-          </Box>
-        </Tooltip>
-      </Flex>
-    </Td>
+    <Flex key={id} direction="column" justify="center" align="center">
+      <Box
+        height={3}
+        width="100%"
+        backgroundColor={calcHeaderSortColor(sort)}
+      />
+      <Tooltip label={label} hasArrow placement="top">
+        <Box my={2} fontWeight={700}>
+          {text}
+        </Box>
+      </Tooltip>
+    </Flex>
   );
 };
 const RankingsHeaderCell = memo(RankingsHeaderCell_);
@@ -188,23 +186,37 @@ const RankingsTable_ = ({
       {
         id: "rank",
         accessorFn: (player) => (u ? player.pastYearRank : player.rank),
-        header: () => (
+        header: ({ column }) => (
           <RankingsHeaderCell
             text="Rank"
             label="Rank (from Hashtag Basketball)"
+            sort={column.getIsSorted()}
           />
         ),
         cell: (p) => <TableTd>{p.getValue() as number}</TableTd>,
+        invertSorting: true,
       },
       {
         accessorKey: "auctionValuedAt",
-        header: () => <RankingsHeaderCell text="$" label="Auction Value" />,
+        header: ({ column }) => (
+          <RankingsHeaderCell
+            text="$"
+            label="Auction Value"
+            sort={column.getIsSorted()}
+          />
+        ),
         cell: (p) => <TableTd>${(p.getValue() as number).toFixed(1)}</TableTd>,
       },
       {
         id: "team",
         accessorFn: (player) => (u ? player.pastYearTeam : player.team),
-        header: () => <RankingsHeaderCell text="Team" label="Team" />,
+        header: ({ column }) => (
+          <RankingsHeaderCell
+            text="Team"
+            label="Team"
+            sort={column.getIsSorted()}
+          />
+        ),
         cell: ({ row }) => (
           <TableTd>
             {u ? (
@@ -234,7 +246,13 @@ const RankingsTable_ = ({
       {
         id: "name",
         accessorFn: (player) => player.firstName + player.lastName,
-        header: () => <RankingsHeaderCell text="Player" label="Player Name" />,
+        header: ({ column }) => (
+          <RankingsHeaderCell
+            text="Player"
+            label="Player Name"
+            sort={column.getIsSorted()}
+          />
+        ),
         cell: ({ row }) => {
           const playerTrend = getPlayerTrend(row.original);
           return (
@@ -260,7 +278,13 @@ const RankingsTable_ = ({
       },
       {
         accessorKey: "age",
-        header: () => <RankingsHeaderCell text="Age" label="Age" />,
+        header: ({ column }) => (
+          <RankingsHeaderCell
+            text="Age"
+            label="Age"
+            sort={column.getIsSorted()}
+          />
+        ),
         cell: (p) => (
           <TableTd>
             {u ? (p.getValue() as number) - 1 : (p.getValue() as number)}
@@ -275,7 +299,13 @@ const RankingsTable_ = ({
               ? player.pastYearStats.gp
               : 0
             : player.projections.gp,
-        header: () => <RankingsHeaderCell text="GP" label="Games Played" />,
+        header: ({ column }) => (
+          <RankingsHeaderCell
+            text="GP"
+            label="Games Played"
+            sort={column.getIsSorted()}
+          />
+        ),
         cell: (p) => (
           <TableTd fontWeight={500}>{p.getValue() as number}</TableTd>
         ),
@@ -288,8 +318,12 @@ const RankingsTable_ = ({
               ? player.pastYearStats.mpg
               : 0
             : player.projections.mpg,
-        header: () => (
-          <RankingsHeaderCell text="MPG" label="Minutes Per Game" />
+        header: ({ column }) => (
+          <RankingsHeaderCell
+            text="MPG"
+            label="Minutes Per Game"
+            sort={column.getIsSorted()}
+          />
         ),
         cell: (p) => (
           <TableTd fontWeight={500}>
@@ -299,7 +333,15 @@ const RankingsTable_ = ({
       },
       {
         id: "fg",
-        header: () => <RankingsHeaderCell text="FG" label="Field Goal %" />,
+        accessorFn: (player) =>
+          ss ? getNStats(player, u).fgImpact : getStats(player, u).fgImpact,
+        header: ({ column }) => (
+          <RankingsHeaderCell
+            text="FG"
+            label="Field Goal %"
+            sort={column.getIsSorted()}
+          />
+        ),
         cell: ({ row }) => {
           const playerStats = getStats(row.original, u);
           const playerNStats = getNStats(row.original, u);
@@ -333,7 +375,15 @@ const RankingsTable_ = ({
       },
       {
         id: "ft",
-        header: () => <RankingsHeaderCell text="FT" label="Free Throw %" />,
+        accessorFn: (player) =>
+          ss ? getNStats(player, u).ftImpact : getStats(player, u).ftImpact,
+        header: ({ column }) => (
+          <RankingsHeaderCell
+            text="FT"
+            label="Free Throw %"
+            sort={column.getIsSorted()}
+          />
+        ),
         cell: ({ row }) => {
           const playerStats = getStats(row.original, u);
           const playerNStats = getNStats(row.original, u);
@@ -369,7 +419,13 @@ const RankingsTable_ = ({
         id: "tpm",
         accessorFn: (player) =>
           ss ? getNStats(player, u).tpm : getStats(player, u).tpm,
-        header: () => <RankingsHeaderCell text="3PM" label="3-Pointers Made" />,
+        header: ({ column }) => (
+          <RankingsHeaderCell
+            text="3PM"
+            label="3-Pointers Made"
+            sort={column.getIsSorted()}
+          />
+        ),
         cell: ({ cell, row }) => {
           const tpm = cell.getValue() as number;
           return (
@@ -388,7 +444,13 @@ const RankingsTable_ = ({
         id: "pts",
         accessorFn: (player) =>
           ss ? getNStats(player, u).pts : getStats(player, u).pts,
-        header: () => <RankingsHeaderCell text="PTS" label="Points" />,
+        header: ({ column }) => (
+          <RankingsHeaderCell
+            text="PTS"
+            label="Points"
+            sort={column.getIsSorted()}
+          />
+        ),
         cell: ({ cell }) => {
           const pts = cell.getValue() as number;
           return (
@@ -405,7 +467,13 @@ const RankingsTable_ = ({
         id: "reb",
         accessorFn: (player) =>
           ss ? getNStats(player, u).reb : getStats(player, u).reb,
-        header: () => <RankingsHeaderCell text="REB" label="Rebounds" />,
+        header: ({ column }) => (
+          <RankingsHeaderCell
+            text="REB"
+            label="Rebounds"
+            sort={column.getIsSorted()}
+          />
+        ),
         cell: ({ cell }) => {
           const reb = cell.getValue() as number;
           return (
@@ -422,7 +490,13 @@ const RankingsTable_ = ({
         id: "ast",
         accessorFn: (player) =>
           ss ? getNStats(player, u).ast : getStats(player, u).ast,
-        header: () => <RankingsHeaderCell text="AST" label="Assists" />,
+        header: ({ column }) => (
+          <RankingsHeaderCell
+            text="AST"
+            label="Assists"
+            sort={column.getIsSorted()}
+          />
+        ),
         cell: ({ cell }) => {
           const ast = cell.getValue() as number;
           return (
@@ -439,7 +513,13 @@ const RankingsTable_ = ({
         id: "stl",
         accessorFn: (player) =>
           ss ? getNStats(player, u).stl : getStats(player, u).stl,
-        header: () => <RankingsHeaderCell text="STL" label="Steals" />,
+        header: ({ column }) => (
+          <RankingsHeaderCell
+            text="STL"
+            label="Steals"
+            sort={column.getIsSorted()}
+          />
+        ),
         cell: ({ cell }) => {
           const stl = cell.getValue() as number;
           return (
@@ -456,7 +536,13 @@ const RankingsTable_ = ({
         id: "blk",
         accessorFn: (player) =>
           ss ? getNStats(player, u).blk : getStats(player, u).blk,
-        header: () => <RankingsHeaderCell text="BLK" label="Blocks" />,
+        header: ({ column }) => (
+          <RankingsHeaderCell
+            text="BLK"
+            label="Blocks"
+            sort={column.getIsSorted()}
+          />
+        ),
         cell: ({ cell }) => {
           const blk = cell.getValue() as number;
           return (
@@ -473,7 +559,13 @@ const RankingsTable_ = ({
         id: "to",
         accessorFn: (player) =>
           ss ? getNStats(player, u).to : getStats(player, u).to,
-        header: () => <RankingsHeaderCell text="TO" label="Turnovers" />,
+        header: ({ column }) => (
+          <RankingsHeaderCell
+            text="TO"
+            label="Turnovers"
+            sort={column.getIsSorted()}
+          />
+        ),
         cell: ({ cell }) => {
           const to = cell.getValue() as number;
           return (
@@ -485,6 +577,7 @@ const RankingsTable_ = ({
             </TableTd>
           );
         },
+        invertSorting: true,
       },
       {
         id: "total",
@@ -502,11 +595,14 @@ const RankingsTable_ = ({
                   : EMPTY_PLAYER_STATS_NSCORE,
                 punts
               );
-          console.log(total);
           return total;
         },
-        header: () => (
-          <RankingsHeaderCell text="Total" label="Total Smart Score" />
+        header: ({ column }) => (
+          <RankingsHeaderCell
+            text="Total"
+            label="Total Smart Score"
+            sort={column.getIsSorted()}
+          />
         ),
         cell: ({ cell }) => (
           <TableTd fontWeight={600}>
@@ -541,6 +637,7 @@ const RankingsTable_ = ({
     columns,
     data: currentYearPlayers,
     getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
     state: {
       columnVisibility,
       sorting,
@@ -582,13 +679,36 @@ const RankingsTable_ = ({
         <Thead>
           {playersTable.getHeaderGroups().map((headerGroup) => (
             <Tr {...headerColProps} key={headerGroup.id}>
-              <RankingsHeaderCell key={headerGroup.id} text="#" label="Row #" />
-              {headerGroup.headers.map((header) =>
-                flexRender(header.column.columnDef.header, {
-                  ...header.getContext(),
-                  key: `${header.id}-${header.index}`,
-                })
-              )}
+              <Td {...headerColProps} backgroundColor="gray.200" p={0}>
+                <RankingsHeaderCell
+                  key={headerGroup.id}
+                  text="#"
+                  label="Row #"
+                />
+              </Td>
+              {headerGroup.headers.map((header) => (
+                <Td
+                  {...headerColProps}
+                  key={`${header.id}-${header.index}`}
+                  backgroundColor="gray.200"
+                  p={0}
+                  cursor={header.column.getCanSort() ? "pointer" : "default"}
+                  onClick={header.column.getToggleSortingHandler()}
+                  title={
+                    header.column.getCanSort()
+                      ? header.column.getNextSortingOrder() === "asc"
+                        ? "Sort ascending"
+                        : header.column.getNextSortingOrder() === "desc"
+                        ? "Sort descending"
+                        : "Clear sort"
+                      : undefined
+                  }
+                >
+                  {flexRender(header.column.columnDef.header, {
+                    ...header.getContext(),
+                  })}
+                </Td>
+              ))}
             </Tr>
           ))}
         </Thead>
