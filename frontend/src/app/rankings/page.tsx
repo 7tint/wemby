@@ -225,7 +225,6 @@ const RankingsPage = () => {
           value={selectedYear}
           onChange={(e) => {
             setSelectedYear(parseInt(e.target.value));
-            setIsLoaded(false);
           }}
         >
           <option value={1}>2024-2025 Projections</option>
