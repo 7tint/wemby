@@ -523,7 +523,12 @@ const RankingsTable_ = ({
   }, [players, usePastYearStats, punts]);
 
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
-  const [sorting, setSorting] = useState<SortingState>([]);
+  const [sorting, setSorting] = useState<SortingState>([
+    {
+      id: "total",
+      desc: true,
+    },
+  ]);
 
   const playersTable = useReactTable<Player>({
     columns,
