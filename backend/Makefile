@@ -14,4 +14,4 @@ run: ## Run the server
 	python3 app.py
 
 setup_players: ## Set up players data
-	PYTHONPATH=. python3 data/players.py
+	PYTHONPATH=. python3 data/players.py ${YEAR}
