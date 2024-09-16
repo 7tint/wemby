@@ -4,8 +4,8 @@ import { TableCell } from "@/components/ui/table";
 import Tooltip from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 
-export const cellWidthSm = "45px";
-export const cellWidthMd = "60px";
+export const cellWidthSm = "50px";
+export const cellWidthMd = "55px";
 export const cellWidthLg = "125px";
 
 export const colStyles = "border border-slate-300";
