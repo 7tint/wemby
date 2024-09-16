@@ -65,19 +65,17 @@ export interface Player {
   lastName: string;
   teamId: number;
   team: string;
-  pastYearTeam: string;
   age: number | null;
   headshot: string;
   yearsPro: number;
   jersey: number | null;
   rank: number;
-  pastYearRank: number;
-  adp: number; // Average Draft Position
+  adp: number | null; // Average Draft Position
   positions: string[]; // List of position eligibilities
-  projections: PlayerStats;
-  projectionNScores: PlayerStatsNScore | null;
-  pastYearStats: PlayerStats | null;
-  pastYearNScores: PlayerStatsNScore | null;
+  stats: PlayerStats;
+  nScores: PlayerStatsNScore | null;
+  trend: "up" | "down" | "equal";
+  changedTeams: boolean;
   auctionValuedAt: number | null;
   auctionYahooAvg: number | null;
   auctionEspnAvg: number | null;

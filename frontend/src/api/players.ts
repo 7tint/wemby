@@ -4,28 +4,35 @@ import toCamelCase from "@/utils/camelCase";
 import { API_URL } from "@/utils/env";
 
 interface PlayerResponse {
+  year: string;
   players: Player[];
-  projCategories: CategoryStats;
-  pastCategories: CategoryStats;
+  categoryStatsPer: CategoryStats;
+  categoryStatsTotal: CategoryStats;
 }
-const getPlayers = async (): Promise<PlayerResponse> => {
+
+const AVAILABLE_YEARS = ["2023", "2024"];
+
+const getPlayers = async (year: string): Promise<PlayerResponse> => {
   try {
-    const response = await fetch(`${API_URL}/api/players`);
+    if (!AVAILABLE_YEARS.includes(year))
+      throw new Error("Invalid year provided");
+    const response = await fetch(`${API_URL}/api/players/${year}`);
     const data = await response.json();
-    const players = toCamelCase(data.players) as Player[];
-    const projCategories = toCamelCase(
-      data.proj_category_stats
+    const players = toCamelCase(data[`${year}_players`]) as Player[];
+    const categoryStatsPer = toCamelCase(
+      data[`${year}_category_stats_per`]
     ) as CategoryStats;
-    const pastCategories = toCamelCase(
-      data.past_category_stats
+    const categoryStatsTotal = toCamelCase(
+      data[`${year}_category_stats_total`]
     ) as CategoryStats;
-    return { players, projCategories, pastCategories };
+    return { year, players, categoryStatsPer, categoryStatsTotal };
   } catch (error) {
     console.error("Error fetching players", error);
     return {
+      year,
       players: [],
-      projCategories: EMPTY_CATEGORY_STATS,
-      pastCategories: EMPTY_CATEGORY_STATS,
+      categoryStatsPer: EMPTY_CATEGORY_STATS,
+      categoryStatsTotal: EMPTY_CATEGORY_STATS,
     };
   }
 };

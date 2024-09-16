@@ -7,27 +7,11 @@ import {
   PlayerStatsNScore,
 } from "@/types/playerTypes";
 
-export const getStats = (
-  player: Player,
-  usePastYearStats: boolean
-): PlayerStats =>
-  usePastYearStats
-    ? player.pastYearStats === null
-      ? EMPTY_PLAYER_STATS
-      : player.pastYearStats
-    : player.projections;
+export const getStats = (player: Player): PlayerStats =>
+  player.stats === null ? EMPTY_PLAYER_STATS : player.stats;
 
-export const getNStats = (
-  player: Player,
-  usePastYearStats: boolean
-): PlayerStatsNScore =>
-  usePastYearStats
-    ? player.pastYearNScores === null
-      ? EMPTY_PLAYER_STATS_NSCORE
-      : player.pastYearNScores!
-    : player.projectionNScores === null
-    ? EMPTY_PLAYER_STATS_NSCORE
-    : player.projectionNScores!;
+export const getNStats = (player: Player): PlayerStatsNScore =>
+  player.nScores === null ? EMPTY_PLAYER_STATS_NSCORE : player.nScores;
 
 export const calculateStatPercentiles = (stat: number, category: string) => {
   switch (category) {
@@ -105,7 +89,7 @@ export const normalizeScores = (
     ast: shrinkNumber(score.ast + 2),
     stl: shrinkNumber(score.stl + 2),
     blk: shrinkNumber(score.blk + 2),
-    to: shrinkNumber(score.to + 2),
+    to: score.to / 1.5,
     total: 0,
   };
   return newScores;

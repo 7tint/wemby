@@ -43,7 +43,7 @@ def main():
     n = len(sys.argv)
     if n == 2:
         if sys.argv[1] not in [proj_year_key, past_year_key]:
-            logger.error("Invalid year key. Must be 2023 or 2024")
+            logger.error("Invalid year key.")
             return
         year_key = sys.argv[1]
 

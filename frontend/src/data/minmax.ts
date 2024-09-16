@@ -1,5 +1,9 @@
 import { getStats } from "./stats";
-import { Player, PlayerStatsNScore } from "@/types/playerTypes";
+import {
+  EMPTY_PLAYER_STATS_NSCORE,
+  Player,
+  PlayerStatsNScore,
+} from "@/types/playerTypes";
 import { CategoryStats } from "@/types/statTypes";
 
 /**
@@ -9,31 +13,17 @@ import { CategoryStats } from "@/types/statTypes";
 
 const calculateMinMax = (
   players: Player[],
-  categories: CategoryStats,
-  usePastYearStats: boolean
+  categories: CategoryStats
 ): Map<number, PlayerStatsNScore> => {
-  const u = usePastYearStats;
-  if (u) players = players.filter((player) => player.pastYearStats);
-
   // Calculate min-max normalization
   const minMax = new Map<number, PlayerStatsNScore>();
   players.forEach((player) => {
-    if (u && !player.pastYearStats) {
-      minMax.set(player.id, {
-        fgImpact: 0,
-        ftImpact: 0,
-        tpm: 0,
-        pts: 0,
-        reb: 0,
-        ast: 0,
-        stl: 0,
-        blk: 0,
-        to: 0,
-      });
+    if (!player.stats) {
+      minMax.set(player.id, EMPTY_PLAYER_STATS_NSCORE);
       return;
     }
 
-    const playerStats = getStats(player, u);
+    const playerStats = getStats(player);
     const nScores = new Map<string, number>();
     Object.entries(categories).forEach(([category, stat]) => {
       if (
@@ -44,13 +34,9 @@ const calculateMinMax = (
       )
         return;
 
-      let min = stat.min,
-        max = stat.max;
+      const min = stat.min;
+      const max = stat.max;
       if (max === min) return 0;
-      if (category !== "fgImpact" && category !== "ftImpact") {
-        min = min / 72;
-        max = max / 72;
-      }
 
       const pStat = playerStats[category as keyof typeof playerStats];
       if (category === "to")

@@ -4,24 +4,22 @@ import { CategoryStats } from "@/types/statTypes";
 
 const calculateZScores = (
   players: Player[],
-  categories: CategoryStats,
-  usePastYearStats: boolean
+  categories: CategoryStats
 ): Map<number, PlayerStatsNScore> => {
-  const u = usePastYearStats;
-  if (u) players = players.filter((player) => player.pastYearStats);
-
   // Games played
-  const GP = players.map((player) => getStats(player, u).gp || 0);
+  const GP = players.map((player) => getStats(player).gp);
 
   // Calculate z-scores
   const plainZMap = new Map<number, PlayerStatsNScore>();
   players.forEach((p, i) => {
-    const pStats = getStats(p, u);
+    const pStats = getStats(p);
     const plainZ = {
       fgImpact:
-        (pStats.fgImpact - categories.fgImpact.mean) / categories.fgImpact.std,
+        (pStats.fgImpact * GP[i] - categories.fgImpact.mean) /
+        categories.fgImpact.std,
       ftImpact:
-        (pStats.ftImpact - categories.ftImpact.mean) / categories.ftImpact.std,
+        (pStats.ftImpact * GP[i] - categories.ftImpact.mean) /
+        categories.ftImpact.std,
       tpm: (pStats.tpm * GP[i] - categories.tpm.mean) / categories.tpm.std,
       pts: (pStats.pts * GP[i] - categories.pts.mean) / categories.pts.std,
       reb: (pStats.reb * GP[i] - categories.reb.mean) / categories.reb.std,

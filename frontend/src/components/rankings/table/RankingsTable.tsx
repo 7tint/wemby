@@ -20,9 +20,6 @@ import {
 } from "@tanstack/react-table";
 import Tooltip from "@/components/ui/tooltip";
 import {
-  IconArrowUp,
-  IconArrowDown,
-  IconEqual,
   IconPointFilled,
   IconArrowBadgeUpFilled,
   IconCurrencyDollar,
@@ -44,40 +41,18 @@ import usePlayersToDisplay from "@/hooks/usePlayersToDisplay";
 /*
  * RANKINGS TABLE
  */
-const getPlayerTrend = (player: Player) => {
-  const playerTrend =
-    player.pastYearStats === null ? (
-      <Tooltip label="Rookie season">
-        <IconPointFilled className="text-pink-400" size={18} />
-      </Tooltip>
-    ) : player.rank === player.pastYearRank ? (
-      <Tooltip label="No change in rank from last season">
-        <IconEqual className="text-blue-400" size={18} />
-      </Tooltip>
-    ) : player.rank > player.pastYearRank ? (
-      <Tooltip label="Rank decreased from last season">
-        <IconArrowDown className="text-red-400" size={18} />
-      </Tooltip>
-    ) : (
-      <Tooltip label="Rank increased from last season">
-        <IconArrowUp className="text-green-400" size={18} />
-      </Tooltip>
-    );
-  return playerTrend;
-};
-
 interface RankingsTableProps {
   players: Player[];
-  usePastYearStats: boolean;
   showSmartScores: boolean;
+  showDraftColumns: boolean;
   showHighlights: boolean;
   punts: string[];
 }
 
 const RankingsTable_ = ({
   players,
-  usePastYearStats: u,
-  showSmartScores: ss,
+  showSmartScores,
+  showDraftColumns,
   showHighlights,
   punts,
 }: RankingsTableProps) => {
@@ -104,12 +79,11 @@ const RankingsTable_ = ({
 
   const columns = useMemo<ColumnDef<Player>[]>(() => {
     const getDisplayValue = (player: Player) =>
-      ss ? getNStats(player, u) : getStats(player, u);
+      showSmartScores ? getNStats(player) : getStats(player);
 
     return [
       {
-        id: "rank",
-        accessorFn: (player) => (u ? player.pastYearRank : player.rank),
+        accessorKey: "rank",
         header: ({ column }) => (
           <RankingsHeaderCell
             text={<IconArrowBadgeUpFilled size={18} />}
@@ -129,11 +103,14 @@ const RankingsTable_ = ({
             sort={column.getIsSorted()}
           />
         ),
-        cell: (p) => <TableTd>${(p.getValue() as number).toFixed(1)}</TableTd>,
+        cell: (p) => (
+          <TableTd>
+            ${p.getValue() === null ? "0" : (p.getValue() as number).toFixed(1)}
+          </TableTd>
+        ),
       },
       {
-        id: "team",
-        accessorFn: (player) => (u ? player.pastYearTeam : player.team),
+        accessorKey: "team",
         header: ({ column }) => (
           <RankingsHeaderCell
             text="Team"
@@ -143,18 +120,14 @@ const RankingsTable_ = ({
         ),
         cell: ({ row }) => (
           <TableTd>
-            {u ? (
-              <TeamLogo team={row.original.pastYearTeam as Team} size="sm" />
-            ) : (
-              <Fragment>
-                {row.original.team !== row.original.pastYearTeam && (
-                  <Tooltip label="Changing teams this season">
-                    <IconPointFilled className="text-pink-400 pr-1" size={18} />
-                  </Tooltip>
-                )}
-                <TeamLogo team={row.original.team as Team} size="sm" />
-              </Fragment>
-            )}
+            <Fragment>
+              {row.original.changedTeams && (
+                <Tooltip label="Changing teams this season">
+                  <IconPointFilled className="text-pink-400 pr-1" size={18} />
+                </Tooltip>
+              )}
+              <TeamLogo team={row.original.team as Team} size="sm" />
+            </Fragment>
           </TableTd>
         ),
         invertSorting: true,
@@ -178,7 +151,12 @@ const RankingsTable_ = ({
                 <div className="flex items-center ml-2 mr-1">
                   {row.original.firstName} {row.original.lastName}
                 </div>
-                {!u && getPlayerTrend(row.original)}
+                {/* TODO: fix rookie season api */}
+                {/* {row.original.yearsPro === 0 && (
+                  <Tooltip label="Rookie season">
+                    <IconPointFilled className="text-pink-400" size={18} />
+                  </Tooltip>
+                )} */}
               </div>
             </TableCell>
           );
@@ -193,20 +171,10 @@ const RankingsTable_ = ({
             sort={column.getIsSorted()}
           />
         ),
-        cell: (p) => (
-          <TableTd>
-            {u ? (p.getValue() as number) - 1 : (p.getValue() as number)}
-          </TableTd>
-        ),
+        cell: (p) => <TableTd>{p.getValue() as number}</TableTd>,
       },
       {
-        id: "gp",
-        accessorFn: (player) =>
-          u
-            ? player.pastYearStats
-              ? player.pastYearStats.gp
-              : 0
-            : player.projections.gp,
+        accessorKey: "stats.gp",
         header: ({ column }) => (
           <RankingsHeaderCell
             text="GP"
@@ -217,13 +185,7 @@ const RankingsTable_ = ({
         cell: (p) => <TableTd>{p.getValue() as number}</TableTd>,
       },
       {
-        id: "mpg",
-        accessorFn: (player) =>
-          u
-            ? player.pastYearStats
-              ? player.pastYearStats.mpg
-              : 0
-            : player.projections.mpg,
+        accessorKey: "stats.mpg",
         header: ({ column }) => (
           <RankingsHeaderCell
             text="MPG"
@@ -244,8 +206,8 @@ const RankingsTable_ = ({
           />
         ),
         cell: ({ row }) => {
-          const playerStats = getStats(row.original, u);
-          const playerNStats = getNStats(row.original, u);
+          const playerStats = getStats(row.original);
+          const playerNStats = getNStats(row.original);
           return (
             <TableTd
               className={getPercentileColor(
@@ -254,7 +216,7 @@ const RankingsTable_ = ({
               )}
             >
               <div className="flex flex-col items-center">
-                {ss ? (
+                {showSmartScores ? (
                   <div>{playerNStats.fgImpact.toFixed(2)}</div>
                 ) : (
                   <div className="flex items-center">
@@ -285,8 +247,8 @@ const RankingsTable_ = ({
           />
         ),
         cell: ({ row }) => {
-          const playerStats = getStats(row.original, u);
-          const playerNStats = getNStats(row.original, u);
+          const playerStats = getStats(row.original);
+          const playerNStats = getNStats(row.original);
           return (
             <TableTd
               className={getPercentileColor(
@@ -295,7 +257,7 @@ const RankingsTable_ = ({
               )}
             >
               <div className="flex flex-col items-center">
-                {ss ? (
+                {showSmartScores ? (
                   <div>{playerNStats.ftImpact.toFixed(2)}</div>
                 ) : (
                   <div className="flex items-center">
@@ -325,10 +287,12 @@ const RankingsTable_ = ({
             sort={column.getIsSorted()}
           />
         ),
-        cell: ({ cell }) => {
+        cell: ({ cell, row }) => {
           const tpm = cell.getValue() as number;
           return (
-            <TableTd className={getPercentileColor(tpm, "tpm")}>
+            <TableTd
+              className={getPercentileColor(getStats(row.original).tpm, "tpm")}
+            >
               {tpm.toFixed(1)}
             </TableTd>
           );
@@ -344,10 +308,12 @@ const RankingsTable_ = ({
             sort={column.getIsSorted()}
           />
         ),
-        cell: ({ cell }) => {
+        cell: ({ cell, row }) => {
           const pts = cell.getValue() as number;
           return (
-            <TableTd className={getPercentileColor(pts, "pts")}>
+            <TableTd
+              className={getPercentileColor(getStats(row.original).pts, "pts")}
+            >
               {pts.toFixed(1)}
             </TableTd>
           );
@@ -363,10 +329,12 @@ const RankingsTable_ = ({
             sort={column.getIsSorted()}
           />
         ),
-        cell: ({ cell }) => {
+        cell: ({ cell, row }) => {
           const reb = cell.getValue() as number;
           return (
-            <TableTd className={getPercentileColor(reb, "reb")}>
+            <TableTd
+              className={getPercentileColor(getStats(row.original).reb, "reb")}
+            >
               {reb.toFixed(1)}
             </TableTd>
           );
@@ -382,10 +350,12 @@ const RankingsTable_ = ({
             sort={column.getIsSorted()}
           />
         ),
-        cell: ({ cell }) => {
+        cell: ({ cell, row }) => {
           const ast = cell.getValue() as number;
           return (
-            <TableTd className={getPercentileColor(ast, "ast")}>
+            <TableTd
+              className={getPercentileColor(getStats(row.original).ast, "ast")}
+            >
               {ast.toFixed(1)}
             </TableTd>
           );
@@ -401,10 +371,12 @@ const RankingsTable_ = ({
             sort={column.getIsSorted()}
           />
         ),
-        cell: ({ cell }) => {
+        cell: ({ cell, row }) => {
           const stl = cell.getValue() as number;
           return (
-            <TableTd className={getPercentileColor(stl, "stl")}>
+            <TableTd
+              className={getPercentileColor(getStats(row.original).stl, "stl")}
+            >
               {stl.toFixed(1)}
             </TableTd>
           );
@@ -420,10 +392,12 @@ const RankingsTable_ = ({
             sort={column.getIsSorted()}
           />
         ),
-        cell: ({ cell }) => {
+        cell: ({ cell, row }) => {
           const blk = cell.getValue() as number;
           return (
-            <TableTd className={getPercentileColor(blk, "blk")}>
+            <TableTd
+              className={getPercentileColor(getStats(row.original).blk, "blk")}
+            >
               {blk.toFixed(1)}
             </TableTd>
           );
@@ -439,19 +413,21 @@ const RankingsTable_ = ({
             sort={column.getIsSorted()}
           />
         ),
-        cell: ({ cell }) => {
+        cell: ({ cell, row }) => {
           const to = cell.getValue() as number;
           return (
-            <TableTd className={getPercentileColor(to, "to")}>
+            <TableTd
+              className={getPercentileColor(getStats(row.original).to, "to")}
+            >
               {to.toFixed(1)}
             </TableTd>
           );
         },
-        invertSorting: true,
+        invertSorting: showSmartScores ? false : true,
       },
       {
         id: "total",
-        accessorFn: (player) => getNStats(player, u).total,
+        accessorFn: (player) => getNStats(player).total,
         header: ({ column }) => (
           <RankingsHeaderCell
             text="Total"
@@ -466,13 +442,13 @@ const RankingsTable_ = ({
         ),
       },
     ];
-  }, [u, ss, getPercentileColor]);
+  }, [showSmartScores, getPercentileColor]);
 
   useEffect(() => {
-    setColumnVisibility({ auctionValuedAt: !u });
-  }, [u, players]);
+    setColumnVisibility({ auctionValuedAt: showDraftColumns });
+  }, [players, showDraftColumns]);
 
-  const playersList = usePlayersToDisplay(players, u, punts);
+  const playersList = usePlayersToDisplay(players, punts, showSmartScores);
 
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [sorting, setSorting] = useState<SortingState>([
@@ -498,7 +474,10 @@ const RankingsTable_ = ({
   return (
     <div className="shadow-md w-full overflow-x-scroll">
       <Table className="w-max min-w-full">
-        <RankingsColumnGroup u={u} ss={ss} />
+        <RankingsColumnGroup
+          showDraftColumns={showDraftColumns}
+          showSmartScores={showSmartScores}
+        />
         <TableHeader>
           {playersTable.getHeaderGroups().map((headerGroup) => (
             <TableRow

@@ -65,18 +65,30 @@ export const RankingsHeaderCell = memo(RankingsHeaderCell_);
 /*
  * RANKINGS COLUMNS
  */
-const RankingsColumnGroup_ = ({ u, ss }: { u: boolean; ss: boolean }) => (
+const RankingsColumnGroup_ = ({
+  showDraftColumns,
+  showSmartScores,
+}: {
+  showDraftColumns: boolean;
+  showSmartScores: boolean;
+}) => (
   <colgroup>
     <col className={colStyles} width={cellWidthSm} />
     <col className={colStyles} width={cellWidthSm} />
-    {!u && <col className={colStyles} width={cellWidthMd} />}
+    {showDraftColumns && <col className={colStyles} width={cellWidthMd} />}
     <col className={colStyles} width={cellWidthMd} />
     <col className={cn(colStyles, "w-fit")} />
     <col className={colStyles} width={cellWidthSm} />
     <col className={colStyles} width={cellWidthSm} />
     <col className={colStyles} width={cellWidthSm} />
-    <col className={colStyles} width={ss ? cellWidthMd : cellWidthLg} />
-    <col className={colStyles} width={ss ? cellWidthMd : cellWidthLg} />
+    <col
+      className={colStyles}
+      width={showSmartScores ? cellWidthMd : cellWidthLg}
+    />
+    <col
+      className={colStyles}
+      width={showSmartScores ? cellWidthMd : cellWidthLg}
+    />
     <col className={colStyles} width={cellWidthMd} />
     <col className={colStyles} width={cellWidthMd} />
     <col className={colStyles} width={cellWidthMd} />

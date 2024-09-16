@@ -30,13 +30,16 @@ const RankingsPage = () => {
 
   useEffect(() => {
     const getPlayersData = async () => {
-      const { players, projCategories, pastCategories } = await getPlayers();
-      const zScoresProj = calculateZScores(players, projCategories, false);
-      const minmaxScoresProj = calculateMinMax(players, projCategories, false);
-      const zScoresPast = calculateZScores(players, pastCategories, true);
-      const minmaxScoresPast = calculateMinMax(players, pastCategories, true);
+      let year = "2024";
+      if (selectedYear === 2) year = "2023";
+
+      const { players, categoryStatsTotal, categoryStatsPer } =
+        await getPlayers(year);
+      const zScoresProj = calculateZScores(players, categoryStatsTotal);
+      const minmaxScoresProj = calculateMinMax(players, categoryStatsPer);
 
       players.forEach((player) => {
+        if (!player.stats) return;
         const projZScores = zScoresProj.get(player.id) || null;
         const projMinMax = minmaxScoresProj.get(player.id) || null;
         if (projZScores && projMinMax) {
@@ -51,31 +54,13 @@ const RankingsPage = () => {
             blk: 1 * projZScores.blk + 8 * projMinMax.blk,
             to: 0.25 * projZScores.to + 8 * projMinMax.to,
           });
-          player.projectionNScores = projNScores;
-        }
-        const pastZScores = zScoresPast.get(player.id) || null;
-        const pastMinMax = minmaxScoresPast.get(player.id) || null;
-        if (pastZScores && pastMinMax) {
-          const pastNScores = normalizeScores({
-            fgImpact: 1 * pastZScores.fgImpact + 6 * pastMinMax.fgImpact,
-            ftImpact: 1 * pastZScores.ftImpact + 6 * pastMinMax.ftImpact,
-            tpm: 1 * pastZScores.tpm + 6 * pastMinMax.tpm,
-            pts: 1 * pastZScores.pts + 6 * pastMinMax.pts,
-            reb: 1 * pastZScores.reb + 6 * pastMinMax.reb,
-            ast: 1 * pastZScores.ast + 6 * pastMinMax.ast,
-            stl: 1 * pastZScores.stl + 6 * pastMinMax.stl,
-            blk: 1 * pastZScores.blk + 6 * pastMinMax.blk,
-            to: 0.25 * pastZScores.to + 6 * pastMinMax.to,
-          });
-          player.pastYearNScores = pastNScores;
-        } else {
-          player.pastYearNScores = null;
+          player.nScores = projNScores;
         }
       });
       setPlayers(players);
     };
     getPlayersData();
-  }, []);
+  }, [selectedYear]);
 
   useEffect(() => {
     if (players.length > 0) setIsLoaded(true);
@@ -89,6 +74,7 @@ const RankingsPage = () => {
           <Select
             defaultValue={selectedYear.toString()}
             onValueChange={(value) => {
+              setIsLoaded(false);
               setSelectedYear(parseInt(value));
             }}
           >
@@ -119,7 +105,7 @@ const RankingsPage = () => {
         <div className="mt-8">
           <RankingsTable
             players={players}
-            usePastYearStats={selectedYear === 2}
+            showDraftColumns={selectedYear === 1}
             showSmartScores={showSmartScores}
             showHighlights={showHighlights}
             punts={punts}
