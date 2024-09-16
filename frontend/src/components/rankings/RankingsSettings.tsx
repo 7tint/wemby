@@ -37,7 +37,7 @@ const RankingsSettings = ({
 }: RankingsSettingsProps) => {
   const [showSettings, setShowSettings] = useState(true);
   return (
-    <div className="my-4">
+    <div className="my-6">
       <Collapsible defaultOpen={true} open={showSettings}>
         <CollapsibleTrigger>
           <div
@@ -55,35 +55,8 @@ const RankingsSettings = ({
           </div>
         </CollapsibleTrigger>
         <CollapsibleContent>
-          <div className="flex flex-col-reverse lg:flex-row justify-between gap-6 lg:gap-0 overflow-scroll ml-6">
-            <div className="flex flex-col gap-4 lg:gap-3 w-52">
-              <div className="flex justify-between items-center">
-                <div className="flex items-center">
-                  <IconAdjustmentsFilled className="mr-1" size={18} />
-                  <div className="font-medium">Smart Scores</div>
-                  <Tooltip label='Show "Smart Scores" - a weighted product of z-scores and min-max normalization (influenced by user selected punts and total games played).'>
-                    <IconInfoSquareRounded className="mx-1" size={14} />
-                  </Tooltip>
-                </div>
-                <Switch
-                  className="ml-2"
-                  checked={showSmartScores}
-                  onCheckedChange={() => setShowSmartScores(!showSmartScores)}
-                />
-              </div>
-              <div className="flex justify-between items-center">
-                <div className="flex items-center">
-                  <IconHighlight className="mr-1" size={18} />
-                  <div className="font-medium">Highlight Stats</div>
-                </div>
-                <Switch
-                  className="ml-2"
-                  checked={showHighlights}
-                  onCheckedChange={() => setShowHighlights(!showHighlights)}
-                />
-              </div>
-            </div>
-            <div className="flex lg:flex-col gap-3">
+          <div className="flex flex-col gap-6 overflow-scroll ml-6">
+            <div className="flex items-center gap-3">
               <div className="flex items-center">
                 <IconAbacus className="mr-1" size={18} />
                 <div className="font-medium">Punting</div>
@@ -123,6 +96,29 @@ const RankingsSettings = ({
                     );
                   })}
                 </div>
+              </div>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="flex items-center">
+                <IconAdjustmentsFilled className="mr-1" size={18} />
+                <div className="font-medium">Smart Scores</div>
+                <Tooltip label='Show "Smart Scores" - a weighted product of z-scores and min-max normalization (influenced by user selected punts and total games played).'>
+                  <IconInfoSquareRounded className="mx-1" size={14} />
+                </Tooltip>
+                <Switch
+                  className="ml-2"
+                  checked={showSmartScores}
+                  onCheckedChange={() => setShowSmartScores(!showSmartScores)}
+                />
+              </div>
+              <div className="flex items-center">
+                <IconHighlight className="mr-1" size={18} />
+                <div className="font-medium">Highlight Stats</div>
+                <Switch
+                  className="ml-2"
+                  checked={showHighlights}
+                  onCheckedChange={() => setShowHighlights(!showHighlights)}
+                />
               </div>
             </div>
           </div>

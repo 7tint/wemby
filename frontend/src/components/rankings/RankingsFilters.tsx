@@ -11,7 +11,7 @@ interface RankingsSettingsProps {}
 const RankingsFilters = ({}: RankingsSettingsProps) => {
   const [showFilters, setShowFilters] = useState(true);
   return (
-    <div className="my-4">
+    <div className="my-6">
       <Collapsible defaultOpen={true} open={showFilters}>
         <CollapsibleTrigger>
           <div
