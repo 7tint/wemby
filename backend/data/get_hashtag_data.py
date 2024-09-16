@@ -145,7 +145,7 @@ def scrape_past_year_stats():
         past_year_option.click()
 
         logger.info("Waiting for table to update p.2")
-        time.sleep(1)
+        time.sleep(2)
 
         page_source = driver.page_source
 
@@ -215,7 +215,7 @@ def scrape_auction_data():
         all_option.click()
 
         logger.info("Waiting for table to update")
-        time.sleep(1)
+        time.sleep(2)
 
         page_source = driver.page_source
 

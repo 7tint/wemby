@@ -167,6 +167,7 @@ def main():
         if not roster_data:
             continue
         auction_data = get_auction_data(player)
+
         player = Player(
             id=roster_data["id"],
             first_name=roster_data["first_name"],
@@ -174,7 +175,15 @@ def main():
             positions=player["positions"],
             team_id=roster_data["team_id"],
             team=roster_data["team"],
-            age=roster_data["age"] if "age" in roster_data else None,
+            age=(
+                (
+                    roster_data["age"]
+                    if year_key == proj_year_key
+                    else roster_data["age"] - 1
+                )
+                if "age" in roster_data
+                else None
+            ),
             headshot=roster_data["headshot"],
             years_pro=roster_data["years_pro"],
             jersey=roster_data["jersey"] if "jersey" in roster_data else None,
