@@ -472,7 +472,10 @@ const RankingsTable_ = ({
   });
 
   return (
-    <div className="shadow-md w-full overflow-x-scroll">
+    <div
+      className="shadow-md w-full overflow-x-scroll"
+      style={{ fontSize: "13px" }}
+    >
       <Table className="w-max min-w-full">
         <RankingsColumnGroup
           showDraftColumns={showDraftColumns}
