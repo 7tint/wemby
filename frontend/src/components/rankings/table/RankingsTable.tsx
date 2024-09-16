@@ -141,6 +141,7 @@ const RankingsTable_ = ({
             text="Player"
             label="Player Name"
             sort={column.getIsSorted()}
+            className="w-fit min-w-64"
           />
         ),
         cell: ({ row }) => {

@@ -35,11 +35,13 @@ const RankingsHeaderCell_ = ({
   label,
   text,
   sort = false,
+  className,
 }: {
   id?: string;
   label: string;
   text: string | ReactNode;
   sort?: false | SortDirection;
+  className?: string;
 }) => {
   const calcHeaderSortColor = (sort: false | SortDirection) => {
     if (sort === "asc") return "bg-orange-200";
@@ -50,7 +52,7 @@ const RankingsHeaderCell_ = ({
   return (
     <div
       key={id}
-      className="flex flex-col justify-start items-center"
+      className={cn("flex flex-col justify-start items-center", className)}
       style={{ height: 50 }}
     >
       <div className={cn("h-3 w-full", calcHeaderSortColor(sort))} />
