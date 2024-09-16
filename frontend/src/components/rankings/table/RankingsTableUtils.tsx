@@ -77,7 +77,7 @@ const RankingsColumnGroup_ = ({
     <col className={colStyles} width={cellWidthSm} />
     {showDraftColumns && <col className={colStyles} width={cellWidthMd} />}
     <col className={colStyles} width={cellWidthMd} />
-    <col className={cn(colStyles, "w-fit")} />
+    <col className={cn(colStyles, "w-fit min-w-64")} />
     <col className={colStyles} width={cellWidthSm} />
     <col className={colStyles} width={cellWidthSm} />
     <col className={colStyles} width={cellWidthSm} />
