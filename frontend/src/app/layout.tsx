@@ -15,7 +15,7 @@ const RootLayout = ({
 }>) => {
   return (
     <html lang="en" className={fonts.rubik.variable}>
-      <body className="text-xs sm:text-sm bg-inherit">{children}</body>
+      <body className="text-sm bg-inherit">{children}</body>
     </html>
   );
 };

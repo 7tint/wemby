@@ -17,6 +17,7 @@ import calculateMinMax from "@/data/minmax";
 import calculateZScores from "@/data/zScore";
 import { Player } from "@/types/playerTypes";
 import RankingsFilters from "@/components/rankings/RankingsFilters";
+import BaseLayout from "@/components/ui/base";
 
 const RankingsPage = () => {
   const [players, setPlayers] = useState<Player[]>([]);
@@ -67,10 +68,10 @@ const RankingsPage = () => {
   }, [players]);
 
   return (
-    <div className="mx-auto mt-16 mb-12 px-4 md:px-8 lg:px-12">
-      <div className="flex justify-between my-8">
-        <h1 className="text-2xl font-semibold">Player Rankings</h1>
-        <div className="w-auto">
+    <BaseLayout>
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between my-8">
+        <h1 className="text-2xl font-semibold pl-1 md:pl-0">Player Rankings</h1>
+        <div className="w-auto mt-4 md:mt-0">
           <Select
             defaultValue={selectedYear.toString()}
             onValueChange={(value) => {
@@ -116,7 +117,7 @@ const RankingsPage = () => {
           <Skeleton key={i} className="h-10 mb-4" />
         ))
       )}
-    </div>
+    </BaseLayout>
   );
 };
 

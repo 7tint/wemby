@@ -55,13 +55,13 @@ const RankingsSettings = ({
           </div>
         </CollapsibleTrigger>
         <CollapsibleContent>
-          <div className="flex flex-col lg:flex-row justify-between gap-4 lg:gap-0 overflow-scroll ml-6">
+          <div className="flex flex-col-reverse lg:flex-row justify-between gap-6 lg:gap-0 overflow-scroll ml-6">
             <div className="flex flex-col gap-4 lg:gap-3 w-52">
               <div className="flex justify-between items-center">
                 <div className="flex items-center">
                   <IconAdjustmentsFilled className="mr-1" size={18} />
                   <div className="font-medium">Smart Scores</div>
-                  <Tooltip label='Show "Smart Scores" - a fine-tuned combination of z-scores and min-max normalization that is used to rank players.'>
+                  <Tooltip label='Show "Smart Scores" - a weighted product of z-scores and min-max normalization (influenced by user selected punts and total games played).'>
                     <IconInfoSquareRounded className="mx-1" size={14} />
                   </Tooltip>
                 </div>
@@ -104,7 +104,7 @@ const RankingsSettings = ({
                         variant={punts.includes(key) ? "violet" : "secondary"}
                         size="sm"
                         className={cn(
-                          "text-xs sm:text-sm border rounded-none border-l-0",
+                          "text-sm border rounded-none border-l-0",
                           i === 0 ? "rounded-l-md " : "",
                           i === 8 ? "rounded-r-md " : "",
                           i === 0 ? "border-l " : ""
