@@ -25,6 +25,7 @@ import {
   IconPointFilled,
   IconArrowBadgeUpFilled,
   IconCurrencyDollar,
+  IconShirtSport,
 } from "@tabler/icons-react";
 import { calculateStatPercentiles, getNStats, getStats } from "@/data/stats";
 import { Player } from "@/types/playerTypes";
@@ -119,7 +120,7 @@ const RankingsTable_ = ({
         accessorKey: "team",
         header: ({ column }) => (
           <RankingsHeaderCell
-            text="Team"
+            text={<IconShirtSport size={18} />}
             label="Team"
             sort={column.getIsSorted()}
           />
@@ -147,13 +148,13 @@ const RankingsTable_ = ({
             text="Player"
             label="Player Name"
             sort={column.getIsSorted()}
-            className="min-w-64"
+            className="min-w-56"
           />
         ),
         cell: ({ row }) => {
           return (
             <TableCell>
-              <div className="flex items-center px-4 pt-1.5">
+              <div className="flex items-center px-2 pt-1.5">
                 <PlayerHeadshot player={row.original} size="sm" />
                 <div className="flex items-center ml-2 mr-1">
                   {row.original.firstName} {row.original.lastName}

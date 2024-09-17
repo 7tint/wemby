@@ -4,10 +4,10 @@ import { TableCell } from "@/components/ui/table";
 import Tooltip from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 
-export const cellWidthSm = "50px";
+export const cellWidthSm = "47.5px";
 export const cellWidthMd = "55px";
-export const cellWidthLg = "85px";
-export const cellWidthXl = "125px";
+export const cellWidthLg = "82.5px";
+export const cellWidthXl = "120px";
 
 export const colStyles = "border border-slate-300";
 export const headerColStyles = cn(colStyles, "bg-slate-200");
@@ -79,8 +79,8 @@ const RankingsColumnGroup_ = ({
     <col className={colStyles} width={cellWidthSm} />
     <col className={colStyles} width={cellWidthSm} />
     {showDraftColumns && <col className={colStyles} width={cellWidthMd} />}
-    <col className={colStyles} width={cellWidthMd} />
-    <col className={cn(colStyles, "w-fit min-w-64")} />
+    <col className={colStyles} width={cellWidthSm} />
+    <col className={cn(colStyles, "w-fit min-w-56")} />
     <col className={colStyles} width={cellWidthSm} />
     <col className={colStyles} width={cellWidthLg} />
     <col className={colStyles} width={cellWidthSm} />

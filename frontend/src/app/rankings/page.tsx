@@ -106,14 +106,16 @@ const RankingsPage = () => {
       />
       <RankingsFilters positions={positions} setPositions={setPositions} />
       {isLoaded ? (
-        <RankingsTable
-          players={players}
-          showDraftColumns={selectedYear === 1}
-          showSmartScores={showSmartScores}
-          showHighlights={showHighlights}
-          punts={punts}
-          positions={positions}
-        />
+        <div className="mt-8">
+          <RankingsTable
+            players={players}
+            showDraftColumns={selectedYear === 1}
+            showSmartScores={showSmartScores}
+            showHighlights={showHighlights}
+            punts={punts}
+            positions={positions}
+          />
+        </div>
       ) : (
         Array.from({ length: 10 }, (_, i) => (
           <Skeleton key={i} className="h-10 mb-4" />

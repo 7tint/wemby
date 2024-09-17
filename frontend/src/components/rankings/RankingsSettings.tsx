@@ -98,7 +98,7 @@ const RankingsSettings = ({
                 </div>
               </div>
             </div>
-            <div className="flex flex-col md:flex-row gap-4 md:gap-8">
+            <div className="flex flex-col md:flex-row gap-4 md:gap-10">
               <div className="flex items-center">
                 <IconAdjustmentsFilled className="mr-1" size={18} />
                 <div className="font-medium">Smart Scores</div>
