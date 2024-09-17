@@ -55,7 +55,7 @@ const RankingsSettings = ({
           </div>
         </CollapsibleTrigger>
         <CollapsibleContent>
-          <div className="flex flex-col gap-6 overflow-scroll ml-6">
+          <div className="flex flex-col xl:flex-row gap-6 xl:gap-12 overflow-scroll ml-6">
             <div className="flex items-center gap-3">
               <div className="flex items-center">
                 <IconAbacus className="mr-1" size={18} />
@@ -77,9 +77,9 @@ const RankingsSettings = ({
                         variant={punts.includes(key) ? "violet" : "secondary"}
                         size="sm"
                         className={cn(
-                          "text-sm border rounded-none border-l-0",
+                          "text-sm border rounded-none border-l-0 w-14",
                           i === 0 ? "rounded-l-md " : "",
-                          i === 8 ? "rounded-r-md " : "",
+                          i === STAT_KEYS.length - 1 ? "rounded-r-md " : "",
                           i === 0 ? "border-l " : ""
                         )}
                         color={punts.includes(key) ? "purple" : "slate"}
@@ -98,7 +98,7 @@ const RankingsSettings = ({
                 </div>
               </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="flex flex-col md:flex-row gap-4 md:gap-8">
               <div className="flex items-center">
                 <IconAdjustmentsFilled className="mr-1" size={18} />
                 <div className="font-medium">Smart Scores</div>

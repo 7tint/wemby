@@ -29,6 +29,9 @@ const RankingsPage = () => {
   const [showHighlights, setShowHighlights] = useState(true);
   const [punts, setPunts] = useState<string[]>([]);
 
+  // Filters states
+  const [positions, setPositions] = useState<string[]>([]);
+
   useEffect(() => {
     const getPlayersData = async () => {
       let year = "2024";
@@ -101,7 +104,7 @@ const RankingsPage = () => {
         punts={punts}
         setPunts={setPunts}
       />
-      <RankingsFilters />
+      <RankingsFilters positions={positions} setPositions={setPositions} />
       {isLoaded ? (
         <RankingsTable
           players={players}
@@ -109,6 +112,7 @@ const RankingsPage = () => {
           showSmartScores={showSmartScores}
           showHighlights={showHighlights}
           punts={punts}
+          positions={positions}
         />
       ) : (
         Array.from({ length: 10 }, (_, i) => (

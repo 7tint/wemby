@@ -6,7 +6,8 @@ import { cn } from "@/lib/utils";
 
 export const cellWidthSm = "50px";
 export const cellWidthMd = "55px";
-export const cellWidthLg = "125px";
+export const cellWidthLg = "85px";
+export const cellWidthXl = "125px";
 
 export const colStyles = "border border-slate-300";
 export const headerColStyles = cn(colStyles, "bg-slate-200");
@@ -81,15 +82,16 @@ const RankingsColumnGroup_ = ({
     <col className={colStyles} width={cellWidthMd} />
     <col className={cn(colStyles, "w-fit min-w-64")} />
     <col className={colStyles} width={cellWidthSm} />
+    <col className={colStyles} width={cellWidthLg} />
     <col className={colStyles} width={cellWidthSm} />
     <col className={colStyles} width={cellWidthSm} />
     <col
       className={colStyles}
-      width={showSmartScores ? cellWidthMd : cellWidthLg}
+      width={showSmartScores ? cellWidthMd : cellWidthXl}
     />
     <col
       className={colStyles}
-      width={showSmartScores ? cellWidthMd : cellWidthLg}
+      width={showSmartScores ? cellWidthMd : cellWidthXl}
     />
     <col className={colStyles} width={cellWidthMd} />
     <col className={colStyles} width={cellWidthMd} />

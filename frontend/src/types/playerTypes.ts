@@ -81,3 +81,5 @@ export interface Player {
   auctionEspnAvg: number | null;
   auctionBlendAvg: number | null;
 }
+
+export const PLAYER_POSITIONS = ["PG", "SG", "SF", "PF", "C"];

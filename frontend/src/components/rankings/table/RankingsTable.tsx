@@ -11,10 +11,12 @@ import {
 } from "@/components/ui/table";
 import {
   ColumnDef,
+  ColumnFiltersState,
   SortingState,
   VisibilityState,
   flexRender,
   getCoreRowModel,
+  getFilteredRowModel,
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
@@ -47,6 +49,7 @@ interface RankingsTableProps {
   showDraftColumns: boolean;
   showHighlights: boolean;
   punts: string[];
+  positions: string[];
 }
 
 const RankingsTable_ = ({
@@ -55,6 +58,7 @@ const RankingsTable_ = ({
   showDraftColumns,
   showHighlights,
   punts,
+  positions,
 }: RankingsTableProps) => {
   const getPercentileColor = useMemo(() => {
     return (stat: number, category: string) => {
@@ -91,7 +95,9 @@ const RankingsTable_ = ({
             sort={column.getIsSorted()}
           />
         ),
-        cell: (p) => <TableTd>{p.getValue() as number}</TableTd>,
+        cell: (p) => (
+          <TableTd className="font-medium">{p.getValue() as number}</TableTd>
+        ),
         invertSorting: true,
       },
       {
@@ -173,6 +179,43 @@ const RankingsTable_ = ({
           />
         ),
         cell: (p) => <TableTd>{p.getValue() as number}</TableTd>,
+      },
+      {
+        id: "pos",
+        accessorFn: (player) => {
+          if (!player.positions || player.positions[0] === "") return "???";
+          else return player.positions.join(", ");
+        },
+        header: ({ column }) => (
+          <RankingsHeaderCell
+            text="Pos"
+            label="Position"
+            sort={column.getIsSorted()}
+          />
+        ),
+        cell: (p) => (
+          <TableTd className="font-medium">{p.getValue() as string}</TableTd>
+        ),
+        sortingFn: (a, b) => {
+          const aPositions = a.original.positions;
+          const bPositions = b.original.positions;
+          const order = ["PG", "SG", "SF", "PF", "C", ""];
+          for (let i = 0; i < order.length; i++) {
+            if (aPositions.includes(order[i]) && !bPositions.includes(order[i]))
+              return 1;
+            if (!aPositions.includes(order[i]) && bPositions.includes(order[i]))
+              return -1;
+          }
+          return 0;
+        },
+        sortDescFirst: true,
+        filterFn: (row, columnId, filterValue: string[]) => {
+          const playerPos = row.original.positions;
+          return (
+            filterValue.length === 0 ||
+            filterValue.some((pos) => playerPos.includes(pos))
+          );
+        },
       },
       {
         accessorKey: "stats.gp",
@@ -449,6 +492,15 @@ const RankingsTable_ = ({
     setColumnVisibility({ auctionValuedAt: showDraftColumns });
   }, [players, showDraftColumns]);
 
+  useEffect(() => {
+    setColumnFilters([
+      {
+        id: "pos",
+        value: positions,
+      },
+    ]);
+  }, [positions]);
+
   const playersList = usePlayersToDisplay(players, punts, showSmartScores);
 
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
@@ -458,18 +510,22 @@ const RankingsTable_ = ({
       desc: true,
     },
   ]);
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
   const playersTable = useReactTable<Player>({
     columns,
     data: playersList,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
     state: {
       columnVisibility,
       sorting,
+      columnFilters,
     },
     onColumnVisibilityChange: setColumnVisibility,
     onSortingChange: setSorting,
+    onColumnFiltersChange: setColumnFilters,
   });
 
   return (
@@ -528,7 +584,7 @@ const RankingsTable_ = ({
           {playersTable.getRowModel().rows.map((row, index) => {
             return (
               <TableRow key={row.id} className="h-10 odd:bg-slate-50">
-                <TableTd className="font-medium">{index + 1}</TableTd>
+                <TableTd className="text-slate-400">{index + 1}</TableTd>
                 {row.getVisibleCells().map((cell) =>
                   flexRender(cell.column.columnDef.cell, {
                     ...cell.getContext(),
