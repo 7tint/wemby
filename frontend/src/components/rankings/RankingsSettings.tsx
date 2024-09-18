@@ -55,7 +55,7 @@ const RankingsSettings = ({
           </div>
         </CollapsibleTrigger>
         <CollapsibleContent>
-          <div className="flex flex-col xl:flex-row gap-6 xl:gap-12 overflow-scroll ml-6">
+          <div className="flex flex-col xl:flex-row gap-4 xl:gap-12 overflow-scroll ml-6">
             <div className="flex items-center gap-3">
               <div className="flex items-center">
                 <IconAbacus className="mr-1" size={18} />
@@ -64,38 +64,36 @@ const RankingsSettings = ({
                   <IconInfoSquareRounded className="mx-1" size={14} />
                 </Tooltip>
               </div>
-              <div className="flex">
-                <div className="flex gap-0">
-                  {STAT_KEYS.map((key, i) => {
-                    let label: string = key.toUpperCase();
-                    if (key === "fg") label = "FG%";
-                    if (key === "ft") label = "FT%";
-                    if (key === "tpm") label = "3PM";
-                    return (
-                      <Button
-                        key={label}
-                        variant={punts.includes(key) ? "violet" : "secondary"}
-                        size="sm"
-                        className={cn(
-                          "text-sm border rounded-none border-l-0 w-14",
-                          i === 0 ? "rounded-l-md " : "",
-                          i === STAT_KEYS.length - 1 ? "rounded-r-md " : "",
-                          i === 0 ? "border-l " : ""
-                        )}
-                        color={punts.includes(key) ? "purple" : "slate"}
-                        onClick={() => {
-                          if (punts.includes(key)) {
-                            setPunts(punts.filter((cat) => cat !== key));
-                          } else {
-                            setPunts([...punts, key]);
-                          }
-                        }}
-                      >
-                        {label}
-                      </Button>
-                    );
-                  })}
-                </div>
+              <div className="flex gap-0">
+                {STAT_KEYS.map((key, i) => {
+                  let label: string = key.toUpperCase();
+                  if (key === "fg") label = "FG%";
+                  if (key === "ft") label = "FT%";
+                  if (key === "tpm") label = "3PM";
+                  return (
+                    <Button
+                      key={label}
+                      variant={punts.includes(key) ? "violet" : "secondary"}
+                      size="sm"
+                      className={cn(
+                        "text-sm border rounded-none border-l-0 w-14",
+                        i === 0 ? "rounded-l-md " : "",
+                        i === STAT_KEYS.length - 1 ? "rounded-r-md " : "",
+                        i === 0 ? "border-l " : ""
+                      )}
+                      color={punts.includes(key) ? "purple" : "slate"}
+                      onClick={() => {
+                        if (punts.includes(key)) {
+                          setPunts(punts.filter((cat) => cat !== key));
+                        } else {
+                          setPunts([...punts, key]);
+                        }
+                      }}
+                    >
+                      {label}
+                    </Button>
+                  );
+                })}
               </div>
             </div>
             <div className="flex flex-col md:flex-row gap-4 md:gap-10">

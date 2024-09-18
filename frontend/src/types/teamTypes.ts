@@ -1,35 +1,38 @@
-export type Team =
-  | "ATL"
-  | "BOS"
-  | "BKN"
-  | "CHA"
-  | "CHI"
-  | "CLE"
-  | "DAL"
-  | "DEN"
-  | "DET"
-  | "GS"
-  | "HOU"
-  | "IND"
-  | "LAC"
-  | "LAL"
-  | "MEM"
-  | "MIA"
-  | "MIL"
-  | "MIN"
-  | "NO"
-  | "NY"
-  | "OKC"
-  | "ORL"
-  | "PHI"
-  | "PHX"
-  | "POR"
-  | "SAC"
-  | "SA"
-  | "TOR"
-  | "UTAH"
-  | "WSH"
-  | "NBA";
+export const TEAM_ABBREVS = [
+  "ATL",
+  "BOS",
+  "BKN",
+  "CHA",
+  "CHI",
+  "CLE",
+  "DAL",
+  "DEN",
+  "DET",
+  "GS",
+  "HOU",
+  "IND",
+  "LAC",
+  "LAL",
+  "MEM",
+  "MIA",
+  "MIL",
+  "MIN",
+  "NO",
+  "NY",
+  "OKC",
+  "ORL",
+  "PHI",
+  "PHX",
+  "POR",
+  "SAC",
+  "SA",
+  "TOR",
+  "UTAH",
+  "WSH",
+  "NBA",
+] as const;
+
+export type Team = (typeof TEAM_ABBREVS)[number];
 
 export const getTeamName = (team: Team): string => {
   switch (team) {
@@ -97,5 +100,72 @@ export const getTeamName = (team: Team): string => {
       return "NBA";
     default:
       return "Unknown Team";
+  }
+};
+
+export const getTeamAbbreviation = (team: string): Team => {
+  switch (team) {
+    case "Atlanta Hawks":
+      return "ATL";
+    case "Boston Celtics":
+      return "BOS";
+    case "Brooklyn Nets":
+      return "BKN";
+    case "Charlotte Hornets":
+      return "CHA";
+    case "Chicago Bulls":
+      return "CHI";
+    case "Cleveland Cavaliers":
+      return "CLE";
+    case "Dallas Mavericks":
+      return "DAL";
+    case "Denver Nuggets":
+      return "DEN";
+    case "Detroit Pistons":
+      return "DET";
+    case "Golden State Warriors":
+      return "GS";
+    case "Houston Rockets":
+      return "HOU";
+    case "Indiana Pacers":
+      return "IND";
+    case "Los Angeles Clippers":
+      return "LAC";
+    case "Los Angeles Lakers":
+      return "LAL";
+    case "Memphis Grizzlies":
+      return "MEM";
+    case "Miami Heat":
+      return "MIA";
+    case "Milwaukee Bucks":
+      return "MIL";
+    case "Minnesota Timberwolves":
+      return "MIN";
+    case "New Orleans Pelicans":
+      return "NO";
+    case "New York Knicks":
+      return "NY";
+    case "Oklahoma City Thunder":
+      return "OKC";
+    case "Orlando Magic":
+      return "ORL";
+    case "Philadelphia 76ers":
+      return "PHI";
+    case "Phoenix Suns":
+      return "PHX";
+    case "Portland Trail Blazers":
+      return "POR";
+    case "Sacramento Kings":
+      return "SAC";
+    case "San Antonio Spurs":
+      return "SA";
+    case "Toronto Raptors":
+      return "TOR";
+    case "Utah Jazz":
+      return "UTAH";
+    case "Washington Wizards":
+      return "WSH";
+    default:
+      return "NBA";
   }
 };

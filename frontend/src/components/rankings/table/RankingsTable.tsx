@@ -51,6 +51,7 @@ interface RankingsTableProps {
   showHighlights: boolean;
   punts: string[];
   positions: string[];
+  team: Team | null;
 }
 
 const RankingsTable_ = ({
@@ -60,6 +61,7 @@ const RankingsTable_ = ({
   showHighlights,
   punts,
   positions,
+  team,
 }: RankingsTableProps) => {
   const getPercentileColor = useMemo(() => {
     return (stat: number, category: string) => {
@@ -139,6 +141,9 @@ const RankingsTable_ = ({
         ),
         invertSorting: true,
         sortDescFirst: true,
+        filterFn: (row, _, filterValue: string | null) => {
+          return filterValue === null || row.original.team === filterValue;
+        },
       },
       {
         id: "name",
@@ -210,7 +215,7 @@ const RankingsTable_ = ({
           return 0;
         },
         sortDescFirst: true,
-        filterFn: (row, columnId, filterValue: string[]) => {
+        filterFn: (row, _, filterValue: string[]) => {
           const playerPos = row.original.positions;
           return (
             filterValue.length === 0 ||
@@ -495,12 +500,10 @@ const RankingsTable_ = ({
 
   useEffect(() => {
     setColumnFilters([
-      {
-        id: "pos",
-        value: positions,
-      },
+      { id: "pos", value: positions },
+      { id: "team", value: team },
     ]);
-  }, [positions]);
+  }, [positions, team]);
 
   const playersList = usePlayersToDisplay(players, punts, showSmartScores);
 

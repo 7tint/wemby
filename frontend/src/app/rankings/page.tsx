@@ -18,6 +18,7 @@ import calculateZScores from "@/data/zScore";
 import { Player } from "@/types/playerTypes";
 import RankingsFilters from "@/components/rankings/RankingsFilters";
 import BaseLayout from "@/components/ui/base";
+import { Team } from "@/types/teamTypes";
 
 const RankingsPage = () => {
   const [players, setPlayers] = useState<Player[]>([]);
@@ -31,6 +32,7 @@ const RankingsPage = () => {
 
   // Filters states
   const [positions, setPositions] = useState<string[]>([]);
+  const [team, setTeam] = useState<Team | null>(null);
 
   useEffect(() => {
     const getPlayersData = async () => {
@@ -104,7 +106,12 @@ const RankingsPage = () => {
         punts={punts}
         setPunts={setPunts}
       />
-      <RankingsFilters positions={positions} setPositions={setPositions} />
+      <RankingsFilters
+        positions={positions}
+        setPositions={setPositions}
+        team={team}
+        setTeam={setTeam}
+      />
       {isLoaded ? (
         <div className="mt-8">
           <RankingsTable
@@ -114,6 +121,7 @@ const RankingsPage = () => {
             showHighlights={showHighlights}
             punts={punts}
             positions={positions}
+            team={team}
           />
         </div>
       ) : (
