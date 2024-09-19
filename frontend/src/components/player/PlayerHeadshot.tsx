@@ -7,10 +7,10 @@ interface PlayerHeadshotProps {
 }
 
 const PlayerHeadshot = ({ player, size }: PlayerHeadshotProps) => {
-  const small = 45;
-  const medium = 90;
-  const large = 135;
-  const proportion = 436 / 600;
+  const small = 44;
+  const medium = 64;
+  const large = 96;
+  const proportion = 38 / 45;
 
   const width = size === "sm" ? small : size === "md" ? medium : large;
   const height = width * proportion;
@@ -21,7 +21,7 @@ const PlayerHeadshot = ({ player, size }: PlayerHeadshotProps) => {
       alt={player.firstName + " " + player.lastName}
       width={width}
       height={height}
-      className="w-auto h-auto"
+      className="w-11 h-auto"
       priority
     />
   );

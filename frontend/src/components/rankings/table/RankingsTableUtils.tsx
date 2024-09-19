@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 
 export const cellWidthSm = "47.5px";
 export const cellWidthMd = "55px";
-export const cellWidthLg = "82.5px";
+export const cellWidthLg = "80px";
 export const cellWidthXl = "120px";
 
 export const colStyles = "border border-slate-300";
@@ -37,12 +37,14 @@ const RankingsHeaderCell_ = ({
   text,
   sort = false,
   className,
+  disableCursor = false,
 }: {
   id?: string;
   label: string;
   text: string | ReactNode;
   sort?: false | SortDirection;
   className?: string;
+  disableCursor?: boolean;
 }) => {
   const calcHeaderSortColor = (sort: false | SortDirection) => {
     if (sort === "asc") return "bg-orange-200";
@@ -58,7 +60,14 @@ const RankingsHeaderCell_ = ({
     >
       <div className={cn("h-3 w-full", calcHeaderSortColor(sort))} />
       <Tooltip label={label}>
-        <div className="my-2 font-semibold">{text}</div>
+        <div
+          className={cn(
+            disableCursor && "!cursor-default",
+            "my-2 font-semibold"
+          )}
+        >
+          {text}
+        </div>
       </Tooltip>
     </div>
   );
@@ -76,11 +85,11 @@ const RankingsColumnGroup_ = ({
   showSmartScores: boolean;
 }) => (
   <colgroup>
-    <col className={colStyles} width={cellWidthSm} />
+    <col className={cn(colStyles)} />
     <col className={colStyles} width={cellWidthSm} />
     {showDraftColumns && <col className={colStyles} width={cellWidthMd} />}
     <col className={colStyles} width={cellWidthSm} />
-    <col className={cn(colStyles, "w-fit min-w-56")} />
+    <col className={cn(colStyles, "w-fit min-w-52")} />
     <col className={colStyles} width={cellWidthSm} />
     <col className={colStyles} width={cellWidthLg} />
     <col className={colStyles} width={cellWidthSm} />

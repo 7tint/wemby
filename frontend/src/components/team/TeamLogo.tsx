@@ -9,9 +9,9 @@ interface TeamLogoProps {
 }
 
 const TeamLogo = ({ team, size, useTooltip = true }: TeamLogoProps) => {
-  const small = 25;
-  const medium = 45;
-  const large = 75;
+  const small = 24;
+  const medium = 48;
+  const large = 64;
 
   return team === null ? (
     <></>

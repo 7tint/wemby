@@ -12,6 +12,7 @@ import {
 import {
   ColumnDef,
   ColumnFiltersState,
+  RowSelectionState,
   SortingState,
   VisibilityState,
   flexRender,
@@ -40,6 +41,7 @@ import {
 } from "./RankingsTableUtils";
 import { cn } from "@/lib/utils";
 import usePlayersToDisplay from "@/hooks/usePlayersToDisplay";
+import { Checkbox } from "@/components/ui/checkbox";
 
 /*
  * RANKINGS TABLE
@@ -153,13 +155,13 @@ const RankingsTable_ = ({
             text="Player"
             label="Player Name"
             sort={column.getIsSorted()}
-            className="min-w-56"
+            className="min-w-52"
           />
         ),
         cell: ({ row }) => {
           return (
             <TableCell>
-              <div className="flex items-center px-2 pt-1.5">
+              <div className="flex items-center pl-2 pr-1 pt-1.5">
                 <PlayerHeadshot player={row.original} size="sm" />
                 <div className="flex items-center ml-2 mr-1">
                   {row.original.firstName} {row.original.lastName}
@@ -199,9 +201,7 @@ const RankingsTable_ = ({
             sort={column.getIsSorted()}
           />
         ),
-        cell: (p) => (
-          <TableTd className="font-medium">{p.getValue() as string}</TableTd>
-        ),
+        cell: (p) => <TableTd>{p.getValue() as string}</TableTd>,
         sortingFn: (a, b) => {
           const aPositions = a.original.positions;
           const bPositions = b.original.positions;
@@ -509,24 +509,26 @@ const RankingsTable_ = ({
 
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [sorting, setSorting] = useState<SortingState>([
-    {
-      id: "total",
-      desc: true,
-    },
+    { id: "total", desc: true },
   ]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
 
   const playersTable = useReactTable<Player>({
     columns,
     data: playersList,
-    getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
+    getRowId: (row) => row.id.toString(),
     state: {
+      rowSelection,
       columnVisibility,
       sorting,
       columnFilters,
     },
+    enableRowSelection: true,
+    getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    onRowSelectionChange: setRowSelection,
     onColumnVisibilityChange: setColumnVisibility,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -549,11 +551,8 @@ const RankingsTable_ = ({
               className={headerColStyles}
               style={{ height: 50 }}
             >
-              <TableHead
-                key={headerGroup.id}
-                className={cn("border-slate-300 p-0 ", headerColStyles)}
-              >
-                <RankingsHeaderCell text="#" label="Row #" />
+              <TableHead className={cn(headerColStyles, "p-0")}>
+                <RankingsHeaderCell text="#" label="Row #" disableCursor />
               </TableHead>
               {headerGroup.headers.map((header) => (
                 <TableHead
@@ -588,7 +587,15 @@ const RankingsTable_ = ({
           {playersTable.getRowModel().rows.map((row, index) => {
             return (
               <TableRow key={row.id} className="h-10 odd:bg-slate-50">
-                <TableTd className="text-slate-400">{index + 1}</TableTd>
+                <TableTd className="p-2 text-slate-400 font-mono">
+                  <Checkbox
+                    checked={row.getIsSelected()}
+                    onCheckedChange={row.getToggleSelectedHandler()}
+                  />
+                  <div className="pl-1 pr-2">
+                    {(index + 1).toString().padStart(3, "0")}
+                  </div>
+                </TableTd>
                 {row.getVisibleCells().map((cell) =>
                   flexRender(cell.column.columnDef.cell, {
                     ...cell.getContext(),
