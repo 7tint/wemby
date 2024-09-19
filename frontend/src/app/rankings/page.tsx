@@ -113,7 +113,7 @@ const RankingsPage = () => {
         setTeam={setTeam}
       />
       {isLoaded ? (
-        <div className="mt-8">
+        <div className="mt-6">
           <RankingsTable
             players={players}
             showDraftColumns={selectedYear === 1}

@@ -37,11 +37,11 @@ const RankingsSettings = ({
 }: RankingsSettingsProps) => {
   const [showSettings, setShowSettings] = useState(true);
   return (
-    <div className="my-6">
+    <div className="my-4">
       <Collapsible defaultOpen={true} open={showSettings}>
         <CollapsibleTrigger>
           <div
-            className="flex items-center cursor-pointer w-fit mb-4"
+            className="flex items-center cursor-pointer w-fit mb-3"
             onClick={() => {
               setShowSettings(!showSettings);
             }}
@@ -55,7 +55,7 @@ const RankingsSettings = ({
           </div>
         </CollapsibleTrigger>
         <CollapsibleContent>
-          <div className="flex flex-col xl:flex-row gap-4 xl:gap-12 overflow-scroll ml-6">
+          <div className="flex flex-col xl:flex-row gap-3 xl:gap-12 overflow-scroll ml-6">
             <div className="flex items-center gap-3">
               <div className="flex items-center">
                 <IconAbacus className="mr-1" size={18} />
