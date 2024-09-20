@@ -41,7 +41,7 @@ const RankingsSettings = ({
       <Collapsible defaultOpen={true} open={showSettings}>
         <CollapsibleTrigger>
           <div
-            className="flex items-center cursor-pointer w-fit mb-3"
+            className="flex items-center cursor-pointer w-fit mb-2"
             onClick={() => {
               setShowSettings(!showSettings);
             }}
