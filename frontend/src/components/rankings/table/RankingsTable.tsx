@@ -1,7 +1,6 @@
 "use client";
 
 import { Fragment, memo, useEffect, useMemo, useState } from "react";
-import { ScrollSync, ScrollSyncPane } from "react-scroll-sync";
 import {
   Table,
   TableBody,
@@ -587,99 +586,90 @@ const RankingsTable_ = ({
   });
 
   return (
-    <div className="w-full">
-      <ScrollSync>
-        <Table className="shadow-md min-w-full" style={{ fontSize: "13px" }}>
-          <ScrollSyncPane>
-            <TableHeader
-              className="sticky top-0 z-10 overflow-x-scroll"
-              style={{ scrollbarWidth: "none" }}
+    <div className="w-full overflow-x-scroll">
+      <Table
+        className="shadow-md w-max min-w-full"
+        style={{ fontSize: "13px" }}
+      >
+        <TableHeader>
+          {playersTable.getHeaderGroups().map((headerGroup) => (
+            <TableRow
+              className="border-l border-slate-300"
+              key={headerGroup.id}
+              style={{ height: 50 }}
             >
-              {playersTable.getHeaderGroups().map((headerGroup) => (
-                <TableRow
-                  className="border-l border-slate-300"
-                  key={headerGroup.id}
-                  style={{ height: 50 }}
+              <TableHead className="p-0">
+                <RankingsHeaderCell
+                  text="#"
+                  label="Row #"
+                  width="60px"
+                  disableCursor
+                />
+              </TableHead>
+              {headerGroup.headers.map((header) => (
+                <TableHead
+                  key={`${headerGroup.id}-${header.id}`}
+                  className={cn(
+                    "border-slate-300 p-0",
+                    header.column.getCanSort()
+                      ? "cursor-pointer"
+                      : "cursor-auto"
+                  )}
+                  onClick={header.column.getToggleSortingHandler()}
+                  title={
+                    header.column.getCanSort()
+                      ? header.column.getNextSortingOrder() === "asc"
+                        ? "Sort ascending"
+                        : header.column.getNextSortingOrder() === "desc"
+                        ? "Sort descending"
+                        : "Clear sort"
+                      : undefined
+                  }
                 >
-                  <TableHead className="p-0">
-                    <RankingsHeaderCell
-                      text="#"
-                      label="Row #"
-                      width="60px"
-                      disableCursor
-                    />
-                  </TableHead>
-                  {headerGroup.headers.map((header) => (
-                    <TableHead
-                      key={`${headerGroup.id}-${header.id}`}
-                      className={cn(
-                        "border-slate-300 p-0",
-                        header.column.getCanSort()
-                          ? "cursor-pointer"
-                          : "cursor-auto"
-                      )}
-                      onClick={header.column.getToggleSortingHandler()}
-                      title={
-                        header.column.getCanSort()
-                          ? header.column.getNextSortingOrder() === "asc"
-                            ? "Sort ascending"
-                            : header.column.getNextSortingOrder() === "desc"
-                            ? "Sort descending"
-                            : "Clear sort"
-                          : undefined
-                      }
-                    >
-                      {flexRender(header.column.columnDef.header, {
-                        ...header.getContext(),
-                      })}
-                    </TableHead>
-                  ))}
-                </TableRow>
+                  {flexRender(header.column.columnDef.header, {
+                    ...header.getContext(),
+                  })}
+                </TableHead>
               ))}
-            </TableHeader>
-          </ScrollSyncPane>
-          <ScrollSyncPane>
-            <TableBody
-              className="border-l border-slate-200 overflow-x-scroll"
-              style={{ scrollbarWidth: "none" }}
-            >
-              {playersTable.getRowModel().rows.map((row, index) => {
-                return (
-                  <TableRow key={row.id} className="h-10 odd:bg-slate-50/60">
-                    <TableTd
-                      className="p-2 text-slate-400 font-mono"
-                      width="60px"
-                    >
-                      <Checkbox
-                        checked={row.getIsSelected()}
-                        onCheckedChange={row.getToggleSelectedHandler()}
-                      />
-                      {!totalsMode && (
-                        <div className="pl-1">
-                          {(index + 1).toString().padStart(3, "0")}
-                        </div>
-                      )}
-                    </TableTd>
-                    {row.getVisibleCells().map((cell) =>
-                      flexRender(cell.column.columnDef.cell, {
-                        ...cell.getContext(),
-                        key: `${row.id}-${cell.id}`,
-                      })
-                    )}
-                  </TableRow>
-                );
-              })}
-            </TableBody>
-          </ScrollSyncPane>
-          {totalsMode && (
-            <RankingsTableFooter
-              selectedPlayers={selectedPlayers}
-              showSmartScores={showSmartScores}
-              showDraftColumns={showDraftColumns}
-            />
-          )}
-        </Table>
-      </ScrollSync>
+            </TableRow>
+          ))}
+        </TableHeader>
+        <TableBody
+          className="border-l border-slate-200 overflow-x-scroll"
+          style={{ scrollbarWidth: "none" }}
+        >
+          {playersTable.getRowModel().rows.map((row, index) => {
+            return (
+              <TableRow key={row.id} className="h-10 odd:bg-slate-50/60">
+                <TableTd className="p-2 text-slate-400 font-mono" width="60px">
+                  <Checkbox
+                    checked={row.getIsSelected()}
+                    onCheckedChange={row.getToggleSelectedHandler()}
+                  />
+                  {!totalsMode && (
+                    <div className="pl-1">
+                      {(index + 1).toString().padStart(3, "0")}
+                    </div>
+                  )}
+                </TableTd>
+                {row.getVisibleCells().map((cell) =>
+                  flexRender(cell.column.columnDef.cell, {
+                    ...cell.getContext(),
+                    key: `${row.id}-${cell.id}`,
+                  })
+                )}
+              </TableRow>
+            );
+          })}
+        </TableBody>
+        {totalsMode && (
+          <RankingsTableFooter
+            selectedPlayers={selectedPlayers}
+            showSmartScores={showSmartScores}
+            showDraftColumns={showDraftColumns}
+          />
+        )}
+      </Table>
     </div>
   );
 };
