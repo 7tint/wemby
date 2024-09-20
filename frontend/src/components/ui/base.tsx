@@ -6,7 +6,7 @@ const BaseLayout = ({
   children: ReactNode;
 }>) => {
   return (
-    <div className="mx-auto mt-16 mb-12 px-2 md:px-6 lg:px-8 xl:px-10">
+    <div className="mx-auto mt-16 mb-12 px-3 md:px-6 lg:px-8 xl:px-10">
       {children}
     </div>
   );

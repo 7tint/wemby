@@ -74,7 +74,7 @@ const RankingsPage = () => {
 
   return (
     <BaseLayout>
-      <div className="pl-2.5 md:pl-1.5 lg:pl-1">
+      <div className="pl-2 md:pl-1.5 lg:pl-1">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between my-8">
           <h1 className="text-2xl font-semibold pl-1 md:pl-0">
             Player Rankings
