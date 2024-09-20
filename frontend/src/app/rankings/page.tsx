@@ -126,7 +126,7 @@ const RankingsPage = () => {
             showDraftColumns={selectedYear === 1}
             showSmartScores={showSmartScores}
             showHighlights={showHighlights}
-            punts={[]}
+            punts={punts}
             positions={[]}
             team={null}
             selectPlayerIds={selectPlayerIds}
