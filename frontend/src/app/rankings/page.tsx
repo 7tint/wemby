@@ -141,7 +141,11 @@ const RankingsPage = () => {
         )}
       {isLoaded ? (
         <div className="my-6">
-          <h2 className="text-lg font-medium mb-4 pl-1">Player Rankings</h2>
+          <h2 className="text-lg font-medium mb-4 pl-1">
+            {selectedYear === 1
+              ? "2024-2025 Season Projections"
+              : "2023-2024 Season Rankings"}
+          </h2>
           <RankingsTable
             players={players}
             showDraftColumns={selectedYear === 1}
