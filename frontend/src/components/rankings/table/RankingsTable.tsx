@@ -274,7 +274,7 @@ const RankingsTable_ = ({
           <RankingsHeaderCell
             text="FG%"
             label="Field Goal %"
-            width={cellWidthXl}
+            width={showSmartScores ? cellWidthMd : cellWidthXl}
             sort={column.getIsSorted()}
           />
         ),
@@ -287,7 +287,7 @@ const RankingsTable_ = ({
                 playerStats.fgm / playerStats.fga,
                 "fg"
               )}
-              width={cellWidthXl}
+              width={showSmartScores ? cellWidthMd : cellWidthXl}
             >
               <div className="flex flex-col items-center">
                 {showSmartScores ? (
@@ -317,7 +317,7 @@ const RankingsTable_ = ({
           <RankingsHeaderCell
             text="FT%"
             label="Free Throw %"
-            width={cellWidthXl}
+            width={showSmartScores ? cellWidthMd : cellWidthXl}
             sort={column.getIsSorted()}
           />
         ),
@@ -330,7 +330,7 @@ const RankingsTable_ = ({
                 playerStats.ftm / playerStats.fta,
                 "ft"
               )}
-              width={cellWidthXl}
+              width={showSmartScores ? cellWidthMd : cellWidthXl}
             >
               <div className="flex flex-col items-center">
                 {showSmartScores ? (
