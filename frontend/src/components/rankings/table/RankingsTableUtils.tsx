@@ -65,7 +65,7 @@ const RankingsHeaderCell_ = ({
     <div
       key={id}
       className={cn(
-        "flex flex-col flex-grow justify-start items-center border-b",
+        "flex flex-col flex-grow justify-start items-center border-b hover:bg-slate-150",
         className,
         headerColStyles
       )}
