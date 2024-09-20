@@ -22,7 +22,7 @@ const TableTd_ = ({
 }: {
   children?: ReactNode;
   className?: string;
-  width?: string;
+  width?: string | number;
 }) => (
   <TableCell
     style={{ minWidth: width, width: width }}

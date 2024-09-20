@@ -13,6 +13,7 @@ import {
 import {
   ColumnDef,
   ColumnFiltersState,
+  OnChangeFn,
   RowSelectionState,
   SortingState,
   VisibilityState,
@@ -46,6 +47,8 @@ import {
 import { cn } from "@/lib/utils";
 import usePlayersToDisplay from "@/hooks/usePlayersToDisplay";
 import { Checkbox } from "@/components/ui/checkbox";
+import useSelectedPlayers from "@/hooks/useSelectedPlayers";
+import RankingsTableFooter from "./RankingsTableFooter";
 
 /*
  * RANKINGS TABLE
@@ -58,6 +61,9 @@ interface RankingsTableProps {
   punts: string[];
   positions: string[];
   team: Team | null;
+  selectPlayerIds: RowSelectionState;
+  setSelectPlayerIds: OnChangeFn<RowSelectionState>;
+  totalsMode?: boolean;
 }
 
 const RankingsTable_ = ({
@@ -68,6 +74,9 @@ const RankingsTable_ = ({
   punts,
   positions,
   team,
+  selectPlayerIds,
+  setSelectPlayerIds,
+  totalsMode = false,
 }: RankingsTableProps) => {
   const getPercentileColor = useMemo(() => {
     return (stat: number, category: string) => {
@@ -91,6 +100,7 @@ const RankingsTable_ = ({
   }, [showHighlights, punts]);
 
   const columns = useMemo<ColumnDef<Player>[]>(() => {
+    const f = showSmartScores ? 2 : 1;
     const getDisplayValue = (player: Player) =>
       showSmartScores ? getNStats(player) : getStats(player);
 
@@ -111,22 +121,6 @@ const RankingsTable_ = ({
           </TableTd>
         ),
         invertSorting: true,
-      },
-      {
-        accessorKey: "auctionValuedAt",
-        header: ({ column }) => (
-          <RankingsHeaderCell
-            text={<IconCurrencyDollar className="mt-2.5" size={16} />}
-            label="Auction Value"
-            width={cellWidthMd}
-            sort={column.getIsSorted()}
-          />
-        ),
-        cell: (p) => (
-          <TableTd width={cellWidthMd}>
-            ${p.getValue() === null ? "0" : (p.getValue() as number).toFixed(1)}
-          </TableTd>
-        ),
       },
       {
         accessorKey: "team",
@@ -187,17 +181,19 @@ const RankingsTable_ = ({
         },
       },
       {
-        accessorKey: "age",
+        accessorKey: "auctionValuedAt",
         header: ({ column }) => (
           <RankingsHeaderCell
-            text="Age"
-            label="Age"
-            width={cellWidthSm}
+            text={<IconCurrencyDollar className="mt-2.5" size={16} />}
+            label="Auction Value"
+            width={cellWidthMd}
             sort={column.getIsSorted()}
           />
         ),
         cell: (p) => (
-          <TableTd width={cellWidthSm}>{p.getValue() as number}</TableTd>
+          <TableTd width={cellWidthMd}>
+            ${p.getValue() === null ? "0" : (p.getValue() as number).toFixed(1)}
+          </TableTd>
         ),
       },
       {
@@ -237,6 +233,20 @@ const RankingsTable_ = ({
             filterValue.some((pos) => playerPos.includes(pos))
           );
         },
+      },
+      {
+        accessorKey: "age",
+        header: ({ column }) => (
+          <RankingsHeaderCell
+            text="Age"
+            label="Age"
+            width={cellWidthSm}
+            sort={column.getIsSorted()}
+          />
+        ),
+        cell: (p) => (
+          <TableTd width={cellWidthSm}>{p.getValue() as number}</TableTd>
+        ),
       },
       {
         accessorKey: "stats.gp",
@@ -372,7 +382,7 @@ const RankingsTable_ = ({
               className={getPercentileColor(getStats(row.original).tpm, "tpm")}
               width={cellWidthMd}
             >
-              {tpm.toFixed(1)}
+              {tpm.toFixed(f)}
             </TableTd>
           );
         },
@@ -395,7 +405,7 @@ const RankingsTable_ = ({
               className={getPercentileColor(getStats(row.original).pts, "pts")}
               width={cellWidthMd}
             >
-              {pts.toFixed(1)}
+              {pts.toFixed(f)}
             </TableTd>
           );
         },
@@ -418,7 +428,7 @@ const RankingsTable_ = ({
               className={getPercentileColor(getStats(row.original).reb, "reb")}
               width={cellWidthMd}
             >
-              {reb.toFixed(1)}
+              {reb.toFixed(f)}
             </TableTd>
           );
         },
@@ -441,7 +451,7 @@ const RankingsTable_ = ({
               className={getPercentileColor(getStats(row.original).ast, "ast")}
               width={cellWidthMd}
             >
-              {ast.toFixed(1)}
+              {ast.toFixed(f)}
             </TableTd>
           );
         },
@@ -464,7 +474,7 @@ const RankingsTable_ = ({
               className={getPercentileColor(getStats(row.original).stl, "stl")}
               width={cellWidthMd}
             >
-              {stl.toFixed(1)}
+              {stl.toFixed(f)}
             </TableTd>
           );
         },
@@ -487,7 +497,7 @@ const RankingsTable_ = ({
               className={getPercentileColor(getStats(row.original).blk, "blk")}
               width={cellWidthMd}
             >
-              {blk.toFixed(1)}
+              {blk.toFixed(f)}
             </TableTd>
           );
         },
@@ -510,7 +520,7 @@ const RankingsTable_ = ({
               className={getPercentileColor(getStats(row.original).to, "to")}
               width={cellWidthMd}
             >
-              {to.toFixed(1)}
+              {to.toFixed(f)}
             </TableTd>
           );
         },
@@ -548,20 +558,20 @@ const RankingsTable_ = ({
   }, [positions, team]);
 
   const playersList = usePlayersToDisplay(players, punts, showSmartScores);
+  const selectedPlayers = useSelectedPlayers(selectPlayerIds, playersList);
 
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [sorting, setSorting] = useState<SortingState>([
     { id: "total", desc: true },
   ]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-  const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
 
   const playersTable = useReactTable<Player>({
     columns,
     data: playersList,
     getRowId: (row) => row.id.toString(),
     state: {
-      rowSelection,
+      rowSelection: selectPlayerIds,
       columnVisibility,
       sorting,
       columnFilters,
@@ -570,7 +580,7 @@ const RankingsTable_ = ({
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
-    onRowSelectionChange: setRowSelection,
+    onRowSelectionChange: setSelectPlayerIds,
     onColumnVisibilityChange: setColumnVisibility,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -629,7 +639,10 @@ const RankingsTable_ = ({
             </TableHeader>
           </ScrollSyncPane>
           <ScrollSyncPane>
-            <TableBody className="border-l border-slate-200 overflow-x-scroll">
+            <TableBody
+              className="border-l border-slate-200 overflow-x-scroll"
+              style={{ scrollbarWidth: "none" }}
+            >
               {playersTable.getRowModel().rows.map((row, index) => {
                 return (
                   <TableRow key={row.id} className="h-10 odd:bg-slate-50/60">
@@ -641,9 +654,11 @@ const RankingsTable_ = ({
                         checked={row.getIsSelected()}
                         onCheckedChange={row.getToggleSelectedHandler()}
                       />
-                      <div className="pl-1">
-                        {(index + 1).toString().padStart(3, "0")}
-                      </div>
+                      {!totalsMode && (
+                        <div className="pl-1">
+                          {(index + 1).toString().padStart(3, "0")}
+                        </div>
+                      )}
                     </TableTd>
                     {row.getVisibleCells().map((cell) =>
                       flexRender(cell.column.columnDef.cell, {
@@ -656,6 +671,13 @@ const RankingsTable_ = ({
               })}
             </TableBody>
           </ScrollSyncPane>
+          {totalsMode && (
+            <RankingsTableFooter
+              selectedPlayers={selectedPlayers}
+              showSmartScores={showSmartScores}
+              showDraftColumns={showDraftColumns}
+            />
+          )}
         </Table>
       </ScrollSync>
     </div>

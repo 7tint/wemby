@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { RowSelectionState } from "@tanstack/react-table";
 import { getPlayers } from "@/api/players";
 import {
   Select,
@@ -22,6 +23,7 @@ import { Team } from "@/types/teamTypes";
 
 const RankingsPage = () => {
   const [players, setPlayers] = useState<Player[]>([]);
+  const [selectPlayerIds, setSelectPlayerIds] = useState<RowSelectionState>({});
   const [selectedYear, setSelectedYear] = useState(1);
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -116,6 +118,22 @@ const RankingsPage = () => {
           setTeam={setTeam}
         />
       </div>
+      {selectPlayerIds &&
+        Object.keys(selectPlayerIds).length > 0 &&
+        isLoaded && (
+          <RankingsTable
+            players={players.filter((player) => selectPlayerIds[player.id])}
+            showDraftColumns={selectedYear === 1}
+            showSmartScores={showSmartScores}
+            showHighlights={showHighlights}
+            punts={[]}
+            positions={[]}
+            team={null}
+            selectPlayerIds={selectPlayerIds}
+            setSelectPlayerIds={setSelectPlayerIds}
+            totalsMode
+          />
+        )}
       {isLoaded ? (
         <div className="mt-6">
           <RankingsTable
@@ -126,6 +144,8 @@ const RankingsPage = () => {
             punts={punts}
             positions={positions}
             team={team}
+            selectPlayerIds={selectPlayerIds}
+            setSelectPlayerIds={setSelectPlayerIds}
           />
         </div>
       ) : (
