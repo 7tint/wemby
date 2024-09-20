@@ -576,75 +576,79 @@ const RankingsTable_ = ({
   });
 
   return (
-    <Table
-      className="shadow-md w-full overflow-x-scroll min-w-full"
-      style={{ fontSize: "13px" }}
-    >
-      <TableHeader>
-        {playersTable.getHeaderGroups().map((headerGroup) => (
-          <TableRow
-            className="border-l border-slate-300"
-            key={headerGroup.id}
-            style={{ height: 50 }}
-          >
-            <TableHead className="p-0">
-              <RankingsHeaderCell
-                text="#"
-                label="Row #"
-                width="60px"
-                disableCursor
-              />
-            </TableHead>
-            {headerGroup.headers.map((header) => (
-              <TableHead
-                key={`${headerGroup.id}-${header.id}`}
-                className={cn(
-                  "border-slate-300 p-0",
-                  header.column.getCanSort() ? "cursor-pointer" : "cursor-auto"
-                )}
-                onClick={header.column.getToggleSortingHandler()}
-                title={
-                  header.column.getCanSort()
-                    ? header.column.getNextSortingOrder() === "asc"
-                      ? "Sort ascending"
-                      : header.column.getNextSortingOrder() === "desc"
-                      ? "Sort descending"
-                      : "Clear sort"
-                    : undefined
-                }
-              >
-                {flexRender(header.column.columnDef.header, {
-                  ...header.getContext(),
-                })}
-              </TableHead>
-            ))}
-          </TableRow>
-        ))}
-      </TableHeader>
-      <TableBody className="border-l border-slate-200">
-        {playersTable.getRowModel().rows.map((row, index) => {
-          return (
-            <TableRow key={row.id} className="h-10 odd:bg-slate-50">
-              <TableTd className="p-2 text-slate-400 font-mono" width="60px">
-                <Checkbox
-                  checked={row.getIsSelected()}
-                  onCheckedChange={row.getToggleSelectedHandler()}
+    <div className="w-full overflow-x-scroll">
+      <Table
+        className="shadow-md w-max min-w-full"
+        style={{ fontSize: "13px" }}
+      >
+        <TableHeader>
+          {playersTable.getHeaderGroups().map((headerGroup) => (
+            <TableRow
+              className="border-l border-slate-300"
+              key={headerGroup.id}
+              style={{ height: 50 }}
+            >
+              <TableHead className="p-0">
+                <RankingsHeaderCell
+                  text="#"
+                  label="Row #"
+                  width="60px"
+                  disableCursor
                 />
-                <div className="pl-1">
-                  {(index + 1).toString().padStart(3, "0")}
-                </div>
-              </TableTd>
-              {row.getVisibleCells().map((cell) =>
-                flexRender(cell.column.columnDef.cell, {
-                  ...cell.getContext(),
-                  key: `${row.id}-${cell.id}`,
-                })
-              )}
+              </TableHead>
+              {headerGroup.headers.map((header) => (
+                <TableHead
+                  key={`${headerGroup.id}-${header.id}`}
+                  className={cn(
+                    "border-slate-300 p-0",
+                    header.column.getCanSort()
+                      ? "cursor-pointer"
+                      : "cursor-auto"
+                  )}
+                  onClick={header.column.getToggleSortingHandler()}
+                  title={
+                    header.column.getCanSort()
+                      ? header.column.getNextSortingOrder() === "asc"
+                        ? "Sort ascending"
+                        : header.column.getNextSortingOrder() === "desc"
+                        ? "Sort descending"
+                        : "Clear sort"
+                      : undefined
+                  }
+                >
+                  {flexRender(header.column.columnDef.header, {
+                    ...header.getContext(),
+                  })}
+                </TableHead>
+              ))}
             </TableRow>
-          );
-        })}
-      </TableBody>
-    </Table>
+          ))}
+        </TableHeader>
+        <TableBody className="border-l border-slate-200">
+          {playersTable.getRowModel().rows.map((row, index) => {
+            return (
+              <TableRow key={row.id} className="h-10 odd:bg-slate-50">
+                <TableTd className="p-2 text-slate-400 font-mono" width="60px">
+                  <Checkbox
+                    checked={row.getIsSelected()}
+                    onCheckedChange={row.getToggleSelectedHandler()}
+                  />
+                  <div className="pl-1">
+                    {(index + 1).toString().padStart(3, "0")}
+                  </div>
+                </TableTd>
+                {row.getVisibleCells().map((cell) =>
+                  flexRender(cell.column.columnDef.cell, {
+                    ...cell.getContext(),
+                    key: `${row.id}-${cell.id}`,
+                  })
+                )}
+              </TableRow>
+            );
+          })}
+        </TableBody>
+      </Table>
+    </div>
   );
 };
 const RankingsTable = memo(RankingsTable_);
