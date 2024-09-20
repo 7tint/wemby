@@ -14,7 +14,7 @@ const PlayerRows = ({ playersTable, totalsMode }: PlayerRowsProps) => {
   const rows = playersTable.getRowModel().rows;
   const elements = [];
   for (let i = 0; i < rows.length; i++) {
-    if (i % 15 === 0 && i !== 0) {
+    if (i % 15 === 0 && i !== 0 && !totalsMode) {
       elements.push(
         <RankingsTableHeader
           key={`header-${i}`}

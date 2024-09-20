@@ -107,10 +107,10 @@
   }
 }
 
+// Disables top bar for table headers repeated in the table body
 .disable-top-bar .top-bar {
   display: none;
 }
-
 .disable-top-bar > div {
-  height: 38px !important;
+  height: 36px !important;
 }

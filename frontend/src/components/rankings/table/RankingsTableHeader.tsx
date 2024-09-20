@@ -19,7 +19,7 @@ const RankingsTableHeader = ({
         <TableRow
           className={isInTableBody ? "" : "border-l border-slate-300"}
           key={headerGroup.id}
-          style={{ height: isInTableBody ? 38 : 50 }}
+          style={{ height: isInTableBody ? 36 : 50 }}
         >
           <TableHead
             className={cn("p-0", isInTableBody ? "disable-top-bar" : "")}

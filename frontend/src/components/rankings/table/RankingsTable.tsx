@@ -586,7 +586,7 @@ const RankingsTable_ = ({
       >
         <RankingsTableHeader playersTable={playersTable} />
         <TableBody
-          className="border-l border-slate-300 overflow-x-scroll"
+          className="border-l border-b border-slate-300 overflow-x-scroll"
           style={{ scrollbarWidth: "none" }}
         >
           <PlayerRows playersTable={playersTable} totalsMode={totalsMode} />
