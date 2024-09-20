@@ -2,13 +2,11 @@
 
 import { Fragment, memo, useEffect, useMemo, useState } from "react";
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+  IconPointFilled,
+  IconArrowBadgeUpFilled,
+  IconCurrencyDollar,
+  IconShirtSport,
+} from "@tabler/icons-react";
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -16,24 +14,19 @@ import {
   RowSelectionState,
   SortingState,
   VisibilityState,
-  flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import Tooltip from "@/components/ui/tooltip";
-import {
-  IconPointFilled,
-  IconArrowBadgeUpFilled,
-  IconCurrencyDollar,
-  IconShirtSport,
-} from "@tabler/icons-react";
 import { calculateStatPercentiles, getNStats, getStats } from "@/data/stats";
-import { Player } from "@/types/playerTypes";
-import { Team } from "@/types/teamTypes";
+import useSelectedPlayers from "@/hooks/useSelectedPlayers";
+import usePlayersToDisplay from "@/hooks/usePlayersToDisplay";
+import { cn } from "@/lib/utils";
 import PlayerHeadshot from "../../player/PlayerHeadshot";
 import TeamLogo from "../../team/TeamLogo";
+import RankingsTableFooter from "./RankingsTableFooter";
+import RankingsTableHeader from "./RankingsTableHeader";
 import {
   cellWidthLg,
   cellWidthMd,
@@ -43,11 +36,11 @@ import {
   RankingsHeaderCell,
   TableTd,
 } from "./RankingsTableUtils";
-import { cn } from "@/lib/utils";
-import usePlayersToDisplay from "@/hooks/usePlayersToDisplay";
-import { Checkbox } from "@/components/ui/checkbox";
-import useSelectedPlayers from "@/hooks/useSelectedPlayers";
-import RankingsTableFooter from "./RankingsTableFooter";
+import { Team } from "@/types/teamTypes";
+import { Player } from "@/types/playerTypes";
+import Tooltip from "@/components/ui/tooltip";
+import { Table, TableBody, TableCell } from "@/components/ui/table";
+import PlayerRows from "./RankingsTablePlayerRows";
 
 /*
  * RANKINGS TABLE
@@ -591,76 +584,12 @@ const RankingsTable_ = ({
         className="shadow-md w-max min-w-full"
         style={{ fontSize: "13px" }}
       >
-        <TableHeader>
-          {playersTable.getHeaderGroups().map((headerGroup) => (
-            <TableRow
-              className="border-l border-slate-300"
-              key={headerGroup.id}
-              style={{ height: 50 }}
-            >
-              <TableHead className="p-0">
-                <RankingsHeaderCell
-                  text="#"
-                  label="Row #"
-                  width="60px"
-                  disableCursor
-                />
-              </TableHead>
-              {headerGroup.headers.map((header) => (
-                <TableHead
-                  key={`${headerGroup.id}-${header.id}`}
-                  className={cn(
-                    "border-slate-300 p-0",
-                    header.column.getCanSort()
-                      ? "cursor-pointer"
-                      : "cursor-auto"
-                  )}
-                  onClick={header.column.getToggleSortingHandler()}
-                  title={
-                    header.column.getCanSort()
-                      ? header.column.getNextSortingOrder() === "asc"
-                        ? "Sort ascending"
-                        : header.column.getNextSortingOrder() === "desc"
-                        ? "Sort descending"
-                        : "Clear sort"
-                      : undefined
-                  }
-                >
-                  {flexRender(header.column.columnDef.header, {
-                    ...header.getContext(),
-                  })}
-                </TableHead>
-              ))}
-            </TableRow>
-          ))}
-        </TableHeader>
+        <RankingsTableHeader playersTable={playersTable} />
         <TableBody
-          className="border-l border-slate-200 overflow-x-scroll"
+          className="border-l border-slate-300 overflow-x-scroll"
           style={{ scrollbarWidth: "none" }}
         >
-          {playersTable.getRowModel().rows.map((row, index) => {
-            return (
-              <TableRow key={row.id} className="h-10 odd:bg-slate-50/60">
-                <TableTd className="p-2 text-slate-400 font-mono" width="60px">
-                  <Checkbox
-                    checked={row.getIsSelected()}
-                    onCheckedChange={row.getToggleSelectedHandler()}
-                  />
-                  {!totalsMode && (
-                    <div className="pl-1">
-                      {(index + 1).toString().padStart(3, "0")}
-                    </div>
-                  )}
-                </TableTd>
-                {row.getVisibleCells().map((cell) =>
-                  flexRender(cell.column.columnDef.cell, {
-                    ...cell.getContext(),
-                    key: `${row.id}-${cell.id}`,
-                  })
-                )}
-              </TableRow>
-            );
-          })}
+          <PlayerRows playersTable={playersTable} totalsMode={totalsMode} />
         </TableBody>
         {totalsMode && (
           <RankingsTableFooter

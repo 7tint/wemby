@@ -26,7 +26,7 @@ const TableTd_ = ({
 }) => (
   <TableCell
     style={{ minWidth: width, width: width }}
-    className={cn("px-1.5 py-1", className, colStyles)}
+    className={cn("px-1.5 py-1 last:border-r-slate-300", className, colStyles)}
   >
     <div className="flex flex-row flex-grow justify-center items-center">
       {children}
@@ -38,6 +38,16 @@ export const TableTd = memo(TableTd_);
 /*
  * RANKINGS HEADER CELL
  */
+interface RankingsHeaderCellProps {
+  id?: string;
+  label: string;
+  text: string | ReactNode;
+  width?: string;
+  sort?: false | SortDirection;
+  className?: string;
+  disableCursor?: boolean;
+}
+
 const RankingsHeaderCell_ = ({
   id,
   label,
@@ -46,15 +56,7 @@ const RankingsHeaderCell_ = ({
   sort = false,
   className,
   disableCursor = false,
-}: {
-  id?: string;
-  label: string;
-  text: string | ReactNode;
-  width?: string;
-  sort?: false | SortDirection;
-  className?: string;
-  disableCursor?: boolean;
-}) => {
+}: RankingsHeaderCellProps) => {
   const calcHeaderSortColor = (sort: false | SortDirection) => {
     if (sort === "asc") return "bg-orange-200";
     if (sort === "desc") return "bg-teal-200";
@@ -65,23 +67,25 @@ const RankingsHeaderCell_ = ({
     <div
       key={id}
       className={cn(
-        "flex flex-col flex-grow justify-start items-center border-b hover:bg-slate-150",
+        "flex flex-col flex-grow justify-start items-center border-y hover:bg-slate-150",
         className,
         headerColStyles
       )}
       style={{ height: 50, minWidth: width, width: width }}
     >
-      <div className={cn("h-3 w-full", calcHeaderSortColor(sort))} />
-      <Tooltip label={label}>
-        <div
-          className={cn(
-            disableCursor && "!cursor-default",
-            "my-2 font-semibold"
-          )}
-        >
-          {text}
-        </div>
-      </Tooltip>
+      <div className={cn("top-bar h-3 w-full", calcHeaderSortColor(sort))} />
+      <div className="flex items-center">
+        <Tooltip label={label}>
+          <div
+            className={cn(
+              disableCursor && "!cursor-default",
+              "my-2 font-semibold"
+            )}
+          >
+            {text}
+          </div>
+        </Tooltip>
+      </div>
     </div>
   );
 };
