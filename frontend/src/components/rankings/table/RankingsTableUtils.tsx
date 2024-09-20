@@ -5,11 +5,11 @@ import Tooltip from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 
 export const cellWidthSm = "47.5px";
-export const cellWidthMd = "55px";
+export const cellWidthMd = "52.5px";
 export const cellWidthLg = "80px";
 export const cellWidthXl = "120px";
 
-export const colStyles = "border border-slate-300";
+export const colStyles = "border-r border-slate-300";
 export const headerColStyles = cn(colStyles, "bg-slate-200");
 
 /*
@@ -18,12 +18,19 @@ export const headerColStyles = cn(colStyles, "bg-slate-200");
 const TableTd_ = ({
   children,
   className,
+  width,
 }: {
   children?: ReactNode;
   className?: string;
+  width?: string;
 }) => (
-  <TableCell className={cn("px-2 py-1", className)}>
-    <div className="flex flex-row justify-center items-center">{children}</div>
+  <TableCell
+    style={{ minWidth: width, width: width }}
+    className={cn("px-1.5 py-1", className, colStyles)}
+  >
+    <div className="flex flex-row flex-grow justify-center items-center">
+      {children}
+    </div>
   </TableCell>
 );
 export const TableTd = memo(TableTd_);
@@ -35,6 +42,7 @@ const RankingsHeaderCell_ = ({
   id,
   label,
   text,
+  width,
   sort = false,
   className,
   disableCursor = false,
@@ -42,6 +50,7 @@ const RankingsHeaderCell_ = ({
   id?: string;
   label: string;
   text: string | ReactNode;
+  width?: string;
   sort?: false | SortDirection;
   className?: string;
   disableCursor?: boolean;
@@ -55,8 +64,12 @@ const RankingsHeaderCell_ = ({
   return (
     <div
       key={id}
-      className={cn("flex flex-col justify-start items-center", className)}
-      style={{ height: 50 }}
+      className={cn(
+        "flex flex-col flex-grow justify-start items-center border-b border-slate-300",
+        className,
+        headerColStyles
+      )}
+      style={{ height: 50, minWidth: width, width: width }}
     >
       <div className={cn("h-3 w-full", calcHeaderSortColor(sort))} />
       <Tooltip label={label}>
@@ -73,43 +86,3 @@ const RankingsHeaderCell_ = ({
   );
 };
 export const RankingsHeaderCell = memo(RankingsHeaderCell_);
-
-/*
- * RANKINGS COLUMNS
- */
-const RankingsColumnGroup_ = ({
-  showDraftColumns,
-  showSmartScores,
-}: {
-  showDraftColumns: boolean;
-  showSmartScores: boolean;
-}) => (
-  <colgroup>
-    <col className={cn(colStyles)} />
-    <col className={colStyles} width={cellWidthSm} />
-    {showDraftColumns && <col className={colStyles} width={cellWidthMd} />}
-    <col className={colStyles} width={cellWidthSm} />
-    <col className={cn(colStyles, "w-fit min-w-52")} />
-    <col className={colStyles} width={cellWidthSm} />
-    <col className={colStyles} width={cellWidthLg} />
-    <col className={colStyles} width={cellWidthSm} />
-    <col className={colStyles} width={cellWidthSm} />
-    <col
-      className={colStyles}
-      width={showSmartScores ? cellWidthMd : cellWidthXl}
-    />
-    <col
-      className={colStyles}
-      width={showSmartScores ? cellWidthMd : cellWidthXl}
-    />
-    <col className={colStyles} width={cellWidthMd} />
-    <col className={colStyles} width={cellWidthMd} />
-    <col className={colStyles} width={cellWidthMd} />
-    <col className={colStyles} width={cellWidthMd} />
-    <col className={colStyles} width={cellWidthMd} />
-    <col className={colStyles} width={cellWidthMd} />
-    <col className={colStyles} width={cellWidthMd} />
-    <col className={colStyles} width={cellWidthMd} />
-  </colgroup>
-);
-export const RankingsColumnGroup = memo(RankingsColumnGroup_);

@@ -34,8 +34,11 @@ import { Team } from "@/types/teamTypes";
 import PlayerHeadshot from "../../player/PlayerHeadshot";
 import TeamLogo from "../../team/TeamLogo";
 import {
-  headerColStyles,
-  RankingsColumnGroup,
+  cellWidthLg,
+  cellWidthMd,
+  cellWidthSm,
+  cellWidthXl,
+  colStyles,
   RankingsHeaderCell,
   TableTd,
 } from "./RankingsTableUtils";
@@ -97,11 +100,14 @@ const RankingsTable_ = ({
           <RankingsHeaderCell
             text={<IconArrowBadgeUpFilled size={18} />}
             label="Rank (from Hashtag Basketball)"
+            width={cellWidthSm}
             sort={column.getIsSorted()}
           />
         ),
         cell: (p) => (
-          <TableTd className="font-medium">{p.getValue() as number}</TableTd>
+          <TableTd className="font-medium" width={cellWidthSm}>
+            {p.getValue() as number}
+          </TableTd>
         ),
         invertSorting: true,
       },
@@ -111,11 +117,12 @@ const RankingsTable_ = ({
           <RankingsHeaderCell
             text={<IconCurrencyDollar className="mt-2.5" size={16} />}
             label="Auction Value"
+            width={cellWidthMd}
             sort={column.getIsSorted()}
           />
         ),
         cell: (p) => (
-          <TableTd>
+          <TableTd width={cellWidthMd}>
             ${p.getValue() === null ? "0" : (p.getValue() as number).toFixed(1)}
           </TableTd>
         ),
@@ -126,11 +133,12 @@ const RankingsTable_ = ({
           <RankingsHeaderCell
             text={<IconShirtSport size={18} />}
             label="Team"
+            width={cellWidthSm}
             sort={column.getIsSorted()}
           />
         ),
         cell: ({ row }) => (
-          <TableTd>
+          <TableTd width={cellWidthSm}>
             <Fragment>
               {row.original.changedTeams && (
                 <Tooltip label="Changing teams this season">
@@ -155,15 +163,15 @@ const RankingsTable_ = ({
             text="Player"
             label="Player Name"
             sort={column.getIsSorted()}
-            className="min-w-52"
+            className="w-56 min-w-56"
           />
         ),
         cell: ({ row }) => {
           return (
-            <TableCell>
+            <TableCell className={cn("w-56 min-w-56", colStyles)}>
               <div className="flex items-center pl-2 pr-1 pt-1.5">
                 <PlayerHeadshot player={row.original} size="sm" />
-                <div className="flex items-center ml-2 mr-1">
+                <div className="inline-block ml-2 mr-1 text-ellipsis overflow-hidden whitespace-nowrap">
                   {row.original.firstName} {row.original.lastName}
                 </div>
                 {/* TODO: fix rookie season api */}
@@ -183,10 +191,13 @@ const RankingsTable_ = ({
           <RankingsHeaderCell
             text="Age"
             label="Age"
+            width={cellWidthSm}
             sort={column.getIsSorted()}
           />
         ),
-        cell: (p) => <TableTd>{p.getValue() as number}</TableTd>,
+        cell: (p) => (
+          <TableTd width={cellWidthSm}>{p.getValue() as number}</TableTd>
+        ),
       },
       {
         id: "pos",
@@ -198,10 +209,13 @@ const RankingsTable_ = ({
           <RankingsHeaderCell
             text="Pos"
             label="Position"
+            width={cellWidthLg}
             sort={column.getIsSorted()}
           />
         ),
-        cell: (p) => <TableTd>{p.getValue() as string}</TableTd>,
+        cell: (p) => (
+          <TableTd width={cellWidthLg}>{p.getValue() as string}</TableTd>
+        ),
         sortingFn: (a, b) => {
           const aPositions = a.original.positions;
           const bPositions = b.original.positions;
@@ -229,10 +243,13 @@ const RankingsTable_ = ({
           <RankingsHeaderCell
             text="GP"
             label="Games Played"
+            width={cellWidthSm}
             sort={column.getIsSorted()}
           />
         ),
-        cell: (p) => <TableTd>{p.getValue() as number}</TableTd>,
+        cell: (p) => (
+          <TableTd width={cellWidthSm}>{p.getValue() as number}</TableTd>
+        ),
       },
       {
         accessorKey: "stats.mpg",
@@ -240,10 +257,15 @@ const RankingsTable_ = ({
           <RankingsHeaderCell
             text="MPG"
             label="Minutes Per Game"
+            width={cellWidthMd}
             sort={column.getIsSorted()}
           />
         ),
-        cell: (p) => <TableTd>{(p.getValue() as number).toFixed(1)}</TableTd>,
+        cell: (p) => (
+          <TableTd width={cellWidthMd}>
+            {(p.getValue() as number).toFixed(1)}
+          </TableTd>
+        ),
       },
       {
         id: "fg",
@@ -252,6 +274,7 @@ const RankingsTable_ = ({
           <RankingsHeaderCell
             text="FG%"
             label="Field Goal %"
+            width={cellWidthXl}
             sort={column.getIsSorted()}
           />
         ),
@@ -264,6 +287,7 @@ const RankingsTable_ = ({
                 playerStats.fgm / playerStats.fga,
                 "fg"
               )}
+              width={cellWidthXl}
             >
               <div className="flex flex-col items-center">
                 {showSmartScores ? (
@@ -293,6 +317,7 @@ const RankingsTable_ = ({
           <RankingsHeaderCell
             text="FT%"
             label="Free Throw %"
+            width={cellWidthXl}
             sort={column.getIsSorted()}
           />
         ),
@@ -305,6 +330,7 @@ const RankingsTable_ = ({
                 playerStats.ftm / playerStats.fta,
                 "ft"
               )}
+              width={cellWidthXl}
             >
               <div className="flex flex-col items-center">
                 {showSmartScores ? (
@@ -334,6 +360,7 @@ const RankingsTable_ = ({
           <RankingsHeaderCell
             text="3PM"
             label="3-Pointers Made"
+            width={cellWidthMd}
             sort={column.getIsSorted()}
           />
         ),
@@ -342,6 +369,7 @@ const RankingsTable_ = ({
           return (
             <TableTd
               className={getPercentileColor(getStats(row.original).tpm, "tpm")}
+              width={cellWidthMd}
             >
               {tpm.toFixed(1)}
             </TableTd>
@@ -355,6 +383,7 @@ const RankingsTable_ = ({
           <RankingsHeaderCell
             text="PTS"
             label="Points"
+            width={cellWidthMd}
             sort={column.getIsSorted()}
           />
         ),
@@ -363,6 +392,7 @@ const RankingsTable_ = ({
           return (
             <TableTd
               className={getPercentileColor(getStats(row.original).pts, "pts")}
+              width={cellWidthMd}
             >
               {pts.toFixed(1)}
             </TableTd>
@@ -376,6 +406,7 @@ const RankingsTable_ = ({
           <RankingsHeaderCell
             text="REB"
             label="Rebounds"
+            width={cellWidthMd}
             sort={column.getIsSorted()}
           />
         ),
@@ -384,6 +415,7 @@ const RankingsTable_ = ({
           return (
             <TableTd
               className={getPercentileColor(getStats(row.original).reb, "reb")}
+              width={cellWidthMd}
             >
               {reb.toFixed(1)}
             </TableTd>
@@ -397,6 +429,7 @@ const RankingsTable_ = ({
           <RankingsHeaderCell
             text="AST"
             label="Assists"
+            width={cellWidthMd}
             sort={column.getIsSorted()}
           />
         ),
@@ -405,6 +438,7 @@ const RankingsTable_ = ({
           return (
             <TableTd
               className={getPercentileColor(getStats(row.original).ast, "ast")}
+              width={cellWidthMd}
             >
               {ast.toFixed(1)}
             </TableTd>
@@ -418,6 +452,7 @@ const RankingsTable_ = ({
           <RankingsHeaderCell
             text="STL"
             label="Steals"
+            width={cellWidthMd}
             sort={column.getIsSorted()}
           />
         ),
@@ -426,6 +461,7 @@ const RankingsTable_ = ({
           return (
             <TableTd
               className={getPercentileColor(getStats(row.original).stl, "stl")}
+              width={cellWidthMd}
             >
               {stl.toFixed(1)}
             </TableTd>
@@ -439,6 +475,7 @@ const RankingsTable_ = ({
           <RankingsHeaderCell
             text="BLK"
             label="Blocks"
+            width={cellWidthMd}
             sort={column.getIsSorted()}
           />
         ),
@@ -447,6 +484,7 @@ const RankingsTable_ = ({
           return (
             <TableTd
               className={getPercentileColor(getStats(row.original).blk, "blk")}
+              width={cellWidthMd}
             >
               {blk.toFixed(1)}
             </TableTd>
@@ -460,6 +498,7 @@ const RankingsTable_ = ({
           <RankingsHeaderCell
             text="TO"
             label="Turnovers"
+            width={cellWidthMd}
             sort={column.getIsSorted()}
           />
         ),
@@ -468,6 +507,7 @@ const RankingsTable_ = ({
           return (
             <TableTd
               className={getPercentileColor(getStats(row.original).to, "to")}
+              width={cellWidthMd}
             >
               {to.toFixed(1)}
             </TableTd>
@@ -482,11 +522,12 @@ const RankingsTable_ = ({
           <RankingsHeaderCell
             text="Total"
             label="Total Smart Score"
+            width={cellWidthMd}
             sort={column.getIsSorted()}
           />
         ),
         cell: ({ cell }) => (
-          <TableTd className="font-medium">
+          <TableTd className="font-medium" width={cellWidthMd}>
             {(cell.getValue() as number).toFixed(2)}
           </TableTd>
         ),
@@ -535,79 +576,75 @@ const RankingsTable_ = ({
   });
 
   return (
-    <div
-      className="shadow-md w-full overflow-x-scroll"
+    <Table
+      className="shadow-md w-full overflow-x-scroll min-w-full"
       style={{ fontSize: "13px" }}
     >
-      <Table className="w-max min-w-full">
-        <RankingsColumnGroup
-          showDraftColumns={showDraftColumns}
-          showSmartScores={showSmartScores}
-        />
-        <TableHeader>
-          {playersTable.getHeaderGroups().map((headerGroup) => (
-            <TableRow
-              key={headerGroup.id}
-              className={headerColStyles}
-              style={{ height: 50 }}
-            >
-              <TableHead className={cn(headerColStyles, "p-0")}>
-                <RankingsHeaderCell text="#" label="Row #" disableCursor />
-              </TableHead>
-              {headerGroup.headers.map((header) => (
-                <TableHead
-                  key={`${headerGroup.id}-${header.id}`}
-                  className={cn(
-                    "border-slate-300 p-0",
-                    headerColStyles,
-                    header.column.getCanSort()
-                      ? "cursor-pointer"
-                      : "cursor-auto"
-                  )}
-                  onClick={header.column.getToggleSortingHandler()}
-                  title={
-                    header.column.getCanSort()
-                      ? header.column.getNextSortingOrder() === "asc"
-                        ? "Sort ascending"
-                        : header.column.getNextSortingOrder() === "desc"
-                        ? "Sort descending"
-                        : "Clear sort"
-                      : undefined
-                  }
-                >
-                  {flexRender(header.column.columnDef.header, {
-                    ...header.getContext(),
-                  })}
-                </TableHead>
-              ))}
-            </TableRow>
-          ))}
-        </TableHeader>
-        <TableBody>
-          {playersTable.getRowModel().rows.map((row, index) => {
-            return (
-              <TableRow key={row.id} className="h-10 odd:bg-slate-50">
-                <TableTd className="p-2 text-slate-400 font-mono">
-                  <Checkbox
-                    checked={row.getIsSelected()}
-                    onCheckedChange={row.getToggleSelectedHandler()}
-                  />
-                  <div className="pl-1 pr-2">
-                    {(index + 1).toString().padStart(3, "0")}
-                  </div>
-                </TableTd>
-                {row.getVisibleCells().map((cell) =>
-                  flexRender(cell.column.columnDef.cell, {
-                    ...cell.getContext(),
-                    key: `${row.id}-${cell.id}`,
-                  })
+      <TableHeader>
+        {playersTable.getHeaderGroups().map((headerGroup) => (
+          <TableRow
+            className="border-l border-slate-300"
+            key={headerGroup.id}
+            style={{ height: 50 }}
+          >
+            <TableHead className="p-0">
+              <RankingsHeaderCell
+                text="#"
+                label="Row #"
+                width="60px"
+                disableCursor
+              />
+            </TableHead>
+            {headerGroup.headers.map((header) => (
+              <TableHead
+                key={`${headerGroup.id}-${header.id}`}
+                className={cn(
+                  "border-slate-300 p-0",
+                  header.column.getCanSort() ? "cursor-pointer" : "cursor-auto"
                 )}
-              </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
-    </div>
+                onClick={header.column.getToggleSortingHandler()}
+                title={
+                  header.column.getCanSort()
+                    ? header.column.getNextSortingOrder() === "asc"
+                      ? "Sort ascending"
+                      : header.column.getNextSortingOrder() === "desc"
+                      ? "Sort descending"
+                      : "Clear sort"
+                    : undefined
+                }
+              >
+                {flexRender(header.column.columnDef.header, {
+                  ...header.getContext(),
+                })}
+              </TableHead>
+            ))}
+          </TableRow>
+        ))}
+      </TableHeader>
+      <TableBody className="border-l border-slate-300">
+        {playersTable.getRowModel().rows.map((row, index) => {
+          return (
+            <TableRow key={row.id} className="h-10 odd:bg-slate-50">
+              <TableTd className="p-2 text-slate-400 font-mono" width="60px">
+                <Checkbox
+                  checked={row.getIsSelected()}
+                  onCheckedChange={row.getToggleSelectedHandler()}
+                />
+                <div className="pl-1">
+                  {(index + 1).toString().padStart(3, "0")}
+                </div>
+              </TableTd>
+              {row.getVisibleCells().map((cell) =>
+                flexRender(cell.column.columnDef.cell, {
+                  ...cell.getContext(),
+                  key: `${row.id}-${cell.id}`,
+                })
+              )}
+            </TableRow>
+          );
+        })}
+      </TableBody>
+    </Table>
   );
 };
 const RankingsTable = memo(RankingsTable_);

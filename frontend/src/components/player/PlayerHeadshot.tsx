@@ -10,7 +10,7 @@ const PlayerHeadshot = ({ player, size }: PlayerHeadshotProps) => {
   const small = 44;
   const medium = 64;
   const large = 96;
-  const proportion = 38 / 45;
+  const proportion = 8 / 11;
 
   const width = size === "sm" ? small : size === "md" ? medium : large;
   const height = width * proportion;
