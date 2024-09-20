@@ -3,6 +3,16 @@
 import { useEffect, useState } from "react";
 import { RowSelectionState } from "@tanstack/react-table";
 import { getPlayers } from "@/api/players";
+import calculateMinMax from "@/data/minmax";
+import calculateZScores from "@/data/zScore";
+import { normalizeScores } from "@/data/stats";
+import { Team } from "@/types/teamTypes";
+import { Player } from "@/types/playerTypes";
+import BaseLayout from "@/components/ui/base";
+import { Skeleton } from "@/components/ui/skeleton";
+import RankingsFilters from "@/components/rankings/RankingsFilters";
+import RankingsSettings from "@/components/rankings/RankingsSettings";
+import RankingsTable from "@/components/rankings/table/RankingsTable";
 import {
   Select,
   SelectContent,
@@ -10,16 +20,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Skeleton } from "@/components/ui/skeleton";
-import RankingsSettings from "@/components/rankings/RankingsSettings";
-import RankingsTable from "@/components/rankings/table/RankingsTable";
-import { normalizeScores } from "@/data/stats";
-import calculateMinMax from "@/data/minmax";
-import calculateZScores from "@/data/zScore";
-import { Player } from "@/types/playerTypes";
-import RankingsFilters from "@/components/rankings/RankingsFilters";
-import BaseLayout from "@/components/ui/base";
-import { Team } from "@/types/teamTypes";
+import { Separator } from "@/components/ui/separator";
 
 const RankingsPage = () => {
   const [players, setPlayers] = useState<Player[]>([]);
@@ -118,24 +119,29 @@ const RankingsPage = () => {
           setTeam={setTeam}
         />
       </div>
+      <Separator className="my-6" />
       {selectPlayerIds &&
         Object.keys(selectPlayerIds).length > 0 &&
         isLoaded && (
-          <RankingsTable
-            players={players.filter((player) => selectPlayerIds[player.id])}
-            showDraftColumns={selectedYear === 1}
-            showSmartScores={showSmartScores}
-            showHighlights={showHighlights}
-            punts={punts}
-            positions={[]}
-            team={null}
-            selectPlayerIds={selectPlayerIds}
-            setSelectPlayerIds={setSelectPlayerIds}
-            totalsMode
-          />
+          <div>
+            <h2 className="text-lg font-medium mb-4 pl-1">Selected Players</h2>
+            <RankingsTable
+              players={players.filter((player) => selectPlayerIds[player.id])}
+              showDraftColumns={selectedYear === 1}
+              showSmartScores={showSmartScores}
+              showHighlights={showHighlights}
+              punts={punts}
+              positions={[]}
+              team={null}
+              selectPlayerIds={selectPlayerIds}
+              setSelectPlayerIds={setSelectPlayerIds}
+              totalsMode
+            />
+          </div>
         )}
       {isLoaded ? (
-        <div className="mt-6">
+        <div className="my-6">
+          <h2 className="text-lg font-medium mb-4 pl-1">Player Rankings</h2>
           <RankingsTable
             players={players}
             showDraftColumns={selectedYear === 1}
