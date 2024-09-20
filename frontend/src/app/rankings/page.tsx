@@ -74,44 +74,48 @@ const RankingsPage = () => {
 
   return (
     <BaseLayout>
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between my-8">
-        <h1 className="text-2xl font-semibold pl-1 md:pl-0">Player Rankings</h1>
-        <div className="w-auto mt-4 md:mt-0">
-          <Select
-            defaultValue={selectedYear.toString()}
-            onValueChange={(value) => {
-              setIsLoaded(false);
-              setSelectedYear(parseInt(value));
-            }}
-          >
-            <SelectTrigger>
-              <SelectValue placeholder="Select year for rankings" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem className="cursor-pointer" value="1">
-                2024-2025 Projections
-              </SelectItem>
-              <SelectItem className="cursor-pointer" value="2">
-                2023-2024 Stats
-              </SelectItem>
-            </SelectContent>
-          </Select>
+      <div className="pl-2.5 md:pl-1.5 lg:pl-1">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between my-8">
+          <h1 className="text-2xl font-semibold pl-1 md:pl-0">
+            Player Rankings
+          </h1>
+          <div className="w-auto mt-4 md:mt-0">
+            <Select
+              defaultValue={selectedYear.toString()}
+              onValueChange={(value) => {
+                setIsLoaded(false);
+                setSelectedYear(parseInt(value));
+              }}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Select year for rankings" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem className="cursor-pointer" value="1">
+                  2024-2025 Projections
+                </SelectItem>
+                <SelectItem className="cursor-pointer" value="2">
+                  2023-2024 Stats
+                </SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
         </div>
+        <RankingsSettings
+          showSmartScores={showSmartScores}
+          setShowSmartScores={setShowSmartScores}
+          showHighlights={showHighlights}
+          setShowHighlights={setShowHighlights}
+          punts={punts}
+          setPunts={setPunts}
+        />
+        <RankingsFilters
+          positions={positions}
+          setPositions={setPositions}
+          team={team}
+          setTeam={setTeam}
+        />
       </div>
-      <RankingsSettings
-        showSmartScores={showSmartScores}
-        setShowSmartScores={setShowSmartScores}
-        showHighlights={showHighlights}
-        setShowHighlights={setShowHighlights}
-        punts={punts}
-        setPunts={setPunts}
-      />
-      <RankingsFilters
-        positions={positions}
-        setPositions={setPositions}
-        team={team}
-        setTeam={setTeam}
-      />
       {isLoaded ? (
         <div className="mt-6">
           <RankingsTable

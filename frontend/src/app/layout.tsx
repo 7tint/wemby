@@ -4,7 +4,7 @@ import { fonts } from "./fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Wemby Fantasy Helper",
+  title: "Wemby Fantasy Basketball Analytics",
   description: "Become the fantasy basketball CHAMP.",
 };
 
