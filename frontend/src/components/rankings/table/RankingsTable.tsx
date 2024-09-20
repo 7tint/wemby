@@ -621,7 +621,7 @@ const RankingsTable_ = ({
           </TableRow>
         ))}
       </TableHeader>
-      <TableBody className="border-l border-slate-300">
+      <TableBody className="border-l border-slate-200">
         {playersTable.getRowModel().rows.map((row, index) => {
           return (
             <TableRow key={row.id} className="h-10 odd:bg-slate-50">

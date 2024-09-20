@@ -9,8 +9,8 @@ export const cellWidthMd = "52.5px";
 export const cellWidthLg = "80px";
 export const cellWidthXl = "120px";
 
-export const colStyles = "border-r border-slate-300";
-export const headerColStyles = cn(colStyles, "bg-slate-200");
+export const colStyles = "border-r border-slate-200";
+export const headerColStyles = cn(colStyles, "border-slate-300 bg-slate-200");
 
 /*
  * TABLE CELL COMPONENTS
@@ -65,7 +65,7 @@ const RankingsHeaderCell_ = ({
     <div
       key={id}
       className={cn(
-        "flex flex-col flex-grow justify-start items-center border-b border-slate-300",
+        "flex flex-col flex-grow justify-start items-center border-b",
         className,
         headerColStyles
       )}

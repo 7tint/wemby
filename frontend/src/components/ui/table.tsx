@@ -47,7 +47,7 @@ const TableRow = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "flex flex-row min-w-full items-center border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted",
+      "flex flex-row min-w-full items-center border-b border-slate-200 transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted",
       className
     )}
     {...props}
