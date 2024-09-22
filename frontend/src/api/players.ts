@@ -27,8 +27,6 @@ const getPlayers = async (year: string): Promise<PlayerResponse> => {
       data[`${year}_category_stats_total`]
     ) as CategoryStats;
 
-    console.log(players);
-
     return { year, players, categoryStatsPer, categoryStatsTotal };
   } catch (error) {
     console.error("Error fetching players", error);

@@ -214,3 +214,9 @@ export const getInjuryAbbreviation = (status: string): string => {
       return "?";
   }
 };
+
+export const convertInchesToFeet = (inches: number): string => {
+  const feet = Math.floor(inches / 12);
+  const inch = inches % 12;
+  return `${feet}'${inch}`;
+};

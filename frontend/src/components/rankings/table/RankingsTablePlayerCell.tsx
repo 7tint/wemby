@@ -16,7 +16,12 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
-import { getInjuryAbbreviation, getTeamName, YEAR } from "@/utils/consts";
+import {
+  convertInchesToFeet,
+  getInjuryAbbreviation,
+  getTeamName,
+  YEAR,
+} from "@/utils/consts";
 
 interface PlayerCellProps {
   player: Player;
@@ -59,8 +64,14 @@ const PlayerCell_ = ({ player }: PlayerCellProps) => {
                   {player.firstName} {player.lastName}
                 </div>
                 <div className="text-sm">{getTeamName(player.team)}</div>
-                <div className="mt-1">
+                <div className="flex items-center mt-1">
                   <PlayerPositionBadges positions={player.positions} />
+                  <div className="ml-3 text-xs text-slate-500 font-medium">
+                    <span className="mr-2">
+                      {convertInchesToFeet(player.height)}
+                    </span>
+                    <span>{player.weight} lbs</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -130,7 +141,38 @@ const PlayerCell_ = ({ player }: PlayerCellProps) => {
                 </div>
               </Badge>
             </div>
-            {/* TODO: add recent news, or notes section */}
+            <div className="px-4 pt-2 pb-3">
+              <div className="mb-1 font-semibold">
+                {player.injuries.length > 0 ? (
+                  <div>
+                    <span className="text-red-400">
+                      {player.injuries[0].status}
+                    </span>{" "}
+                    -{" "}
+                    {player.injuries[0].details.side !== "Not Specified" &&
+                      `${player.injuries[0].details.side}`}{" "}
+                    {player.injuries[0].details.detail &&
+                      `${player.injuries[0].details.location}`}
+                  </div>
+                ) : (
+                  <div className="text-green-700">Healthy</div>
+                )}
+              </div>
+              {player.injuries.length > 0 ? (
+                <div className="text-xs">
+                  <div className="text-slate-500 italic">
+                    {player.injuries[0].shortComment}
+                  </div>
+                  <div className="text-slate-700 text-right mt-1 font-semibold">
+                    Estimated Return: {player.injuries[0].details.returnDate}
+                  </div>
+                </div>
+              ) : (
+                <div className="text-xs text-slate-500 italic">
+                  No injuries to report
+                </div>
+              )}
+            </div>
           </HoverCardContent>
         </HoverCard>
         <div className="inline-block w-8 text-red-400 text-2xs font-bold ml-0.5">
