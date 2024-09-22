@@ -26,7 +26,6 @@ const getPlayers = async (year: string): Promise<PlayerResponse> => {
     const categoryStatsTotal = toCamelCase(
       data[`${year}_category_stats_total`]
     ) as CategoryStats;
-
     return { year, players, categoryStatsPer, categoryStatsTotal };
   } catch (error) {
     console.error("Error fetching players", error);

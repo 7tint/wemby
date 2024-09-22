@@ -1,10 +1,7 @@
 import { getStats } from "./stats";
-import {
-  EMPTY_PLAYER_STATS_NSCORE,
-  Player,
-  PlayerStatsNScore,
-} from "@/types/playerTypes";
+import { Player, PlayerStatsNScore } from "@/types/playerTypes";
 import { CategoryStats } from "@/types/statTypes";
+import { EMPTY_PLAYER_STATS_NSCORE } from "@/utils/consts";
 
 /**
  * Calculate min-max normalization for each player

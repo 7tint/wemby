@@ -1,11 +1,6 @@
+import { EMPTY_PLAYER_STATS, EMPTY_PLAYER_STATS_NSCORE } from "@/utils/consts";
 import { shrinkNumber } from "./math";
-import {
-  EMPTY_PLAYER_STATS,
-  EMPTY_PLAYER_STATS_NSCORE,
-  Player,
-  PlayerStats,
-  PlayerStatsNScore,
-} from "@/types/playerTypes";
+import { Player, PlayerStats, PlayerStatsNScore } from "@/types/playerTypes";
 
 export const getStats = (player: Player): PlayerStats =>
   player.stats === null ? EMPTY_PLAYER_STATS : player.stats;
