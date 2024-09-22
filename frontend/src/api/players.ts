@@ -1,6 +1,7 @@
 import { Player } from "@/types/playerTypes";
-import { CategoryStats, EMPTY_CATEGORY_STATS } from "@/types/statTypes";
+import { CategoryStats } from "@/types/statTypes";
 import toCamelCase from "@/utils/camelCase";
+import { EMPTY_CATEGORY_STATS } from "@/utils/consts";
 import { API_URL } from "@/utils/env";
 
 interface PlayerResponse {
@@ -25,6 +26,9 @@ const getPlayers = async (year: string): Promise<PlayerResponse> => {
     const categoryStatsTotal = toCamelCase(
       data[`${year}_category_stats_total`]
     ) as CategoryStats;
+
+    console.log(players);
+
     return { year, players, categoryStatsPer, categoryStatsTotal };
   } catch (error) {
     console.error("Error fetching players", error);

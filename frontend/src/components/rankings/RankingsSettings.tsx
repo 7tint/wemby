@@ -12,11 +12,11 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { STAT_KEYS } from "@/types/statTypes";
 import { Switch } from "@/components/ui/switch";
 import Tooltip from "@/components/ui/tooltip";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { STAT_KEYS } from "@/utils/consts";
 
 interface RankingsSettingsProps {
   showSmartScores: boolean;

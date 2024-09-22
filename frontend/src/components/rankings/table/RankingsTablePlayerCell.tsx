@@ -1,22 +1,22 @@
+import { memo } from "react";
+import Image from "next/image";
+import { IconBallBasketball, IconCalendarFilled } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
 import { colStyles } from "./RankingsTableUtils";
 import { Player } from "@/types/playerTypes";
+import Tooltip from "@/components/ui/tooltip";
+import { Badge } from "@/components/ui/badge";
 import { TableCell } from "@/components/ui/table";
+import TeamLogo from "@/components/team/TeamLogo";
+import { Separator } from "@/components/ui/separator";
 import PlayerHeadshot from "@/components/player/PlayerHeadshot";
+import PlayerPositionBadges from "@/components/player/PlayerPositionBadges";
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
-import { memo } from "react";
-import PlayerPositionBadges from "@/components/player/PlayerPositionBadges";
-import { getTeamName } from "@/types/teamTypes";
-import TeamLogo from "@/components/team/TeamLogo";
-import Tooltip from "@/components/ui/tooltip";
-import Image from "next/image";
-import { Badge } from "@/components/ui/badge";
-import { IconBallBasketball, IconCalendarFilled } from "@tabler/icons-react";
-import { Separator } from "@/components/ui/separator";
+import { getInjuryAbbreviation, getTeamName } from "@/utils/consts";
 
 interface PlayerCellProps {
   player: Player;
@@ -29,8 +29,12 @@ const PlayerCell_ = ({ player }: PlayerCellProps) => {
         <HoverCardTrigger className="cursor-pointer">
           <div className="flex items-center pl-2 pr-1 pt-1.5">
             <PlayerHeadshot player={player} size="sm" />
-            <div className="inline-block ml-2 mr-1 text-ellipsis overflow-hidden whitespace-nowrap">
+            <div className="inline-block max-w-44 ml-2 mr-1 text-ellipsis overflow-hidden whitespace-nowrap">
               {player.firstName} {player.lastName}
+            </div>
+            <div className="inline-block w-8 text-red-400 text-2xs font-bold ml-0.5">
+              {player.injuries.length > 0 &&
+                getInjuryAbbreviation(player.injuries[0].status)}
             </div>
             {/* TODO: fix rookie season api */}
             {/* {row.original.yearsPro === 0 && (

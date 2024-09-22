@@ -18,24 +18,6 @@ export interface PlayerStats {
   to: number;
 }
 
-export const EMPTY_PLAYER_STATS: PlayerStats = {
-  gp: 0,
-  mpg: 0,
-  fgm: 0,
-  fga: 0,
-  fgImpact: 0,
-  ftm: 0,
-  fta: 0,
-  ftImpact: 0,
-  tpm: 0,
-  pts: 0,
-  reb: 0,
-  ast: 0,
-  stl: 0,
-  blk: 0,
-  to: 0,
-};
-
 export interface PlayerStatsNScore {
   fgImpact: number;
   ftImpact: number;
@@ -49,17 +31,26 @@ export interface PlayerStatsNScore {
   total?: number;
 }
 
-export const EMPTY_PLAYER_STATS_NSCORE: PlayerStatsNScore = {
-  fgImpact: 0,
-  ftImpact: 0,
-  tpm: 0,
-  pts: 0,
-  reb: 0,
-  ast: 0,
-  stl: 0,
-  blk: 0,
-  to: 0,
-};
+export interface PlayerInjury {
+  id: number;
+  longComment: string | null;
+  shortComment: string | null;
+  status: string;
+  date: string;
+  details: {
+    type: string;
+    location: string;
+    detail?: string;
+    side?: string;
+    returnDate: string;
+  };
+}
+
+export interface PlayerDraft {
+  year: number;
+  round: number;
+  selection: number;
+}
 
 export interface Player {
   id: number; // ESPN Player ID
@@ -71,6 +62,10 @@ export interface Player {
   headshot: string;
   yearsPro: number;
   jersey: number | null;
+  height: number;
+  weight: number;
+  injuries: PlayerInjury[];
+  draft: PlayerDraft | null;
   rank: number;
   adp: number | null; // Average Draft Position
   positions: string[]; // List of position eligibilities
@@ -83,5 +78,3 @@ export interface Player {
   auctionEspnAvg: number | null;
   auctionBlendAvg: number | null;
 }
-
-export const PLAYER_POSITIONS = ["PG", "SG", "SF", "PF", "C"];

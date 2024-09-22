@@ -19,13 +19,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
+import { Team, TEAM_ABBREVS } from "@/types/teamTypes";
 import {
+  PLAYER_POSITIONS,
   getTeamAbbreviation,
   getTeamName,
-  Team,
-  TEAM_ABBREVS,
-} from "@/types/teamTypes";
-import { PLAYER_POSITIONS } from "@/types/playerTypes";
+} from "@/utils/consts";
 
 interface RankingsSettingsProps {
   positions: string[];

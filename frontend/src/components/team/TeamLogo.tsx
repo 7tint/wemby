@@ -1,6 +1,7 @@
-import { getTeamName, Team } from "@/types/teamTypes";
+import { Team } from "@/types/teamTypes";
 import Tooltip from "@/components/ui/tooltip";
 import Image from "next/image";
+import { getTeamName } from "@/utils/consts";
 
 interface TeamLogoProps {
   team: Team;
