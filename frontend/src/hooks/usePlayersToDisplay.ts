@@ -1,5 +1,6 @@
 import { getNStats, totalCategories } from "@/data/stats";
-import { EMPTY_PLAYER_STATS_NSCORE, Player } from "@/types/playerTypes";
+import { Player } from "@/types/playerTypes";
+import { EMPTY_PLAYER_STATS_NSCORE } from "@/utils/consts";
 import { useMemo } from "react";
 
 const usePlayersToDisplay = (
