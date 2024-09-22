@@ -24,7 +24,7 @@ interface PlayerCellProps {
 
 const PlayerCell_ = ({ player }: PlayerCellProps) => {
   return (
-    <TableCell className={cn("w-56 min-w-56", colStyles)}>
+    <TableCell className={cn("w-64 min-w-64", colStyles)}>
       <HoverCard openDelay={350}>
         <HoverCardTrigger className="cursor-pointer">
           <div className="flex items-center pl-2 pr-1 pt-1.5">

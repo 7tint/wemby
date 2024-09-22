@@ -25,7 +25,7 @@ const RankingsTableFooter = ({
         <TableTd width={61} />
         <TableTd width={cellWidthSm} />
         <TableTd width={cellWidthSm} />
-        <TableTd className="w-56 min-w-56">Averages</TableTd>
+        <TableTd className="w-64 min-w-64">Averages</TableTd>
         {showDraftColumns && (
           <TableTd width={cellWidthMd}>
             $
@@ -38,12 +38,6 @@ const RankingsTableFooter = ({
           </TableTd>
         )}
         <TableTd width={cellWidthLg} />
-        <TableTd width={cellWidthSm}>
-          {(
-            selectedPlayers.reduce((acc, player) => acc + player.age!, 0) /
-            selectedPlayers.length
-          ).toFixed(1)}
-        </TableTd>
         <TableTd width={cellWidthSm}>
           {(
             selectedPlayers.reduce((acc, player) => acc + player.stats.gp!, 0) /
@@ -248,7 +242,7 @@ const RankingsTableFooter = ({
         <TableTd width={61} />
         <TableTd width={cellWidthSm} />
         <TableTd width={cellWidthSm} />
-        <TableTd className="w-56 min-w-56">Totals</TableTd>
+        <TableTd className="w-64 min-w-64">Totals</TableTd>
         {showDraftColumns && (
           <TableTd width={cellWidthMd}>
             $
@@ -258,12 +252,6 @@ const RankingsTableFooter = ({
           </TableTd>
         )}
         <TableTd width={cellWidthLg} />
-        <TableTd width={cellWidthSm}>
-          {(
-            selectedPlayers.reduce((acc, player) => acc + player.age!, 0) /
-            selectedPlayers.length
-          ).toFixed(1)}
-        </TableTd>
         <TableTd width={cellWidthSm}>
           {selectedPlayers.reduce((acc, player) => acc + player.stats.gp!, 0)}
         </TableTd>

@@ -149,7 +149,7 @@ const RankingsTable_ = ({
             text="Player"
             label="Player Name"
             sort={column.getIsSorted()}
-            className="w-56 min-w-56"
+            className="w-64 min-w-64"
           />
         ),
         cell: ({ row }) => {
@@ -210,20 +210,6 @@ const RankingsTable_ = ({
             filterValue.some((pos) => playerPos.includes(pos))
           );
         },
-      },
-      {
-        accessorKey: "age",
-        header: ({ column }) => (
-          <RankingsHeaderCell
-            text="Age"
-            label="Age"
-            width={cellWidthSm}
-            sort={column.getIsSorted()}
-          />
-        ),
-        cell: (p) => (
-          <TableTd width={cellWidthSm}>{p.getValue() as number}</TableTd>
-        ),
       },
       {
         accessorKey: "stats.gp",
