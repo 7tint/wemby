@@ -149,9 +149,10 @@ const PlayerCell_ = ({ player }: PlayerCellProps) => {
                       {player.injuries[0].status}
                     </span>{" "}
                     -{" "}
-                    {player.injuries[0].details.side !== "Not Specified" &&
+                    {player.injuries[0].details.side &&
+                      player.injuries[0].details.side !== "Not Specified" &&
                       `${player.injuries[0].details.side}`}{" "}
-                    {player.injuries[0].details.detail &&
+                    {player.injuries[0].details.location &&
                       `${player.injuries[0].details.location}`}
                   </div>
                 ) : (
