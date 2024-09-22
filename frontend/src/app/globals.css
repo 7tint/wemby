@@ -107,10 +107,19 @@
   }
 }
 
-// Disables top bar for table headers repeated in the table body
+/* Disables top bar for table headers repeated in the table body */
 .disable-top-bar .top-bar {
   display: none;
 }
 .disable-top-bar > div {
   height: 36px !important;
+}
+
+/* Hide scrollbars */
+.hide-scrollbar {
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
 }

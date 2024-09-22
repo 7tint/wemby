@@ -183,7 +183,10 @@ const RankingsTable_ = ({
           />
         ),
         cell: ({ row }) => (
-          <TableTd width={cellWidthLg} className="overflow-scroll">
+          <TableTd
+            width={cellWidthLg}
+            className="overflow-scroll hide-scrollbar"
+          >
             <PlayerPositionBadges positions={row.original.positions} />
           </TableTd>
         ),
@@ -561,14 +564,14 @@ const RankingsTable_ = ({
   });
 
   return (
-    <div className="w-full overflow-x-scroll">
+    <div className="w-full overflow-x-scroll hide-scrollbar">
       <Table
         className="shadow-md w-max min-w-full"
         style={{ fontSize: "13px" }}
       >
         <RankingsTableHeader playersTable={playersTable} />
         <TableBody
-          className="border-l border-b border-slate-300 overflow-x-scroll"
+          className="border-l border-b border-slate-300 overflow-x-scroll hide-scrollbar"
           style={{ scrollbarWidth: "none" }}
         >
           <PlayerRows playersTable={playersTable} totalsMode={totalsMode} />

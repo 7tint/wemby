@@ -55,7 +55,7 @@ const RankingsSettings = ({
           </div>
         </CollapsibleTrigger>
         <CollapsibleContent>
-          <div className="flex flex-col xl:flex-row gap-3 xl:gap-12 overflow-scroll ml-6">
+          <div className="flex flex-col xl:flex-row gap-3 xl:gap-12 ml-6 overflow-scroll hide-scrollbar">
             <div className="flex items-center gap-3">
               <div className="flex items-center">
                 <IconAbacus className="mr-1" size={18} />

@@ -22,6 +22,8 @@ def get_rosters():
         roster_data = roster_response.json()
         roster_players = roster_data["team"]["athletes"]
 
+        # TODO: get draft year
+
         for player in roster_players:
             try:
                 player_data = {

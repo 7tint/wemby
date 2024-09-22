@@ -45,7 +45,7 @@ const TableFooter = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "overflow-x-scroll border-l border-b border-slate-300 bg-muted/50 font-medium [&>tr]:last:border-b-0",
+      "overflow-x-scroll hide-scrollbar border-l border-b border-slate-300 bg-muted/50 font-medium [&>tr]:last:border-b-0",
       className
     )}
     {...props}
