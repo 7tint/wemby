@@ -33,15 +33,17 @@ const Tooltip = ({
   label,
   children,
   className,
+  side = "top",
 }: {
   label: string;
   children: React.ReactNode;
   className?: string;
+  side?: "top" | "bottom" | "left" | "right";
 }) => (
-  <TooltipProvider_>
+  <TooltipProvider_ delayDuration={300}>
     <Tooltip_>
       <TooltipTrigger_ className={className}>{children}</TooltipTrigger_>
-      <TooltipContent_>
+      <TooltipContent_ side={side}>
         <p className="inline-block max-w-72">{label}</p>
       </TooltipContent_>
     </Tooltip_>
