@@ -32,13 +32,15 @@ export { Tooltip_, TooltipTrigger_, TooltipContent_, TooltipProvider_ };
 const Tooltip = ({
   label,
   children,
+  className,
 }: {
   label: string;
   children: React.ReactNode;
+  className?: string;
 }) => (
   <TooltipProvider_>
     <Tooltip_>
-      <TooltipTrigger_>{children}</TooltipTrigger_>
+      <TooltipTrigger_ className={className}>{children}</TooltipTrigger_>
       <TooltipContent_>
         <p className="inline-block max-w-72">{label}</p>
       </TooltipContent_>

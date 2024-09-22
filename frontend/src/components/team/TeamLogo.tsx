@@ -4,11 +4,12 @@ import Image from "next/image";
 
 interface TeamLogoProps {
   team: Team;
-  size: "sm" | "md" | "lg";
+  size: "xs" | "sm" | "md" | "lg";
   useTooltip?: boolean;
 }
 
 const TeamLogo = ({ team, size, useTooltip = true }: TeamLogoProps) => {
+  const xsmall = 16;
   const small = 24;
   const medium = 48;
   const large = 64;
@@ -18,18 +19,52 @@ const TeamLogo = ({ team, size, useTooltip = true }: TeamLogoProps) => {
   ) : useTooltip ? (
     <Tooltip label={getTeamName(team)}>
       <Image
+        className="relative"
         src={`https://a.espncdn.com/combiner/i?img=/i/teamlogos/nba/500/${team.toLowerCase()}.png&h=1200&w=1200`}
         alt={team}
-        width={size === "sm" ? small : size === "md" ? medium : large}
-        height={size === "sm" ? small : size === "md" ? medium : large}
+        width={
+          size === "xs"
+            ? xsmall
+            : size === "sm"
+            ? small
+            : size === "md"
+            ? medium
+            : large
+        }
+        height={
+          size === "xs"
+            ? xsmall
+            : size === "sm"
+            ? small
+            : size === "md"
+            ? medium
+            : large
+        }
       />
     </Tooltip>
   ) : (
     <Image
+      className="relative"
       src={`https://a.espncdn.com/combiner/i?img=/i/teamlogos/nba/500/${team.toLowerCase()}.png&h=1200&w=1200`}
       alt={team}
-      width={size === "sm" ? small : size === "md" ? medium : large}
-      height={size === "sm" ? small : size === "md" ? medium : large}
+      width={
+        size === "xs"
+          ? xsmall
+          : size === "sm"
+          ? small
+          : size === "md"
+          ? medium
+          : large
+      }
+      height={
+        size === "xs"
+          ? xsmall
+          : size === "sm"
+          ? small
+          : size === "md"
+          ? medium
+          : large
+      }
     />
   );
 };

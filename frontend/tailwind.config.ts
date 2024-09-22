@@ -8,6 +8,9 @@ const config: Config = {
       fontSize: {
         "2xs": "0.625rem",
       },
+      spacing: {
+        "0.75": "0.1875rem",
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",

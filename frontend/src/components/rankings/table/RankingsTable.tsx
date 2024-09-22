@@ -19,12 +19,10 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import PlayerCell from "./RankingsTablePlayerCell";
 import { calculateStatPercentiles, getNStats, getStats } from "@/data/stats";
-import useSelectedPlayers from "@/hooks/useSelectedPlayers";
 import usePlayersToDisplay from "@/hooks/usePlayersToDisplay";
-import { cn } from "@/lib/utils";
-import PlayerHeadshot from "../../player/PlayerHeadshot";
-import TeamLogo from "../../team/TeamLogo";
+import PlayerRows from "./RankingsTablePlayerRows";
 import RankingsTableFooter from "./RankingsTableFooter";
 import RankingsTableHeader from "./RankingsTableHeader";
 import {
@@ -32,15 +30,16 @@ import {
   cellWidthMd,
   cellWidthSm,
   cellWidthXl,
-  colStyles,
   RankingsHeaderCell,
   TableTd,
 } from "./RankingsTableUtils";
+import TeamLogo from "../../team/TeamLogo";
 import { Team } from "@/types/teamTypes";
 import { Player } from "@/types/playerTypes";
 import Tooltip from "@/components/ui/tooltip";
-import { Table, TableBody, TableCell } from "@/components/ui/table";
-import PlayerRows from "./RankingsTablePlayerRows";
+import { Table, TableBody } from "@/components/ui/table";
+import useSelectedPlayers from "@/hooks/useSelectedPlayers";
+import PlayerPositionBadges from "@/components/player/PlayerPositionBadges";
 
 /*
  * RANKINGS TABLE
@@ -154,22 +153,7 @@ const RankingsTable_ = ({
           />
         ),
         cell: ({ row }) => {
-          return (
-            <TableCell className={cn("w-56 min-w-56", colStyles)}>
-              <div className="flex items-center pl-2 pr-1 pt-1.5">
-                <PlayerHeadshot player={row.original} size="sm" />
-                <div className="inline-block ml-2 mr-1 text-ellipsis overflow-hidden whitespace-nowrap">
-                  {row.original.firstName} {row.original.lastName}
-                </div>
-                {/* TODO: fix rookie season api */}
-                {/* {row.original.yearsPro === 0 && (
-                  <Tooltip label="Rookie season">
-                    <IconPointFilled className="text-pink-400" size={18} />
-                  </Tooltip>
-                )} */}
-              </div>
-            </TableCell>
-          );
+          return <PlayerCell player={row.original} />;
         },
       },
       {
@@ -189,11 +173,7 @@ const RankingsTable_ = ({
         ),
       },
       {
-        id: "pos",
-        accessorFn: (player) => {
-          if (!player.positions || player.positions[0] === "") return "???";
-          else return player.positions.join(", ");
-        },
+        accessorKey: "positions",
         header: ({ column }) => (
           <RankingsHeaderCell
             text="Pos"
@@ -202,8 +182,10 @@ const RankingsTable_ = ({
             sort={column.getIsSorted()}
           />
         ),
-        cell: (p) => (
-          <TableTd width={cellWidthLg}>{p.getValue() as string}</TableTd>
+        cell: ({ row }) => (
+          <TableTd width={cellWidthLg} className="overflow-scroll">
+            <PlayerPositionBadges positions={row.original.positions} />
+          </TableTd>
         ),
         sortingFn: (a, b) => {
           const aPositions = a.original.positions;
@@ -544,7 +526,7 @@ const RankingsTable_ = ({
 
   useEffect(() => {
     setColumnFilters([
-      { id: "pos", value: positions },
+      { id: "positions", value: positions },
       { id: "team", value: team },
     ]);
   }, [positions, team]);

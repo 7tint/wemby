@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import { Player } from "@/types/playerTypes";
 import Image from "next/image";
 
@@ -9,19 +10,21 @@ interface PlayerHeadshotProps {
 const PlayerHeadshot = ({ player, size }: PlayerHeadshotProps) => {
   const small = 44;
   const medium = 64;
-  const large = 96;
-  const proportion = 8 / 11;
+  const large = 112;
+  const proportion = 254 / 350;
 
   const width = size === "sm" ? small : size === "md" ? medium : large;
-  const height = width * proportion;
+  const height = Math.round(width * proportion);
+
+  const widthClass = size === "sm" ? "w-11" : size === "md" ? "w-16" : "w-28";
 
   return (
     <Image
+      className={cn(widthClass, "relative h-auto")}
       src={player.headshot}
       alt={player.firstName + " " + player.lastName}
       width={width}
       height={height}
-      className="w-11 h-auto"
       priority
     />
   );

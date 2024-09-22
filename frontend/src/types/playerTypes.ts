@@ -1,3 +1,5 @@
+import { Team } from "./teamTypes";
+
 export interface PlayerStats {
   gp: number;
   mpg: number;
@@ -64,7 +66,7 @@ export interface Player {
   firstName: string;
   lastName: string;
   teamId: number;
-  team: string;
+  team: Team;
   age: number | null;
   headshot: string;
   yearsPro: number;
