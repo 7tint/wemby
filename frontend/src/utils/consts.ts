@@ -2,6 +2,8 @@ import { PlayerStats, PlayerStatsNScore } from "@/types/playerTypes";
 import { CategoryStats } from "@/types/statTypes";
 import { Team } from "@/types/teamTypes";
 
+export const YEAR = 2024;
+
 export const PLAYER_POSITIONS = ["PG", "SG", "SF", "PF", "C"];
 
 export const STAT_KEYS = [

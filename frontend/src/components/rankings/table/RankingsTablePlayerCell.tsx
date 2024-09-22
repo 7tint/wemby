@@ -16,7 +16,7 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
-import { getInjuryAbbreviation, getTeamName } from "@/utils/consts";
+import { getInjuryAbbreviation, getTeamName, YEAR } from "@/utils/consts";
 
 interface PlayerCellProps {
   player: Player;
@@ -79,11 +79,13 @@ const PlayerCell_ = ({ player }: PlayerCellProps) => {
               <Badge variant="default" className="px-2">
                 <div className="flex items-center gap-0.75">
                   <Tooltip
-                    label={`${player.yearsPro} years of NBA experience`}
+                    label={`${
+                      player.draft ? YEAR - player.draft.year : player.yearsPro
+                    } years in the NBA`}
                     className="flex items-center gap-0.75"
                   >
                     <IconBallBasketball size={14} />
-                    {player.yearsPro}y
+                    {player.draft ? YEAR - player.draft.year : player.yearsPro}y
                   </Tooltip>
                 </div>
               </Badge>
