@@ -22,12 +22,12 @@ const PlayerPositionBadges = ({ positions }: PlayerPositionBadgesProps) => {
     }
   };
   return (
-    <div className="flex gap-0.75">
+    <div className="flex gap-1">
       {positions.map((position) => (
         <Badge
           key={position}
           variant={variant(position)}
-          className="text-2xs px-2 py-0"
+          className="text-2xs px-1.5 py-0"
         >
           {position}
         </Badge>
