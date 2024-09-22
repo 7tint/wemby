@@ -14,9 +14,9 @@ const PlayerPositionBadges = ({ positions }: PlayerPositionBadgesProps) => {
       case "SF":
         return "yellow";
       case "PF":
-        return "lime";
+        return "teal";
       case "C":
-        return "sky";
+        return "indigo";
       default:
         return "default";
     }
