@@ -146,6 +146,15 @@ def scrape_past_year_stats():
         )
         past_year_option.click()
 
+        # Toggle position eligibilities to ESPN
+        dropdown3 = driver.find_element(By.NAME, "ctl00$ContentPlaceHolder1$DDPOSFROM")
+        dropdown3.click()
+        time.sleep(1)
+        espn_option = driver.find_element(
+            By.XPATH, '//*[@id="ContentPlaceHolder1_DDPOSFROM"]/option[2]'
+        )
+        espn_option.click()
+
         logger.info("Waiting for table to update p.2")
         time.sleep(2)
 
