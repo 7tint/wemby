@@ -22,8 +22,6 @@ def get_rosters():
         roster_data = roster_response.json()
         roster_players = roster_data["team"]["athletes"]
 
-        # TODO: get draft year
-
         for player in roster_players:
             try:
                 player_data = {
@@ -41,6 +39,38 @@ def get_rosters():
                     ),
                     "years_pro": int(player["experience"]["years"]),
                     "jersey": int(player["jersey"]) if "jersey" in player else None,
+                    "height": int(player["height"]) if "height" in player else None,
+                    "weight": int(player["weight"]) if "weight" in player else None,
+                    "injuries": [
+                        {
+                            "id": int(injury["id"]),
+                            "long_comment": (
+                                injury["longComment"]
+                                if "longComment" in injury
+                                else None
+                            ),
+                            "short_comment": (
+                                injury["shortComment"]
+                                if "shortComment" in injury
+                                else None
+                            ),
+                            "status": injury["status"],
+                            "date": injury["date"],
+                            "details": (
+                                injury["details"] if "details" in injury else None
+                            ),
+                        }
+                        for injury in player.get("injuries", [])
+                    ],
+                    "draft": (
+                        {
+                            "year": (player["draft"]["year"]),
+                            "round": (player["draft"]["round"]),
+                            "selection": (player["draft"]["selection"]),
+                        }
+                        if "draft" in player
+                        else None
+                    ),
                 }
                 players_list.append(player_data)
 

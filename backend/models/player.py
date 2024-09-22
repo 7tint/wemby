@@ -1,3 +1,7 @@
+from ast import In
+from typing import Dict
+
+
 class PlayerStats:
     gp: int
     mpg: float
@@ -33,6 +37,34 @@ class PlayerStats:
         self.to = to
 
 
+class PlayerInjury:
+    id: int
+    long_comment: str | None
+    short_comment: str | None
+    status: str
+    date: str
+    details: Dict[str, Dict[str, str] | str] | None
+
+    def __init__(self, id, long_comment, short_comment, status, date, details):
+        self.id = id
+        self.long_comment = long_comment
+        self.short_comment = short_comment
+        self.status = status
+        self.date = date
+        self.details = details
+
+
+class PlayerDraft:
+    year: int
+    round: int
+    selection: int
+
+    def __init__(self, year, round, selection):
+        self.year = year
+        self.round = round
+        self.selection = selection
+
+
 class Player:
     id: int  # ESPN Player ID
     first_name: str
@@ -43,8 +75,10 @@ class Player:
     headshot: str
     years_pro: int
     jersey: int | None
-    # TODO: add height and weight
-    # TODO: add injuries
+    height: int | None
+    weight: int | None
+    injuries: list[PlayerInjury]
+    draft: PlayerDraft | None
     # TODO: add salary
     rank: int  # Rank in projections
     adp: float | None  # Average Draft Position
@@ -67,6 +101,10 @@ class Player:
         years_pro,
         rank,
         stats,
+        height,
+        weight,
+        injuries,
+        draft,
         adp=None,
         age=None,
         jersey=None,
@@ -85,6 +123,10 @@ class Player:
         self.headshot = headshot
         self.years_pro = years_pro
         self.jersey = jersey
+        self.height = height
+        self.weight = weight
+        self.injuries = injuries
+        self.draft = draft
         self.rank = rank
         self.adp = adp
         self.stats = stats

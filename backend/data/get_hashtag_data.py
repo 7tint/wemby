@@ -14,6 +14,8 @@ logger = logging.getLogger(__name__)
 
 def parse_position(position):
     # Format of "PG/SG" or "C"
+    if "," in position:
+        return position.split(",")
     return position.split("/")
 
 
@@ -79,7 +81,7 @@ def scrape_projections():
                 if cols[0].text == "R#":
                     continue
                 player = {
-                    "rank": int(cols[0].text.strip()),
+                    "rank": int(cols[0].find(text=True, recursive=False).strip()),
                     "adp": (
                         float(cols[1].text.strip()) if cols[1].text.strip() else 140.0
                     ),

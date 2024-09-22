@@ -1,7 +1,8 @@
 import json
 import logging
 import sys
-from models import Player, PlayerStats
+import unidecode
+from models import Player, PlayerStats, PlayerInjury, PlayerDraft
 from data import (
     calc_categories,
     scrape_projections,
@@ -16,7 +17,16 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-name_exceptions = [("Kenyon Martin Jr.", "KJ Martin"), ("Boogie Ellis", "SKIP")]
+name_exceptions = [
+    ("Kenyon Martin Jr.", "KJ Martin"),
+    ("Xavier Tillman Sr.", "Xavier Tillman"),
+    ("Nicolas Claxton", "Nic Claxton"),
+    ("Alexandre Sarr", "Alex Sarr"),
+    ("Carlton Carrington", "Bub Carrington"),
+    ("Joe Harris", "SKIP"),
+    ("Dennis Smith Jr.", "SKIP"),
+    ("Boogie Ellis", "SKIP"),
+]
 
 category_keys = [
     "fgm",
@@ -70,7 +80,7 @@ def main():
     """
 
     def get_roster_data(player):
-        name = player["name"]
+        name = unidecode.unidecode(player["name"])
         roster_data = next(
             (
                 player
@@ -87,7 +97,7 @@ def main():
                     if exception[0] == name
                 )
                 if new_name == "SKIP":
-                    logger.error(f"Manually skipping player: {name}")
+                    logger.info(f"  -   Manually skipping player: {name}")
                     return None
 
                 else:
@@ -99,27 +109,9 @@ def main():
                         ),
                         None,
                     )
-
             else:
-                # Try again with first or last name within the same team
-                team = player["team"]
-                first_name = name.split(" ")[0]
-                last_name = name.split(" ")[1]
-                roster_data = next(
-                    (
-                        player
-                        for player in players_roster_data
-                        if player["team"] == team
-                        and (
-                            player["first_name"] == first_name
-                            or player["last_name"] == last_name
-                        )
-                    ),
-                    None,
-                )
-                if not roster_data:
-                    logger.error(f"Could not find roster data for player: {name}")
-                    return None
+                logger.info(f"  -   Could not find roster data for player: {name}")
+                return None
         return roster_data
 
     def get_auction_data(player):
@@ -187,6 +179,32 @@ def main():
             headshot=roster_data["headshot"],
             years_pro=roster_data["years_pro"],
             jersey=roster_data["jersey"] if "jersey" in roster_data else None,
+            height=roster_data["height"] if "height" in roster_data else None,
+            weight=roster_data["weight"] if "weight" in roster_data else None,
+            injuries=(
+                [
+                    PlayerInjury(
+                        id=int(injury["id"]),
+                        long_comment=injury["long_comment"],
+                        short_comment=injury["short_comment"],
+                        status=injury["status"],
+                        date=injury["date"],
+                        details=injury["details"],
+                    )
+                    for injury in roster_data.get("injuries", [])
+                ]
+                if year_key == proj_year_key
+                else []
+            ),
+            draft=(
+                PlayerDraft(
+                    year=roster_data["draft"]["year"],
+                    round=roster_data["draft"]["round"],
+                    selection=roster_data["draft"]["selection"],
+                )
+                if year_key == proj_year_key and roster_data["draft"] is not None
+                else None
+            ),
             rank=player["rank"],
             adp=player["adp"] if "adp" in player else None,
             stats=PlayerStats(
@@ -314,6 +332,8 @@ def main():
     players_data = [player.__dict__ for player in players]
     for player in players_data:
         player["stats"] = player["stats"].__dict__
+        player["draft"] = player["draft"].__dict__ if player["draft"] else None
+        player["injuries"] = [injury.__dict__ for injury in player["injuries"]]
 
     json_data = json.load(open("data/players.json"))
     json_data[year_key] = players_data

@@ -1,3 +1,3 @@
-from .player import Player, PlayerStats
+from .player import Player, PlayerStats, PlayerInjury, PlayerDraft
 
-__all__ = ["Player", "PlayerStats"]
+__all__ = ["Player", "PlayerStats", "PlayerInjury", "PlayerDraft"]
