@@ -46,7 +46,7 @@ const PlayerCell_ = ({ player, showPlayerCard }: PlayerCellProps) => {
           <HoverCardContent
             side="right"
             sideOffset={-15}
-            className="w-auto p-0 overflow-hidden"
+            className="w-96 p-0 overflow-hidden"
           >
             {/* TODO: add indication for rookie */}
             <div className="flex items-end px-3 pt-4 bg-slate-50">
@@ -69,43 +69,48 @@ const PlayerCell_ = ({ player, showPlayerCard }: PlayerCellProps) => {
                   {player.firstName} {player.lastName}
                 </div>
                 <div className="text-sm">{getTeamName(player.team)}</div>
-                <div className="flex items-center mt-1">
+                <div className="mt-0.5 text-xs text-slate-500 font-medium">
+                  <span className="mr-2">
+                    {convertInchesToFeet(player.height)}
+                  </span>
+                  <span>{player.weight} lbs</span>
+                </div>
+                <div className="flex items-center mt-2 gap-1.5">
                   <PlayerPositionBadges positions={player.positions} />
-                  <div className="ml-3 text-xs text-slate-500 font-medium">
-                    <span className="mr-2">
-                      {convertInchesToFeet(player.height)}
-                    </span>
-                    <span>{player.weight} lbs</span>
-                  </div>
+                  <Separator orientation="vertical" className="h-6" />
+                  <Badge variant="default" className="px-2">
+                    <div className="flex items-center gap-0.75">
+                      <Tooltip
+                        label={`${player.age} years old`}
+                        className="flex items-center gap-0.75"
+                      >
+                        <IconCalendarFilled size={14} />
+                        {player.age}y
+                      </Tooltip>
+                    </div>
+                  </Badge>
+                  <Badge variant="default" className="px-2">
+                    <div className="flex items-center gap-0.75">
+                      <Tooltip
+                        label={`${
+                          player.draft
+                            ? YEAR - player.draft.year
+                            : player.yearsPro
+                        } years in the NBA`}
+                        className="flex items-center gap-0.75"
+                      >
+                        <IconBallBasketball size={14} />
+                        {player.draft
+                          ? YEAR - player.draft.year
+                          : player.yearsPro}
+                        y
+                      </Tooltip>
+                    </div>
+                  </Badge>
                 </div>
               </div>
             </div>
             <div className="flex items-center gap-2 px-3 py-2 bg-slate-100 border-y border-slate-150">
-              <Badge variant="default" className="px-2">
-                <div className="flex items-center gap-0.75">
-                  <Tooltip
-                    label={`${player.age} years old`}
-                    className="flex items-center gap-0.75"
-                  >
-                    <IconCalendarFilled size={14} />
-                    {player.age}y
-                  </Tooltip>
-                </div>
-              </Badge>
-              <Badge variant="default" className="px-2">
-                <div className="flex items-center gap-0.75">
-                  <Tooltip
-                    label={`${
-                      player.draft ? YEAR - player.draft.year : player.yearsPro
-                    } years in the NBA`}
-                    className="flex items-center gap-0.75"
-                  >
-                    <IconBallBasketball size={14} />
-                    {player.draft ? YEAR - player.draft.year : player.yearsPro}y
-                  </Tooltip>
-                </div>
-              </Badge>
-              <Separator orientation="vertical" className="h-6" />
               <Badge variant="outline" className="px-2">
                 <div className="flex items-center gap-0.75">
                   <Tooltip label={"Smart Score Auction Price"}>
