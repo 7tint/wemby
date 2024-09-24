@@ -222,7 +222,7 @@ def main():
                 blk=player["blk"],
                 to=player["to"],
             ),
-            auction_valued_at=auction_data["valued_at"] if auction_data else None,
+            auction_hashtag=auction_data["valued_at"] if auction_data else None,
             auction_yahoo_avg=auction_data["yahoo_avg"] if auction_data else None,
             auction_espn_avg=auction_data["espn_avg"] if auction_data else None,
             auction_blend_avg=auction_data["blend_avg"] if auction_data else None,

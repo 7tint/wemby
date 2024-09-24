@@ -84,7 +84,7 @@ class Player:
     adp: float | None  # Average Draft Position
     positions: list[str]  # List of position eligibilities
     stats: PlayerStats
-    auction_valued_at: float | None
+    auction_hashtag: float | None
     auction_yahoo_avg: float | None
     auction_espn_avg: float | None
     auction_blend_avg: float | None
@@ -108,7 +108,7 @@ class Player:
         adp=None,
         age=None,
         jersey=None,
-        auction_valued_at=None,
+        auction_hashtag=None,
         auction_yahoo_avg=None,
         auction_espn_avg=None,
         auction_blend_avg=None,
@@ -130,7 +130,7 @@ class Player:
         self.rank = rank
         self.adp = adp
         self.stats = stats
-        self.auction_valued_at = auction_valued_at
+        self.auction_hashtag = auction_hashtag
         self.auction_yahoo_avg = auction_yahoo_avg
         self.auction_espn_avg = auction_espn_avg
         self.auction_blend_avg = auction_blend_avg
