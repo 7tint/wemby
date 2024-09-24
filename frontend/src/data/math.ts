@@ -3,5 +3,5 @@ export const sum = (arr: number[]): number => {
 };
 
 export const shrinkNumber = (num: number): number => {
-  return num / 3.55;
+  return num / 7;
 };
