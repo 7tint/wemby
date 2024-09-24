@@ -46,6 +46,7 @@ export const EMPTY_PLAYER_STATS_NSCORE: PlayerStatsNScore = {
   stl: 0,
   blk: 0,
   to: 0,
+  total: 0,
 };
 
 export const EMPTY_CATEGORY_STATS: CategoryStats = {
