@@ -76,14 +76,14 @@ export const normalizeScores = (
   score: PlayerStatsNScore
 ): PlayerStatsNScore => {
   const newScores = {
-    fgImpact: shrinkNumber(score.fgImpact + 2),
-    ftImpact: shrinkNumber(score.ftImpact + 2),
-    tpm: shrinkNumber(score.tpm + 2),
-    pts: shrinkNumber(score.pts + 2),
-    reb: shrinkNumber(score.reb + 2),
-    ast: shrinkNumber(score.ast + 2),
-    stl: shrinkNumber(score.stl + 2),
-    blk: shrinkNumber(score.blk + 2),
+    fgImpact: shrinkNumber(score.fgImpact + 2.4),
+    ftImpact: shrinkNumber(score.ftImpact + 2.4),
+    tpm: shrinkNumber(score.tpm + 2.4),
+    pts: shrinkNumber(score.pts + 2.4),
+    reb: shrinkNumber(score.reb + 2.4),
+    ast: shrinkNumber(score.ast + 2.4),
+    stl: shrinkNumber(score.stl + 2.4),
+    blk: shrinkNumber(score.blk + 2.4),
     to: score.to / 1.5,
     total: 0,
   };

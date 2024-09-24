@@ -1,9 +1,9 @@
 "use client";
 
 import { Fragment, memo, useEffect, useMemo, useState } from "react";
+import Image from "next/image";
 import {
   IconPointFilled,
-  IconArrowBadgeUpFilled,
   IconCurrencyDollar,
   IconShirtSport,
 } from "@tabler/icons-react";
@@ -46,8 +46,8 @@ import PlayerPositionBadges from "@/components/player/PlayerPositionBadges";
  */
 interface RankingsTableProps {
   players: Player[];
+  isCurrentSeason: boolean;
   showSmartScores: boolean;
-  showDraftColumns: boolean;
   showHighlights: boolean;
   punts: string[];
   positions: string[];
@@ -59,8 +59,8 @@ interface RankingsTableProps {
 
 const RankingsTable_ = ({
   players,
+  isCurrentSeason,
   showSmartScores,
-  showDraftColumns,
   showHighlights,
   punts,
   positions,
@@ -100,7 +100,14 @@ const RankingsTable_ = ({
         accessorKey: "rank",
         header: ({ column }) => (
           <RankingsHeaderCell
-            text={<IconArrowBadgeUpFilled size={18} />}
+            text={
+              <Image
+                src="/img/sources/hashtag.png"
+                width={15}
+                height={15}
+                alt="Hashtag Basketball"
+              />
+            }
             label="Rank (from Hashtag Basketball)"
             width={cellWidthSm}
             sort={column.getIsSorted()}
@@ -153,7 +160,12 @@ const RankingsTable_ = ({
           />
         ),
         cell: ({ row }) => {
-          return <PlayerCell player={row.original} />;
+          return (
+            <PlayerCell
+              player={row.original}
+              showPlayerCard={isCurrentSeason}
+            />
+          );
         },
       },
       {
@@ -168,7 +180,7 @@ const RankingsTable_ = ({
         ),
         cell: (p) => (
           <TableTd width={cellWidthMd}>
-            ${p.getValue() === null ? "0" : (p.getValue() as number).toFixed(1)}
+            ${(p.getValue() as number).toFixed(1)}
           </TableTd>
         ),
       },
@@ -507,11 +519,11 @@ const RankingsTable_ = ({
         ),
       },
     ];
-  }, [showSmartScores, getPercentileColor]);
+  }, [showSmartScores, getPercentileColor, isCurrentSeason]);
 
   useEffect(() => {
-    setColumnVisibility({ auctionValuedAt: showDraftColumns });
-  }, [players, showDraftColumns]);
+    setColumnVisibility({ auctionValuedAt: isCurrentSeason });
+  }, [players, isCurrentSeason]);
 
   useEffect(() => {
     setColumnFilters([
@@ -566,7 +578,7 @@ const RankingsTable_ = ({
           <RankingsTableFooter
             selectedPlayers={selectedPlayers}
             showSmartScores={showSmartScores}
-            showDraftColumns={showDraftColumns}
+            showDraftColumns={isCurrentSeason}
           />
         )}
       </Table>

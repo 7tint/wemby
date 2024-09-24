@@ -28,7 +28,7 @@ export interface PlayerStatsNScore {
   stl: number;
   blk: number;
   to: number;
-  total?: number;
+  total: number;
 }
 
 export interface PlayerInjury {
@@ -70,11 +70,11 @@ export interface Player {
   adp: number | null; // Average Draft Position
   positions: string[]; // List of position eligibilities
   stats: PlayerStats;
-  nScores: PlayerStatsNScore | null;
+  nScores: PlayerStatsNScore;
   trend: "up" | "down" | "equal";
   changedTeams: boolean;
-  auctionValuedAt: number | null;
+  auctionValuedAt: number;
+  auctionHashtag: number | null;
   auctionYahooAvg: number | null;
   auctionEspnAvg: number | null;
-  auctionBlendAvg: number | null;
 }

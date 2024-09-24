@@ -5,7 +5,7 @@ import { RowSelectionState } from "@tanstack/react-table";
 import { getPlayers } from "@/api/players";
 import calculateMinMax from "@/data/minmax";
 import calculateZScores from "@/data/zScore";
-import { normalizeScores } from "@/data/stats";
+import { normalizeScores, totalCategories } from "@/data/stats";
 import { Team } from "@/types/teamTypes";
 import { Player } from "@/types/playerTypes";
 import BaseLayout from "@/components/ui/base";
@@ -44,28 +44,43 @@ const RankingsPage = () => {
 
       const { players, categoryStatsTotal, categoryStatsPer } =
         await getPlayers(year);
-      const zScoresProj = calculateZScores(players, categoryStatsTotal);
-      const minmaxScoresProj = calculateMinMax(players, categoryStatsPer);
+      const zScores = calculateZScores(players, categoryStatsTotal);
+      const minmaxScores = calculateMinMax(players, categoryStatsPer);
+      let totalNScore = 0;
 
       players.forEach((player) => {
         if (!player.stats) return;
-        const projZScores = zScoresProj.get(player.id) || null;
-        const projMinMax = minmaxScoresProj.get(player.id) || null;
-        if (projZScores && projMinMax) {
-          const projNScores = normalizeScores({
-            fgImpact: 1 * projZScores.fgImpact + 8 * projMinMax.fgImpact,
-            ftImpact: 1 * projZScores.ftImpact + 8 * projMinMax.ftImpact,
-            tpm: 1 * projZScores.tpm + 8 * projMinMax.tpm,
-            pts: 1 * projZScores.pts + 8 * projMinMax.pts,
-            reb: 1 * projZScores.reb + 8 * projMinMax.reb,
-            ast: 1 * projZScores.ast + 8 * projMinMax.ast,
-            stl: 1 * projZScores.stl + 8 * projMinMax.stl,
-            blk: 1 * projZScores.blk + 8 * projMinMax.blk,
-            to: 0.25 * projZScores.to + 8 * projMinMax.to,
+        const zScore = zScores.get(player.id) || null;
+        const minMax = minmaxScores.get(player.id) || null;
+        if (zScore && minMax) {
+          const nScores = normalizeScores({
+            fgImpact: 1 * zScore.fgImpact + 8 * minMax.fgImpact,
+            ftImpact: 1 * zScore.ftImpact + 8 * minMax.ftImpact,
+            tpm: 1 * zScore.tpm + 8 * minMax.tpm,
+            pts: 1 * zScore.pts + 8 * minMax.pts,
+            reb: 1 * zScore.reb + 8 * minMax.reb,
+            ast: 1 * zScore.ast + 8 * minMax.ast,
+            stl: 1 * zScore.stl + 8 * minMax.stl,
+            blk: 1 * zScore.blk + 8 * minMax.blk,
+            to: 0.25 * zScore.to + 8 * minMax.to,
+            total: 0,
           });
-          player.nScores = projNScores;
+          const total = totalCategories(nScores, []);
+          player.nScores = {
+            ...nScores,
+            total,
+          };
+          if (total > 0) totalNScore += total;
         }
       });
+
+      const auctionRatio = (12 * 200) / totalNScore;
+      players.forEach((player) => {
+        const auctionValuedAt = player.nScores.total * auctionRatio;
+        if (auctionValuedAt < 1) player.auctionValuedAt = 1;
+        else player.auctionValuedAt = Math.round(auctionValuedAt * 10) / 10;
+      });
+
       setPlayers(players);
     };
     getPlayersData();
@@ -127,7 +142,7 @@ const RankingsPage = () => {
             <h2 className="text-lg font-medium mb-4 pl-1">Selected Players</h2>
             <RankingsTable
               players={players.filter((player) => selectPlayerIds[player.id])}
-              showDraftColumns={selectedYear === 1}
+              isCurrentSeason={selectedYear === 1}
               showSmartScores={showSmartScores}
               showHighlights={showHighlights}
               punts={punts}
@@ -148,7 +163,7 @@ const RankingsPage = () => {
           </h2>
           <RankingsTable
             players={players}
-            showDraftColumns={selectedYear === 1}
+            isCurrentSeason={selectedYear === 1}
             showSmartScores={showSmartScores}
             showHighlights={showHighlights}
             punts={punts}

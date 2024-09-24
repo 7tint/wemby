@@ -27,6 +27,7 @@ const calculateZScores = (
       stl: (pStats.stl * GP[i] - categories.stl.mean) / categories.stl.std,
       blk: (pStats.blk * GP[i] - categories.blk.mean) / categories.blk.std,
       to: (categories.to.mean - pStats.to * GP[i]) / categories.to.std,
+      total: 0,
     };
     plainZMap.set(p.id, plainZ);
   });
@@ -45,6 +46,7 @@ const calculateZScores = (
       stl: plainZMap.get(player.id)!.stl,
       blk: plainZMap.get(player.id)!.blk,
       to: plainZMap.get(player.id)!.to,
+      total: 0,
     };
     zScores.set(player.id, PlayerStatsNScore);
   });

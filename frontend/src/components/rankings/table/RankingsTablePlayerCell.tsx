@@ -1,14 +1,23 @@
 import { memo } from "react";
 import Image from "next/image";
-import { IconBallBasketball, IconCalendarFilled } from "@tabler/icons-react";
+import {
+  IconBallBasketball,
+  IconCalendarFilled,
+  IconCoinFilled,
+} from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
 import { colStyles } from "./RankingsTableUtils";
 import { Player } from "@/types/playerTypes";
+import {
+  convertInchesToFeet,
+  getInjuryAbbreviation,
+  getTeamName,
+  YEAR,
+} from "@/utils/consts";
 import Tooltip from "@/components/ui/tooltip";
 import { Badge } from "@/components/ui/badge";
 import { TableCell } from "@/components/ui/table";
 import TeamLogo from "@/components/team/TeamLogo";
-import { Separator } from "@/components/ui/separator";
 import PlayerHeadshot from "@/components/player/PlayerHeadshot";
 import PlayerPositionBadges from "@/components/player/PlayerPositionBadges";
 import {
@@ -16,19 +25,15 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
-import {
-  convertInchesToFeet,
-  getInjuryAbbreviation,
-  getTeamName,
-  YEAR,
-} from "@/utils/consts";
+import { Separator } from "@/components/ui/separator";
 
 interface PlayerCellProps {
   player: Player;
+  showPlayerCard: boolean;
 }
 
-const PlayerCell_ = ({ player }: PlayerCellProps) => {
-  return (
+const PlayerCell_ = ({ player, showPlayerCard }: PlayerCellProps) => {
+  return showPlayerCard ? (
     <TableCell className={cn("w-64 min-w-64", colStyles)}>
       <div className="flex items-center pl-2 pr-1 pt-1.5">
         <HoverCard openDelay={350}>
@@ -41,7 +46,7 @@ const PlayerCell_ = ({ player }: PlayerCellProps) => {
           <HoverCardContent
             side="right"
             sideOffset={-15}
-            className="w-96 p-0 overflow-hidden"
+            className="w-auto p-0 overflow-hidden"
           >
             {/* TODO: add indication for rookie */}
             <div className="flex items-end px-3 pt-4 bg-slate-50">
@@ -75,7 +80,7 @@ const PlayerCell_ = ({ player }: PlayerCellProps) => {
                 </div>
               </div>
             </div>
-            <div className="h-9 flex items-center gap-2 px-3 py-1.5 bg-slate-100 border-y border-slate-150">
+            <div className="flex items-center gap-2 px-3 py-2 bg-slate-100 border-y border-slate-150">
               <Badge variant="default" className="px-2">
                 <div className="flex items-center gap-0.75">
                   <Tooltip
@@ -100,10 +105,18 @@ const PlayerCell_ = ({ player }: PlayerCellProps) => {
                   </Tooltip>
                 </div>
               </Badge>
-              <Separator orientation="vertical" className="h-full" />
+              <Separator orientation="vertical" className="h-6" />
               <Badge variant="outline" className="px-2">
                 <div className="flex items-center gap-0.75">
-                  <Tooltip label={"Hashtag Basketball Player Rank"}>
+                  <Tooltip label={"Smart Score Auction Price"}>
+                    <IconCoinFilled className="text-cyan-600" size={14} />
+                  </Tooltip>
+                  ${player.auctionValuedAt}
+                </div>
+              </Badge>
+              <Badge variant="outline" className="px-2">
+                <div className="flex items-center gap-0.75">
+                  <Tooltip label={"Hashtag Basketball Auction Price"}>
                     <Image
                       src="/img/sources/hashtag.png"
                       width={14}
@@ -111,7 +124,7 @@ const PlayerCell_ = ({ player }: PlayerCellProps) => {
                       alt="Hashtag Basketball"
                     />
                   </Tooltip>
-                  {player.rank}
+                  ${player.auctionHashtag}
                 </div>
               </Badge>
               <Badge variant="outline" className="px-2">
@@ -182,6 +195,15 @@ const PlayerCell_ = ({ player }: PlayerCellProps) => {
               {getInjuryAbbreviation(player.injuries[0].status)}
             </Tooltip>
           )}
+        </div>
+      </div>
+    </TableCell>
+  ) : (
+    <TableCell className={cn("w-64 min-w-64", colStyles)}>
+      <div className="flex items-center pl-2 pr-1 pt-1.5">
+        <PlayerHeadshot player={player} size="sm" />
+        <div className="inline-block max-w-44 ml-2 mr-1 text-ellipsis overflow-hidden whitespace-nowrap">
+          {player.firstName} {player.lastName}
         </div>
       </div>
     </TableCell>

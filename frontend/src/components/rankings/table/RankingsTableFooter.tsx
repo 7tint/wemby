@@ -31,7 +31,7 @@ const RankingsTableFooter = ({
             $
             {(
               selectedPlayers.reduce(
-                (acc, player) => acc + player.auctionValuedAt!,
+                (acc, player) => acc + player.auctionValuedAt,
                 0
               ) / selectedPlayers.length
             ).toFixed(1)}
@@ -40,16 +40,14 @@ const RankingsTableFooter = ({
         <TableTd width={cellWidthLg} />
         <TableTd width={cellWidthSm}>
           {(
-            selectedPlayers.reduce((acc, player) => acc + player.stats.gp!, 0) /
+            selectedPlayers.reduce((acc, player) => acc + player.stats.gp, 0) /
             selectedPlayers.length
           ).toFixed(1)}
         </TableTd>
         <TableTd width={cellWidthMd}>
           {(
-            selectedPlayers.reduce(
-              (acc, player) => acc + player.stats.mpg!,
-              0
-            ) / selectedPlayers.length
+            selectedPlayers.reduce((acc, player) => acc + player.stats.mpg, 0) /
+            selectedPlayers.length
           ).toFixed(1)}
         </TableTd>
         <TableTd width={showSmartScores ? cellWidthMd : cellWidthXl}>
@@ -57,7 +55,7 @@ const RankingsTableFooter = ({
             <div>
               {(
                 selectedPlayers.reduce(
-                  (acc, player) => acc + player.nScores!.fgImpact!,
+                  (acc, player) => acc + player.nScores.fgImpact,
                   0
                 ) / selectedPlayers.length
               ).toFixed(2)}
@@ -66,22 +64,22 @@ const RankingsTableFooter = ({
             <div>
               {(
                 selectedPlayers.reduce(
-                  (acc, player) => acc + player.stats.fgm!,
+                  (acc, player) => acc + player.stats.fgm,
                   0
                 ) /
                 selectedPlayers.reduce(
-                  (acc, player) => acc + player.stats.fga!,
+                  (acc, player) => acc + player.stats.fga,
                   0
                 )
               ).toFixed(2)}
               <span className="text-2xs ml-1">
                 (
                 {selectedPlayers
-                  .reduce((acc, player) => acc + player.stats.fgm!, 0)
+                  .reduce((acc, player) => acc + player.stats.fgm, 0)
                   .toFixed(1)}{" "}
                 /{" "}
                 {selectedPlayers
-                  .reduce((acc, player) => acc + player.stats.fga!, 0)
+                  .reduce((acc, player) => acc + player.stats.fga, 0)
                   .toFixed(1)}
                 )
               </span>
@@ -93,7 +91,7 @@ const RankingsTableFooter = ({
             <div>
               {(
                 selectedPlayers.reduce(
-                  (acc, player) => acc + player.nScores!.ftImpact!,
+                  (acc, player) => acc + player.nScores.ftImpact,
                   0
                 ) / selectedPlayers.length
               ).toFixed(2)}
@@ -102,22 +100,22 @@ const RankingsTableFooter = ({
             <div>
               {(
                 selectedPlayers.reduce(
-                  (acc, player) => acc + player.stats.ftm!,
+                  (acc, player) => acc + player.stats.ftm,
                   0
                 ) /
                 selectedPlayers.reduce(
-                  (acc, player) => acc + player.stats.fta!,
+                  (acc, player) => acc + player.stats.fta,
                   0
                 )
               ).toFixed(2)}
               <span className="text-2xs ml-1">
                 (
                 {selectedPlayers
-                  .reduce((acc, player) => acc + player.stats.ftm!, 0)
+                  .reduce((acc, player) => acc + player.stats.ftm, 0)
                   .toFixed(1)}{" "}
                 /{" "}
                 {selectedPlayers
-                  .reduce((acc, player) => acc + player.stats.fta!, 0)
+                  .reduce((acc, player) => acc + player.stats.fta, 0)
                   .toFixed(1)}
                 )
               </span>
@@ -128,13 +126,13 @@ const RankingsTableFooter = ({
           {showSmartScores
             ? (
                 selectedPlayers.reduce(
-                  (acc, player) => acc + player.nScores!.tpm!,
+                  (acc, player) => acc + player.nScores.tpm,
                   0
                 ) / selectedPlayers.length
               ).toFixed(2)
             : (
                 selectedPlayers.reduce(
-                  (acc, player) => acc + player.stats.tpm!,
+                  (acc, player) => acc + player.stats.tpm,
                   0
                 ) / selectedPlayers.length
               ).toFixed(1)}
@@ -143,13 +141,13 @@ const RankingsTableFooter = ({
           {showSmartScores
             ? (
                 selectedPlayers.reduce(
-                  (acc, player) => acc + player.nScores!.pts!,
+                  (acc, player) => acc + player.nScores.pts,
                   0
                 ) / selectedPlayers.length
               ).toFixed(2)
             : (
                 selectedPlayers.reduce(
-                  (acc, player) => acc + player.stats.pts!,
+                  (acc, player) => acc + player.stats.pts,
                   0
                 ) / selectedPlayers.length
               ).toFixed(1)}
@@ -158,13 +156,13 @@ const RankingsTableFooter = ({
           {showSmartScores
             ? (
                 selectedPlayers.reduce(
-                  (acc, player) => acc + player.nScores!.reb!,
+                  (acc, player) => acc + player.nScores.reb,
                   0
                 ) / selectedPlayers.length
               ).toFixed(2)
             : (
                 selectedPlayers.reduce(
-                  (acc, player) => acc + player.stats.reb!,
+                  (acc, player) => acc + player.stats.reb,
                   0
                 ) / selectedPlayers.length
               ).toFixed(1)}
@@ -173,13 +171,13 @@ const RankingsTableFooter = ({
           {showSmartScores
             ? (
                 selectedPlayers.reduce(
-                  (acc, player) => acc + player.nScores!.ast!,
+                  (acc, player) => acc + player.nScores.ast,
                   0
                 ) / selectedPlayers.length
               ).toFixed(2)
             : (
                 selectedPlayers.reduce(
-                  (acc, player) => acc + player.stats.ast!,
+                  (acc, player) => acc + player.stats.ast,
                   0
                 ) / selectedPlayers.length
               ).toFixed(1)}
@@ -188,13 +186,13 @@ const RankingsTableFooter = ({
           {showSmartScores
             ? (
                 selectedPlayers.reduce(
-                  (acc, player) => acc + player.nScores!.stl!,
+                  (acc, player) => acc + player.nScores.stl,
                   0
                 ) / selectedPlayers.length
               ).toFixed(2)
             : (
                 selectedPlayers.reduce(
-                  (acc, player) => acc + player.stats.stl!,
+                  (acc, player) => acc + player.stats.stl,
                   0
                 ) / selectedPlayers.length
               ).toFixed(1)}
@@ -203,13 +201,13 @@ const RankingsTableFooter = ({
           {showSmartScores
             ? (
                 selectedPlayers.reduce(
-                  (acc, player) => acc + player.nScores!.blk!,
+                  (acc, player) => acc + player.nScores.blk,
                   0
                 ) / selectedPlayers.length
               ).toFixed(2)
             : (
                 selectedPlayers.reduce(
-                  (acc, player) => acc + player.stats.blk!,
+                  (acc, player) => acc + player.stats.blk,
                   0
                 ) / selectedPlayers.length
               ).toFixed(1)}
@@ -218,13 +216,13 @@ const RankingsTableFooter = ({
           {showSmartScores
             ? (
                 selectedPlayers.reduce(
-                  (acc, player) => acc + player.nScores!.to!,
+                  (acc, player) => acc + player.nScores.to,
                   0
                 ) / selectedPlayers.length
               ).toFixed(2)
             : (
                 selectedPlayers.reduce(
-                  (acc, player) => acc + player.stats.to!,
+                  (acc, player) => acc + player.stats.to,
                   0
                 ) / selectedPlayers.length
               ).toFixed(1)}
@@ -232,7 +230,7 @@ const RankingsTableFooter = ({
         <TableTd width={cellWidthMd}>
           {(
             selectedPlayers.reduce(
-              (acc, player) => acc + player.nScores!.total!,
+              (acc, player) => acc + player.nScores.total,
               0
             ) / selectedPlayers.length
           ).toFixed(2)}
@@ -247,49 +245,47 @@ const RankingsTableFooter = ({
           <TableTd width={cellWidthMd}>
             $
             {selectedPlayers
-              .reduce((acc, player) => acc + player.auctionValuedAt!, 0)
+              .reduce((acc, player) => acc + player.auctionValuedAt, 0)
               .toFixed(1)}
           </TableTd>
         )}
         <TableTd width={cellWidthLg} />
         <TableTd width={cellWidthSm}>
-          {selectedPlayers.reduce((acc, player) => acc + player.stats.gp!, 0)}
+          {selectedPlayers.reduce((acc, player) => acc + player.stats.gp, 0)}
         </TableTd>
         <TableTd width={cellWidthMd}>
           {(
-            selectedPlayers.reduce(
-              (acc, player) => acc + player.stats.mpg!,
-              0
-            ) / selectedPlayers.length
+            selectedPlayers.reduce((acc, player) => acc + player.stats.mpg, 0) /
+            selectedPlayers.length
           ).toFixed(1)}
         </TableTd>
         <TableTd width={showSmartScores ? cellWidthMd : cellWidthXl}>
           {showSmartScores ? (
             <div>
               {selectedPlayers
-                .reduce((acc, player) => acc + player.nScores!.fgImpact!, 0)
+                .reduce((acc, player) => acc + player.nScores.fgImpact, 0)
                 .toFixed(2)}
             </div>
           ) : (
             <div>
               {(
                 selectedPlayers.reduce(
-                  (acc, player) => acc + player.stats.fgm!,
+                  (acc, player) => acc + player.stats.fgm,
                   0
                 ) /
                 selectedPlayers.reduce(
-                  (acc, player) => acc + player.stats.fga!,
+                  (acc, player) => acc + player.stats.fga,
                   0
                 )
               ).toFixed(2)}
               <span className="text-2xs ml-1">
                 (
                 {selectedPlayers
-                  .reduce((acc, player) => acc + player.stats.fgm!, 0)
+                  .reduce((acc, player) => acc + player.stats.fgm, 0)
                   .toFixed(1)}{" "}
                 /{" "}
                 {selectedPlayers
-                  .reduce((acc, player) => acc + player.stats.fga!, 0)
+                  .reduce((acc, player) => acc + player.stats.fga, 0)
                   .toFixed(1)}
                 )
               </span>
@@ -300,29 +296,29 @@ const RankingsTableFooter = ({
           {showSmartScores ? (
             <div>
               {selectedPlayers
-                .reduce((acc, player) => acc + player.nScores!.ftImpact!, 0)
+                .reduce((acc, player) => acc + player.nScores.ftImpact, 0)
                 .toFixed(2)}
             </div>
           ) : (
             <div>
               {(
                 selectedPlayers.reduce(
-                  (acc, player) => acc + player.stats.ftm!,
+                  (acc, player) => acc + player.stats.ftm,
                   0
                 ) /
                 selectedPlayers.reduce(
-                  (acc, player) => acc + player.stats.fta!,
+                  (acc, player) => acc + player.stats.fta,
                   0
                 )
               ).toFixed(2)}
               <span className="text-2xs ml-1">
                 (
                 {selectedPlayers
-                  .reduce((acc, player) => acc + player.stats.ftm!, 0)
+                  .reduce((acc, player) => acc + player.stats.ftm, 0)
                   .toFixed(1)}{" "}
                 /{" "}
                 {selectedPlayers
-                  .reduce((acc, player) => acc + player.stats.fta!, 0)
+                  .reduce((acc, player) => acc + player.stats.fta, 0)
                   .toFixed(1)}
                 )
               </span>
@@ -332,69 +328,69 @@ const RankingsTableFooter = ({
         <TableTd width={cellWidthMd}>
           {showSmartScores
             ? selectedPlayers
-                .reduce((acc, player) => acc + player.nScores!.tpm!, 0)
+                .reduce((acc, player) => acc + player.nScores.tpm, 0)
                 .toFixed(2)
             : selectedPlayers
-                .reduce((acc, player) => acc + player.stats.tpm!, 0)
+                .reduce((acc, player) => acc + player.stats.tpm, 0)
                 .toFixed(1)}
         </TableTd>
         <TableTd width={cellWidthMd}>
           {showSmartScores
             ? selectedPlayers
-                .reduce((acc, player) => acc + player.nScores!.pts!, 0)
+                .reduce((acc, player) => acc + player.nScores.pts, 0)
                 .toFixed(2)
             : selectedPlayers
-                .reduce((acc, player) => acc + player.stats.pts!, 0)
+                .reduce((acc, player) => acc + player.stats.pts, 0)
                 .toFixed(1)}
         </TableTd>
         <TableTd width={cellWidthMd}>
           {showSmartScores
             ? selectedPlayers
-                .reduce((acc, player) => acc + player.nScores!.reb!, 0)
+                .reduce((acc, player) => acc + player.nScores.reb, 0)
                 .toFixed(2)
             : selectedPlayers
-                .reduce((acc, player) => acc + player.stats.reb!, 0)
+                .reduce((acc, player) => acc + player.stats.reb, 0)
                 .toFixed(1)}
         </TableTd>
         <TableTd width={cellWidthMd}>
           {showSmartScores
             ? selectedPlayers
-                .reduce((acc, player) => acc + player.nScores!.ast!, 0)
+                .reduce((acc, player) => acc + player.nScores.ast, 0)
                 .toFixed(2)
             : selectedPlayers
-                .reduce((acc, player) => acc + player.stats.ast!, 0)
+                .reduce((acc, player) => acc + player.stats.ast, 0)
                 .toFixed(1)}
         </TableTd>
         <TableTd width={cellWidthMd}>
           {showSmartScores
             ? selectedPlayers
-                .reduce((acc, player) => acc + player.nScores!.stl!, 0)
+                .reduce((acc, player) => acc + player.nScores.stl, 0)
                 .toFixed(2)
             : selectedPlayers
-                .reduce((acc, player) => acc + player.stats.stl!, 0)
+                .reduce((acc, player) => acc + player.stats.stl, 0)
                 .toFixed(1)}
         </TableTd>
         <TableTd width={cellWidthMd}>
           {showSmartScores
             ? selectedPlayers
-                .reduce((acc, player) => acc + player.nScores!.blk!, 0)
+                .reduce((acc, player) => acc + player.nScores.blk, 0)
                 .toFixed(2)
             : selectedPlayers
-                .reduce((acc, player) => acc + player.stats.blk!, 0)
+                .reduce((acc, player) => acc + player.stats.blk, 0)
                 .toFixed(1)}
         </TableTd>
         <TableTd width={cellWidthMd}>
           {showSmartScores
             ? selectedPlayers
-                .reduce((acc, player) => acc + player.nScores!.to!, 0)
+                .reduce((acc, player) => acc + player.nScores.to, 0)
                 .toFixed(2)
             : selectedPlayers
-                .reduce((acc, player) => acc + player.stats.to!, 0)
+                .reduce((acc, player) => acc + player.stats.to, 0)
                 .toFixed(1)}
         </TableTd>
         <TableTd width={cellWidthMd}>
           {selectedPlayers
-            .reduce((acc, player) => acc + player.nScores!.total!, 0)
+            .reduce((acc, player) => acc + player.nScores.total, 0)
             .toFixed(2)}
         </TableTd>
       </TableRow>

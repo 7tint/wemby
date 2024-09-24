@@ -67,14 +67,14 @@ const RankingsHeaderCell_ = ({
     <div
       key={id}
       className={cn(
-        "flex flex-col flex-grow justify-start items-center border-y hover:bg-slate-150",
+        "flex flex-col h-full flex-grow justify-start items-center border-y hover:bg-slate-150",
         className,
         headerColStyles
       )}
       style={{ height: 50, minWidth: width, width: width }}
     >
       <div className={cn("top-bar h-3 w-full", calcHeaderSortColor(sort))} />
-      <div className="flex items-center">
+      <div className="flex flex-grow items-center">
         <Tooltip label={label}>
           <div
             className={cn(
