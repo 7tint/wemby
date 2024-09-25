@@ -52,12 +52,12 @@ const PlayerCell_ = ({ player, showPlayerCard }: PlayerCellProps) => {
             <div className="flex items-end px-3 pt-4 bg-slate-50">
               <div className="w-28 relative">
                 {/* ghost player number in top right corner */}
-                <div className="absolute top-0 right-0 text-xl text-slate-400">
+                <div className="absolute -top-2 right-0 text-xl text-slate-400">
                   <span className="text-sm mr-0.5">#</span>
                   {player.jersey}
                 </div>
                 {/* ghost team logo behind player */}
-                <div className="absolute top-0 opacity-50 z-0 -mt-1 -ml-1">
+                <div className="absolute top-0 opacity-50 z-0 -mt-4">
                   <TeamLogo team={player.team} size="lg" useTooltip={false} />
                 </div>
                 <div className="z-10">
@@ -75,9 +75,9 @@ const PlayerCell_ = ({ player, showPlayerCard }: PlayerCellProps) => {
                   </span>
                   <span>{player.weight} lbs</span>
                 </div>
-                <div className="flex items-center mt-2 gap-1.5">
+                <div className="flex items-center mt-1 gap-1.5">
                   <PlayerPositionBadges positions={player.positions} />
-                  <Separator orientation="vertical" className="h-6" />
+                  <Separator orientation="vertical" className="h-5" />
                   <Badge variant="default" className="px-2">
                     <div className="flex items-center gap-0.75">
                       <Tooltip
