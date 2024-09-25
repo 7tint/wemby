@@ -84,7 +84,7 @@ export const normalizeScores = (
     ast: shrinkNumber(score.ast + 2.4),
     stl: shrinkNumber(score.stl + 2.4),
     blk: shrinkNumber(score.blk + 2.4),
-    to: score.to / 1.5,
+    to: score.to / 2.5,
     total: 0,
   };
   return newScores;
