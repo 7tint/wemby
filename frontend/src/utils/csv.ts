@@ -4,9 +4,7 @@ import { mkConfig, generateCsv, download } from "export-to-csv";
 
 const exportToCsv = (rows: Row<Player>[]) => {
   const csvConfig = mkConfig({
-    fieldSeparator: ",",
-    filename: "sample", // export file name (without .csv)
-    decimalSeparator: ".",
+    filename: "players",
     useKeysAsHeaders: true,
   });
 
