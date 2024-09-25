@@ -19,9 +19,10 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import PlayerCell from "./RankingsTablePlayerCell";
 import { calculateStatPercentiles, getNStats, getStats } from "@/data/stats";
+import useSelectedPlayers from "@/hooks/useSelectedPlayers";
 import usePlayersToDisplay from "@/hooks/usePlayersToDisplay";
+import PlayerCell from "./RankingsTablePlayerCell";
 import PlayerRows from "./RankingsTablePlayerRows";
 import RankingsTableFooter from "./RankingsTableFooter";
 import RankingsTableHeader from "./RankingsTableHeader";
@@ -37,9 +38,10 @@ import TeamLogo from "../../team/TeamLogo";
 import { Team } from "@/types/teamTypes";
 import { Player } from "@/types/playerTypes";
 import Tooltip from "@/components/ui/tooltip";
+import { Button } from "@/components/ui/button";
 import { Table, TableBody } from "@/components/ui/table";
-import useSelectedPlayers from "@/hooks/useSelectedPlayers";
 import PlayerPositionBadges from "@/components/player/PlayerPositionBadges";
+import exportToCsv from "@/utils/csv";
 
 /*
  * RANKINGS TABLE
@@ -563,6 +565,20 @@ const RankingsTable_ = ({
 
   return (
     <div className="w-full overflow-x-scroll hide-scrollbar">
+      <div className="flex justify-between w-100 mb-4">
+        <h2 className="text-lg font-medium pl-1">
+          {isCurrentSeason
+            ? "2024-2025 Season Projections"
+            : "2023-2024 Season Rankings"}
+        </h2>
+        <Button
+          size="sm"
+          variant="outline"
+          onClick={() => exportToCsv(playersTable.getFilteredRowModel().rows)}
+        >
+          Export to CSV
+        </Button>
+      </div>
       <Table
         className="shadow-md w-max min-w-full"
         style={{ fontSize: "13px" }}
