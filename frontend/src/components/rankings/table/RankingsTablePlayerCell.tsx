@@ -92,11 +92,7 @@ const PlayerCell_ = ({ player, showPlayerCard }: PlayerCellProps) => {
                   <Badge variant="default" className="px-2">
                     <div className="flex items-center gap-0.75">
                       <Tooltip
-                        label={`${
-                          player.draft
-                            ? YEAR - player.draft.year
-                            : player.yearsPro
-                        } years in the NBA`}
+                        label={`${player.yearsPro} years in the NBA`}
                         className="flex items-center gap-0.75"
                       >
                         <IconBallBasketball size={14} />
