@@ -8,15 +8,15 @@ const PlayerPositionBadges = ({ positions }: PlayerPositionBadgesProps) => {
   const variant = (position: string) => {
     switch (position) {
       case "PG":
-        return "pink";
+        return "fuchsia";
       case "SG":
-        return "orange";
-      case "SF":
         return "yellow";
+      case "SF":
+        return "red";
       case "PF":
         return "teal";
       case "C":
-        return "indigo";
+        return "blue";
       default:
         return "default";
     }
