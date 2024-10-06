@@ -550,7 +550,7 @@ const RankingsTable_ = ({
         ),
       },
     ];
-  }, [showSmartScores, getPercentileColor, isCurrentSeason]);
+  }, [showSmartScores, getPercentileColor, isCurrentSeason, totalsMode]);
 
   useEffect(() => {
     setColumnVisibility({ auctionValuedAt: isCurrentSeason });
