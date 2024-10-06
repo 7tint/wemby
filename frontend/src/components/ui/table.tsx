@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
+import { memo } from "react";
 
 const Table = React.forwardRef<
   HTMLTableElement,
@@ -67,6 +68,7 @@ const TableRow = React.forwardRef<
   />
 ));
 TableRow.displayName = "TableRow";
+const MemoizedTableRow = memo(TableRow);
 
 const TableHead = React.forwardRef<
   HTMLTableCellElement,
@@ -103,4 +105,5 @@ export {
   TableRow,
   TableHead,
   TableCell,
+  MemoizedTableRow,
 };

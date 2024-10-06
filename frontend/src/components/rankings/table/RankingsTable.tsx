@@ -572,6 +572,7 @@ const RankingsTable_ = ({
             : "2023-2024 Season Rankings"}
         </h2>
         <Button
+          className="hidden md:block"
           size="sm"
           variant="outline"
           onClick={() => exportToCsv(playersTable.getFilteredRowModel().rows)}
