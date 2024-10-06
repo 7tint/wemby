@@ -34,7 +34,7 @@ interface PlayerCellProps {
 
 const PlayerCell_ = ({ player, showPlayerCard }: PlayerCellProps) => {
   return showPlayerCard ? (
-    <TableCell className={cn("w-64 min-w-64", colStyles)}>
+    <TableCell className={cn("w-56 min-w-56", colStyles)}>
       <div className="flex items-center pl-2 pr-1 pt-1.5">
         <HoverCard openDelay={350}>
           <HoverCardTrigger className="cursor-pointer flex items-center">
@@ -200,7 +200,7 @@ const PlayerCell_ = ({ player, showPlayerCard }: PlayerCellProps) => {
       </div>
     </TableCell>
   ) : (
-    <TableCell className={cn("w-64 min-w-64", colStyles)}>
+    <TableCell className={cn("w-56 min-w-56", colStyles)}>
       <div className="flex items-center pl-2 pr-1 pt-1.5">
         <PlayerHeadshot player={player} size="sm" />
         <div className="inline-block max-w-44 ml-2 mr-1 text-ellipsis overflow-hidden whitespace-nowrap">

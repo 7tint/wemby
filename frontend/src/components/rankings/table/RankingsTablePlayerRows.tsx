@@ -1,10 +1,9 @@
+import { useMemo } from "react";
 import { flexRender, Table } from "@tanstack/react-table";
-import { TableTd } from "./RankingsTableUtils";
+import { cellWidthSm, TableTd } from "./RankingsTableUtils";
 import RankingsTableHeader from "./RankingsTableHeader";
 import { Player } from "@/types/playerTypes";
 import { MemoizedTableRow } from "@/components/ui/table";
-import { Checkbox } from "@/components/ui/checkbox";
-import { useMemo } from "react";
 
 type PlayerRowsProps = {
   playersTable: Table<Player>;
@@ -29,15 +28,14 @@ const PlayerRows = ({ playersTable, totalsMode }: PlayerRowsProps) => {
       const row = rows[i];
       elems.push(
         <MemoizedTableRow key={row.id} className="h-10 odd:bg-slate-50/60">
-          <TableTd className="p-2 text-slate-400 font-mono" width="60px">
-            <Checkbox
-              checked={row.getIsSelected()}
-              onCheckedChange={row.getToggleSelectedHandler()}
-            />
-            {!totalsMode && (
-              <div className="pl-1">{(i + 1).toString().padStart(3, "0")}</div>
-            )}
-          </TableTd>
+          {!totalsMode && (
+            <TableTd
+              className="py-2 text-slate-400 font-mono"
+              width={cellWidthSm}
+            >
+              <div>{(i + 1).toString().padStart(3, "0")}</div>
+            </TableTd>
+          )}
           {row.getVisibleCells().map((cell) =>
             flexRender(cell.column.columnDef.cell, {
               ...cell.getContext(),

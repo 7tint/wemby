@@ -6,6 +6,9 @@ import {
   IconPointFilled,
   IconCurrencyDollar,
   IconShirtSport,
+  IconHeart,
+  IconScale,
+  IconX,
 } from "@tabler/icons-react";
 import {
   ColumnDef,
@@ -158,7 +161,7 @@ const RankingsTable_ = ({
             text="Player"
             label="Player Name"
             sort={column.getIsSorted()}
-            className="w-64 min-w-64"
+            className="w-56 min-w-56"
           />
         ),
         cell: ({ row }) => {
@@ -169,6 +172,32 @@ const RankingsTable_ = ({
             />
           );
         },
+      },
+      {
+        id: "likeButton",
+        header: () => (
+          <RankingsHeaderCell text="" label="Like Player" width={cellWidthMd} />
+        ),
+        cell: ({ row }) => (
+          <TableTd className="p-0 text-slate-400 font-mono" width={cellWidthMd}>
+            {row.getIsSelected() ? (
+              <IconX
+                className="cursor-pointer"
+                size={16}
+                stroke={2}
+                onClick={row.getToggleSelectedHandler()}
+              />
+            ) : (
+              <IconScale
+                className="cursor-pointer"
+                size={16}
+                stroke={2}
+                onClick={row.getToggleSelectedHandler()}
+              />
+            )}
+            <IconHeart className="cursor-pointer ml-0.5" size={16} stroke={2} />
+          </TableTd>
+        ),
       },
       {
         accessorKey: "auctionValuedAt",
@@ -584,7 +613,10 @@ const RankingsTable_ = ({
         className="shadow-md w-max min-w-full"
         style={{ fontSize: "13px" }}
       >
-        <RankingsTableHeader playersTable={playersTable} />
+        <RankingsTableHeader
+          playersTable={playersTable}
+          totalsMode={totalsMode}
+        />
         <TableBody
           className="border-l border-b border-slate-300 overflow-x-scroll hide-scrollbar"
           style={{ scrollbarWidth: "none" }}

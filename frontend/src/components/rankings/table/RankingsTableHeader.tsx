@@ -1,17 +1,19 @@
 import { flexRender, Table } from "@tanstack/react-table";
 import { cn } from "@/lib/utils";
-import { RankingsHeaderCell } from "./RankingsTableUtils";
+import { cellWidthSm, RankingsHeaderCell } from "./RankingsTableUtils";
 import { Player } from "@/types/playerTypes";
 import { TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 interface RankingsTableHeaderProps {
   playersTable: Table<Player>;
   isInTableBody?: boolean;
+  totalsMode?: boolean;
 }
 
 const RankingsTableHeader = ({
   playersTable,
   isInTableBody = false,
+  totalsMode = false,
 }: RankingsTableHeaderProps) => {
   return (
     <TableHeader>
@@ -21,16 +23,18 @@ const RankingsTableHeader = ({
           key={headerGroup.id}
           style={{ height: isInTableBody ? 36 : 50 }}
         >
-          <TableHead
-            className={cn("p-0", isInTableBody ? "disable-top-bar" : "")}
-          >
-            <RankingsHeaderCell
-              text="#"
-              label="Row #"
-              width="60px"
-              disableCursor
-            />
-          </TableHead>
+          {!totalsMode && (
+            <TableHead
+              className={cn("p-0", isInTableBody ? "disable-top-bar" : "")}
+            >
+              <RankingsHeaderCell
+                text="#"
+                label="Row #"
+                width={cellWidthSm}
+                disableCursor
+              />
+            </TableHead>
+          )}
           {headerGroup.headers.map((header) => (
             <TableHead
               key={`${headerGroup.id}-${header.id}`}

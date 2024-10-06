@@ -22,10 +22,10 @@ const RankingsTableFooter = ({
   return (
     <TableFooter style={{ scrollbarWidth: "none" }}>
       <TableRow className="h-10 hover:bg-slate-50">
-        <TableTd width={61} />
         <TableTd width={cellWidthSm} />
         <TableTd width={cellWidthSm} />
-        <TableTd className="w-64 min-w-64">Averages</TableTd>
+        <TableTd className="w-56 min-w-56">Averages</TableTd>
+        <TableTd width={cellWidthMd} />
         {showDraftColumns && (
           <TableTd width={cellWidthMd}>
             $
@@ -237,10 +237,10 @@ const RankingsTableFooter = ({
         </TableTd>
       </TableRow>
       <TableRow className="h-10 hover:bg-slate-50">
-        <TableTd width={61} />
         <TableTd width={cellWidthSm} />
         <TableTd width={cellWidthSm} />
-        <TableTd className="w-64 min-w-64">Totals</TableTd>
+        <TableTd className="w-56 min-w-56">Totals</TableTd>
+        <TableTd width={cellWidthMd} />
         {showDraftColumns && (
           <TableTd width={cellWidthMd}>
             $
