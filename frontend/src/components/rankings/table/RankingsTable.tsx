@@ -180,7 +180,7 @@ const RankingsTable_ = ({
         ),
         cell: ({ row }) => (
           <TableTd className="p-0 text-slate-400 font-mono" width={cellWidthMd}>
-            {row.getIsSelected() ? (
+            {totalsMode ? (
               <IconX
                 className="cursor-pointer"
                 size={16}
