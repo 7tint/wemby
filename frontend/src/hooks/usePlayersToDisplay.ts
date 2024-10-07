@@ -1,30 +1,23 @@
 import { totalCategories } from "@/data/stats";
 import { Player } from "@/types/playerTypes";
-import { useState, useEffect } from "react";
+import { useMemo } from "react";
 
 const usePlayersToDisplay = (
   players: Player[],
   punts: Set<string>,
   showSmartScores: boolean
 ) => {
-  const [processedPlayers, setProcessedPlayers] = useState<Player[]>([]);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      const processPlayers = (players: Player[], punts: Set<string>) => {
-        return players.length > 0
-          ? players.map((player) => {
-              player.nScores.total = totalCategories(player.nScores, punts);
-              return player;
-            })
-          : [];
-      };
-      setProcessedPlayers(processPlayers(players, punts));
-    }, 0);
-    return () => clearTimeout(timer);
+  return useMemo<Player[]>(() => {
+    const res =
+      players.length > 0
+        ? players.map((player) => {
+            player.nScores.total = totalCategories(player.nScores, punts);
+            return player;
+          })
+        : [];
+    return res;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [players, punts, showSmartScores]);
-
-  return processedPlayers;
 };
 
 export default usePlayersToDisplay;
