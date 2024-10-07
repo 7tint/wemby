@@ -97,9 +97,9 @@ const RankingsPage = () => {
     setIsLoaded(false);
     const timer = setTimeout(() => {
       setIsLoaded(true);
-    }, 250);
+    }, 300);
     return () => clearTimeout(timer);
-  }, [customSettings.showSmartScores]);
+  }, [customSettings.showSmartScores, punts]);
 
   return (
     <BaseLayout>

@@ -2,6 +2,7 @@
 
 import {
   Dispatch,
+  Fragment,
   memo,
   SetStateAction,
   useEffect,
@@ -43,6 +44,7 @@ import {
   RankingsHeaderCell,
   TableTd,
 } from "./RankingsTableUtils";
+import TeamLogo from "../../team/TeamLogo";
 import { Team } from "@/types/teamTypes";
 import { Player } from "@/types/playerTypes";
 import { Button } from "@/components/ui/button";
@@ -122,9 +124,17 @@ const RankingsTable_ = ({
             sort={column.getIsSorted()}
           />
         ),
-        cell: ({ cell }) => (
-          <TableTd width={cellWidthSm} className="text-slate-600">
-            {cell.getValue() as string}
+        cell: ({ row }) => (
+          <TableTd width={cellWidthSm}>
+            <Fragment>
+              {/* TODO: Changed teams */}
+              {/* {row.original.changedTeams && (
+                <Tooltip label="Changing teams this season">
+                  <IconPointFilled className="text-pink-400 pr-1" size={18} />
+                </Tooltip>
+              )} */}
+              <TeamLogo team={row.original.team as Team} size="sm" />
+            </Fragment>
           </TableTd>
         ),
         invertSorting: true,

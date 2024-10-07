@@ -1,13 +1,15 @@
 import { cn } from "@/lib/utils";
 import { Player } from "@/types/playerTypes";
 import Image from "next/image";
+import { memo } from "react";
 
 interface PlayerHeadshotProps {
   player: Player;
   size: "sm" | "md" | "lg";
+  className?: string;
 }
 
-const PlayerHeadshot = ({ player, size }: PlayerHeadshotProps) => {
+const PlayerHeadshot = ({ player, size, className }: PlayerHeadshotProps) => {
   const small = 44;
   const medium = 64;
   const large = 112;
@@ -26,7 +28,7 @@ const PlayerHeadshot = ({ player, size }: PlayerHeadshotProps) => {
 
   return (
     <Image
-      className={cn(widthClass, "relative h-auto")}
+      className={cn(widthClass, "relative h-auto", className)}
       src={headshotSrc}
       alt={player.firstName + " " + player.lastName}
       width={width}
@@ -36,4 +38,4 @@ const PlayerHeadshot = ({ player, size }: PlayerHeadshotProps) => {
   );
 };
 
-export default PlayerHeadshot;
+export default memo(PlayerHeadshot);

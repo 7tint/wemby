@@ -35,10 +35,11 @@ interface PlayerCellProps {
 const PlayerCell_ = ({ player, showPlayerCard }: PlayerCellProps) => {
   return showPlayerCard ? (
     <TableCell className={cn("w-52 min-w-52", colStyles)}>
-      <div className="flex items-center pl-2 pr-1 pt-1.5">
+      <div className="flex items-center pl-2 pr-1">
         <HoverCard openDelay={350}>
-          <HoverCardTrigger className="cursor-pointer">
-            <div className="inline-block max-w-44 mx-1 text-ellipsis overflow-hidden whitespace-nowrap font-medium">
+          <HoverCardTrigger className="cursor-pointer flex items-center">
+            <PlayerHeadshot className="pt-1.5" player={player} size="sm" />
+            <div className="inline-block max-w-44 ml-2 mr-1 text-ellipsis overflow-hidden whitespace-nowrap">
               {player.firstName} {player.lastName}
             </div>
           </HoverCardTrigger>
@@ -55,7 +56,6 @@ const PlayerCell_ = ({ player, showPlayerCard }: PlayerCellProps) => {
                   <span className="text-sm mr-0.5">#</span>
                   {player.jersey}
                 </div>
-                {/* ghost team logo behind player */}
                 <div className="absolute top-0 opacity-50 z-0 -mt-4">
                   <TeamLogo team={player.team} size="lg" useTooltip={false} />
                 </div>
@@ -199,9 +199,12 @@ const PlayerCell_ = ({ player, showPlayerCard }: PlayerCellProps) => {
       </div>
     </TableCell>
   ) : (
-    <TableCell className={cn("w-52 min-w-52", colStyles)}>
-      <div className="inline-block max-w-44 mx-1 text-ellipsis overflow-hidden whitespace-nowrap">
-        {player.firstName} {player.lastName}
+    <TableCell className={cn("w-56 min-w-56", colStyles)}>
+      <div className="flex items-center pl-2 pr-1">
+        <PlayerHeadshot className="pt-1.5" player={player} size="sm" />
+        <div className="inline-block max-w-44 ml-2 mr-1 text-ellipsis overflow-hidden whitespace-nowrap">
+          {player.firstName} {player.lastName}
+        </div>
       </div>
     </TableCell>
   );
