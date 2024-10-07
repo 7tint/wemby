@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import {
@@ -6,7 +5,6 @@ import {
   Fragment,
   memo,
   SetStateAction,
-  useCallback,
   useEffect,
   useMemo,
   useState,
@@ -32,7 +30,7 @@ import {
   SortingState,
   ColumnFiltersState,
 } from "@tanstack/react-table";
-import { calculateStatPercentiles, getNStats, getStats } from "@/data/stats";
+import { getNStats, getStats } from "@/data/stats";
 import useSelectedPlayers from "@/hooks/useSelectedPlayers";
 import usePlayersToDisplay from "@/hooks/usePlayersToDisplay";
 import PlayerCell from "./RankingsTablePlayerCell";
