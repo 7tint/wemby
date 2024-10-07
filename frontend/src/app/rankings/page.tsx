@@ -21,6 +21,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
+import { CustomTableState } from "@/components/rankings/table/customStates";
 
 const RankingsPage = () => {
   const [players, setPlayers] = useState<Player[]>([]);
@@ -29,8 +30,10 @@ const RankingsPage = () => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   // Settings states
-  const [showSmartScores, setShowSmartScores] = useState(false);
-  const [showHighlights, setShowHighlights] = useState(true);
+  const [customSettings, setCustomSettings] = useState<CustomTableState>({
+    showSmartScores: false,
+    showHighlights: true,
+  });
   const [punts, setPunts] = useState<Set<string>>(new Set());
 
   // Filters states
@@ -120,10 +123,14 @@ const RankingsPage = () => {
           </div>
         </div>
         <RankingsSettings
-          showSmartScores={showSmartScores}
-          setShowSmartScores={setShowSmartScores}
-          showHighlights={showHighlights}
-          setShowHighlights={setShowHighlights}
+          showSmartScores={customSettings.showSmartScores}
+          setShowSmartScores={(value) =>
+            setCustomSettings({ ...customSettings, showSmartScores: value })
+          }
+          showHighlights={customSettings.showHighlights}
+          setShowHighlights={(value) =>
+            setCustomSettings({ ...customSettings, showHighlights: value })
+          }
           punts={punts}
           setPunts={setPunts}
         />
@@ -143,8 +150,20 @@ const RankingsPage = () => {
             <RankingsTable
               players={players.filter((player) => selectPlayerIds[player.id])}
               isCurrentSeason={selectedYear === 1}
-              showSmartScores={showSmartScores}
-              showHighlights={showHighlights}
+              showSmartScores={customSettings.showSmartScores}
+              setShowSmartScores={() =>
+                setCustomSettings({
+                  ...customSettings,
+                  showSmartScores: !customSettings.showSmartScores,
+                })
+              }
+              showHighlights={customSettings.showHighlights}
+              setShowHighlights={() =>
+                setCustomSettings({
+                  ...customSettings,
+                  showHighlights: !customSettings.showHighlights,
+                })
+              }
               punts={punts}
               positions={[]}
               team={null}
@@ -159,8 +178,20 @@ const RankingsPage = () => {
           <RankingsTable
             players={players}
             isCurrentSeason={selectedYear === 1}
-            showSmartScores={showSmartScores}
-            showHighlights={showHighlights}
+            showSmartScores={customSettings.showSmartScores}
+            setShowSmartScores={() =>
+              setCustomSettings({
+                ...customSettings,
+                showSmartScores: !customSettings.showSmartScores,
+              })
+            }
+            showHighlights={customSettings.showHighlights}
+            setShowHighlights={() =>
+              setCustomSettings({
+                ...customSettings,
+                showHighlights: !customSettings.showHighlights,
+              })
+            }
             punts={punts}
             positions={positions}
             team={team}

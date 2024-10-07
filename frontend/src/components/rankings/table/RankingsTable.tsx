@@ -1,6 +1,16 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
-import { Fragment, memo, useEffect, useMemo, useState } from "react";
+import {
+  Dispatch,
+  Fragment,
+  memo,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import Image from "next/image";
 import {
   IconPointFilled,
@@ -12,15 +22,15 @@ import {
 } from "@tabler/icons-react";
 import {
   ColumnDef,
-  ColumnFiltersState,
-  OnChangeFn,
-  RowSelectionState,
-  SortingState,
-  VisibilityState,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getSortedRowModel,
   useReactTable,
+  getCoreRowModel,
+  getSortedRowModel,
+  getFilteredRowModel,
+  RowSelectionState,
+  OnChangeFn,
+  VisibilityState,
+  SortingState,
+  ColumnFiltersState,
 } from "@tanstack/react-table";
 import { calculateStatPercentiles, getNStats, getStats } from "@/data/stats";
 import useSelectedPlayers from "@/hooks/useSelectedPlayers";
@@ -45,15 +55,15 @@ import { Button } from "@/components/ui/button";
 import { Table, TableBody } from "@/components/ui/table";
 import PlayerPositionBadges from "@/components/player/PlayerPositionBadges";
 import exportToCsv from "@/utils/csv";
+import CustomFeature from "./customStates";
 
-/*
- * RANKINGS TABLE
- */
 interface RankingsTableProps {
   players: Player[];
   isCurrentSeason: boolean;
-  showSmartScores: boolean;
   showHighlights: boolean;
+  setShowHighlights: Dispatch<SetStateAction<boolean>>;
+  showSmartScores: boolean;
+  setShowSmartScores: Dispatch<SetStateAction<boolean>>;
   punts: Set<string>;
   positions: string[];
   team: Team | null;
@@ -65,8 +75,10 @@ interface RankingsTableProps {
 const RankingsTable_ = ({
   players,
   isCurrentSeason,
-  showSmartScores,
   showHighlights,
+  setShowHighlights,
+  showSmartScores,
+  setShowSmartScores,
   punts,
   positions,
   team,
@@ -74,31 +86,12 @@ const RankingsTable_ = ({
   setSelectPlayerIds,
   totalsMode = false,
 }: RankingsTableProps) => {
-  const getPercentileColor = useMemo(() => {
-    return (stat: number, category: string) => {
-      if (!showHighlights) return "bg-transparent";
-      if (punts.has(category)) return "bg-slate-150";
-      const percentile = calculateStatPercentiles(stat, category);
-      if (percentile === 0) {
-        return "bg-red-300";
-      } else if (percentile === 1) {
-        return "bg-red-200";
-      } else if (percentile === 2) {
-        return "bg-transparent";
-      } else if (percentile === 3) {
-        return "bg-emerald-200";
-      } else if (percentile === 4) {
-        return "bg-emerald-300";
-      } else {
-        return "bg-transparent";
-      }
-    };
-  }, [showHighlights, punts]);
-
   const columns = useMemo<ColumnDef<Player>[]>(() => {
+    const getDisplayValue = (player: Player) => {
+      return showSmartScores ? getNStats(player) : getStats(player);
+    };
+
     const f = showSmartScores ? 2 : 1;
-    const getDisplayValue = (player: Player) =>
-      showSmartScores ? getNStats(player) : getStats(player);
 
     return [
       {
@@ -164,14 +157,9 @@ const RankingsTable_ = ({
             className="w-56 min-w-56"
           />
         ),
-        cell: ({ row }) => {
-          return (
-            <PlayerCell
-              player={row.original}
-              showPlayerCard={isCurrentSeason}
-            />
-          );
-        },
+        cell: ({ row }) => (
+          <PlayerCell player={row.original} showPlayerCard={isCurrentSeason} />
+        ),
       },
       {
         id: "likeButton",
@@ -299,31 +287,23 @@ const RankingsTable_ = ({
           const playerStats = getStats(row.original);
           const playerNStats = getNStats(row.original);
           return (
-            <TableTd
-              className={getPercentileColor(
-                playerStats.fgm / playerStats.fga,
-                "fg"
-              )}
-              width={showSmartScores ? cellWidthMd : cellWidthXl}
-            >
-              <div className="flex flex-col items-center">
-                {showSmartScores ? (
-                  <div>{playerNStats.fgImpact.toFixed(2)}</div>
-                ) : (
-                  <div className="flex items-center">
-                    <div>
-                      {playerStats.fga > 0
-                        ? (playerStats.fgm / playerStats.fga).toFixed(2)
-                        : (0).toFixed(2)}
-                    </div>
-                    <span className="text-2xs ml-1">
-                      ({playerStats.fgm.toFixed(2)} /{" "}
-                      {playerStats.fga.toFixed(2)})
-                    </span>
+            <div className="flex flex-col items-center">
+              {showSmartScores ? (
+                <div>{playerNStats.fgImpact.toFixed(2)}</div>
+              ) : (
+                <div className="flex items-center">
+                  <div>
+                    {playerStats.fga > 0
+                      ? (playerStats.fgm / playerStats.fga).toFixed(2)
+                      : (0).toFixed(2)}
                   </div>
-                )}
-              </div>
-            </TableTd>
+                  <span className="text-2xs ml-1">
+                    ({playerStats.fgm.toFixed(2)} / {playerStats.fga.toFixed(2)}
+                    )
+                  </span>
+                </div>
+              )}
+            </div>
           );
         },
       },
@@ -342,37 +322,29 @@ const RankingsTable_ = ({
           const playerStats = getStats(row.original);
           const playerNStats = getNStats(row.original);
           return (
-            <TableTd
-              className={getPercentileColor(
-                playerStats.ftm / playerStats.fta,
-                "ft"
-              )}
-              width={showSmartScores ? cellWidthMd : cellWidthXl}
-            >
-              <div className="flex flex-col items-center">
-                {showSmartScores ? (
-                  <div>{playerNStats.ftImpact.toFixed(2)}</div>
-                ) : (
-                  <div className="flex items-center">
-                    <div>
-                      {playerStats.fta > 0
-                        ? (playerStats.ftm / playerStats.fta).toFixed(2)
-                        : (0).toFixed(2)}
-                    </div>
-                    <span className="text-2xs ml-1">
-                      ({playerStats.ftm.toFixed(2)} /{" "}
-                      {playerStats.fta.toFixed(2)})
-                    </span>
+            <div className="flex flex-col items-center">
+              {showSmartScores ? (
+                <div>{playerNStats.ftImpact.toFixed(2)}</div>
+              ) : (
+                <div className="flex items-center">
+                  <div>
+                    {playerStats.fta > 0
+                      ? (playerStats.ftm / playerStats.fta).toFixed(2)
+                      : (0).toFixed(2)}
                   </div>
-                )}
-              </div>
-            </TableTd>
+                  <span className="text-2xs ml-1">
+                    ({playerStats.ftm.toFixed(2)} / {playerStats.fta.toFixed(2)}
+                    )
+                  </span>
+                </div>
+              )}
+            </div>
           );
         },
       },
       {
         id: "tpm",
-        accessorFn: (player) => getDisplayValue(player).tpm,
+        accessorFn: (player) => getDisplayValue(player).tpm.toFixed(f),
         header: ({ column }) => (
           <RankingsHeaderCell
             text="3PM"
@@ -381,21 +353,10 @@ const RankingsTable_ = ({
             sort={column.getIsSorted()}
           />
         ),
-        cell: ({ cell, row }) => {
-          const tpm = cell.getValue() as number;
-          return (
-            <TableTd
-              className={getPercentileColor(getStats(row.original).tpm, "tpm")}
-              width={cellWidthMd}
-            >
-              {tpm.toFixed(f)}
-            </TableTd>
-          );
-        },
       },
       {
         id: "pts",
-        accessorFn: (player) => getDisplayValue(player).pts,
+        accessorFn: (player) => getDisplayValue(player).pts.toFixed(f),
         header: ({ column }) => (
           <RankingsHeaderCell
             text="PTS"
@@ -404,21 +365,10 @@ const RankingsTable_ = ({
             sort={column.getIsSorted()}
           />
         ),
-        cell: ({ cell, row }) => {
-          const pts = cell.getValue() as number;
-          return (
-            <TableTd
-              className={getPercentileColor(getStats(row.original).pts, "pts")}
-              width={cellWidthMd}
-            >
-              {pts.toFixed(f)}
-            </TableTd>
-          );
-        },
       },
       {
         id: "reb",
-        accessorFn: (player) => getDisplayValue(player).reb,
+        accessorFn: (player) => getDisplayValue(player).reb.toFixed(f),
         header: ({ column }) => (
           <RankingsHeaderCell
             text="REB"
@@ -427,21 +377,10 @@ const RankingsTable_ = ({
             sort={column.getIsSorted()}
           />
         ),
-        cell: ({ cell, row }) => {
-          const reb = cell.getValue() as number;
-          return (
-            <TableTd
-              className={getPercentileColor(getStats(row.original).reb, "reb")}
-              width={cellWidthMd}
-            >
-              {reb.toFixed(f)}
-            </TableTd>
-          );
-        },
       },
       {
         id: "ast",
-        accessorFn: (player) => getDisplayValue(player).ast,
+        accessorFn: (player) => getDisplayValue(player).ast.toFixed(f),
         header: ({ column }) => (
           <RankingsHeaderCell
             text="AST"
@@ -450,21 +389,10 @@ const RankingsTable_ = ({
             sort={column.getIsSorted()}
           />
         ),
-        cell: ({ cell, row }) => {
-          const ast = cell.getValue() as number;
-          return (
-            <TableTd
-              className={getPercentileColor(getStats(row.original).ast, "ast")}
-              width={cellWidthMd}
-            >
-              {ast.toFixed(f)}
-            </TableTd>
-          );
-        },
       },
       {
         id: "stl",
-        accessorFn: (player) => getDisplayValue(player).stl,
+        accessorFn: (player) => getDisplayValue(player).stl.toFixed(f),
         header: ({ column }) => (
           <RankingsHeaderCell
             text="STL"
@@ -473,21 +401,10 @@ const RankingsTable_ = ({
             sort={column.getIsSorted()}
           />
         ),
-        cell: ({ cell, row }) => {
-          const stl = cell.getValue() as number;
-          return (
-            <TableTd
-              className={getPercentileColor(getStats(row.original).stl, "stl")}
-              width={cellWidthMd}
-            >
-              {stl.toFixed(f)}
-            </TableTd>
-          );
-        },
       },
       {
         id: "blk",
-        accessorFn: (player) => getDisplayValue(player).blk,
+        accessorFn: (player) => getDisplayValue(player).blk.toFixed(f),
         header: ({ column }) => (
           <RankingsHeaderCell
             text="BLK"
@@ -496,21 +413,10 @@ const RankingsTable_ = ({
             sort={column.getIsSorted()}
           />
         ),
-        cell: ({ cell, row }) => {
-          const blk = cell.getValue() as number;
-          return (
-            <TableTd
-              className={getPercentileColor(getStats(row.original).blk, "blk")}
-              width={cellWidthMd}
-            >
-              {blk.toFixed(f)}
-            </TableTd>
-          );
-        },
       },
       {
         id: "to",
-        accessorFn: (player) => getDisplayValue(player).to,
+        accessorFn: (player) => getDisplayValue(player).to.toFixed(f),
         header: ({ column }) => (
           <RankingsHeaderCell
             text="TO"
@@ -519,17 +425,6 @@ const RankingsTable_ = ({
             sort={column.getIsSorted()}
           />
         ),
-        cell: ({ cell, row }) => {
-          const to = cell.getValue() as number;
-          return (
-            <TableTd
-              className={getPercentileColor(getStats(row.original).to, "to")}
-              width={cellWidthMd}
-            >
-              {to.toFixed(f)}
-            </TableTd>
-          );
-        },
         invertSorting: showSmartScores ? false : true,
       },
       {
@@ -550,18 +445,7 @@ const RankingsTable_ = ({
         ),
       },
     ];
-  }, [showSmartScores, getPercentileColor, isCurrentSeason, totalsMode]);
-
-  useEffect(() => {
-    setColumnVisibility({ auctionValuedAt: isCurrentSeason });
-  }, [players, isCurrentSeason]);
-
-  useEffect(() => {
-    setColumnFilters([
-      { id: "positions", value: positions },
-      { id: "team", value: team },
-    ]);
-  }, [positions, team]);
+  }, [showSmartScores, isCurrentSeason, totalsMode]);
 
   const playersList = usePlayersToDisplay(players, punts, showSmartScores);
   const selectedPlayers = useSelectedPlayers(selectPlayerIds, playersList);
@@ -573,6 +457,7 @@ const RankingsTable_ = ({
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
   const playersTable = useReactTable<Player>({
+    _features: [CustomFeature],
     columns,
     data: playersList,
     getRowId: (row) => row.id.toString(),
@@ -581,6 +466,8 @@ const RankingsTable_ = ({
       columnVisibility,
       sorting,
       columnFilters,
+      showHighlights,
+      showSmartScores,
     },
     enableRowSelection: true,
     getCoreRowModel: getCoreRowModel(),
@@ -590,7 +477,20 @@ const RankingsTable_ = ({
     onColumnVisibilityChange: setColumnVisibility,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
+    onShowHighlightsChange: setShowHighlights,
+    onShowSmartScoresChange: setShowSmartScores,
   });
+
+  useEffect(() => {
+    setColumnVisibility({ auctionValuedAt: isCurrentSeason });
+  }, [isCurrentSeason]);
+
+  useEffect(() => {
+    setColumnFilters([
+      { id: "positions", value: positions },
+      { id: "team", value: team },
+    ]);
+  }, [positions, team]);
 
   return (
     <div className="w-full overflow-x-scroll hide-scrollbar">
@@ -621,7 +521,13 @@ const RankingsTable_ = ({
           className="border-l border-b border-slate-300 overflow-x-scroll hide-scrollbar"
           style={{ scrollbarWidth: "none" }}
         >
-          <PlayerRows playersTable={playersTable} totalsMode={totalsMode} />
+          <PlayerRows
+            playersTable={playersTable}
+            totalsMode={totalsMode}
+            punts={punts}
+            showHighlights={showHighlights}
+            showSmartScores={showSmartScores}
+          />
         </TableBody>
         {totalsMode && (
           <RankingsTableFooter
