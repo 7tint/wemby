@@ -2,7 +2,6 @@
 
 import {
   Dispatch,
-  Fragment,
   memo,
   SetStateAction,
   useEffect,
@@ -11,7 +10,6 @@ import {
 } from "react";
 import Image from "next/image";
 import {
-  IconPointFilled,
   IconCurrencyDollar,
   IconShirtSport,
   IconHeart,
@@ -45,10 +43,8 @@ import {
   RankingsHeaderCell,
   TableTd,
 } from "./RankingsTableUtils";
-import TeamLogo from "../../team/TeamLogo";
 import { Team } from "@/types/teamTypes";
 import { Player } from "@/types/playerTypes";
-import Tooltip from "@/components/ui/tooltip";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody } from "@/components/ui/table";
 import PlayerPositionBadges from "@/components/player/PlayerPositionBadges";
@@ -126,16 +122,9 @@ const RankingsTable_ = ({
             sort={column.getIsSorted()}
           />
         ),
-        cell: ({ row }) => (
-          <TableTd width={cellWidthSm}>
-            <Fragment>
-              {row.original.changedTeams && (
-                <Tooltip label="Changing teams this season">
-                  <IconPointFilled className="text-pink-400 pr-1" size={18} />
-                </Tooltip>
-              )}
-              <TeamLogo team={row.original.team as Team} size="sm" />
-            </Fragment>
+        cell: ({ cell }) => (
+          <TableTd width={cellWidthSm} className="text-slate-600">
+            {cell.getValue() as string}
           </TableTd>
         ),
         invertSorting: true,
