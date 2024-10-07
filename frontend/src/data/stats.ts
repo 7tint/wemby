@@ -92,13 +92,17 @@ export const normalizeScores = (
 
 export const totalCategories = (
   categories: PlayerStatsNScore,
-  punts: string[]
+  punts: Set<string>
 ): number => {
   let total = 0;
-  Object.entries(categories).forEach(([category, score]) => {
-    if (category === "fgImpact") category = "fg";
-    if (category === "ftImpact") category = "ft";
-    if (!punts.includes(category)) total += score;
-  });
+  if (!punts.has("fg")) total += categories.fgImpact;
+  if (!punts.has("ft")) total += categories.ftImpact;
+  if (!punts.has("tpm")) total += categories.tpm;
+  if (!punts.has("pts")) total += categories.pts;
+  if (!punts.has("reb")) total += categories.reb;
+  if (!punts.has("ast")) total += categories.ast;
+  if (!punts.has("stl")) total += categories.stl;
+  if (!punts.has("blk")) total += categories.blk;
+  if (!punts.has("to")) total += categories.to;
   return total;
 };

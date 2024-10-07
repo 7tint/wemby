@@ -31,7 +31,7 @@ const RankingsPage = () => {
   // Settings states
   const [showSmartScores, setShowSmartScores] = useState(false);
   const [showHighlights, setShowHighlights] = useState(true);
-  const [punts, setPunts] = useState<string[]>([]);
+  const [punts, setPunts] = useState<Set<string>>(new Set());
 
   // Filters states
   const [positions, setPositions] = useState<string[]>([]);
@@ -65,7 +65,7 @@ const RankingsPage = () => {
             to: 0.25 * zScore.to + 8 * minMax.to,
             total: 0,
           });
-          const total = totalCategories(nScores, []);
+          const total = totalCategories(nScores, new Set());
           player.nScores = {
             ...nScores,
             total,

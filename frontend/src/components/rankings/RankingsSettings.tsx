@@ -23,8 +23,8 @@ interface RankingsSettingsProps {
   setShowSmartScores: (value: boolean) => void;
   showHighlights: boolean;
   setShowHighlights: (value: boolean) => void;
-  punts: string[];
-  setPunts: (value: string[]) => void;
+  punts: Set<string>;
+  setPunts: (value: Set<string>) => void;
 }
 
 const RankingsSettings = ({
@@ -73,7 +73,7 @@ const RankingsSettings = ({
                   return (
                     <Button
                       key={label}
-                      variant={punts.includes(key) ? "violet" : "secondary"}
+                      variant={punts.has(key) ? "violet" : "secondary"}
                       size="sm"
                       className={cn(
                         "text-sm border rounded-none border-l-0 w-14",
@@ -81,13 +81,11 @@ const RankingsSettings = ({
                         i === STAT_KEYS.length - 1 ? "rounded-r-md " : "",
                         i === 0 ? "border-l " : ""
                       )}
-                      color={punts.includes(key) ? "purple" : "slate"}
+                      color={punts.has(key) ? "purple" : "slate"}
                       onClick={() => {
-                        if (punts.includes(key)) {
-                          setPunts(punts.filter((cat) => cat !== key));
-                        } else {
-                          setPunts([...punts, key]);
-                        }
+                        if (punts.has(key)) punts.delete(key);
+                        else punts.add(key);
+                        setPunts(new Set(punts));
                       }}
                     >
                       {label}

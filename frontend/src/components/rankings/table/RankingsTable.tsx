@@ -54,7 +54,7 @@ interface RankingsTableProps {
   isCurrentSeason: boolean;
   showSmartScores: boolean;
   showHighlights: boolean;
-  punts: string[];
+  punts: Set<string>;
   positions: string[];
   team: Team | null;
   selectPlayerIds: RowSelectionState;
@@ -77,7 +77,7 @@ const RankingsTable_ = ({
   const getPercentileColor = useMemo(() => {
     return (stat: number, category: string) => {
       if (!showHighlights) return "bg-transparent";
-      if (punts.includes(category)) return "bg-slate.100";
+      if (punts.has(category)) return "bg-slate-150";
       const percentile = calculateStatPercentiles(stat, category);
       if (percentile === 0) {
         return "bg-red-300";
