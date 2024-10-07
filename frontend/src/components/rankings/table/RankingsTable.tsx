@@ -141,7 +141,7 @@ const RankingsTable_ = ({
             text="Player"
             label="Player Name"
             sort={column.getIsSorted()}
-            className="w-56 min-w-56"
+            className="w-52 min-w-52"
           />
         ),
         cell: ({ row }) => (
@@ -149,12 +149,16 @@ const RankingsTable_ = ({
         ),
       },
       {
-        id: "likeButton",
+        id: "action",
         header: () => (
-          <RankingsHeaderCell text="" label="Like Player" width={cellWidthMd} />
+          <RankingsHeaderCell
+            text="Action"
+            label="Compare and Save Players"
+            width={cellWidthLg}
+          />
         ),
         cell: ({ row }) => (
-          <TableTd className="p-0 text-slate-400 font-mono" width={cellWidthMd}>
+          <TableTd className="p-0 text-slate-400 font-mono" width={cellWidthLg}>
             {totalsMode ? (
               <IconX
                 className="cursor-pointer"
@@ -170,7 +174,7 @@ const RankingsTable_ = ({
                 onClick={row.getToggleSelectedHandler()}
               />
             )}
-            <IconHeart className="cursor-pointer ml-0.5" size={16} stroke={2} />
+            <IconHeart className="cursor-pointer ml-1" size={16} stroke={2} />
           </TableTd>
         ),
       },

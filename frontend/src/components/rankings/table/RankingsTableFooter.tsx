@@ -24,8 +24,8 @@ const RankingsTableFooter = ({
       <TableRow className="h-10 hover:bg-slate-50">
         <TableTd width={cellWidthSm} />
         <TableTd width={cellWidthSm} />
-        <TableTd className="w-56 min-w-56">Averages</TableTd>
-        <TableTd width={cellWidthMd} />
+        <TableTd className="w-52 min-w-52">Averages</TableTd>
+        <TableTd width={cellWidthLg} />
         {showDraftColumns && (
           <TableTd width={cellWidthMd}>
             $
@@ -239,8 +239,8 @@ const RankingsTableFooter = ({
       <TableRow className="h-10 hover:bg-slate-50">
         <TableTd width={cellWidthSm} />
         <TableTd width={cellWidthSm} />
-        <TableTd className="w-56 min-w-56">Totals</TableTd>
-        <TableTd width={cellWidthMd} />
+        <TableTd className="w-52 min-w-52">Totals</TableTd>
+        <TableTd width={cellWidthLg} />
         {showDraftColumns && (
           <TableTd width={cellWidthMd}>
             $

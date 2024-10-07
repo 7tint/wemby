@@ -93,6 +93,14 @@ const RankingsPage = () => {
     if (players.length > 0) setIsLoaded(true);
   }, [players]);
 
+  useEffect(() => {
+    setIsLoaded(false);
+    const timer = setTimeout(() => {
+      setIsLoaded(true);
+    }, 250);
+    return () => clearTimeout(timer);
+  }, [customSettings.showSmartScores]);
+
   return (
     <BaseLayout>
       <div className="pl-2 md:pl-1.5 lg:pl-1">

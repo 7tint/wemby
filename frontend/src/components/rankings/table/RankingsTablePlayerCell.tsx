@@ -34,11 +34,11 @@ interface PlayerCellProps {
 
 const PlayerCell_ = ({ player, showPlayerCard }: PlayerCellProps) => {
   return showPlayerCard ? (
-    <TableCell className={cn("w-56 min-w-56", colStyles)}>
+    <TableCell className={cn("w-52 min-w-52", colStyles)}>
       <div className="flex items-center pl-2 pr-1 pt-1.5">
         <HoverCard openDelay={350}>
           <HoverCardTrigger className="cursor-pointer">
-            <div className="inline-block max-w-44 mx-1 text-ellipsis overflow-hidden whitespace-nowrap">
+            <div className="inline-block max-w-44 mx-1 text-ellipsis overflow-hidden whitespace-nowrap font-medium">
               {player.firstName} {player.lastName}
             </div>
           </HoverCardTrigger>
@@ -199,7 +199,7 @@ const PlayerCell_ = ({ player, showPlayerCard }: PlayerCellProps) => {
       </div>
     </TableCell>
   ) : (
-    <TableCell className={cn("w-56 min-w-56", colStyles)}>
+    <TableCell className={cn("w-52 min-w-52", colStyles)}>
       <div className="inline-block max-w-44 mx-1 text-ellipsis overflow-hidden whitespace-nowrap">
         {player.firstName} {player.lastName}
       </div>
