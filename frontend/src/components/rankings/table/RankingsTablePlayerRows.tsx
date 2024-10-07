@@ -16,7 +16,7 @@ const PlayerRows = ({ playersTable, totalsMode }: PlayerRowsProps) => {
   const elements = useMemo(() => {
     const elems = [];
     for (let i = 0; i < rows.length; i++) {
-      if (i % 15 === 0 && i !== 0 && !totalsMode) {
+      if (i % 12 === 0 && i !== 0 && !totalsMode) {
         elems.push(
           <RankingsTableHeader
             key={`header-${i}`}
