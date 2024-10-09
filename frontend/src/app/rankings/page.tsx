@@ -145,33 +145,30 @@ const RankingsPage = () => {
       {selectPlayerIds &&
         Object.keys(selectPlayerIds).length > 0 &&
         isLoaded && (
-          <div>
-            <h2 className="text-lg font-medium mb-4 pl-1">Selected Players</h2>
-            <RankingsTable
-              players={players.filter((player) => selectPlayerIds[player.id])}
-              isCurrentSeason={selectedYear === 1}
-              showSmartScores={customSettings.showSmartScores}
-              setShowSmartScores={() =>
-                setCustomSettings({
-                  ...customSettings,
-                  showSmartScores: !customSettings.showSmartScores,
-                })
-              }
-              showHighlights={customSettings.showHighlights}
-              setShowHighlights={() =>
-                setCustomSettings({
-                  ...customSettings,
-                  showHighlights: !customSettings.showHighlights,
-                })
-              }
-              punts={punts}
-              positions={[]}
-              team={null}
-              selectPlayerIds={selectPlayerIds}
-              setSelectPlayerIds={setSelectPlayerIds}
-              totalsMode
-            />
-          </div>
+          <RankingsTable
+            players={players.filter((player) => selectPlayerIds[player.id])}
+            isCurrentSeason={selectedYear === 1}
+            showSmartScores={customSettings.showSmartScores}
+            setShowSmartScores={() =>
+              setCustomSettings({
+                ...customSettings,
+                showSmartScores: !customSettings.showSmartScores,
+              })
+            }
+            showHighlights={customSettings.showHighlights}
+            setShowHighlights={() =>
+              setCustomSettings({
+                ...customSettings,
+                showHighlights: !customSettings.showHighlights,
+              })
+            }
+            punts={punts}
+            positions={[]}
+            team={null}
+            selectPlayerIds={selectPlayerIds}
+            setSelectPlayerIds={setSelectPlayerIds}
+            totalsMode
+          />
         )}
       {isLoaded ? (
         <div className="my-6">

@@ -461,7 +461,9 @@ const RankingsTable_ = ({
     <div className="w-full overflow-x-scroll hide-scrollbar">
       <div className="flex justify-between w-100 mb-4">
         <h2 className="text-lg font-medium pl-1">
-          {isCurrentSeason
+          {totalsMode
+            ? "Selected Players"
+            : isCurrentSeason
             ? "2024-2025 Season Projections"
             : "2023-2024 Season Rankings"}
         </h2>

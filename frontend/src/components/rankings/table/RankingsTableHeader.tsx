@@ -67,7 +67,7 @@ const RankingsTableHeader = ({
             className={cn("p-0", isInTableBody ? "disable-top-bar" : "")}
           >
             <RankingsHeaderCell
-              text="Action"
+              text="Actions"
               label="Compare and Save Players"
               width={cellWidthLg}
               disableCursor

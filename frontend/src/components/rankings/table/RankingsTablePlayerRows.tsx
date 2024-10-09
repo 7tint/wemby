@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { MouseEventHandler, ReactNode, useMemo } from "react";
 import { flexRender, Table } from "@tanstack/react-table";
 import {
   cellWidthLg,
@@ -11,7 +11,22 @@ import RankingsTableHeader from "./RankingsTableHeader";
 import { Player } from "@/types/playerTypes";
 import { MemoizedTableRow } from "@/components/ui/table";
 import { calculateStatPercentiles, getStats } from "@/data/stats";
-import { IconHeart, IconScale, IconX } from "@tabler/icons-react";
+import { IconBookmark, IconHeart, IconScale, IconX } from "@tabler/icons-react";
+
+const IconWrapper = ({
+  children,
+  onClick,
+}: {
+  children: ReactNode;
+  onClick?: MouseEventHandler<HTMLDivElement>;
+}) => (
+  <div
+    className="cursor-pointer hover:bg-slate-200 rounded-sm p-0.5"
+    onClick={onClick}
+  >
+    {children}
+  </div>
+);
 
 type PlayerRowsProps = {
   playersTable: Table<Player>;
@@ -125,21 +140,24 @@ const PlayerRows = ({
           })}
           <TableTd className="p-0 text-slate-400 font-mono" width={cellWidthLg}>
             {selectedPlayers.has(row.original) ? (
-              <IconX
-                className="cursor-pointer"
-                size={16}
-                stroke={2}
-                onClick={row.getToggleSelectedHandler()}
-              />
+              <IconWrapper onClick={row.getToggleSelectedHandler()}>
+                <IconX
+                  size={16}
+                  stroke={2}
+                  onClick={row.getToggleSelectedHandler()}
+                />
+              </IconWrapper>
             ) : (
-              <IconScale
-                className="cursor-pointer"
-                size={16}
-                stroke={2}
-                onClick={row.getToggleSelectedHandler()}
-              />
+              <IconWrapper onClick={row.getToggleSelectedHandler()}>
+                <IconScale size={16} stroke={2} />
+              </IconWrapper>
             )}
-            <IconHeart className="cursor-pointer ml-1" size={16} stroke={2} />
+            <IconWrapper>
+              <IconHeart size={16} stroke={2} />
+            </IconWrapper>
+            <IconWrapper>
+              <IconBookmark size={16} stroke={2} />
+            </IconWrapper>
           </TableTd>
         </MemoizedTableRow>
       );
