@@ -4,7 +4,8 @@ import { CategoryStats } from "@/types/statTypes";
 
 const calculateZScores = (
   players: Player[],
-  categories: CategoryStats
+  categories: CategoryStats,
+  ignoreGames: boolean
 ): Map<number, PlayerStatsNScore> => {
   // Games played
   const GP = players.map((player) => getStats(player).gp);
@@ -13,20 +14,21 @@ const calculateZScores = (
   const plainZMap = new Map<number, PlayerStatsNScore>();
   players.forEach((p, i) => {
     const pStats = getStats(p);
+    const gp = ignoreGames ? 82 : GP[i];
     const plainZ = {
       fgImpact:
-        (pStats.fgImpact * GP[i] - categories.fgImpact.mean) /
+        (pStats.fgImpact * gp - categories.fgImpact.mean) /
         categories.fgImpact.std,
       ftImpact:
-        (pStats.ftImpact * GP[i] - categories.ftImpact.mean) /
+        (pStats.ftImpact * gp - categories.ftImpact.mean) /
         categories.ftImpact.std,
-      tpm: (pStats.tpm * GP[i] - categories.tpm.mean) / categories.tpm.std,
-      pts: (pStats.pts * GP[i] - categories.pts.mean) / categories.pts.std,
-      reb: (pStats.reb * GP[i] - categories.reb.mean) / categories.reb.std,
-      ast: (pStats.ast * GP[i] - categories.ast.mean) / categories.ast.std,
-      stl: (pStats.stl * GP[i] - categories.stl.mean) / categories.stl.std,
-      blk: (pStats.blk * GP[i] - categories.blk.mean) / categories.blk.std,
-      to: (categories.to.mean - pStats.to * GP[i]) / categories.to.std,
+      tpm: (pStats.tpm * gp - categories.tpm.mean) / categories.tpm.std,
+      pts: (pStats.pts * gp - categories.pts.mean) / categories.pts.std,
+      reb: (pStats.reb * gp - categories.reb.mean) / categories.reb.std,
+      ast: (pStats.ast * gp - categories.ast.mean) / categories.ast.std,
+      stl: (pStats.stl * gp - categories.stl.mean) / categories.stl.std,
+      blk: (pStats.blk * gp - categories.blk.mean) / categories.blk.std,
+      to: (categories.to.mean - pStats.to * gp) / categories.to.std,
       total: 0,
     };
     plainZMap.set(p.id, plainZ);

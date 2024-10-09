@@ -34,6 +34,7 @@ const RankingsPage = () => {
     showSmartScores: false,
     showHighlights: true,
   });
+  const [ignoreGames, setIgnoreGames] = useState<boolean>(false);
   const [punts, setPunts] = useState<Set<string>>(new Set());
 
   // Filters states
@@ -47,7 +48,11 @@ const RankingsPage = () => {
 
       const { players, categoryStatsTotal, categoryStatsPer } =
         await getPlayers(year);
-      const zScores = calculateZScores(players, categoryStatsTotal);
+      const zScores = calculateZScores(
+        players,
+        categoryStatsTotal,
+        ignoreGames
+      );
       const minmaxScores = calculateMinMax(players, categoryStatsPer);
       let totalNScore = 0;
 
@@ -87,7 +92,7 @@ const RankingsPage = () => {
       setPlayers(players);
     };
     getPlayersData();
-  }, [selectedYear]);
+  }, [selectedYear, ignoreGames]);
 
   useEffect(() => {
     if (players.length > 0) setIsLoaded(true);
@@ -131,6 +136,8 @@ const RankingsPage = () => {
           setShowHighlights={(value) =>
             setCustomSettings({ ...customSettings, showHighlights: value })
           }
+          ignoreGames={ignoreGames}
+          setIgnoreGames={setIgnoreGames}
           punts={punts}
           setPunts={setPunts}
         />
