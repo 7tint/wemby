@@ -51,7 +51,7 @@ const RankingsPage = () => {
       const minmaxScores = calculateMinMax(players, categoryStatsPer);
       let totalNScore = 0;
 
-      players.forEach((player) => {
+      players.forEach((player, i) => {
         if (!player.stats) return;
         const zScore = zScores.get(player.id) || null;
         const minMax = minmaxScores.get(player.id) || null;
@@ -73,7 +73,7 @@ const RankingsPage = () => {
             ...nScores,
             total,
           };
-          if (total > 0) totalNScore += total;
+          if (total > 0 && i <= 10 * 12) totalNScore += total;
         }
       });
 
