@@ -16,7 +16,7 @@ const TeamLogo = ({ team, size, useTooltip = true }: TeamLogoProps) => {
   const medium = 48;
   const large = 64;
 
-  const imgSize = size === "xs" || size === "sm" ? "250" : "800";
+  const imgSize = size === "xs" || size === "sm" ? "250" : "1200";
 
   return team === null ? (
     <></>
