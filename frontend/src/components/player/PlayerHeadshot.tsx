@@ -19,11 +19,17 @@ const PlayerHeadshot = ({ player, size, className }: PlayerHeadshotProps) => {
   const height = Math.round(width * proportion);
   const widthClass = size === "sm" ? "w-11" : size === "md" ? "w-16" : "w-28";
 
+  // original headshot in form of https://a.espncdn.com/i/headshots/nba/players/full/{id}.png
+  // get id to resize headshot
+  const id =
+    player.headshot ===
+    "https://secure.espncdn.com/combiner/i?img=/i/headshots/nophoto.png"
+      ? null
+      : player.headshot.split("/").pop()?.split(".")[0] || null;
+
   const headshotSrc =
-    size === "sm" &&
-    player.headshot !==
-      "https://secure.espncdn.com/combiner/i?img=/i/headshots/nophoto.png"
-      ? `https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/${player.id}.png&w=96&h=70&cb=1`
+    size === "sm" && id
+      ? `https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/${id}.png&w=96&h=70&cb=1`
       : player.headshot;
 
   return (
