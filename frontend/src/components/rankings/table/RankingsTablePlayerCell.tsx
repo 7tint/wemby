@@ -199,7 +199,7 @@ const PlayerCell_ = ({ player, showPlayerCard }: PlayerCellProps) => {
       </div>
     </TableCell>
   ) : (
-    <TableCell className={cn("w-56 min-w-56", colStyles)}>
+    <TableCell className={cn("w-52 min-w-52", colStyles)}>
       <div className="flex items-center pl-2 pr-1">
         <PlayerHeadshot className="pt-1.5" player={player} size="sm" />
         <div className="inline-block max-w-44 ml-2 mr-1 text-ellipsis overflow-hidden whitespace-nowrap">
