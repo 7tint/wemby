@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { flexRender, Table } from "@tanstack/react-table";
 import {
+  cellWidthLg,
   cellWidthMd,
   cellWidthSm,
   cellWidthXl,
@@ -10,10 +11,12 @@ import RankingsTableHeader from "./RankingsTableHeader";
 import { Player } from "@/types/playerTypes";
 import { MemoizedTableRow } from "@/components/ui/table";
 import { calculateStatPercentiles, getStats } from "@/data/stats";
+import { IconHeart, IconScale, IconX } from "@tabler/icons-react";
 
 type PlayerRowsProps = {
   playersTable: Table<Player>;
   totalsMode: boolean;
+  selectedPlayers: Set<Player>;
   punts: Set<string>;
   showHighlights: boolean;
   showSmartScores: boolean;
@@ -22,6 +25,7 @@ type PlayerRowsProps = {
 const PlayerRows = ({
   playersTable,
   totalsMode,
+  selectedPlayers,
   punts,
   showHighlights,
   showSmartScores,
@@ -119,11 +123,37 @@ const PlayerRows = ({
               });
             }
           })}
+          <TableTd className="p-0 text-slate-400 font-mono" width={cellWidthLg}>
+            {selectedPlayers.has(row.original) ? (
+              <IconX
+                className="cursor-pointer"
+                size={16}
+                stroke={2}
+                onClick={row.getToggleSelectedHandler()}
+              />
+            ) : (
+              <IconScale
+                className="cursor-pointer"
+                size={16}
+                stroke={2}
+                onClick={row.getToggleSelectedHandler()}
+              />
+            )}
+            <IconHeart className="cursor-pointer ml-1" size={16} stroke={2} />
+          </TableTd>
         </MemoizedTableRow>
       );
     }
     return elems;
-  }, [rows, totalsMode, playersTable, punts, showHighlights, showSmartScores]);
+  }, [
+    rows,
+    totalsMode,
+    playersTable,
+    punts,
+    showHighlights,
+    showSmartScores,
+    selectedPlayers,
+  ]);
 
   return elements;
 };

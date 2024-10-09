@@ -10,13 +10,7 @@ import {
   useState,
 } from "react";
 import Image from "next/image";
-import {
-  IconCurrencyDollar,
-  IconShirtSport,
-  IconHeart,
-  IconScale,
-  IconX,
-} from "@tabler/icons-react";
+import { IconCurrencyDollar, IconShirtSport } from "@tabler/icons-react";
 import {
   ColumnDef,
   useReactTable,
@@ -156,36 +150,6 @@ const RankingsTable_ = ({
         ),
         cell: ({ row }) => (
           <PlayerCell player={row.original} showPlayerCard={isCurrentSeason} />
-        ),
-      },
-      {
-        id: "action",
-        header: () => (
-          <RankingsHeaderCell
-            text="Action"
-            label="Compare and Save Players"
-            width={cellWidthLg}
-          />
-        ),
-        cell: ({ row }) => (
-          <TableTd className="p-0 text-slate-400 font-mono" width={cellWidthLg}>
-            {totalsMode ? (
-              <IconX
-                className="cursor-pointer"
-                size={16}
-                stroke={2}
-                onClick={row.getToggleSelectedHandler()}
-              />
-            ) : (
-              <IconScale
-                className="cursor-pointer"
-                size={16}
-                stroke={2}
-                onClick={row.getToggleSelectedHandler()}
-              />
-            )}
-            <IconHeart className="cursor-pointer ml-1" size={16} stroke={2} />
-          </TableTd>
         ),
       },
       {
@@ -446,7 +410,7 @@ const RankingsTable_ = ({
         ),
       },
     ];
-  }, [showSmartScores, isCurrentSeason, totalsMode]);
+  }, [showSmartScores, isCurrentSeason]);
 
   const playersList = usePlayersToDisplay(players, punts, showSmartScores);
   const selectedPlayers = useSelectedPlayers(selectPlayerIds, playersList);
@@ -525,6 +489,7 @@ const RankingsTable_ = ({
           <PlayerRows
             playersTable={playersTable}
             totalsMode={totalsMode}
+            selectedPlayers={selectedPlayers}
             punts={punts}
             showHighlights={showHighlights}
             showSmartScores={showSmartScores}

@@ -1,6 +1,10 @@
 import { flexRender, Table } from "@tanstack/react-table";
 import { cn } from "@/lib/utils";
-import { cellWidthSm, RankingsHeaderCell } from "./RankingsTableUtils";
+import {
+  cellWidthLg,
+  cellWidthSm,
+  RankingsHeaderCell,
+} from "./RankingsTableUtils";
 import { Player } from "@/types/playerTypes";
 import { TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
@@ -59,6 +63,16 @@ const RankingsTableHeader = ({
               })}
             </TableHead>
           ))}
+          <TableHead
+            className={cn("p-0", isInTableBody ? "disable-top-bar" : "")}
+          >
+            <RankingsHeaderCell
+              text="Action"
+              label="Compare and Save Players"
+              width={cellWidthLg}
+              disableCursor
+            />
+          </TableHead>
         </TableRow>
       ))}
     </TableHeader>
