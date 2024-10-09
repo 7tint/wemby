@@ -1,6 +1,7 @@
 import {
   IconAbacus,
   IconAdjustmentsFilled,
+  IconChartBar,
   IconHighlight,
   IconInfoSquareRounded,
 } from "@tabler/icons-react";
@@ -87,7 +88,7 @@ const RankingsSettings = ({
             />
           </div>
           <div className="flex items-center">
-            <IconAdjustmentsFilled className="mr-1" size={18} />
+            <IconChartBar className="mr-1" size={18} />
             <div className="font-medium">Ignore GP</div>
             <Tooltip label="Assumes all players play the same number of games when calculating smart scores. Useful for gauging per-game value.">
               <IconInfoSquareRounded className="mx-1" size={14} />
