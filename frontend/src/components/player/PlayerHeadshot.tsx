@@ -1,6 +1,6 @@
+/* eslint-disable @next/next/no-img-element */
 import { cn } from "@/lib/utils";
 import { Player } from "@/types/playerTypes";
-import Image from "next/image";
 import { memo } from "react";
 
 interface PlayerHeadshotProps {
@@ -33,13 +33,15 @@ const PlayerHeadshot = ({ player, size, className }: PlayerHeadshotProps) => {
       : player.headshot;
 
   return (
-    <Image
+    <img
       className={cn(widthClass, "relative h-auto", className)}
       src={headshotSrc}
       alt={player.firstName + " " + player.lastName}
       width={width}
       height={height}
-      priority
+      fetchPriority="low"
+      loading="lazy"
+      decoding="async"
     />
   );
 };
