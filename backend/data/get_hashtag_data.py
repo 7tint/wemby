@@ -65,6 +65,18 @@ def scrape_projections():
         logger.info("Waiting for table to update")
         time.sleep(1)
 
+        # Toggle position eligibilities to ESPN
+        dropdown2 = driver.find_element(By.NAME, "ctl00$ContentPlaceHolder1$DDPOSFROM")
+        dropdown2.click()
+        time.sleep(1)
+        espn_option = driver.find_element(
+            By.XPATH, '//*[@id="ContentPlaceHolder1_DDPOSFROM"]/option[2]'
+        )
+        espn_option.click()
+
+        logger.info("Waiting for table to update p.2")
+        time.sleep(2)
+
         page_source = driver.page_source
 
         logger.info("Parsing HTML")
