@@ -40,6 +40,7 @@ const RankingsPage = () => {
   // Filters states
   const [positions, setPositions] = useState<string[]>([]);
   const [team, setTeam] = useState<Team | null>(null);
+  const [favouritesOnly, setFavouritesOnly] = useState<boolean>(false);
 
   useEffect(() => {
     const getPlayersData = async () => {
@@ -146,6 +147,8 @@ const RankingsPage = () => {
           setPositions={setPositions}
           team={team}
           setTeam={setTeam}
+          favouritesOnly={favouritesOnly}
+          setFavouritesOnly={setFavouritesOnly}
         />
       </div>
       <Separator className="my-6" />
@@ -175,6 +178,7 @@ const RankingsPage = () => {
             selectPlayerIds={selectPlayerIds}
             setSelectPlayerIds={setSelectPlayerIds}
             totalsMode
+            favouritesOnly={false}
           />
         )}
       {isLoaded ? (
@@ -201,6 +205,7 @@ const RankingsPage = () => {
             team={team}
             selectPlayerIds={selectPlayerIds}
             setSelectPlayerIds={setSelectPlayerIds}
+            favouritesOnly={favouritesOnly}
           />
         </div>
       ) : (

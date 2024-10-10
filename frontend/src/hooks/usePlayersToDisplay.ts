@@ -1,23 +1,33 @@
+import { useState, useEffect } from "react";
+import { getFavouritePlayers } from "@/app/store/players";
 import { totalCategories } from "@/data/stats";
 import { Player } from "@/types/playerTypes";
-import { useMemo } from "react";
 
 const usePlayersToDisplay = (
   players: Player[],
   punts: Set<string>,
-  showSmartScores: boolean
+  showSmartScores: boolean,
+  favouritesOnly: boolean
 ) => {
-  return useMemo<Player[]>(() => {
+  const [computedPlayers, setComputedPlayers] = useState<Player[]>([]);
+
+  useEffect(() => {
+    let playersList = players;
+    if (favouritesOnly) {
+      const favouritePlayers = getFavouritePlayers();
+      playersList = players.filter((player) => favouritePlayers.has(player.id));
+    }
     const res =
-      players.length > 0
-        ? players.map((player) => {
+      playersList.length > 0
+        ? playersList.map((player) => {
             player.nScores.total = totalCategories(player.nScores, punts);
             return player;
           })
         : [];
-    return res;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [players, punts, showSmartScores]);
+    setComputedPlayers(res);
+  }, [players, punts, showSmartScores, favouritesOnly]);
+
+  return computedPlayers;
 };
 
 export default usePlayersToDisplay;

@@ -60,6 +60,7 @@ interface RankingsTableProps {
   selectPlayerIds: RowSelectionState;
   setSelectPlayerIds: OnChangeFn<RowSelectionState>;
   totalsMode?: boolean;
+  favouritesOnly: boolean;
 }
 
 const RankingsTable_ = ({
@@ -75,12 +76,12 @@ const RankingsTable_ = ({
   selectPlayerIds,
   setSelectPlayerIds,
   totalsMode = false,
+  favouritesOnly,
 }: RankingsTableProps) => {
   const columns = useMemo<ColumnDef<Player>[]>(() => {
     const getDisplayValue = (player: Player) => {
       return showSmartScores ? getNStats(player) : getStats(player);
     };
-
     const f = showSmartScores ? 2 : 1;
 
     return [
@@ -419,7 +420,12 @@ const RankingsTable_ = ({
     ];
   }, [showSmartScores, isCurrentSeason]);
 
-  const playersList = usePlayersToDisplay(players, punts, showSmartScores);
+  const playersList = usePlayersToDisplay(
+    players,
+    punts,
+    showSmartScores,
+    favouritesOnly
+  );
   const selectedPlayers = useSelectedPlayers(selectPlayerIds, playersList);
 
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});

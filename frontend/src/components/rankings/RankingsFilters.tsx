@@ -1,12 +1,8 @@
-import { IconBallBasketball, IconShirtSport } from "@tabler/icons-react";
-import { Button } from "@/components/ui/button";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+  IconBallBasketball,
+  IconHeart,
+  IconShirtSport,
+} from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
 import { Team, TEAM_ABBREVS } from "@/types/teamTypes";
 import {
@@ -14,12 +10,23 @@ import {
   getTeamAbbreviation,
   getTeamName,
 } from "@/utils/consts";
+import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface RankingsSettingsProps {
   positions: string[];
   setPositions: (value: string[]) => void;
   team: Team | null;
   setTeam: (value: Team | null) => void;
+  favouritesOnly: boolean;
+  setFavouritesOnly: (value: boolean) => void;
 }
 
 const RankingsFilters = ({
@@ -27,11 +34,13 @@ const RankingsFilters = ({
   setPositions,
   team,
   setTeam,
+  favouritesOnly,
+  setFavouritesOnly,
 }: RankingsSettingsProps) => {
   return (
     <div className="my-6 text-slate-700">
       <h2 className="text-lg text-foreground font-medium mb-3">Filters</h2>
-      <div className="flex flex-col 2xl:flex-row gap-3 2xl:gap-12 overflow-scroll hide-scrollbar">
+      <div className="flex flex-col xl:flex-row gap-3 xl:gap-12 overflow-scroll hide-scrollbar">
         <div className="flex items-center gap-3">
           <div className="flex items-center">
             <IconBallBasketball className="mr-1" size={18} />
@@ -99,6 +108,15 @@ const RankingsFilters = ({
               </SelectContent>
             </Select>
           </div>
+        </div>
+        <div className="flex items-center">
+          <IconHeart className="mr-1" size={18} />
+          <div className="font-medium">Favourites Only</div>
+          <Switch
+            className="ml-2"
+            checked={favouritesOnly}
+            onCheckedChange={() => setFavouritesOnly(!favouritesOnly)}
+          />
         </div>
       </div>
     </div>
