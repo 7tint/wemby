@@ -17125,11 +17125,11 @@
       "weight": 280,
       "injuries": [
         {
-          "id": 462564,
-          "long_comment": "Embiid and Paul George will stay in street clothes for the 76ers' preseason opener. The 2023 MVP lost 25-30 pounds this offseason in an effort to be healthier during the playoffs, and it'd be surprising if he played a significant role during preseason action. Philadelphia has a back-to-back set this weekend, playing in Minnesota on Friday and in Boston on Saturday.",
-          "short_comment": "Embiid (rest) won't play in Monday's exhibition versus the New Zealand Breakers, Kyle Neubeck of AllPHLY.com reports.",
+          "id": 462801,
+          "long_comment": "Embiid doesn't appear to have suffered any injury but will miss his second straight preseason contest Friday. His next chance to suit up is Saturday's preseason matchup with Boston.",
+          "short_comment": "Embiid (rest) didn't make the trip for Friday's preseason contest against the Timberwolves, Tony Jones of The Athletic reports.",
           "status": "Day-To-Day",
-          "date": "2024-10-07T21:26Z",
+          "date": "2024-10-10T17:10Z",
           "details": {
             "fantasyStatus": {
               "description": "GTD",
@@ -17137,7 +17137,7 @@
             },
             "type": "Rest",
             "location": "Other",
-            "returnDate": "2024-10-11"
+            "returnDate": "2024-10-12"
           }
         }
       ],
@@ -18105,24 +18105,7 @@
       "jersey": 8,
       "height": 80,
       "weight": 220,
-      "injuries": [
-        {
-          "id": -2195,
-          "long_comment": "George and Joel Embiid (rest) will both be held out of the 76ers' preseason opener Monday. George relayed Friday that he expects to have his playing time restricted during the preseason as he prepares for the start of the regular season, per Austin Krell of USA Today. As a member of the Clippers last season, George averaged 22.6 points, 5.2 rebounds, 3.5 assists and 1.5 steals across 33.8 minutes per game.",
-          "short_comment": "George (rest) will not play in Monday's exhibition game against the New Zealand Breakers, Kyle Neubeck of AllPHLY.com reports.",
-          "status": "Day-To-Day",
-          "date": "2024-10-07T21:50Z",
-          "details": {
-            "fantasyStatus": {
-              "description": "GTD",
-              "abbreviation": "GTD"
-            },
-            "type": "Rest",
-            "location": "Other",
-            "returnDate": "2024-10-11"
-          }
-        }
-      ],
+      "injuries": [],
       "draft": {
         "year": 2010,
         "round": 1,
@@ -18268,7 +18251,24 @@
       "jersey": 5,
       "height": 72,
       "weight": 193,
-      "injuries": [],
+      "injuries": [
+        {
+          "id": -2262,
+          "long_comment": "VanVleet will be replaced by Amen Thompson in the starting lineup Wednesday. VanVleet's next opportunity for preseason reps comes against the Pelicans on Tuesday.",
+          "short_comment": "VanVleet (rest) will not play in Wednesday's preseason game versus Oklahoma City, Jonathan Feigen of the Houston Chronicle reports.",
+          "status": "Day-To-Day",
+          "date": "2024-10-09T22:53Z",
+          "details": {
+            "fantasyStatus": {
+              "description": "GTD",
+              "abbreviation": "GTD"
+            },
+            "type": "Rest",
+            "location": "Other",
+            "returnDate": "2024-10-15"
+          }
+        }
+      ],
       "draft": null,
       "rank": 30,
       "adp": 38.6,
@@ -19073,11 +19073,11 @@
       "weight": 190,
       "injuries": [
         {
-          "id": 462446,
-          "long_comment": "Quickley is dealing with a thumb sprain that will keep him out of Sunday's preseason contest. However, there is no indication that the 25-year-old guard will miss any regular-season action.",
-          "short_comment": "Quickley (thumb) won't play in Sunday's preseason opener against the Wizards, Eric Koreen of The Athletic reports.",
+          "id": 462799,
+          "long_comment": "Quickley will miss his second straight preseason contest while dealing with a left thumb sprain. His next chance to suit up is Sunday's preseason matchup with Boston.",
+          "short_comment": "Quickley (thumb) won't play in Friday's preseason game versus the Wizards, Josh Lewenberg of TSN.ca reports.",
           "status": "Day-To-Day",
-          "date": "2024-10-05T16:15Z",
+          "date": "2024-10-10T16:55Z",
           "details": {
             "fantasyStatus": {
               "description": "GTD",
@@ -19087,7 +19087,7 @@
             "location": "Arm",
             "detail": "Sprain",
             "side": "Left",
-            "returnDate": "2024-10-11"
+            "returnDate": "2024-10-13"
           }
         }
       ],
@@ -20002,7 +20002,7 @@
             "location": "Groin",
             "detail": "Strain",
             "side": "Right",
-            "returnDate": "2024-10-10"
+            "returnDate": "2024-10-13"
           }
         }
       ],
@@ -20241,11 +20241,11 @@
       "weight": 210,
       "injuries": [
         {
-          "id": 462538,
-          "long_comment": "Coach Willie Green said Ingram's absence is not because of an injury. Green recently said that Ingram has been dominating in training camp, but it's unclear if he will be available for Friday's preseason rematch against Orlando. As for the rest of the starters, Green anticipates they will see around 20 minutes.",
-          "short_comment": "Ingram (undisclosed) will not play in Monday's preseason game against Orlando, Christian Clark of The New Orleans Times-Picayune reports.",
+          "id": 462734,
+          "long_comment": "Ingram practiced Wednesday and \"is fine\" in the words of coach Willie Green. His exclusion from the majority of preseason contests appears to merely be veteran treatment for the 27-year-old.",
+          "short_comment": "Ingram (undisclosed) will not play until New Orleans' preseason finale Tuesday versus Houston, Christian Clark of The New Orleans Times-Picayune reports.",
           "status": "Day-To-Day",
-          "date": "2024-10-07T15:56Z",
+          "date": "2024-10-09T19:48Z",
           "details": {
             "fantasyStatus": {
               "description": "GTD",
@@ -20441,7 +20441,7 @@
       "positions": ["SG", "SF"],
       "team_id": 4,
       "team": "CHI",
-      "age": 21,
+      "age": 22,
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4871145.png",
       "years_pro": 3,
       "jersey": 3,
@@ -20777,7 +20777,7 @@
             "location": "Leg",
             "detail": "Surgery",
             "side": "Left",
-            "returnDate": "2024-10-10"
+            "returnDate": "2024-10-14"
           }
         }
       ],
@@ -21863,7 +21863,24 @@
       "jersey": 24,
       "height": 76,
       "weight": 215,
-      "injuries": [],
+      "injuries": [
+        {
+          "id": -2270,
+          "long_comment": "Powell started in each of the Clippers' first two preseason contests but could be forced to sit out Friday. If Powell is unable to suit up against Portland, Kris Dunn, Amir Coffey and Nicolas Batum are candidates to enter the starting lineup.",
+          "short_comment": "Powell's status for Friday's preseason game versus the Trail Blazers is uncertain due to an undisclosed reason, Law Murray of The Athletic reports.",
+          "status": "Day-To-Day",
+          "date": "2024-10-10T19:02Z",
+          "details": {
+            "fantasyStatus": {
+              "description": "GTD",
+              "abbreviation": "GTD"
+            },
+            "type": "Undisclosed",
+            "location": "Other",
+            "returnDate": "2024-10-11"
+          }
+        }
+      ],
       "draft": {
         "year": 2015,
         "round": 2,
@@ -23470,11 +23487,11 @@
       "weight": 262,
       "injuries": [
         {
-          "id": 462639,
-          "long_comment": "Carter has struggled to stay healthy, playing more than 60 regular-season games only once during his six-year career. However, it seems he avoided a serious injury after appearing visibly frustrated while getting helped off the court Monday. The Magic have three preseason games left until they open the regular season against the Heat on Oct. 23",
-          "short_comment": "Carter (ankle) is considered day-to-day after getting confirmation he suffered a sprained left ankle during Monday's preseason loss to the Pelicans, Jason Beede of the Orlando Sentinel reports.",
+          "id": 462758,
+          "long_comment": "Carter's next opportunity to suit up for preseason action comes Oct. 18 versus Philadelphia, as Friday's game against New Orleans has been canceled due to inclement weather in the area. Orlando will likely exercise an abundance of precaution with the 25-year-old ramping up in advance of the regular season.",
+          "short_comment": "Carter (ankle) is out for Wednesday's preseason game versus San Antonio.",
           "status": "Day-To-Day",
-          "date": "2024-10-08T17:35Z",
+          "date": "2024-10-10T00:24Z",
           "details": {
             "fantasyStatus": {
               "description": "GTD",
@@ -23484,7 +23501,7 @@
             "location": "Leg",
             "detail": "Sprain",
             "side": "Left",
-            "returnDate": "2024-10-09"
+            "returnDate": "2024-10-18"
           }
         }
       ],
@@ -24103,7 +24120,24 @@
       "jersey": 33,
       "height": 73,
       "weight": 190,
-      "injuries": [],
+      "injuries": [
+        {
+          "id": 462748,
+          "long_comment": "Jones' next opportunity for preseason reps comes Saturday versus Utah. Stephon Castle, Malachi Flynn and Blake Wesley represent depth options with extra opportunities to prove themselves Wednesday.",
+          "short_comment": "Jones (rest) will not play Wednesday versus Orlando, Tom Orsborn of the San Antonio Express-News reports.",
+          "status": "Day-To-Day",
+          "date": "2024-10-09T22:47Z",
+          "details": {
+            "fantasyStatus": {
+              "description": "GTD",
+              "abbreviation": "GTD"
+            },
+            "type": "Rest",
+            "location": "Other",
+            "returnDate": "2024-10-12"
+          }
+        }
+      ],
       "draft": {
         "year": 2020,
         "round": 2,
@@ -24631,11 +24665,11 @@
       "weight": 215,
       "injuries": [
         {
-          "id": -2244,
-          "long_comment": "Strus accumulated 2 rebounds and an assist in the nine minutes he did play. His next chance to suit up will be Thursday's preseason matchup with Indiana.",
-          "short_comment": "Strus suffered a right hip contusion during the first half of Tuesday's preseason game against Chicago and will not return, Chris Fedor of The Cleveland Plain Dealer reports.",
+          "id": 462735,
+          "long_comment": "Strus is dealing with a right hip contusion suffered in Tuesday's preseason match against Chicago. The 28-year-old's status will need to be monitored.",
+          "short_comment": "Strus (hip) did not practice Wednesday in advance of Thursday's preseason contest against Indiana, Chris Fedor of The Cleveland Plain Dealer reports.",
           "status": "Day-To-Day",
-          "date": "2024-10-09T00:06Z",
+          "date": "2024-10-09T19:51Z",
           "details": {
             "fantasyStatus": {
               "description": "GTD",
@@ -24687,7 +24721,24 @@
       "jersey": 8,
       "height": 81,
       "weight": 240,
-      "injuries": [],
+      "injuries": [
+        {
+          "id": 462804,
+          "long_comment": "Avdija is missing Friday's contest in Los Angeles, the first of three preseason opportunities before the Blazers tip off the regular season at home vs. Golden State. His next chance to play would be Sunday evening against the Kings.",
+          "short_comment": "Avdija (personal) will not play in Friday's preseason game against the Clippers.",
+          "status": "Day-To-Day",
+          "date": "2024-10-10T19:22Z",
+          "details": {
+            "fantasyStatus": {
+              "description": "GTD",
+              "abbreviation": "GTD"
+            },
+            "type": "Personal",
+            "location": "Other",
+            "returnDate": "2024-10-13"
+          }
+        }
+      ],
       "draft": {
         "year": 2020,
         "round": 1,
@@ -24931,7 +24982,7 @@
             "type": "Groin",
             "location": "Groin",
             "side": "Left",
-            "returnDate": "2024-10-10"
+            "returnDate": "2024-10-13"
           }
         }
       ],
@@ -24979,11 +25030,11 @@
       "weight": 190,
       "injuries": [
         {
-          "id": 462728,
-          "long_comment": "Huerter suffered a labral tear to his left shoulder back in March, and while he's been limited to open training camp, all signs point to a return in the near future. The next step is getting clearance for 5-on-5 activities, but it's unclear when he'll be able to make his preseason debut.",
-          "short_comment": "Huerter (shoulder) was able to increase his activity at Tuesday's practice as he continues to progress to full-contact work, Brenden Nunes of KHTK Sactown Sports 1140 reports.",
+          "id": 462761,
+          "long_comment": "Huerter has been increasingly more involved at practice, but he's yet to be cleared for 5-on-5 activities and will be unavailable for the Kings' preseason opener. Huerter is recovering from a procedure in April that repaired his torn left labrum.  While the 26-year-old seems close to gaining 5-on-5 clearance, it's unknown when he'll be ready to play in games. Sacramento's next exhibition comes Friday at Golden State.",
+          "short_comment": "Huerter (shoulder) has been ruled out for Wednesday's preseason game against the Warriors.",
           "status": "Day-To-Day",
-          "date": "2024-10-09T17:16Z",
+          "date": "2024-10-10T00:42Z",
           "details": {
             "fantasyStatus": {
               "description": "GTD",
@@ -24993,7 +25044,7 @@
             "location": "Arm",
             "detail": "Surgery",
             "side": "Left",
-            "returnDate": "2024-10-09"
+            "returnDate": "2024-10-11"
           }
         }
       ],
@@ -25100,7 +25151,25 @@
       "jersey": 0,
       "height": 77,
       "weight": 215,
-      "injuries": [],
+      "injuries": [
+        {
+          "id": -2259,
+          "long_comment": "Johnson is joined by Tre Jones as healthy scratches Wednesday. Johnson's next opportunity for preseason action comes Saturday versus Utah.",
+          "short_comment": "Johnson (rest) will not play Wednesday versus Orlando, Tom Orsborn of the San Antonio Express-News reports.",
+          "status": "Day-To-Day",
+          "date": "2024-10-09T22:48Z",
+          "details": {
+            "fantasyStatus": {
+              "description": "GTD",
+              "abbreviation": "GTD"
+            },
+            "type": "Rest",
+            "location": "Other",
+            "side": "Not Specified",
+            "returnDate": "2024-10-12"
+          }
+        }
+      ],
       "draft": {
         "year": 2019,
         "round": 1,
@@ -25317,11 +25386,11 @@
       "weight": 209,
       "injuries": [
         {
-          "id": 462659,
-          "long_comment": "Wiggins logged a full practice Tuesday but still isn't ready for game action. Johnson added that Wiggins' availability for Friday's rematch against the Kings and Sunday's contest versus the Pistons are also in jeopardy.",
-          "short_comment": "Wiggins (illness) won't play in Wednesday's preseason game against the Kings, Dalton Johnson of NBC Sports Bay Area reports.",
+          "id": 462808,
+          "long_comment": "Despite fully returning to practice, Wiggins will likely miss Golden State's first four preseason outings while recovering from an illness. However, there is no indication that Wiggins will be unavailable once the regular season rolls around.",
+          "short_comment": "Coach Steve Kerr said Thursday that Wiggins (illness) won't play in Friday's preseason game versus the Kings and is unlikely to suit up for Sunday's preseason matchup with Detroit, Dalton Johnson of NBC Sports Bay Area reports.",
           "status": "Day-To-Day",
-          "date": "2024-10-08T21:39Z",
+          "date": "2024-10-10T19:59Z",
           "details": {
             "fantasyStatus": {
               "description": "GTD",
@@ -25329,7 +25398,7 @@
             },
             "type": "Illness",
             "location": "Other",
-            "returnDate": "2024-10-11"
+            "returnDate": "2024-10-15"
           }
         }
       ],
@@ -25668,7 +25737,24 @@
       "jersey": 2,
       "height": 73,
       "weight": 195,
-      "injuries": [],
+      "injuries": [
+        {
+          "id": -2256,
+          "long_comment": "McBride's absence will give way to Cameron Payne and rookie Tyler Kolek as primary ballhandlers, while Landry Shamet could see more action as well. McBride's next opportunity for preseason action comes Sunday versus Minnesota.",
+          "short_comment": "McBride will miss New York's preseason game Wednesday versus Washington due to an illness, James L. Edwards III of The Athletic reports.",
+          "status": "Day-To-Day",
+          "date": "2024-10-09T22:16Z",
+          "details": {
+            "fantasyStatus": {
+              "description": "GTD",
+              "abbreviation": "GTD"
+            },
+            "type": "Illness",
+            "location": "Other",
+            "returnDate": "2024-10-13"
+          }
+        }
+      ],
       "draft": {
         "year": 2021,
         "round": 2,
@@ -25848,7 +25934,7 @@
             "location": "Arm",
             "detail": "Surgery",
             "side": "Right",
-            "returnDate": "2024-10-10"
+            "returnDate": "2024-10-13"
           }
         }
       ],
@@ -26068,11 +26154,11 @@
       "weight": 200,
       "injuries": [
         {
-          "id": 462477,
-          "long_comment": "Watson has been dealing with a minor hamstring injury which has limited his participation in training camp. The 22-year-old is expected back for the start of the regular season, though his status for next Sunday's preseason game against the Suns is unclear.",
-          "short_comment": "Watson (hamstring) didn't play in Sunday's 130-104 preseason loss to the Celtics in Abu Dhabi.",
+          "id": 462792,
+          "long_comment": "Watson averaged 6.7 points, 3.2 rebounds, 1.1 assists and 1.1 blocks in 18.6 minutes across 80 regular-season appearances in 2023-24. Now, the third-year forward is set to take on an even bigger role and stay in Denver for at least two more years.",
+          "short_comment": "The Nuggets picked up Watson's (hamstring) team option for 2025-26 on Thursday, Keith Smith of Spotrac.com reports.",
           "status": "Day-To-Day",
-          "date": "2024-10-06T17:02Z",
+          "date": "2024-10-10T14:29Z",
           "details": {
             "fantasyStatus": {
               "description": "GTD",
@@ -26484,26 +26570,7 @@
       "jersey": 22,
       "height": 76,
       "weight": 205,
-      "injuries": [
-        {
-          "id": 462641,
-          "long_comment": "Wallace started Monday's game and had a decent showing, scoring nine points with seven rebounds, one assist and one steal in 26 minutes. It sounds like the injury is minor, but Wallace will be re-evaluated Wednesday morning before his status for their exhibition against the Rockets is determined.",
-          "short_comment": "Wallace suffered a mild ankle sprain during Monday's preseason game against the Spurs, Nick Gallo of the Thunder's official site reports.",
-          "status": "Day-To-Day",
-          "date": "2024-10-08T17:41Z",
-          "details": {
-            "fantasyStatus": {
-              "description": "GTD",
-              "abbreviation": "GTD"
-            },
-            "type": "Ankle",
-            "location": "Leg",
-            "detail": "Sprain",
-            "side": "Not Specified",
-            "returnDate": "2024-10-09"
-          }
-        }
-      ],
+      "injuries": [],
       "draft": {
         "year": 2023,
         "round": 1,
@@ -27196,25 +27263,7 @@
       "jersey": 9,
       "height": 79,
       "weight": 220,
-      "injuries": [
-        {
-          "id": -2198,
-          "long_comment": "Brooks will stay on the sidelines Monday, though it is more than likely nothing more than an extra day of rest for the eighth-year vet. With Brooks out, the Rockets will likely get an extended look at Reed Sheppard, Cam Whitmore and Amen Thompson.",
-          "short_comment": "Brooks (rest) has been ruled out for Monday's preseason opener against Utah, Jonathan Feigen of the Houston Chronicle reports.",
-          "status": "Day-To-Day",
-          "date": "2024-10-07T23:43Z",
-          "details": {
-            "fantasyStatus": {
-              "description": "GTD",
-              "abbreviation": "GTD"
-            },
-            "type": "Rest",
-            "location": "Other",
-            "side": "Not Specified",
-            "returnDate": "2024-10-09"
-          }
-        }
-      ],
+      "injuries": [],
       "draft": {
         "year": 2017,
         "round": 2,
@@ -27588,11 +27637,11 @@
       "weight": 197,
       "injuries": [
         {
-          "id": 462658,
-          "long_comment": "Ball has been scrimmaging at recent practices, but he's still not quite ready for his first game action since January of 2022. Given the lengthy layout, Ball will certainly have major restrictions when he is cleared to play, which could come Saturday versus Memphis.",
-          "short_comment": "Ball (knee) won't play in Tuesday's preseason game against the Cavaliers, Chuck Swirsky of the Bulls Radio Network reports.",
+          "id": 462807,
+          "long_comment": "While Ball will not make his long awaited return Saturday, head coach Billy Donovan said that Ball is still working on a slow build up into game readiness, meaning he may come back soon. If held out, his next chance to suit up will be Monday against Milwaukee.",
+          "short_comment": "Ball (knee) is not likely to play in Saturday's preseason game against the Grizzlies, Julia Poe of the Chicago Tribune reports.",
           "status": "Day-To-Day",
-          "date": "2024-10-08T21:35Z",
+          "date": "2024-10-10T19:56Z",
           "details": {
             "fantasyStatus": {
               "description": "GTD",
@@ -27602,7 +27651,7 @@
             "location": "Leg",
             "detail": "Surgery",
             "side": "Left",
-            "returnDate": "2024-10-12"
+            "returnDate": "2024-10-14"
           }
         }
       ],
@@ -28000,11 +28049,11 @@
       "weight": 231,
       "injuries": [
         {
-          "id": 462638,
-          "long_comment": "Bamba will miss his second straight exhibition. He's been limited at training camp, and there hasn't been much clarity on the severity of his knee issue.",
-          "short_comment": "Bamba (knee) will not play in Tuesday's preseason game against the Nets, Law Murray of The Athletic reports.",
+          "id": 462805,
+          "long_comment": "Bamba appears unlikely to suit up this preseason while dealing with a knee injury. While Bamba is hoping to be available once the regular season rolls around, Kai Jones will serve as the team's backup center in his absence.",
+          "short_comment": "Coach Tyronn Lue said Thursday that Bamba (knee) is hopeful to be ready for the Clippers' regular-season opener against Phoenix on Oct. 23, Law Murray of The Athletic reports.",
           "status": "Day-To-Day",
-          "date": "2024-10-08T17:31Z",
+          "date": "2024-10-10T19:40Z",
           "details": {
             "fantasyStatus": {
               "description": "GTD",
@@ -28012,7 +28061,7 @@
             },
             "type": "Knee",
             "location": "Leg",
-            "returnDate": "2024-10-11"
+            "returnDate": "2024-10-23"
           }
         }
       ],
@@ -30043,7 +30092,26 @@
       "jersey": 20,
       "height": 82,
       "weight": 250,
-      "injuries": [],
+      "injuries": [
+        {
+          "id": -2266,
+          "long_comment": "Sims' night was over right after it started, suffering the injury in his second minute of play. The center didn't record any counting stats. The severity of the sprain is unclear, but his next chance to play will come Sunday against the Timberwolves.",
+          "short_comment": "Sims exited Wednesday's 117-94 preseason win over the Wizards after sustaining a sprained ankle, Kristian Winfield of the New York Daily News reports.",
+          "status": "Day-To-Day",
+          "date": "2024-10-10T02:28Z",
+          "details": {
+            "fantasyStatus": {
+              "description": "GTD",
+              "abbreviation": "GTD"
+            },
+            "type": "Ankle",
+            "location": "Leg",
+            "detail": "Sprain",
+            "side": "Not Specified",
+            "returnDate": "2024-10-13"
+          }
+        }
+      ],
       "draft": {
         "year": 2021,
         "round": 2,
@@ -30392,7 +30460,24 @@
       "jersey": 12,
       "height": 83,
       "weight": 265,
-      "injuries": [],
+      "injuries": [
+        {
+          "id": 462743,
+          "long_comment": "Adams is joined by fellow veteran Fred VanVleet as healthy scratches Wednesday. His next opportunity for preseason action comes Tuesday versus New Orleans.",
+          "short_comment": "Adams (rest) will not play in Wednesday's preseason game versus Oklahoma City, Jonathan Feigen of the Houston Chronicle reports.",
+          "status": "Day-To-Day",
+          "date": "2024-10-09T22:34Z",
+          "details": {
+            "fantasyStatus": {
+              "description": "GTD",
+              "abbreviation": "GTD"
+            },
+            "type": "Rest",
+            "location": "Other",
+            "returnDate": "2024-10-15"
+          }
+        }
+      ],
       "draft": {
         "year": 2013,
         "round": 1,
@@ -31768,26 +31853,7 @@
       "jersey": 2,
       "height": 83,
       "weight": 255,
-      "injuries": [
-        {
-          "id": -2200,
-          "long_comment": "Feigen notes that Landale hasn't picked up any sort of injury and he's simply getting the night off due to this being an exhibition. He'll have a chance to make his preseason debut Wednesday against the Thunder.",
-          "short_comment": "Landale won't suit up for Monday's preseason game against the Jazz, Jonathan Feigen of the Houston Chronicle reports.",
-          "status": "Day-To-Day",
-          "date": "2024-10-07T23:46Z",
-          "details": {
-            "fantasyStatus": {
-              "description": "GTD",
-              "abbreviation": "GTD"
-            },
-            "type": "Rest",
-            "location": "Other",
-            "detail": "Not Specified",
-            "side": "Not Specified",
-            "returnDate": "2024-10-09"
-          }
-        }
-      ],
+      "injuries": [],
       "draft": null,
       "rank": 321,
       "adp": 140.0,
@@ -33865,11 +33931,11 @@
       "weight": 235,
       "injuries": [
         {
-          "id": 462417,
-          "long_comment": "Robinson took a hit during Thursday's practice and will not return to action until the club evaluates his injury. The 24-year-old will have the opportunity to compete for minutes with Alex Len and Trey Lyles behind Domantas Sabonis, though it is currenty unclear whether he will be back for Opening Night.",
-          "short_comment": "Robinson is being evaluated for a left knee injury and will be out of action until a diagnosis is confirmed, Sean Cunningham of Fox 40 Sacramento reports.",
+          "id": 462760,
+          "long_comment": "Robinson is dealing with a left knee injury, but a formal diagnosis has yet to be revealed. His next opportunity for preseason action comes Friday in a rematch against Golden State.",
+          "short_comment": "Robinson (knee) will not play in Wednesday's preseason game versus Golden State.",
           "status": "Day-To-Day",
-          "date": "2024-10-04T20:31Z",
+          "date": "2024-10-10T00:41Z",
           "details": {
             "fantasyStatus": {
               "description": "GTD",
@@ -33878,7 +33944,7 @@
             "type": "Knee",
             "location": "Leg",
             "side": "Left",
-            "returnDate": "2024-10-09"
+            "returnDate": "2024-10-11"
           }
         }
       ],
@@ -34439,24 +34505,7 @@
       "jersey": 32,
       "height": 80,
       "weight": 235,
-      "injuries": [
-        {
-          "id": 462583,
-          "long_comment": "Green will be in street clothes Monday, and his next opportunity to suit up will be Wednesday against the Thunder. Green averaged 6.5 points and 2.3 rebounds across 16.8 minutes per game during the 2023-24 regular season.",
-          "short_comment": "Green (rest) will not play in Monday's preseason game against the Jazz, Jonathan Feigen of the Houston Chronicle reports.",
-          "status": "Day-To-Day",
-          "date": "2024-10-07T23:45Z",
-          "details": {
-            "fantasyStatus": {
-              "description": "GTD",
-              "abbreviation": "GTD"
-            },
-            "type": "Rest",
-            "location": "Other",
-            "returnDate": "2024-10-09"
-          }
-        }
-      ],
+      "injuries": [],
       "draft": {
         "year": 2007,
         "round": 1,
@@ -35534,7 +35583,25 @@
       "jersey": null,
       "height": 79,
       "weight": 200,
-      "injuries": [],
+      "injuries": [
+        {
+          "id": 462767,
+          "long_comment": "It's unclear exactly when Dadiet picked up the injury, but it prevented him from appearing in Wednesday's preseason opener. Despite being selected with the 25th overall pick in the 2024 NBA Draft, Dadiet isn't expected to be anything more than a fringe rotation piece this season. His next chance to play will come Sunday against the Timberwolves.",
+          "short_comment": "Dadiet didn't play in Wednesday's 117-94 preseason win over the Wizards due to a  sprained finger, Kristian Winfield of the New York Daily News reports",
+          "status": "Day-To-Day",
+          "date": "2024-10-10T02:21Z",
+          "details": {
+            "fantasyStatus": {
+              "description": "GTD",
+              "abbreviation": "GTD"
+            },
+            "type": "Finger",
+            "location": "Arm",
+            "detail": "Sprain",
+            "returnDate": "2024-10-13"
+          }
+        }
+      ],
       "draft": {
         "year": 2024,
         "round": 1,
