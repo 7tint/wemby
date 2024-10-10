@@ -318,6 +318,7 @@ const RankingsTable_ = ({
             sort={column.getIsSorted()}
           />
         ),
+        sortDescFirst: true,
       },
       {
         id: "pts",
@@ -330,6 +331,7 @@ const RankingsTable_ = ({
             sort={column.getIsSorted()}
           />
         ),
+        sortDescFirst: true,
       },
       {
         id: "reb",
@@ -342,6 +344,7 @@ const RankingsTable_ = ({
             sort={column.getIsSorted()}
           />
         ),
+        sortDescFirst: true,
       },
       {
         id: "ast",
@@ -354,6 +357,7 @@ const RankingsTable_ = ({
             sort={column.getIsSorted()}
           />
         ),
+        sortDescFirst: true,
       },
       {
         id: "stl",
@@ -366,6 +370,7 @@ const RankingsTable_ = ({
             sort={column.getIsSorted()}
           />
         ),
+        sortDescFirst: true,
       },
       {
         id: "blk",
@@ -378,6 +383,7 @@ const RankingsTable_ = ({
             sort={column.getIsSorted()}
           />
         ),
+        sortDescFirst: true,
       },
       {
         id: "to",
@@ -408,6 +414,7 @@ const RankingsTable_ = ({
             {(cell.getValue() as number).toFixed(2)}
           </TableTd>
         ),
+        sortDescFirst: true,
       },
     ];
   }, [showSmartScores, isCurrentSeason]);
