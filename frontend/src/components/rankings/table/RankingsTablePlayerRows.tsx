@@ -1,4 +1,10 @@
-import { MouseEventHandler, ReactNode, useMemo } from "react";
+import {
+  MouseEventHandler,
+  ReactNode,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { flexRender, Table } from "@tanstack/react-table";
 import {
   cellWidthLg,
@@ -11,8 +17,15 @@ import RankingsTableHeader from "./RankingsTableHeader";
 import { Player } from "@/types/playerTypes";
 import { MemoizedTableRow } from "@/components/ui/table";
 import { calculateStatPercentiles, getStats } from "@/data/stats";
-import { IconBookmark, IconHeart, IconScale, IconX } from "@tabler/icons-react";
+import {
+  IconBookmark,
+  IconHeart,
+  IconHeartFilled,
+  IconScale,
+  IconX,
+} from "@tabler/icons-react";
 import { toast } from "sonner";
+import { getFavouritePlayers, setFavouritePlayer } from "@/app/store/players";
 
 const IconWrapper = ({
   children,
@@ -46,6 +59,21 @@ const PlayerRows = ({
   showHighlights,
   showSmartScores,
 }: PlayerRowsProps) => {
+  const [favouritePlayers, setFavouritePlayers] = useState<Set<number>>(
+    new Set()
+  );
+
+  useEffect(() => {
+    const favouritePlayers = getFavouritePlayers();
+    setFavouritePlayers(favouritePlayers);
+  }, []);
+
+  const togglePlayerInFavourites = (playerId: number) => {
+    setFavouritePlayer(playerId);
+    const favouritePlayers = getFavouritePlayers();
+    setFavouritePlayers(favouritePlayers);
+  };
+
   const rows = playersTable.getRowModel().rows;
 
   const elements = useMemo(() => {
@@ -166,13 +194,30 @@ const PlayerRows = ({
               </IconWrapper>
             )}
             <IconWrapper>
-              <IconHeart
-                size={16}
-                stroke={2}
-                onClick={() => {
-                  toast("Coming soon!");
-                }}
-              />
+              {favouritePlayers.has(row.original.id) ? (
+                <IconHeartFilled
+                  size={16}
+                  stroke={2}
+                  className="text-red-500"
+                  onClick={() => {
+                    togglePlayerInFavourites(row.original.id);
+                    toast(
+                      `Unliked ${row.original.firstName} ${row.original.lastName}`
+                    );
+                  }}
+                />
+              ) : (
+                <IconHeart
+                  size={16}
+                  stroke={2}
+                  onClick={() => {
+                    togglePlayerInFavourites(row.original.id);
+                    toast(
+                      `Liked ${row.original.firstName} ${row.original.lastName}`
+                    );
+                  }}
+                />
+              )}
             </IconWrapper>
             <IconWrapper>
               <IconBookmark
@@ -196,6 +241,7 @@ const PlayerRows = ({
     showHighlights,
     showSmartScores,
     selectedPlayers,
+    favouritePlayers,
   ]);
 
   return elements;

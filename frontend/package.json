@@ -24,6 +24,7 @@
     "@tanstack/react-table": "^8.20.5",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "cookies-next": "^4.3.0",
     "export-to-csv": "^1.4.0",
     "lodash-es": "^4.17.21",
     "lucide-react": "^0.441.0",
