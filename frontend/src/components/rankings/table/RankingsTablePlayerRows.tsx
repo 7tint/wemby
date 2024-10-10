@@ -12,6 +12,7 @@ import { Player } from "@/types/playerTypes";
 import { MemoizedTableRow } from "@/components/ui/table";
 import { calculateStatPercentiles, getStats } from "@/data/stats";
 import { IconBookmark, IconHeart, IconScale, IconX } from "@tabler/icons-react";
+import { toast } from "sonner";
 
 const IconWrapper = ({
   children,
@@ -144,19 +145,43 @@ const PlayerRows = ({
                 <IconX
                   size={16}
                   stroke={2}
-                  onClick={row.getToggleSelectedHandler()}
+                  onClick={(e) => {
+                    row.getToggleSelectedHandler()(e);
+                    toast(
+                      `Unselected ${row.original.firstName} ${row.original.lastName}`
+                    );
+                  }}
                 />
               </IconWrapper>
             ) : (
-              <IconWrapper onClick={row.getToggleSelectedHandler()}>
+              <IconWrapper
+                onClick={(e) => {
+                  row.getToggleSelectedHandler()(e);
+                  toast(
+                    `Selected ${row.original.firstName} ${row.original.lastName}`
+                  );
+                }}
+              >
                 <IconScale size={16} stroke={2} />
               </IconWrapper>
             )}
             <IconWrapper>
-              <IconHeart size={16} stroke={2} />
+              <IconHeart
+                size={16}
+                stroke={2}
+                onClick={() => {
+                  toast("Coming soon!");
+                }}
+              />
             </IconWrapper>
             <IconWrapper>
-              <IconBookmark size={16} stroke={2} />
+              <IconBookmark
+                size={16}
+                stroke={2}
+                onClick={() => {
+                  toast("Coming soon!");
+                }}
+              />
             </IconWrapper>
           </TableTd>
         </MemoizedTableRow>

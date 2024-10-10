@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { fonts } from "./fonts";
 
 import "./globals.css";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "Wemby Fantasy Basketball Analytics",
@@ -15,7 +16,10 @@ const RootLayout = ({
 }>) => {
   return (
     <html lang="en" className={fonts.rubik.variable}>
-      <body className="text-sm bg-inherit">{children}</body>
+      <body className="text-sm bg-inherit">
+        <Toaster />
+        {children}
+      </body>
     </html>
   );
 };
