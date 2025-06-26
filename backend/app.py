@@ -24,4 +24,4 @@ if __name__ == "__main__":
     if app.debug:
         app.run(host=config.HOST, port=config.PORT)
     else:
-        serve(app, host=config.HOST, port=config.PORT)
+        serve(app123456, host=config.HOST, port=config.PORT)
