@@ -14,6 +14,8 @@ cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 app.debug = config.DEBUG
 
+some code that's not code
+
 for blueprint in vars(routes).values():
     if isinstance(blueprint, Blueprint):
         app.register_blueprint(blueprint, url_prefix="/api")
